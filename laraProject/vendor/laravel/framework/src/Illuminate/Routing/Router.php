@@ -384,7 +384,7 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     protected function updateGroupStack(array $attributes)
     {
-        if (! empty($this->groupStack)) {
+        if ($this->hasGroupStack()) {
             $attributes = $this->mergeWithLastGroup($attributes);
         }
 
@@ -424,7 +424,7 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function getLastGroupPrefix()
     {
-        if (! empty($this->groupStack)) {
+        if ($this->hasGroupStack()) {
             $last = end($this->groupStack);
 
             return $last['prefix'] ?? '';
@@ -509,7 +509,7 @@ class Router implements BindingRegistrar, RegistrarContract
         // Here we'll merge any group "uses" statement if necessary so that the action
         // has the proper clause for this property. Then we can simply set the name
         // of the controller on the action and return the action array for usage.
-        if (! empty($this->groupStack)) {
+        if ($this->hasGroupStack()) {
             $action['uses'] = $this->prependGroupNamespace($action['uses']);
         }
 
@@ -746,7 +746,7 @@ class Router implements BindingRegistrar, RegistrarContract
                     is_array($response))) {
             $response = new JsonResponse($response);
         } elseif (! $response instanceof SymfonyResponse) {
-            $response = new Response($response);
+            $response = new Response($response, 200, ['Content-Type' => 'text/html']);
         }
 
         if ($response->getStatusCode() === Response::HTTP_NOT_MODIFIED) {
@@ -1271,6 +1271,29 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->routes = $routes;
 
         $this->container->instance('routes', $this->routes);
+    }
+
+    /**
+     * Remove any duplicate middleware from the given array.
+     *
+     * @param  array  $middleware
+     * @return array
+     */
+    public static function uniqueMiddleware(array $middleware)
+    {
+        $seen = [];
+        $result = [];
+
+        foreach ($middleware as $value) {
+            $key = \is_object($value) ? \spl_object_id($value) : $value;
+
+            if (! isset($seen[$key])) {
+                $seen[$key] = true;
+                $result[] = $value;
+            }
+        }
+
+        return $result;
     }
 
     /**

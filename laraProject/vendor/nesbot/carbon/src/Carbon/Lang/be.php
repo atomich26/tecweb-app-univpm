@@ -24,6 +24,7 @@ if (class_exists('Symfony\\Component\\Translation\\PluralizationRules')) {
  * - Serhan Apaydın
  * - JD Isaacks
  * - AbadonnaAbbys
+ * - Siomkin Alexander
  */
 return [
     'year' => ':count год|:count гады|:count гадоў',
@@ -35,18 +36,18 @@ return [
     'week' => ':count тыдзень|:count тыдні|:count тыдняў',
     'a_week' => '{1}тыдзень|:count тыдзень|:count тыдні|:count тыдняў',
     'w' => ':count тыдзень|:count тыдні|:count тыдняў',
-    'day' => ':count дзень|:count ні|:count дзён',
-    'a_day' => '{1}дзень|:count дзень|:count ні|:count дзён',
-    'd' => ':count дзень|:count ні|:count дзён',
+    'day' => ':count дзень|:count дні|:count дзён',
+    'a_day' => '{1}дзень|:count дзень|:count дні|:count дзён',
+    'd' => ':count дн',
     'hour' => ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour' => '{1}гадзіна|:count гадзіна|:count гадзіны|:count гадзін',
     'h' => ':count гадзіна|:count гадзіны|:count гадзін',
     'minute' => ':count хвіліна|:count хвіліны|:count хвілін',
     'a_minute' => '{1}хвіліна|:count хвіліна|:count хвіліны|:count хвілін',
-    'min' => ':count хвіліна|:count хвіліны|:count хвілін',
+    'min' => ':count хв',
     'second' => ':count секунда|:count секунды|:count секунд',
     'a_second' => '{1}некалькі секунд|:count секунда|:count секунды|:count секунд',
-    's' => ':count секунда|:count секунды|:count секунд',
+    's' => ':count сек',
 
     'hour_ago' => ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour_ago' => '{1}гадзіну|:count гадзіну|:count гадзіны|:count гадзін',
@@ -93,8 +94,12 @@ return [
     'after' => ':time пасля',
     'before' => ':time да',
     'diff_now' => 'цяпер',
+    'diff_today' => 'Сёння',
+    'diff_today_regexp' => 'Сёння(?:\\s+ў)?',
     'diff_yesterday' => 'учора',
+    'diff_yesterday_regexp' => 'Учора(?:\\s+ў)?',
     'diff_tomorrow' => 'заўтра',
+    'diff_tomorrow_regexp' => 'Заўтра(?:\\s+ў)?',
     'formats' => [
         'LT' => 'HH:mm',
         'LTS' => 'HH:mm:ss',
@@ -150,7 +155,7 @@ return [
     'months' => ['студзеня', 'лютага', 'сакавіка', 'красавіка', 'траўня', 'чэрвеня', 'ліпеня', 'жніўня', 'верасня', 'кастрычніка', 'лістапада', 'снежня'],
     'months_standalone' => ['студзень', 'люты', 'сакавік', 'красавік', 'травень', 'чэрвень', 'ліпень', 'жнівень', 'верасень', 'кастрычнік', 'лістапад', 'снежань'],
     'months_short' => ['студ', 'лют', 'сак', 'крас', 'трав', 'чэрв', 'ліп', 'жнів', 'вер', 'каст', 'ліст', 'снеж'],
-    'months_regexp' => '/D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/',
+    'months_regexp' => '/(DD?o?\.?(\[[^\[\]]*\]|\s)+MMMM?|L{2,4}|l{2,4})/',
     'weekdays' => ['нядзелю', 'панядзелак', 'аўторак', 'сераду', 'чацвер', 'пятніцу', 'суботу'],
     'weekdays_standalone' => ['нядзеля', 'панядзелак', 'аўторак', 'серада', 'чацвер', 'пятніца', 'субота'],
     'weekdays_short' => ['нд', 'пн', 'ат', 'ср', 'чц', 'пт', 'сб'],

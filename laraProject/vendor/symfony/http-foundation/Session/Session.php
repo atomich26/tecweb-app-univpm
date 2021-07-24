@@ -18,6 +18,11 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 
+// Help opcache.preload discover always-needed symbols
+class_exists(AttributeBag::class);
+class_exists(FlashBag::class);
+class_exists(SessionBagProxy::class);
+
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Drak <drak@zikula.org>
@@ -33,13 +38,13 @@ class Session implements SessionInterface, \IteratorAggregate, \Countable
 
     public function __construct(SessionStorageInterface $storage = null, AttributeBagInterface $attributes = null, FlashBagInterface $flashes = null)
     {
-        $this->storage = $storage ?: new NativeSessionStorage();
+        $this->storage = $storage ?? new NativeSessionStorage();
 
-        $attributes = $attributes ?: new AttributeBag();
+        $attributes = $attributes ?? new AttributeBag();
         $this->attributeName = $attributes->getName();
         $this->registerBag($attributes);
 
-        $flashes = $flashes ?: new FlashBag();
+        $flashes = $flashes ?? new FlashBag();
         $this->flashName = $flashes->getName();
         $this->registerBag($flashes);
     }

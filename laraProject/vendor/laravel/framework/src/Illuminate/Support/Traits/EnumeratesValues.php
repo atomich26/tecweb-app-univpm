@@ -143,9 +143,9 @@ trait EnumeratesValues
      */
     public function dd(...$args)
     {
-        call_user_func_array([$this, 'dump'], $args);
+        $this->dump(...$args);
 
-        die(1);
+        exit(1);
     }
 
     /**
@@ -490,6 +490,28 @@ trait EnumeratesValues
     public function where($key, $operator = null, $value = null)
     {
         return $this->filter($this->operatorForWhere(...func_get_args()));
+    }
+
+    /**
+     * Filter items where the given key is not null.
+     *
+     * @param  string|null  $key
+     * @return static
+     */
+    public function whereNull($key = null)
+    {
+        return $this->whereStrict($key, null);
+    }
+
+    /**
+     * Filter items where the given key is null.
+     *
+     * @param  string|null  $key
+     * @return static
+     */
+    public function whereNotNull($key = null)
+    {
+        return $this->where($key, '!==', null);
     }
 
     /**
