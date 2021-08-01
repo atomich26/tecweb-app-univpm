@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaqTable extends Migration
+class CreateInterventiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateFaqTable extends Migration
      */
     public function up()
     {
-        Schema::create('faqs', function (Blueprint $table) {
+        Schema::create('interventi', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('domanda', 250);
-            $table->string('risposta', 500);
+            $table->unsignedBigInteger('malfunzionamentoID');
+            $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti');
+            $table->string('descrizione', 800);
         });
     }
 
@@ -27,6 +28,6 @@ class CreateFaqTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faq');
+        Schema::dropIfExists('soluzioni');
     }
 }

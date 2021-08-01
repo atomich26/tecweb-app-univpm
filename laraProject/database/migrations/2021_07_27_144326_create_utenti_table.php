@@ -24,7 +24,7 @@ class CreateUtentiTable extends Migration
             $table->string('telefono', 10)->unique()->nullable();
             $table->string('password', 200)->unique();
             $table->string('ruolo', ['tecnico','staff','admin'])->default('tecnico');
-            $table->bigInteger('centroID')->unsigned()->nullable();
+            $table->unsignedBigInteger('centroID')->nullable();
             $table->foreign('centroID')->references('ID')->on('centri_assistenza');
 
         });

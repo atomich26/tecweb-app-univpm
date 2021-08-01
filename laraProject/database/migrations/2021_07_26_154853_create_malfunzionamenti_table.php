@@ -15,9 +15,9 @@ class CreateMalfunzionamentiTable extends Migration
     {
         Schema::create('malfunzionamenti', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->bigInteger('prodottoID')->unsigned();
+            $table->unsignedBigInteger('prodottoID');
             $table->foreign('prodottoID')->references('ID')->on('prodotti');
-            $table->text('descrizione', 500);
+            $table->string('descrizione', 400);
         });
     }
 

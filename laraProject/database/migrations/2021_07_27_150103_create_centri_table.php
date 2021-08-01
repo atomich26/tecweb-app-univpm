@@ -18,7 +18,7 @@ class CreateCentriTable extends Migration
             $table->string('ragione_sociale',50)->unique();
             $table->string('telefono', 10)->unique();
             $table->string('email',100)->unique();
-            $table->text('descrizione', 500);
+            $table->string('descrizione', 500);
             $table->string('via', 50);
             $table->string('cap', 5);
             $table->string('città', 50);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSoluzioniTable extends Migration
+class CreateCategorieTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateSoluzioniTable extends Migration
      */
     public function up()
     {
-        Schema::create('interventi', function (Blueprint $table) {
+        Schema::create('categorie', function(BluePrint $table){
             $table->bigIncrements('ID')->index();
-            $table->bigInteger('malfunzionamentoID');
-            $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti');
-            $table->text('descrizione', 800);
+            $table->string('nome', 40)->unique();
         });
     }
 
@@ -28,6 +26,6 @@ class CreateSoluzioniTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('soluzioni');
+        //
     }
 }
