@@ -14,10 +14,10 @@ class CreateMalfunzionamentiTable extends Migration
     public function up()
     {
         Schema::create('malfunzionamenti', function (Blueprint $table) {
-            $table->bigIncrements('MalfunzionamentoId')->index();
-            $table->bigInteger('prodottoId')->unsigned();
-            $table->foreign('prodottoId')->references('prodottoId')->on('prodotti');
-            $table->string('descrizione', 200);
+            $table->bigIncrements('ID')->index();
+            $table->bigInteger('prodottoID')->unsigned();
+            $table->foreign('prodottoID')->references('ID')->on('prodotti');
+            $table->text('descrizione', 500);
         });
     }
 

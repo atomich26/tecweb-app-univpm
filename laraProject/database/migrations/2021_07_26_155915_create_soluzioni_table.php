@@ -13,11 +13,11 @@ class CreateSoluzioniTable extends Migration
      */
     public function up()
     {
-        Schema::create('soluzioni', function (Blueprint $table) {
-            $table->bigIncrements('soluzioneId')->index();
-            $table->bigInteger('malfunzionamentoId');
-            $table->foreign('malfunzionamentoId')->references('malfunzionamentoId')->on('malfunzionamenti');
-            $table->string('soluzione', 1000);
+        Schema::create('interventi', function (Blueprint $table) {
+            $table->bigIncrements('ID')->index();
+            $table->bigInteger('malfunzionamentoID');
+            $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti');
+            $table->text('descrizione', 800);
         });
     }
 

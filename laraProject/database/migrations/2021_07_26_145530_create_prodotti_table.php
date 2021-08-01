@@ -14,21 +14,20 @@ class CreateProdottiTable extends Migration
     public function up()
     {
         Schema::create('prodotti', function (Blueprint $table) {
-            $table->bigIncrements('prodottoId')->index();
+            $table->bigIncrements('ID')->index();
             $table->string('nome', 50);
-            $table->string('modello', 30)->unique();
+            $table->string('modello', 20)->unique();
             $table->set('categoria',[
-                'Lavatrice', 'Lavastoviglie', 'Condizionare',
-                'Frigorifero', 'Congelatore', 'Forno', 'Microonde', 'Frullatore', 'Ferro da Stiro',
-                ''
-            ])->nullable();
-            $table->string('descrizione', 100);
-            $table->string('specifiche', 250);
-            $table->string('installazione', 1000);
-            $table->string('note buon uso', 1000)->nullable();
-            $table->string('imgName', 150)->default('imgDefault.png');
-            $table->bigInteger('utenteId')->nullable();
-            $table->foreign('utenteId')->references('utenteId')->on('utenti');
+                'Lavatrici e asciugatrici', 'Lavastoviglie', 'Climatizzatori',
+                'Frigoriferi e Congelatori', 'Forni, Piani Cottura e Cappe'
+            ]);
+            $table->text('descrizione', 600);
+            $table->text('specifiche', 350);
+            $table->text('guida_installazione', 1000);
+            $table->text('note', 600)->nullable();
+            $table->string('file_img', 50)->default('imgDefault.png');
+            $table->bigInteger('utenteID')->nullable();
+            $table->foreign('utenteID')->references('ID')->on('utenti');
         });
     }
 

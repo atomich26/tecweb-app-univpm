@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/','pages.homepage')->name('homepage');
+
+Route::view('/legali','pages.legali')->name('legali');
+
+Route::view('/about','pages.about')->name('about');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

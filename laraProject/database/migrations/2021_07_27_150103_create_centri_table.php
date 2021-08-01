@@ -13,14 +13,15 @@ class CreateCentriTable extends Migration
      */
     public function up()
     {
-        Schema::create('centri', function (Blueprint $table) {
-            $table->bigIncrements('centroId')->index();
-            $table->string('nominativo',75);
-            $table->bigInteger('telefono')->unique();
-            $table->string('email')->unique();
+        Schema::create('centri_assistenza', function (Blueprint $table) {
+            $table->bigIncrements('ID')->index();
+            $table->string('ragione_sociale',50)->unique();
+            $table->string('telefono', 10)->unique();
+            $table->string('email',100)->unique();
+            $table->text('descrizione', 500);
             $table->string('via', 50);
-            $table->string('cap', 7);
-            $table->string('città', 80);
+            $table->string('cap', 5);
+            $table->string('città', 50);
         });
     }
 
