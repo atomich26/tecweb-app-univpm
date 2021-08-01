@@ -22,11 +22,10 @@ class CreateUtentiTable extends Migration
             $table->string('codice_fiscale', 16)->unique()->nullable();
             $table->string('email', 319)->unique()->nullable();
             $table->string('telefono', 10)->unique()->nullable();
-            $table->string('password', 200)->unique();
-            $table->string('ruolo', ['tecnico','staff','admin'])->default('tecnico');
+            $table->string('password', 60)->unique();
+            $table->set('ruolo', ['tecnico','staff','admin'])->default('tecnico');
             $table->unsignedBigInteger('centroID')->nullable();
             $table->foreign('centroID')->references('ID')->on('centri_assistenza');
-
         });
     }
 
