@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class FaqsTableSeeder extends Seeder
+class FaqTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
