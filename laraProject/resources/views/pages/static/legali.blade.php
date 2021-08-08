@@ -1,5 +1,5 @@
-@extends('layouts.public')
+@extends('layouts.public', ['title' => 'Legali'])
 
-@section('page-content')
+@section('content')
     <h3>Legali page</h3>
 @endsection

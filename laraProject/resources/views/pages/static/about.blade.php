@@ -1,5 +1,5 @@
-@extends('layouts.public')
+@extends('layouts.public',['title' => 'Azienda'])
 
-@section('page-content')
-    <h3>About page</h3>
+@section('content')
+    <h1>About page</h1>
 @endsection

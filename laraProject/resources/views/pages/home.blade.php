@@ -1,14 +1,5 @@
-@extends('layouts.public')
+@extends('layouts.public', ['title' => 'Portale helpdesk'])
 
-@section('page-content')
-<h1>Homepage</h1>
-
-@guest 
-    <p>Non autenticato</p>
-@endguest
-
-@auth
-<p>{{ Auth::user()->username }}</p>
-@endauth
-
+@section('content')
+    <h1>Homepage</h1>
 @endsection

@@ -1,16 +1,16 @@
 <nav id="public-navbar">
     <ul>
         <li>
-            <a href="{{ route('homepage')}}">Home</a>    
+            <a href="{{ route('home') }}">Home</a>    
         </li>
         <li>
-            <a href="">Catalogo</a>    
+            <a href="{{ route('catalogo') }}">Catalogo</a>    
         </li>
         <li>
-            <a href="">Centri assistenza</a>    
+            <a href="{{ route('centri-assistenza') }}">Centri assistenza</a>    
         </li>
         <li>
-            <a href="{{ route('about')}}">Azienda</a>    
+            <a href="{{ route('about') }}">Azienda</a>    
         </li>
     </ul>
 </nav>

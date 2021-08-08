@@ -1,4 +1,4 @@
-@extends('layouts.root')
+@extends('layouts.root', ['pageTitle' => 'Accedi'])
 
 @section('page-content')
 <div class="container">
