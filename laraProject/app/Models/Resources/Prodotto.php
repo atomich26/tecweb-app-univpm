@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
 class prodotto extends Model
 {
     protected $table ='prodotti';
-    protected $primaryKey = 'eventoId';
+    protected $primaryKey = 'ID';
     public $timestamps = false;
 }

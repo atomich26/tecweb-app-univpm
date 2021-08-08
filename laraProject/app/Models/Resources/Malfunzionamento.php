@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Malfunzionamento extends Model
 {
     protected $table = 'malfunzionamenti';
-    protected $primaryKey = 'malfunzionamentoId';
+    protected $primaryKey = 'ID';
 }
