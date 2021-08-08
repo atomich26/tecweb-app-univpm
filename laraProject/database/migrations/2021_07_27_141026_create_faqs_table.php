@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 
-class CreateFaqTable extends Migration
+class CreateFaqsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +16,9 @@ class CreateFaqTable extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('domanda', 250);
-            $table->string('risposta', 500);
+            $table->string('domanda', Config::get('strings.faq.domanda'));
+            $table->string('risposta', config::get('strings.faq.risposta'));
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateFaqTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faq');
+        Schema::dropIfExists('faqs');
     }
 }

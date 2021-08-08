@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 
 class CreateCategorieTable extends Migration
 {
@@ -15,7 +16,7 @@ class CreateCategorieTable extends Migration
     {
         Schema::create('categorie', function(BluePrint $table){
             $table->bigIncrements('ID')->index();
-            $table->string('nome', 40)->unique();
+            $table->string('nome', Config::get('strings.global.nome'))->unique();
         });
     }
 

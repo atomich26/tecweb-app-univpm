@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class Livello4Controller extends Controller
 {
-    //
+    public function __construct(){
+        $this->middleware('can:isAdmin');
+    }
 }

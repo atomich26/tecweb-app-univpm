@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 
-class CreateInterventiTable extends Migration
+class CreateSoluzioniTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,12 @@ class CreateInterventiTable extends Migration
      */
     public function up()
     {
-        Schema::create('interventi', function (Blueprint $table) {
+        Schema::create('soluzioni', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('malfunzionamentoID');
             $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti');
-            $table->string('descrizione', 800);
+            $table->string('descrizione', Config::get('strings.soluzione.descrizione'));
+            $table->timestamps();
         });
     }
 

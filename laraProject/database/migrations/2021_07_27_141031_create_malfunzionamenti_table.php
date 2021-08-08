@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 
 class CreateMalfunzionamentiTable extends Migration
 {
@@ -17,7 +18,8 @@ class CreateMalfunzionamentiTable extends Migration
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('prodottoID');
             $table->foreign('prodottoID')->references('ID')->on('prodotti');
-            $table->string('descrizione', 400);
+            $table->string('descrizione', Config::get('strings.malfunzionamento.descrizione'));
+            $table->timestamps();
         });
     }
 

@@ -11,12 +11,14 @@
 |
 */
 
-Route::view('/','pages.homepage')->name('homepage');
+Route::view('/','pages.home')->name('homepage');
 
-Route::view('/legali','pages.legali')->name('legali');
+Route::view('/legali','pages.static.legali')->name('legali');
 
-Route::view('/about','pages.about')->name('about');
+Route::view('/about','pages.static.about')->name('about');
 
-Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('login','Auth\LoginController@login')->name('user-login');
+
+Route::post('logout', 'Auth\LoginController@logout')->middleware('auth')->name('user-logout');
