@@ -11,11 +11,17 @@
 |
 */
 
-Route::view('/','pages.home')->name('homepage');
+Route::get('/','PublicController@viewHomePage')->name('home');
+
+Route::get('/catalogo','PublicController@viewCatalogoPage')->name('catalogo');
+
+Route::get('/centri-assistenza','PublicController@viewCentriAssistenzaPage')->name('centri-assistenza');
+
+Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
 Route::view('/legali','pages.static.legali')->name('legali');
 
-Route::view('/about','pages.static.about')->name('about');
+Route::view('/azienda','pages.static.about')->name('about');
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');
 
