@@ -1,0 +1,183 @@
+html{
+    --body-bg : #ececec;
+    --primary-color: #008B99;
+    --light-color: #fff;
+    --dark-color: #000;
+    --btn-bg : #fff;
+}
+
+html.dark{
+    --body-bg : #121212;
+    --light-color: #ececec;
+    --dark-color: #3d3d3d; 
+    --btn-bg : #3d3d3d; 
+}
+
+/*Elements*/
+*, *::before, *::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-bg);
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+}
+
+.button{
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    -webkit-transition: .4s cubic-bezier(.33,.21,0,1.01);
+    -moz-transition: .4s cubic-bezier(.33,.21,0,1.01);
+    -o-transition: .4s cubic-bezier(.33,.21,0,1.01);
+    transition: .4s cubic-bezier(.33,.21,0,1.01);
+}
+
+.button span{
+    vertical-align: sub;
+}
+
+.button i{
+    vertical-align: middle;
+    padding-right: 3px;
+}
+
+.button i svg{
+    width: 20px;
+    height: 20px;
+}
+
+.button.primary-btn, .button.secondary-btn, .button.delete{
+    background-color: var(--btn-bg);
+}
+
+.button.primary-btn:hover, .button.secondary-btn:hover, .button.delete:hover{
+    color: var(--light-color);
+}
+
+.button.primary-btn{
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.button.primary-btn:hover{
+    background-color: var(--primary-color);
+}
+
+.button.secondary-btn{
+    color: var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.button.secondary-btn:hover{
+    background-color: var(--dark-color);
+}
+
+.button.delete{
+    border-color: #d40a0a;
+    color: #d40a0a ;
+}
+
+.button.delete:hover{
+    background-color: #d40a0a;
+}
+
+/* Border radius */
+select, .button, .card-box{
+    border-radius: 4px;
+    /*box-shadow: 0px 0px 5px 0px #16161659;*/
+}
+
+input, select, .button {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+/* Input */
+input[type="text"], input[type="password"], input[type="email"],
+select{
+    padding: 8px 15px;
+    margin: 10px;
+    font-family: inherit;
+}
+
+/* Header */
+header#site-header{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 30px;
+    background-color: #1d282f;
+    align-items: center;
+}
+
+#site-logo svg{
+    margin-top: 3px;
+    width: 130px;
+}
+
+/* Public navbar */
+nav#public-navbar{
+    margin: 0 30px;
+}
+
+nav#public-navbar ul li{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px 12px;
+    transition: .4s cubic-bezier(.33,.21,0,1.01);
+}
+
+nav#public-navbar ul:hover li a{
+    color: #b6b6b6;
+}
+
+nav#public-navbar ul li:hover{
+    background-color: #008B99;
+}
+
+nav#public-navbar ul li:hover a{
+    color: #fff!important;
+}
+
+nav#public-navbar ul li a{
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .5s cubic-bezier(.33,.21,0,1.01);
+}
+
+.divider{
+    width: 1px;
+    height: 30px;
+    margin: 0 10px;
+    background-color: #d6d6d6;
+}
+
+/* Main page content */
+#page-content{
+    margin-top: 80px;
+}
+
+/* Footer */
+#site-footer{
+    background-color: #000;
+    padding: 15px 20px;
+}
+
+/* Container */
+
+.container{
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+}

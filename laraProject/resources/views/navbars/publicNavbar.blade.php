@@ -10,7 +10,7 @@
             <a href="{{ route('centri-assistenza') }}">Centri assistenza</a>    
         </li>
         <li>
-            <a href="{{ route('about') }}">Azienda</a>    
+            <a href="{{ route('faq') }}">FAQ</a>    
         </li>
     </ul>
 </nav>
