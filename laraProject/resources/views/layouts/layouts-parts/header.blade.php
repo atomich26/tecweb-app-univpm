@@ -4,9 +4,10 @@
         @php echo file_get_contents(asset('images/electrohm_logo.svg')) @endphp 
     </div>
 
-
+    <div class="divider"></div>
+ 
     @include('navbars.publicNavbar')
-
+    
     <ul class="navbar-nav ml-auto">
         @guest
             @if(Route::current()->getName() != 'login-form')
@@ -21,12 +22,14 @@
             @endif
         @endguest
         @auth
+        @include('navbars.loginNavbar')
             <li class="nav-item dropdown">
                 @if(Auth::user()->checkRole('admin'))
                     {{ __('Amministratore') }}
                 @else
                     {{ Auth::user()->nome . " " . Auth::user()->cognome}} 
                 @endif
+            
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     <span class="caret"></span>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
