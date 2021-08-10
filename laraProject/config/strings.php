@@ -14,7 +14,8 @@ return [
     ],
 
     'centro_assistenza' => [
-        'descrizione' => 500,
+        'descrizione' => 900,
+        'sito_web' => 30,
         'via' => 50,
         'cap' => 5,
         'città' => 50

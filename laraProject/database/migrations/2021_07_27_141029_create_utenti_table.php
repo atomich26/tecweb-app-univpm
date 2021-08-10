@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
-use App\Enums\Roles;
+use App\Models\Enums\Roles;
 
 class CreateUtentiTable extends Migration
 {
@@ -27,6 +27,7 @@ class CreateUtentiTable extends Migration
             $table->set('role', Roles::USER_ROLES)->default('tecnico');
             $table->unsignedBigInteger('centroID')->nullable();
             $table->foreign('centroID')->references('ID')->on('centri_assistenza');
+            $table->string('file_img')->nullable();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
