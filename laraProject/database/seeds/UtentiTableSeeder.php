@@ -35,6 +35,7 @@ class UtentiTableSeeder extends Seeder
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',
             'centroID' => null,
+            'file_img' => 'male1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -49,6 +50,7 @@ class UtentiTableSeeder extends Seeder
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',
             'centroID' => null,
+            'file_img' => 'male2.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -63,20 +65,22 @@ class UtentiTableSeeder extends Seeder
             'password' => Hash::make('ijADPwLb'),
             'role' => 'tecnico',
             'centroID' => null,
+            'file_img' => 'male3.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('utenti')->insert([
-            'nome' => 'Francesco',
-            'cognome' =>  'Neri',
-            'username' => 'francesco_tecn',
+            'nome' => 'Francesca',
+            'cognome' =>  'Dante',
+            'username' => 'francesca_tecn',
             'data_nascita' => '1990-01-29',
-            'email' => 'francesconeri@tech.electrohm.it',
+            'email' => 'francescadante@tech.electrohm.it',
             'telefono' => '3290303030',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'tecnico',
             'centroID' => null,
+            'file_img' => 'female1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

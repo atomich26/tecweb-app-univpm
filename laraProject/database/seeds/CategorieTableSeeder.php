@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Enums;   
 
 class CategorieTableSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class CategorieTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        foreach ($categories as $catID => $categoryName) {
+           DB::table('categorie')->insert([
+               'ID' => $catID,
+               'nome' => $categoryName
+           ]);
+        }
     }
 }
