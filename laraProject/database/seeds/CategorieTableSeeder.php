@@ -12,7 +12,7 @@ class CategorieTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($categories as $catID => $categoryName) {
+        foreach (Categories::CATEGORIES as $catID => $categoryName) {
            DB::table('categorie')->insert([
                'ID' => $catID,
                'nome' => $categoryName
