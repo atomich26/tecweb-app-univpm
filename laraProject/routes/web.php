@@ -11,6 +11,7 @@
 |
 */
 
+// Rotte al PublicController
 Route::get('/','PublicController@viewHomePage')->name('home');
 
 Route::get('/catalogo','PublicController@viewCatalogoPage')->name('catalogo');
@@ -19,10 +20,14 @@ Route::get('/centri-assistenza','PublicController@viewCentriAssistenzaPage')->na
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::view('/legali','pages.static.legali')->name('legali');
+// Rotte pagine statiche
+Route::view('/lavora-con-noi','pages.static.lavora-con-noi')->name('lavora-con-noi');
 
-Route::view('/azienda','pages.static.about')->name('about');
+Route::view('/chi-siamo','pages.static.chi-siamo')->name('chi-siamo');
 
+Route::view('/informativa-privacy','pages.static.privacy')->name('privacy');
+
+// Rotte per l'autenticazione
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');
 
 Route::post('login','Auth\LoginController@login')->name('user-login');

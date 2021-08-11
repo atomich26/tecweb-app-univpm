@@ -12,7 +12,7 @@ class PublicController extends Controller
     }
 
     public function viewCatalogoPage(){
-        return view('pages.catalog');
+        return view('pages.catalogo');
     }
 
     public function viewHomePage(){

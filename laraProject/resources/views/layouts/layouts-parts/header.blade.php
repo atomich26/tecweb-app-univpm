@@ -6,11 +6,11 @@
 
     <div class="divider"></div>
  
-    @include('navbars.publicNavbar')
+    @include('navbars.publicHeaderNav')
     
     <ul class="navbar-nav ml-auto">
         @guest
-            @if(Route::current()->getName() != 'login-form')
+            @if(!Route::is('login-form'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login-form') }}">{{ __('Login') }}</a>
                 </li>

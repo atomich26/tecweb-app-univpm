@@ -116,23 +116,19 @@ header#site-header{
     left: 0;
     width: 100%;
     padding: 5px 30px;
-    background-color: #1d282f;
+    background-color: #2b3137;
     align-items: center;
 }
 
 #site-logo svg{
-    margin-top: 3px;
     width: 130px;
+    margin-top: 2px;
 }
 
 /* Public navbar */
-nav#public-navbar{
-    margin: 0 30px;
-}
-
 nav#public-navbar ul li{
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 5px 12px;
     transition: .4s cubic-bezier(.33,.21,0,1.01);
 }
@@ -145,7 +141,7 @@ nav#public-navbar ul li:hover{
     background-color: #008B99;
 }
 
-nav#public-navbar ul li:hover a{
+nav#public-navbar ul li:hover a {
     color: #fff!important;
 }
 
@@ -159,8 +155,8 @@ nav#public-navbar ul li a{
 .divider{
     width: 1px;
     height: 30px;
-    margin: 0 10px;
-    background-color: #d6d6d6;
+    margin: 0 8px 0px 20px ;
+    background-color: #7d7d7d;
 }
 
 /* Main page content */
@@ -172,8 +168,27 @@ nav#public-navbar ul li a{
 #site-footer{
     background-color: #000;
     padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
+#site-footer ul li:not(:first-child):not(:last-child){
+    padding: 0 30px;
+}
+
+#site-footer ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#site-footer ul li a:hover{
+    text-decoration: underline;
+}
+
+/* Footer nav */
+nav#footer-nav ul li{
+    display: inline-block;
+}
 /* Container */
 
 .container{
