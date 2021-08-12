@@ -226,7 +226,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Categories' => App\Models\Enums\Categories::class,
-        'Roles' => App\Models\Enums\Roles::class,
     ],
 
 ];

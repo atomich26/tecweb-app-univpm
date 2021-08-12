@@ -34,4 +34,5 @@
     @include('layouts.layouts-parts.footer')
 
 </body>
+    @yield('js-scripts')
 </html>
