@@ -162,6 +162,7 @@ header#site-header{
 
 #header-login  .header-user-info img{
     margin-right:10px;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 /* Public navbar */
