@@ -30,7 +30,7 @@ class UtentiTableSeeder extends Seeder
             'cognome' =>  'Bianchi',
             'username' => 'staffstaff',
             'data_nascita' => '1998-09-03',
-            'email' => 'andreaìbianchi@staff.electrohm.it',
+            'email' => 'andreabianchi@staff.electrohm.it',
             'telefono' => '3200404040',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',
