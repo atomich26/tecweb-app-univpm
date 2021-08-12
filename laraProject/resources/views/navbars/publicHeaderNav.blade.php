@@ -3,7 +3,7 @@
         <li>
             <a href="{{ route('catalogo') }}">Catalogo</a>    
         </li>
-        <li >
+        <li>
             <a href="{{ route('centri-assistenza') }}">Centri assistenza</a>    
         </li>
         <li>
