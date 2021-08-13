@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Electrohm'),
+    'name' => env('APP_NAME', 'Electrohm HelpDesk'),
 
     /*
     |--------------------------------------------------------------------------
