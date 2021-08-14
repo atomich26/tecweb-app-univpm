@@ -27,6 +27,7 @@ body{
     background-color: var(--body-bg);
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
+    text-rendering: optimizeLegibility;
 }
 
 .button{
@@ -108,9 +109,9 @@ body{
     background-color: #1e252d;
 }
 
-.profile-btn{
+.manage-btn{
     margin: 0 20px;
-    background-image: url('/laraProject/public/images/bootstrap_icons/person-square.svg');
+    background-image: url('/laraProject/public/images/bootstrap_icons/database.svg');
 }
 
 /* Border radius */
@@ -150,11 +151,6 @@ header#site-header{
     margin-top: 2px;
 }
 
-.flex-v-center{
-    display: flex;
-    align-items: center;
-}
-
 #header-user .user-info{
     padding: 10px;
     padding-right: 10px;
@@ -175,8 +171,8 @@ header#site-header{
     image-rendering: -webkit-optimize-contrast;
 }
 
-#header-user .user-info #username{
-    margin-right:  15px;
+#header-user .user-info .username{
+    margin-right: 15px;
 }
 
 /* Public navbar */
@@ -213,7 +209,8 @@ nav#public-navbar ul li a{
 }
 
 /* Main page content */
-#page-content{
+
+#content{
     margin-top: 60px;
 }
 
@@ -240,8 +237,75 @@ nav#footer-nav ul li{
 }
 /* Container */
 
-.container{
-    width: 100%;
-    max-width: 1300px;
-    margin: auto;
+.login-container{
+    height: calc(100vh - 50px);
+    background-image: url('/laraProject/public/images/login-bg.png');
+    background-size: cover;
 }
+
+.login-container .row.flex-v-center{
+    height: 100%;
+}
+
+.login-title{
+    color: #1e252d;
+    font-weight: 400;
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+
+.login-title span{
+    font-weight: 600;
+}
+
+.login-container .login-card input.form-control{
+    margin: 5px 0;
+    width: 100%;
+}
+
+.login-container .login-card input[type='text'],
+.login-container .login-card input[type='password']{
+    background-color: #1e252d;
+    color: #fff;
+    border: 3px solid #fff;
+    padding: 17px 10px;
+}
+
+.login-container .login-card input[type='text']:focus,
+.login-container .login-card input[type='password']:focus{
+    outline: 0;
+    border-bottom-color: var(--primary-color)!important;
+}
+
+.login-container .login-card button[type="submit"]{
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    background-color: var(--primary-color);
+}
+
+.login-container .login-card button[type="submit"]:hover{
+    background-color: #1e252d;
+}
+
+.login-container .login-card input.form-check-input{
+    margin: 15px 0;
+}
+
+/* Layout */
+.flex-content-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-v-center{
+    display: flex;
+    align-items: center;
+}
+

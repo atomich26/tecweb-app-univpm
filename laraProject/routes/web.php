@@ -28,8 +28,8 @@ Route::view('/chi-siamo','pages.static.chi-siamo')->name('chi-siamo');
 Route::view('/informativa-privacy','pages.static.privacy')->name('privacy');
 
 // Rotte per l'autenticazione
-Route::get('accedi', 'Auth\LoginController@showLoginForm')->name('login-form');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');
 
-Route::post('accedi','Auth\LoginController@login')->name('user-login');
+Route::post('login','Auth\LoginController@login')->name('user-login');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');

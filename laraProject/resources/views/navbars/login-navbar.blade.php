@@ -13,7 +13,7 @@
     @endguest
         
     @auth
-        <a class="button header-btn profile-btn" href="#">Area utente</a>
+        <a class="button header-btn manage-btn" href="#">Gestisci</a>
         @php 
             $userImgName = Auth::user()->file_img;
 
@@ -23,13 +23,11 @@
         <div class="user-info flex-v-center">
             <img src="{{ asset('storage/images/profiles/' . $userImgName)}}" width="40px" height="40px" style="border-radius:50%"> 
             
-            <a id="username" href="#">
                 @if(Auth::user()->checkRole('admin'))
-                    {{ __('Amministratore') }}
+                    <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
                 @else
-                    {{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} 
+                    <a class="username" href="#">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
                 @endif
-            </a>
 
             <div class="user-login">
                 <a class="button header-btn logout-btn" href="{{ route('user-logout') }}"

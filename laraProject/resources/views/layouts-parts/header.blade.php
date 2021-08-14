@@ -7,10 +7,10 @@
 
         <div class="divider"></div>
  
-        @include('navbars.publicHeaderNav')
+        @include('navbars.public-header-nav')
     </div>
     
     <div id="header-right" class="flex-v-center">
-        @include('navbars.loginNavbar')  
+        @include('navbars.login-navbar')  
     </div>
 </header>
