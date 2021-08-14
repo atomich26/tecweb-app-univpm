@@ -1,16 +1,7 @@
-html{
+:root{
     --body-bg : #ececec;
-    --primary-color: #e00000;
-    --light-color: #fff;
-    --dark-color: #000;
-    --btn-bg : #fff;
-}
-
-html.dark{
-    --body-bg : #121212;
-    --light-color: #ececec;
-    --dark-color: #3d3d3d; 
-    --btn-bg : #3d3d3d; 
+    --color-primary: #e00000;
+    --color-secondary: #1e252d;
 }
 
 /*Elements*/
@@ -61,12 +52,12 @@ h4, h5, h6, i, span, a, input, select, .button{
 }
 
 .button.primary-btn{
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .button.primary-btn:hover{
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 }
 
 .button.secondary-btn{
@@ -98,8 +89,8 @@ h4, h5, h6, i, span, a, input, select, .button{
 }
 
 .header-btn:hover{
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .login-btn{
@@ -111,8 +102,8 @@ h4, h5, h6, i, span, a, input, select, .button{
     background-image: url('/laraProject/public/images/bootstrap_icons/logout.svg');
 }
 .logout-btn:hover, .logout-btn:focus{
-    border-color: #1e252d;
-    background-color: #1e252d;
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
 }
 
 .manage-btn{
@@ -138,7 +129,7 @@ header#site-header{
     width: 100%;
     height: 60px;
     padding-left: 30px;
-    background-color: #1e252d;
+    background-color: var(--color-secondary);
     justify-content: space-between;
 }
 
@@ -183,7 +174,7 @@ nav#public-navbar ul:hover li a{
 }
 
 nav#public-navbar ul li:hover{
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 }
 
 nav#public-navbar ul li:hover a {
@@ -207,6 +198,7 @@ nav#public-navbar ul li a{
 
 #content{
     margin-top: 60px;
+    height: calc(100vh - 110px);    
 }
 
 /* Footer */
@@ -243,7 +235,7 @@ nav#footer-nav ul li{
 }
 
 .login-title{
-    color: #1e252d;
+    color: var(--color-secondary);
     font-weight: 400;
     font-size: 35px;
 }
@@ -267,16 +259,16 @@ nav#footer-nav ul li{
 
 .login-container .login-card input[type='text'],
 .login-container .login-card input[type='password']{
-    background-color: #1e252d;
+    background-color: var(--color-secondary);
     color: #fff;
     border: 3px solid #ececec;
-    padding: 17px 10px;
+    padding: 17px 20px;
 }
 
 .login-container .login-card input[type='text']:focus,
 .login-container .login-card input[type='password']:focus{
     outline: 0;
-    border-color: var(--primary-color)!important;
+    border-color: var(--color-primary)!important;
 }
 
 .login-container .login-card button[type="submit"]{
@@ -288,11 +280,11 @@ nav#footer-nav ul li{
     color: #fff;
     border: 1px solid #ececec;
     cursor: pointer;
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 }
 
 .login-container .login-card button[type="submit"]:hover{
-    background-color: #1e252d;
+    background-color: var(--color-secondary);
 }
 
 .login-container .login-card input.form-check-input{
@@ -300,7 +292,7 @@ nav#footer-nav ul li{
 }
 
 .form-group span[role="alert"].invalid-feedback{
-    color: var(--primary-color);
+    color: var(--color-primary);
 }
 
 /* HTTP error layout */
@@ -312,7 +304,7 @@ nav#footer-nav ul li{
     font-size: 80px;
     padding: 0 10px;
     color: #fff;
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
     margin-bottom: 30px;
     width: -moz-fit-content;
     width: fit-content;
@@ -334,10 +326,6 @@ nav#footer-nav ul li{
 .flex-v-center{
     display: flex;
     align-items: center;
-}
-
-#content{
-    height: calc(100vh - 110px);
 }
 
 
