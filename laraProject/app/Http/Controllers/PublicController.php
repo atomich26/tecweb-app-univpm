@@ -12,18 +12,14 @@ class PublicController extends Controller
     }
 
     public function viewCatalogoPage(){
-        return view('pages.catalogo');
-    }
-
-    public function viewHomePage(){
-        return view('pages.home');
+        return view('public.catalogo');
     }
 
     public function viewCentriAssistenzaPage(){
-        return view('pages.centriAssistenza');
+        return view('public.centri-assistenza');
     }
 
     public function viewFaqPage(){
-        return view('pages.faq');
+        return view('public.faq');
     }
 }

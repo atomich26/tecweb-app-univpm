@@ -4,10 +4,10 @@
 <section class="login-container">
     <div class="row flex-v-center">
         <div class="col" style="margin: 0 250px">
-            <h2 class="login-title">Accedi a <br> Electrohm <span>Helpdesk</span></h2>
             <div class="login-card">
-                
-
+                <div class="card-header">
+                    <h2 class="login-title">Accedi a <br> Electrohm <span>Helpdesk</span></h2>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('user-login') }}">
                         @csrf
@@ -27,7 +27,6 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <input id="password" type="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -51,11 +50,12 @@
                         <div class="form-group">
                             <div>
                                 <button type="submit" class="button">
-                                    {{ __('ACCEDI') }}
+                                    {{ __('Accedi') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <p style="margin-top:20px">Per informazioni sull'accesso ai servizi di helpdesk <a href="{{ route('lavora-con-noi') }}">clicca qui</a></p>
                 </div>
             </div>
         </div>

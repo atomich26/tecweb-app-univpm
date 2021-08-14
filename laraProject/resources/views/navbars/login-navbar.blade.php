@@ -13,7 +13,11 @@
     @endguest
         
     @auth
-        <a class="button header-btn manage-btn" href="#">Gestisci</a>
+        
+        @can('manageData')
+            <a class="button header-btn manage-btn" href="#">Gestisci</a>
+        @endcan
+        
         @php 
             $userImgName = Auth::user()->file_img;
 

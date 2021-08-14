@@ -30,6 +30,12 @@ body{
     text-rendering: optimizeLegibility;
 }
 
+/* Text */
+h4, h5, h6, i, span, a, input, select, .button{
+    font-weight: 400;
+}
+
+/* Elements */
 .button{
     display: inline-block;
     padding: 10px 15px;
@@ -114,16 +120,6 @@ body{
     background-image: url('/laraProject/public/images/bootstrap_icons/database.svg');
 }
 
-/* Border radius */
-select, .button, .card-box, nav#public-navbar ul li{
-    border-radius: 2px;
-    /*box-shadow: 0px 0px 5px 0px #16161659;*/
-}
-
-input, select, .button {
-    font-weight: 400;
-}
-
 /* Input */
 input[type="text"], input[type="password"], input[type="email"],
 select{
@@ -196,7 +192,6 @@ nav#public-navbar ul li:hover a {
 
 nav#public-navbar ul li a{
     color: #fff;
-    font-weight: 400;
     text-decoration: none;
     transition: color .5s cubic-bezier(.33,.21,0,1.01);
 }
@@ -235,11 +230,11 @@ nav#public-navbar ul li a{
 nav#footer-nav ul li{
     display: inline-block;
 }
-/* Container */
 
+/* Login page */
 .login-container{
     height: calc(100vh - 50px);
-    background-image: url('/laraProject/public/images/login-bg.png');
+    background-image: url('/laraProject/public/images/login-bg-2.jpg');
     background-size: cover;
 }
 
@@ -251,11 +246,18 @@ nav#footer-nav ul li{
     color: #1e252d;
     font-weight: 400;
     font-size: 35px;
-    margin-bottom: 30px;
 }
 
 .login-title span{
     font-weight: 600;
+}
+
+.login-container .login-card .card-header{
+    margin-bottom: 20px;
+}
+
+.login-container .login-card{
+    max-width: 337px;
 }
 
 .login-container .login-card input.form-control{
@@ -267,14 +269,14 @@ nav#footer-nav ul li{
 .login-container .login-card input[type='password']{
     background-color: #1e252d;
     color: #fff;
-    border: 3px solid #fff;
+    border: 3px solid #ececec;
     padding: 17px 10px;
 }
 
 .login-container .login-card input[type='text']:focus,
 .login-container .login-card input[type='password']:focus{
     outline: 0;
-    border-bottom-color: var(--primary-color)!important;
+    border-color: var(--primary-color)!important;
 }
 
 .login-container .login-card button[type="submit"]{
@@ -284,7 +286,7 @@ nav#footer-nav ul li{
     font-weight: 600;
     margin: 0;
     color: #fff;
-    border: 1px solid #fff;
+    border: 1px solid #ececec;
     cursor: pointer;
     background-color: var(--primary-color);
 }
@@ -297,7 +299,32 @@ nav#footer-nav ul li{
     margin: 15px 0;
 }
 
+.form-group span[role="alert"].invalid-feedback{
+    color: var(--primary-color);
+}
+
+/* HTTP error layout */
+.http-error{
+    text-align: center;
+}
+
+.http-error h1.error-code{
+    font-size: 80px;
+    padding: 0 10px;
+    color: #fff;
+    background-color: var(--primary-color);
+    margin-bottom: 30px;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
 /* Layout */
+.container{
+    width: 1400px;
+    margin: auto;
+    height: 100%;
+}
+
 .flex-content-center{
     display: flex;
     justify-content: center;
@@ -308,4 +335,10 @@ nav#footer-nav ul li{
     display: flex;
     align-items: center;
 }
+
+#content{
+    height: calc(100vh - 110px);
+}
+
+
 

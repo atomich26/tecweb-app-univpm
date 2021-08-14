@@ -29,13 +29,13 @@
 </head>
 <body>
 
-    @includeWhen($incHeader, 'layouts-parts.header')
+    @includeWhen($incHeader, 'layouts.layouts-parts.header')
     
     <main id="page-container">
         @yield('page-container')
     </main>
 
-    @includeWhen($incFooter, 'layouts-parts.footer')
+    @includeWhen($incFooter, 'layouts.layouts-parts.footer')
 
 </body>
     @yield('js-scripts')
