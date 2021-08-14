@@ -20,18 +20,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <!---- Favicon --->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
 
-    @include('layouts.layouts-parts.header')
-
-    <main id="page-content">
-        @yield('page-content')
+    @includeWhen($incHeader, 'layouts.layouts-parts.header')
+    
+    <main id="page-container">
+        @yield('page-container')
     </main>
 
-    @include('layouts.layouts-parts.footer')
+    @includeWhen($incFooter, 'layouts.layouts-parts.footer')
 
 </body>
+    @yield('js-scripts')
 </html>

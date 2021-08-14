@@ -1,7 +1,9 @@
-@extends('layouts.root', ['pageTitle' => $title])
+@extends('layouts.root', ['pageTitle' => $title, 'incHeader' => true, 'incFooter' => true])
 
-@section('page-content')
+@section('page-container')
 
-@yield('content')
+<section id="content">
+    @yield('content')
+</section>
 
 @endsection
