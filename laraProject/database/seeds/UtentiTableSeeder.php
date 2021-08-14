@@ -15,7 +15,7 @@ class UtentiTableSeeder extends Seeder
             'nome' => null,
             'cognome' =>  null,
             'username' => 'adminadmin',
-            'data_nascita' => null,
+            'dataNascita' => null,
             'email' => 'admin@electrohm.it',
             'telefono' => null,
             'password' => Hash::make('ijADPwLb'),
@@ -29,7 +29,7 @@ class UtentiTableSeeder extends Seeder
             'nome' => 'Andrea',
             'cognome' =>  'Rossi',
             'username' => 'staffstaff',
-            'data_nascita' => '1998-09-03',
+            'dataNascita' => '1998-09-03',
             'email' => 'andrearossi@staff.electrohm.it',
             'telefono' => '3200404040',
             'password' => Hash::make('ijADPwLb'),
@@ -44,7 +44,7 @@ class UtentiTableSeeder extends Seeder
             'nome' => 'Alessandro',
             'cognome' =>  'Bianchi',
             'username' => 'alex_staff',
-            'data_nascita' => '1996-11-27',
+            'dataNascita' => '1996-11-27',
             'email' => 'alexbianchii@staff.electrohm.it',
             'telefono' => '3200505050',
             'password' => Hash::make('ijADPwLb'),
@@ -59,7 +59,7 @@ class UtentiTableSeeder extends Seeder
             'nome' => 'Luca',
             'cognome' =>  'Verdi',
             'username' => 'tecntecn',
-            'data_nascita' => '1993-05-12',
+            'dataNascita' => '1993-05-12',
             'email' => 'lucaverdi@tech.electrohm.it',
             'telefono' => '3290909090',
             'password' => Hash::make('ijADPwLb'),
@@ -74,7 +74,7 @@ class UtentiTableSeeder extends Seeder
             'nome' => 'Francesca',
             'cognome' =>  'Dante',
             'username' => 'francesca_tecn',
-            'data_nascita' => '1990-01-29',
+            'dataNascita' => '1990-01-29',
             'email' => 'francescadante@tech.electrohm.it',
             'telefono' => '3290303030',
             'password' => Hash::make('ijADPwLb'),
@@ -84,5 +84,7 @@ class UtentiTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        
     }
 }
