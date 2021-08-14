@@ -28,7 +28,7 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->nome = $request->nome;
         $user->cognome = $request->cognome;
-        $user->dataNascita = $request->dataNascita;
+        $user->data_nascita = $request->dataNascita;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
         $user->role = $request->role;
