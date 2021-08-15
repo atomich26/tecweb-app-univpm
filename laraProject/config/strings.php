@@ -30,13 +30,15 @@ return [
     'prodotto' => [
         'modello' => 20,
         'descrizione' => 400,
-        'specifiche' => 250,
+        'specifiche' => 1000,
         'guida_installazione' => 1000,
-        'note_uso' => 500,
+        'note_uso' => 1000,
     ],
 
     'malfunzionamento' => [
         'descrizione' => 400,
+        'causa'=> 400,
+        
     ],
     
     'soluzione' => [

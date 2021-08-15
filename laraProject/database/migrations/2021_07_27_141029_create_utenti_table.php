@@ -18,7 +18,7 @@ class CreateUtentiTable extends Migration
             $table->bigIncrements('ID')->index();
             $table->string('nome', Config::get('strings.utente.nome'))->nullable();
             $table->string('cognome', Config::get('strings.utente.cognome'))->nullable();
-            $table->timestamp('data_nascita')->nullable();
+            $table->timestamp('dataNascita')->nullable();
             $table->string('email')->unique();
             $table->string('telefono', Config::get('strings.global.telefono'))->unique()->nullable();
             $table->string('username', Config::get('strings.utente.username'))->unique();
