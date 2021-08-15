@@ -14,8 +14,8 @@
         
     @auth
         
-        @can('manageData')
-            <a class="button header-btn manage-btn" href="#">Gestisci</a>
+        @can('isAdmin')
+            <a class="button header-btn manage-btn" href="#">Gestione dati</a>
         @endcan
         
         @php 
