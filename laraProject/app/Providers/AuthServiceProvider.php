@@ -37,9 +37,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isTecnico', function($user){
             return $user->checkRole('tecnico');
         });
-
-        Gate::define('manageData', function($user){
-            return $user->checkRole(['staff', 'admin']);
-        });
     }
 }
