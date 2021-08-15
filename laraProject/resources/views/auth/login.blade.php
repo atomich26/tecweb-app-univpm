@@ -1,4 +1,4 @@
-@extends('layouts.root', ['pageTitle' => 'Accedi', 'incHeader' => false, 'incFooter' => true])
+@extends('layouts.root', ['title' => 'Accedi', 'incHeader' => false, 'incFooter' => true])
 
 @section('page-container')
 <section class="login-container">

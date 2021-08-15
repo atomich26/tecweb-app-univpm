@@ -1,4 +1,4 @@
-@extends('layouts.root', ['pageTitle' => $title, 'incHeader' => true, 'incFooter' => true])
+@extends('layouts.root', ['incHeader' => true, 'incFooter' => true])
 
 @section('page-container')
 
