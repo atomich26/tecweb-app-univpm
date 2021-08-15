@@ -26,6 +26,26 @@ h4, h5, h6, i, span, a, input, select, .button{
     font-weight: 400;
 }
 
+.text-title{
+    font-size: 24px;
+    margin: 5px 0;
+}   
+
+h2.text-subtitle{
+    font-size: 20px;
+}
+
+h3.text-subtitle{
+    font-size: 18px;
+}
+
+h2.text-subtitle, h3.text-subtitle{
+    margin-top: 15px;
+}
+
+ul.text-list{
+    padding-left: 20px;
+}
 /* Elements */
 .button{
     display: inline-block;
@@ -98,7 +118,7 @@ h4, h5, h6, i, span, a, input, select, .button{
 }
 
 .logout-btn{
-
+    background-color: #00000038;
     background-image: url('/laraProject/public/images/bootstrap_icons/logout.svg');
 }
 .logout-btn:hover, .logout-btn:focus{
@@ -131,6 +151,7 @@ header#site-header{
     padding-left: 30px;
     background-color: var(--color-secondary);
     justify-content: space-between;
+    box-shadow: 0px 0px 5px 4px #00000059;
 }
 
 .site-logo svg{
@@ -197,8 +218,7 @@ nav#public-navbar ul li a{
 /* Main page content */
 
 #content{
-    margin-top: 60px;
-    height: calc(100vh - 110px);    
+    margin-top: 60px;   
 }
 
 /* Footer */
@@ -296,6 +316,10 @@ nav#footer-nav ul li{
 }
 
 /* HTTP error layout */
+.http-error-page{
+    height: calc(100vh - 110px)!important;
+}
+
 .http-error{
     text-align: center;
 }
@@ -308,6 +332,14 @@ nav#footer-nav ul li{
     margin-bottom: 30px;
     width: -moz-fit-content;
     width: fit-content;
+}
+
+/* Article */
+div.simple-page{
+    background-color: #fff;
+    width: 1200px;
+    padding: 50px;
+    box-shadow: 0px 0px 3px 3px #c9c9c9;
 }
 
 /* Layout */
