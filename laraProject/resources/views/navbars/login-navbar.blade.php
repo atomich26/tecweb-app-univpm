@@ -17,21 +17,16 @@
         @can('isAdmin')
             <a class="button header-btn manage-btn" href="#">Gestione dati</a>
         @endcan
-        
-        @php 
-            $userImgName = Auth::user()->file_img;
 
-            if($userImgName == null)
-                $userImgName = "default-user.jpg";
-         @endphp
         <div class="user-info flex-v-center">
-            <img src="{{ asset('storage/images/profiles/' . $userImgName)}}" width="40px" height="40px" style="border-radius:50%"> 
             
-                @if(Auth::user()->checkRole('admin'))
-                    <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
-                @else
-                    <a class="username" href="#">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
-                @endif
+            @include('helpers.user-profile-image', ['width' => 40, 'height' => 40])            
+                
+            @if(Auth::user()->checkRole('admin'))
+                <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
+            @else
+                <a class="username" href="#">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
+            @endif
 
             <div class="user-login">
                 <a class="button header-btn logout-btn" href="{{ route('user-logout') }}"
