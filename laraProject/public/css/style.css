@@ -218,7 +218,7 @@ nav#public-navbar ul li a{
 /* Main page content */
 
 #content{
-    margin-top: 60px;   
+    margin: 100px 80px 30px;
 }
 
 /* Footer */
@@ -337,15 +337,13 @@ nav#footer-nav ul li{
 /* Article */
 div.simple-page{
     background-color: #fff;
-    width: 1200px;
     padding: 50px;
     box-shadow: 0px 0px 3px 3px #c9c9c9;
 }
 
 /* Layout */
 .container{
-    width: 1400px;
-    margin: auto;
+    display: block;
     height: 100%;
 }
 
