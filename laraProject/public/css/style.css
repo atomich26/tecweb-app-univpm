@@ -26,6 +26,12 @@ h4, h5, h6, i, span, a, input, select, .button{
     font-weight: 400;
 }
 
+.page-title{
+    margin: 20px 0;
+    color: var(--color-primary);
+    font-size: 28px;
+}
+
 .text-title{
     font-size: 24px;
     margin: 5px 0;
@@ -151,7 +157,7 @@ header#site-header{
     padding-left: 30px;
     background-color: var(--color-secondary);
     justify-content: space-between;
-    box-shadow: 0px 0px 5px 4px #00000059;
+    box-shadow: 0px 0px 10px 5px #00000047;
 }
 
 .site-logo svg{
@@ -218,7 +224,11 @@ nav#public-navbar ul li a{
 /* Main page content */
 
 #content{
-    margin: 100px 80px 30px;
+    background-color: #fff;
+    padding: 50px;
+    padding-top: 30px;
+    box-shadow: 0px 0px 3px 3px #c9c9c9;
+    margin: 90px 30px 30px;
 }
 
 /* Footer */
@@ -227,6 +237,7 @@ nav#public-navbar ul li a{
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0px -5px 14px 1px #1e1e1e69;
 }
 
 #site-footer ul li:not(:first-child):not(:last-child){
@@ -317,6 +328,8 @@ nav#footer-nav ul li{
 
 /* HTTP error layout */
 .http-error-page{
+    margin-top: 60px;
+    padding: 0 50px;
     height: calc(100vh - 110px)!important;
 }
 
@@ -334,12 +347,6 @@ nav#footer-nav ul li{
     width: fit-content;
 }
 
-/* Article */
-div.simple-page{
-    background-color: #fff;
-    padding: 50px;
-    box-shadow: 0px 0px 3px 3px #c9c9c9;
-}
 
 /* Layout */
 .container{
