@@ -99,9 +99,9 @@ $prodotti = Prodotto::all();
             </ul>
         </div>
         <div>
-            {{  Form::label ('role', 'Ruolo')}}
-            {{  Form::radio ('role', 'tecnico', true)}} Tecnico
-            {{  Form::radio ('role', 'staff')}} Staff
+            {{  Form::label ('role', 'Ruolo') }}
+            {{  Form::radio ('role', 'tecnico') }} Tecnico
+            {{  Form::radio ('role', 'staff')   }} Staff
         </div>
         
         <div>
@@ -109,7 +109,7 @@ $prodotti = Prodotto::all();
             {{  Form::select ('centroID', 
                 [ @foreach ($centri as $centro) 
                      '{!!$centro->ragione_sociale!!}' => '{!!$centro->id!!}'
-                  @endforeach ])
+                  @endforeach ]), ['id'=>'centroID']
             }}
         </div>
 
@@ -125,3 +125,23 @@ $prodotti = Prodotto::all();
 {{  Form::reset ('Reset')}}
 
 {{  Form::close()}}
+
+<script>
+    $(document).ready(function(){
+
+$('input[type=radio][name=role]').change(function() {
+        if (this.value != "tecnico") {
+        document.getElementById("centroID").hidden=true;
+        document.getElementById("centroID").disabled=true;
+         }
+         else if (this.value == "tecnico") ;
+         document.getElementById("centroID").hidden=false;
+         document.getElementById("centroID").disabled=false;
+
+         }
+
+    });
+
+});
+
+</script>
