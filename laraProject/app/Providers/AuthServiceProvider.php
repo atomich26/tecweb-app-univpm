@@ -38,7 +38,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->checkRole('tecnico');
         });
 
-        Gate::define('edit-malfunzionamenti', function($user){
+        Gate::define('hasProfilePage', function($user){
+            return $user->checkRole(['tecnico', 'staff']);
+        });
+        
+        Gate::define('editMalfunzionamenti', function($user){
             return $user->checkRole(['staff', 'admin']);
         });
     }
