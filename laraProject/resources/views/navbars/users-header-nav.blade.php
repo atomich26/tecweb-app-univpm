@@ -7,6 +7,9 @@
             <a href="{{ route('centri-assistenza') }}">Centri assistenza</a>    
         </li>
         <li>
+            <a href="{{ route('centri-assistenza') }}">Gestione utenti</a>    
+        </li>
+        <li>
             <a href="{{ route('faq') }}">FAQ</a>    
         </li>
     </ul>
