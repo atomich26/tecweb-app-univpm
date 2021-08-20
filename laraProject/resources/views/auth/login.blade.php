@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </form>
-                    <p style="margin-top:20px">Per informazioni sull'accesso ai servizi di helpdesk <a href="{{ route('lavora-con-noi') }}">clicca qui</a></p>
+                    <p style="margin-top:20px">Per informazioni sull'accesso ai servizi di helpdesk <a href="{{ route('chi-siamo') }}#lavora-con-noi">clicca qui</a></p>
                 </div>
             </div>
         </div>

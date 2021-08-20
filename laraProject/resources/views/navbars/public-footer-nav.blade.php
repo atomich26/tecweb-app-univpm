@@ -4,7 +4,7 @@
             <a href="{{ route('chi-siamo') }}">Chi siamo</a>
         </li>
         <li>
-            <a href="{{ route('lavora-con-noi') }}">Lavora con noi</a>
+            <a href="{{ route('chi-siamo') }}#lavora-con-noi">Lavora con noi</a>
         </li>
         <li>
             <a href="{{ route('privacy') }}">Informativa sulla privacy</a>

@@ -17,11 +17,10 @@ Route::get('/','PublicController@viewCatalogoPage')->name('catalogo');
 Route::get('/centri-assistenza','PublicController@viewCentriAssistenzaPage')->name('centri-assistenza');
 
 Route::view('/legali','pages.static.legali')->name('legali');
+
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
 // Rotte pagine statiche
-Route::view('/lavora-con-noi','public.static.lavora-con-noi')->name('lavora-con-noi');
-
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
 
 Route::view('/informativa-privacy','public.static.privacy')->name('privacy');
