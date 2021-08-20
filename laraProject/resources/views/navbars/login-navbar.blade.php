@@ -25,7 +25,7 @@
             @if(Auth::user()->checkRole('admin'))
                 <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
             @else
-                <a class="username" href="#">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
+                <a class="username" href="{{ route('user-profile') }}">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
             @endif
 
             <div class="user-login">

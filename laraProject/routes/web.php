@@ -26,6 +26,7 @@ Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
 Route::view('/informativa-privacy','public.static.privacy')->name('privacy');
 
 //Rotte dedicate agli utenti
+Route::view('/profilo','users.user-profile')->name('user-profile')->middleware('can:hasProfilePage');
 
 // Rotte per l'autenticazione
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');

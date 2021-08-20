@@ -27,7 +27,7 @@
 
     <div id="cosa-crediamo" class="cit">
         <h2>In cosa crediamo</h2>
-        <p>Crediamo che esperienze di gusto eccezionali debbano essere alla portata di tutti, che ci sia sempre un modo migliore per prenderci cura dei capi e farli sembrare nuovi più a lungo, che la casa debba essere un'oasi di benessere, dove prenderci cura di noi stessi e dei nostri cari. Per avere successo, ripensiamo e miglioriamo ontinuamente il nostro modo di lavorare, sia internamente sia insieme con i nostri clienti e partner. Con la creazione di soluzioni desiderabili e fantastiche esperienze in grado di arricchire la vita quotidiana delle persone e migliorare la salute del nostro pianeta, vogliamo essere una forza trainante nella definizione di uno stile di vita piacevole e sostenibile.
+        <p>Crediamo che esperienze di gusto eccezionali debbano essere alla portata di tutti, che ci sia sempre un modo migliore per prenderci cura dei capi e farli sembrare nuovi più a lungo, che la casa debba essere un'oasi di benessere, dove prenderci cura di noi stessi e dei nostri cari. Per avere successo, ripensiamo e miglioriamo continuamente il nostro modo di lavorare, sia internamente sia insieme con i nostri clienti e partner. Con la creazione di soluzioni desiderabili e fantastiche esperienze in grado di arricchire la vita quotidiana delle persone e migliorare la salute del nostro pianeta, vogliamo essere una forza trainante nella definizione di uno stile di vita piacevole e sostenibile.
     </div>
     
     <div id="contatti">
@@ -49,7 +49,7 @@
 
     <div id="lavora-con-noi">
         <h1 class="text-title">Lavora con noi</h1>
-        <p>In Electrhom apprezziamo l'entusiamo e la voglia di far sentire il cliente a casa sua e sicuro dei nostri acquisti. In Electrohm sono aperte posizione come membri dello staff(gestiti direttamente da Noi) e come tecnici di centri di assistenza esterni che hanno accesso ai nostri servizi di Helpdesk.
+        <p>In Electrohm apprezziamo l'entusiamo e la voglia di far sentire il cliente a casa sua e sicuro dei nostri acquisti. In Electrohm sono aperte posizione come membri dello staff(gestiti direttamente da Noi) e come tecnici di centri di assistenza esterni che hanno accesso ai nostri servizi di Helpdesk.
             Se sei interessato a questa opportunità puoi inviare la tua candidatura all'indirizzo <strong>email candidate@jobs.electrohm.com</strong>.
         </p>
     </div>
