@@ -56,5 +56,26 @@ class AdminController extends Controller
         return redirect()->route('faq');
     }
 
+    public function modifyFAQ($faqId){
+        $faq = Faq::find($faqId);
+        return view ('pages.modificaFAQ')->with('faq', $faq);
+    }
+
+    public function updateFAQ(FAQRequest $request, $faqId){
+        $faq = Faq::find($faqId);
+        $faq->domanda = $request->domanda;
+        $faq->risposta = $request->domanda;
+        $faq->save();
+
+        return redirect()->route('faq');
+
+    }
+
+    public function deleteFAQ($faqId){
+        $faq = Faq::find($faqId);
+        $faq->delete($faqId);
+        return redirect()->return('faq');
+    }
+
     }
 

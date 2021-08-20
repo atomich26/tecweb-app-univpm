@@ -45,4 +45,10 @@ Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
 Route::get('/faq/insert', 'AdminController@insertFAQ')->name('insertFAQ');
 
-Route::get('/faq/insert', 'AdminController@saveFAQ')->name('insertFAQ.store');
+Route::post('/faq/insert', 'AdminController@saveFAQ')->name('insertFAQ.store');
+
+Route::get('/faq/{faqId}/modify', 'AdminController@modifyFAQ')->name('modifyFAQ');
+
+Route::put('/faq/{faqId}/modify', 'AdminController@updateFAQ')->name('modifyFAQ.update');
+
+Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
