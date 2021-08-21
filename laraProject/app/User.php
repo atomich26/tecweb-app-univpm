@@ -37,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime', 'last_succ_login' => 'datetime', 'data_nascita' => 'datetime',
     ];
 
     public function checkRole($role){
