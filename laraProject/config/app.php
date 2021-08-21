@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Rome',
+    'timezone' => env('APP_TIMEZONE', 'Europe/Rome'),
 
     /*
     |--------------------------------------------------------------------------
