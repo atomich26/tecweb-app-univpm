@@ -18,7 +18,7 @@ class CreateUtentiTable extends Migration
             $table->bigIncrements('ID')->index();
             $table->string('nome', Config::get('strings.utente.nome'))->nullable();
             $table->string('cognome', Config::get('strings.utente.cognome'))->nullable();
-            $table->timestamp('dataNascita')->nullable();
+            $table->timestamp('data_nascita')->nullable();
             $table->string('email')->unique();
             $table->string('telefono', Config::get('strings.global.telefono'))->unique()->nullable();
             $table->string('username', Config::get('strings.utente.username'))->unique();
@@ -29,6 +29,7 @@ class CreateUtentiTable extends Migration
             $table->string('file_img')->nullable();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('last_succ_login')->nullable();
             $table->timestamps();
         });
     }

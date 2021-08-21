@@ -23,6 +23,7 @@ class UtentiTableSeeder extends Seeder
             'centroID' => null,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'last_succ_login' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('utenti')->insert([
@@ -38,6 +39,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'male1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'last_succ_login' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('utenti')->insert([
@@ -53,6 +55,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'female2.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'last_succ_login' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('utenti')->insert([
@@ -68,6 +71,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'male2.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'last_succ_login' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('utenti')->insert([
@@ -83,6 +87,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'female1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'last_succ_login' => date('Y-m-d H:i:s'),
         ]);
 
         
