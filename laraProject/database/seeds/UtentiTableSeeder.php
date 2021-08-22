@@ -23,7 +23,7 @@ class UtentiTableSeeder extends Seeder
             'centroID' => null,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'last_succ_login' => date('Y-m-d H:i:s'),
+            'last_login' => null,
         ]);
 
         DB::table('utenti')->insert([
@@ -31,7 +31,7 @@ class UtentiTableSeeder extends Seeder
             'cognome' =>  'Bianchi',
             'username' => 'staffstaff',
             'data_nascita' => '1998-09-03',
-            'email' => 'andrearossi@staff.electrohm.it',
+            'email' => 'andreabianchi@staff.electrohm.it',
             'telefono' => '3200404040',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',
@@ -39,15 +39,15 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'male1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'last_succ_login' => date('Y-m-d H:i:s'),
+            'last_login' => null,
         ]);
 
         DB::table('utenti')->insert([
-            'nome' => 'Alessandro',
-            'cognome' =>  'Bianchi',
-            'username' => 'alex_staff',
+            'nome' => 'Alessandra',
+            'cognome' =>  'Alighieri',
+            'username' => 'alessandra_staff',
             'data_nascita' => '1996-11-27',
-            'email' => 'alexbianchii@staff.electrohm.it',
+            'email' => 'alessandrabianchi@staff.electrohm.it',
             'telefono' => '3200505050',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',
@@ -55,7 +55,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'female2.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'last_succ_login' => date('Y-m-d H:i:s'),
+            'last_login' => null,
         ]);
 
         DB::table('utenti')->insert([
@@ -71,7 +71,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'male2.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'last_succ_login' => date('Y-m-d H:i:s'),
+            'last_login' => null,
         ]);
 
         DB::table('utenti')->insert([
@@ -79,7 +79,7 @@ class UtentiTableSeeder extends Seeder
             'cognome' =>  'Rossi',
             'username' => 'francesca_tecn',
             'data_nascita' => '1990-01-29',
-            'email' => 'francescadante@tech.electrohm.it',
+            'email' => 'francescarossi@tech.electrohm.it',
             'telefono' => '3290303030',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'tecnico',
@@ -87,9 +87,7 @@ class UtentiTableSeeder extends Seeder
             'file_img' => 'female1.jpg',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'last_succ_login' => date('Y-m-d H:i:s'),
+            'last_login' => null,
         ]);
-
-        
     }
 }

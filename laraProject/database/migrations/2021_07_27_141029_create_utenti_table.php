@@ -29,7 +29,7 @@ class CreateUtentiTable extends Migration
             $table->string('file_img')->nullable();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('last_succ_login')->nullable();
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
     }

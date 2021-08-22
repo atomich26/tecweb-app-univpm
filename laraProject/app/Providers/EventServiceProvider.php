@@ -19,7 +19,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         'Illuminate\Auth\Events\Login' => [
-            'App\Listeners\LogSuccessfulLogin',
+            'App\Listeners\UpdateLastLogin@handleOnLogin',
+        ],
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\UpdateLastLogin@handleOnLogout',
         ],
     ];
 

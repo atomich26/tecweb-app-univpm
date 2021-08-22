@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use DateTime;
 
 class User extends Authenticatable
 {
@@ -19,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'cognome', 'email', 'data_nascita', 'telefono' 
+        'nome', 'cognome', 'email', 'data_nascita', 'telefono'
     ];
 
     /**
@@ -37,11 +39,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime', 'last_succ_login' => 'datetime', 'data_nascita' => 'datetime',
+        'email_verified_at' => 'datetime', 'last_login' => 'datetime', 'data_nascita' => 'datetime',
     ];
 
     public function checkRole($role){
         $roleToCheck = (array)$role;
         return in_array($this->role, $roleToCheck);
+    }
+
+    public function getLastLoginCached(){
+        return Cache::get('last_login_timestamp');
     }
 }
