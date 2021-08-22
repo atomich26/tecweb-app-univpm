@@ -49,7 +49,7 @@
 
     <div id="lavora-con-noi">
         <h1 class="text-title">Lavora con noi</h1>
-        <p>In Electrohm apprezziamo l'entusiamo e la voglia di far sentire il cliente a casa sua e sicuro dei nostri acquisti. In Electrohm sono aperte posizione come membri dello staff(gestiti direttamente da Noi) e come tecnici di centri di assistenza esterni che hanno accesso ai nostri servizi di Helpdesk.
+        <p>In Electrohm apprezziamo l'entusiamo e la voglia di far sentire il cliente a casa sua e sicuro dei nostri acquisti. Sono aperte posizione come membri dello staff(gestiti direttamente da Noi) e come tecnici di centri di assistenza esterni che hanno accesso ai nostri servizi di Helpdesk.
             Se sei interessato a questa opportunità puoi inviare la tua candidatura all'indirizzo <strong>email candidate@jobs.electrohm.com</strong>.
         </p>
     </div>
