@@ -29,11 +29,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isAdmin', function($user){
             return $user->checkRole('admin');
         });
-        
+
         Gate::define('isStaff', function($user){
             return $user->checkRole('staff');
         });
-        
+
         Gate::define('isTecnico', function($user){
             return $user->checkRole('tecnico');
         });
@@ -41,9 +41,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('hasProfilePage', function($user){
             return $user->checkRole(['tecnico', 'staff']);
         });
-        
-        Gate::define('editMalfunzionamenti', function($user){
-            return $user->checkRole(['staff', 'admin']);
+
+        Gate::define('editMalfunzionamenti', function($user, $product){
+
+            if($user->checkRole('admin')){
+                return true;
+            }
+            elseif($user->checkRole('staff')){
+
+                if($product->utenteID != null)
+                    $user->ID == $product->utenteID;
+                else
+                    return true;
+            }
+            else
+                return false;
         });
     }
 }
