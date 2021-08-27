@@ -31,7 +31,7 @@ Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
 
 Route::view('/informativa-privacy','public.static.privacy')->name('privacy');
 
-//Rotte dedicate agli utenti
+// Rotte dedicate agli utenti
 Route::view('/profilo','users.user-profile')->name('user-profile')->middleware('can:hasProfilePage');
 
 // Rotte per l'autenticazione
@@ -41,11 +41,13 @@ Route::post('login','Auth\LoginController@login')->name('user-login');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');
 
+// Rotte dedicate alla gestione degli utenti
+
 Route::get('/inserisciUtente', 'AdminController@insertUtente')->name('insertUtente');
 
 Route::post('/inserisciUtente', 'AdminController@saveUtente')->name('insertUtente.store');
 
-//Rotte dedicate alle FAQ
+// Rotte dedicate alle FAQ
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
@@ -58,3 +60,9 @@ Route::get('/faq/{faqId}/modify', 'AdminController@modifyFAQ')->name('modifyFAQ'
 Route::put('/faq/{faqId}/modify', 'AdminController@updateFAQ')->name('modifyFAQ.update');
 
 Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
+
+// Rotte dedicate ai prodotti
+
+Route::get('/inserisciProdotto', 'AdminController@insertProdotto')->name('insertProdotto');
+
+Route::post('inserisciProdotto', 'AdminController@saveProdotto')->name('insertProdotto.store');

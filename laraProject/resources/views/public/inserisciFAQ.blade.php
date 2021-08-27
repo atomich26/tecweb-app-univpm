@@ -4,5 +4,5 @@
     @include('forms.insertFAQ')
     <br>
     <br>
-    <a href = "{{route('home')}}"> Torna alla Home</a>
+    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
 @endsection

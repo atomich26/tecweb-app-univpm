@@ -29,8 +29,8 @@ class userRequest extends FormRequest
             'nome'=>'required|string|max:50',
             'cognome'=>'required|string|max:50',
             'dataNascita'=>'required|date|before:today',
-            'email'=>'required|unique:users,email|email',
-            'telefono'=>'required|unique:users,telefono|numeric|max:9999999999',
+            'email'=>'required|unique:users,email|email|max:200',
+            'telefono'=>'required|unique:users,telefono|digits:10',
 
         ];
     }

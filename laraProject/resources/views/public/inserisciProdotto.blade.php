@@ -1,7 +1,7 @@
-@extends('layouts.forms', ['title' => 'Modifica FAQ'])
+@extends('layouts.forms', ['title' => 'Inserisci nuovo Prodotto'])
 
 @section('content')
-    @include('forms.modifyFAQ')
+    @include('forms.insertProduct')
     <br>
     <br>
     <a href = "{{route('catalogo')}}"> Torna alla Home</a>
