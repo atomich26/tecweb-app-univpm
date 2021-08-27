@@ -1,5 +1,5 @@
 <div class="form-blank">
-    {{  Form::open(array('route' => 'inserisciFAQ.store', 'id' =>'insertFaq' , 'files' => true))  }}
+    {{  Form::open(array('route' => 'insertFAQ.store', 'id' =>'insertFaq' , 'files' => true))  }}
    
     <h2>Modulo inserimento FAQ</h2>
         <div class="wrap-input">

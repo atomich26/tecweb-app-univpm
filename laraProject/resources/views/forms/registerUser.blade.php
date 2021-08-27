@@ -1,9 +1,3 @@
-@php 
-use App\Models\Resources\CentroAssistenza;
-use App\Models\Resources\prodotto;
-$centri = CentroAssistenza::all();
-$prodotti = Prodotto::all();
-@endphp
 
 {{  Form::open (array('route'=>'insertUtente.store'))}}
 
@@ -54,7 +48,7 @@ $prodotti = Prodotto::all();
                     <li class="errors">{{ $message }}</li>
                     @endforeach
                 </ul>
-                @endif
+            @endif
         </div>
         
         <div>
@@ -66,37 +60,42 @@ $prodotti = Prodotto::all();
                     <li>{{$message}}</li>
                     @endforeach
                 </ul>
+            @endif
         </div>
 
         <div>
-            {{  Form::label ('dataNascita', 'Data di Nascita')}}
-            {{  Form::date('dataNascita', \Carbon\Carbon::now())}}
-            @if (errors->first('dataNascita'))
+            {{  Form::label ('data_nascita', 'Data di Nascita')}}
+            {{  Form::date('data_nascita', \Carbon\Carbon::now())}}
+            @if ($errors->first('data_nascita'))
                 <ul>
-                    @foreach($errors->get('dataNascita') as $message)
+                    @foreach($errors->get('data_nascita') as $message)
                     <li>{{$message}}</li>
                     @endforeach
                 </ul>   
+            @endif
         </div>
         <div>
             {{  Form::label ('email', 'Indirizzo E-Mail')}}
             {{  Form::email ('email', '')}}
-            @if (errors->first('email'))
+            @if ($errors->first('email'))
                 <ul>
                     @foreach($errors->get('email') as $message)
                     <li>{{$message}}</li>
                     @endforeach
                 </ul> 
+            @endif
         </div>
 
         <div>
             {{  Form::label ('telefono', 'Telefono')}}
             {{  Form::text ('telefono','')}};
+            @if ($errors->first('telefono'))
             <ul>
                     @foreach($errors->get('telefono') as $message)
                     <li>{{$message}}</li>
                     @endforeach
             </ul>
+            @endif
         </div>
         <div>
             {{  Form::label ('role', 'Ruolo') }}
@@ -106,20 +105,10 @@ $prodotti = Prodotto::all();
         
         <div>
             {{  Form::label ('centroID', 'Centro Assistenza')}}
-            {{  Form::select ('centroID', 
-                [ @foreach ($centri as $centro) 
-                     '{!!$centro->ragione_sociale!!}' => '{!!$centro->id!!}'
-                  @endforeach ]), ['id'=>'centroID']
-            }}
+            {!! Form::select ('centroID', $centri->pluck('ragione_sociale', 'ID'), null)!!}
         </div>
 
-        <div>
-        Tratta i prodotti: 
-            @foreach ($prodotti as $prodotto)
-            {{  Form::label ('{!!$prodotto->ID!!}', '{!!$prodotto->nome!!} - modello {!!$prodotto->modello!!}')}}
-            {{  Form::checkbox ('prodotto[]', '{!!$prodotto->ID!!}')}}
-            @endforeach
-        </div>
+        
 
 {{  Form::submit ('Inserisci Utente')  }}
 {{  Form::reset ('Reset')}}

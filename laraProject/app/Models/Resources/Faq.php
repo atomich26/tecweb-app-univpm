@@ -5,8 +5,9 @@ namespace App\Models\Resources;
 use Illuminate\Database\Eloquent\Model;
 
 class Faq extends Model
-{
-    protected $primaryKey = 'faqID';
+{   
+    protected $table = 'faqs';
+    protected $primaryKey = 'ID';
     public $timestamps = true;
 }
 
