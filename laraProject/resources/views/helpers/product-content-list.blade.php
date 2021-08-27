@@ -4,7 +4,7 @@
 
 @isset($listItems)
     <ul style="padding-left: 20px">
-        @if($listItems[0] != null && empty($listItems))
+        @if($listItems[0] != null)
             @foreach ($listItems as $item)
                 <li style="margin:10px 0"><p>{{ $item }}</p></li>
             @endforeach
