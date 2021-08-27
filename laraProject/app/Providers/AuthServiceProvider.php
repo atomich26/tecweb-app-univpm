@@ -50,7 +50,7 @@ class AuthServiceProvider extends ServiceProvider
             elseif($user->checkRole('staff')){
 
                 if($product->utenteID != null)
-                    $user->ID == $product->utenteID;
+                    return $user->ID == $product->utenteID;
                 else
                     return true;
             }

@@ -44,7 +44,7 @@ class AdminController extends Controller
 
     }
     //funzioni dedicate alle FAQ
-    
+
     public function insertFAQ(){
         return view ('pages.inserisciFAQ');
     }
@@ -53,11 +53,13 @@ class AdminController extends Controller
         $faq = new Faq;
         $faq->domanda = $request->domanda;
         $faq->risposta = $request->risposta;
+
         return redirect()->route('faq');
     }
 
     public function modifyFAQ($faqId){
         $faq = Faq::find($faqId);
+
         return view ('pages.modificaFAQ')->with('faq', $faq);
     }
 
@@ -68,14 +70,14 @@ class AdminController extends Controller
         $faq->save();
 
         return redirect()->route('faq');
-
     }
 
     public function deleteFAQ($faqId){
         $faq = Faq::find($faqId);
         $faq->delete($faqId);
+
         return redirect()->return('faq');
     }
 
-    }
+}
 

@@ -1,7 +1,7 @@
 @extends('layouts.static', ['title' => 'Chi siamo', 'pageCover' => 'corporate_cover.jpg'])
 
 @section('static-content')
-    <div id="chi-siamo" class="cit">
+    <div id="chi-siamo" class="cit" style="margin-top:0px">
         <h2>Questi siamo noi</h2>
         <p>La nostra storia ha inizio nel 1955, nel periodo in cui gli elettrodomestici diventano oggetti indispensabili in ogni casa. Da allora siamo diventati il brand di elettrodomestici a libera installazione più richiesto d'Italia.
             Negli ultimi vent'anni, ci siamo concentrati sull'innovazione per rendere la vita dei nostri clienti più semplice e più sana. La facilità d'uso e le tecnologie funzionali dei nostri prodotti ci hanno reso il marchio Electrohm con la crescita più rapida sul mercato nazionale.
@@ -29,7 +29,7 @@
         <h2>In cosa crediamo</h2>
         <p>Crediamo che esperienze di gusto eccezionali debbano essere alla portata di tutti, che ci sia sempre un modo migliore per prenderci cura dei capi e farli sembrare nuovi più a lungo, che la casa debba essere un'oasi di benessere, dove prenderci cura di noi stessi e dei nostri cari. Per avere successo, ripensiamo e miglioriamo continuamente il nostro modo di lavorare, sia internamente sia insieme con i nostri clienti e partner. Con la creazione di soluzioni desiderabili e fantastiche esperienze in grado di arricchire la vita quotidiana delle persone e migliorare la salute del nostro pianeta, vogliamo essere una forza trainante nella definizione di uno stile di vita piacevole e sostenibile.
     </div>
-    
+
     <div id="contatti">
         <h1 class="text-title" style="flex-basis:100%">Come contattarci e dove trovarci</h1>
         <div class="flex-v-center">

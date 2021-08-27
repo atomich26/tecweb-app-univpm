@@ -18,7 +18,7 @@ class UpdateLastLogin
      */
     public function __construct()
     {
-        //
+
     }
 
     /**

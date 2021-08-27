@@ -46,8 +46,4 @@ class User extends Authenticatable
         $roleToCheck = (array)$role;
         return in_array($this->role, $roleToCheck);
     }
-
-    public function getLastLoginCached(){
-        return Cache::get('last_login_timestamp');
-    }
 }

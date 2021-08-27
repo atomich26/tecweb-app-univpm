@@ -1,6 +1,6 @@
 :root{
-    --body-bg : #ececec;
-    --color-primary: #e00000;
+    --color-white : #ececec;
+    --color-primary: #ea1835;
     --color-secondary: #1e252d;
     --color-tertiary: #00588c;
     --static-header-height : 450px;
@@ -17,7 +17,7 @@
 body{
     width: 100%;
     height: 100%;
-    background-color: var(--body-bg);
+    background-color: var(--color-white);
     font-family: 'Lexend', sans-serif;
     font-size: 18px;
     text-rendering: optimizeLegibility;
@@ -45,7 +45,7 @@ h2{
 .text-title{
     margin: 5px 0;
     color: #e00000;
-}   
+}
 
 h2.text-subtitle{
     color: #00588c;
@@ -65,13 +65,18 @@ ul.text-list{
 /* Elements */
 .button{
     display: inline-block;
-    padding: 10px 15px;
     margin: 0 5px;
     text-decoration: none;
-    -webkit-transition: .4s cubic-bezier(.33,.21,0,1.01);
-    -moz-transition: .4s cubic-bezier(.33,.21,0,1.01);
-    -o-transition: .4s cubic-bezier(.33,.21,0,1.01);
-    transition: .4s cubic-bezier(.33,.21,0,1.01);
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 10px 52%;
+    padding-left: 40px;
+    -webkit-transition: .2s ease-in;
+    -moz-transition: .2s ease-in;
+    -o-transition: .2s ease-in;
+    transition: .2s ease-in;
 }
 
 .button i svg{
@@ -115,19 +120,13 @@ ul.text-list{
 }
 
 .header-btn {
-    padding: 8px 15px;
-    background-color: #00000000;
-    border: 1px solid #fff;
+    background-color:  var(--color-primary);
     color: #fff;
-    font-size: 16px;
-    background-repeat: no-repeat;
-    background-position: 10px 52%;
-    padding-left: 40px;
 }
 
 .header-btn:hover{
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
 }
 
 .login-btn{
@@ -135,7 +134,7 @@ ul.text-list{
 }
 
 .logout-btn{
-    background-color: #00000038;
+    background-color: #00000069;
     background-image: url('/laraProject/public/images/bootstrap_icons/logout.svg');
 }
 .logout-btn:hover, .logout-btn:focus{
@@ -165,7 +164,7 @@ header#site-header{
     width: 100%;
     height: 60px;
     padding-left: 30px;
-    background-color: var(--color-secondary);
+    background-color: var(--color-white);
     justify-content: space-between;
     box-shadow: 0px 0px 10px 5px #00000047;
     z-index: 99;
@@ -179,7 +178,7 @@ header#site-header{
 #header-user .user-info{
     padding: 10px;
     padding-right: 10px;
-    background-color: #e00000;
+    background-color: var(--color-primary);
 }
 
 .user-info a:not(.header-btn), #site-footer ul li a{
@@ -205,11 +204,11 @@ header#site-header{
 nav#public-navbar ul li{
     display: inline-block;
     padding: 5px 12px;
-    transition: .4s cubic-bezier(.33,.21,0,1.01);
+    transition: .2s ease-in;
 }
 
 nav#public-navbar ul:hover li a{
-    color: #b6b6b6;
+    color: #464646;
 }
 
 nav#public-navbar ul li:hover{
@@ -221,10 +220,10 @@ nav#public-navbar ul li:hover a {
 }
 
 nav#public-navbar ul li a{
-    color: #fff;
+    color: var(--color-secondary);
     font-size: 16px;
     text-decoration: none;
-    transition: color .5s cubic-bezier(.33,.21,0,1.01);
+    transition: color .1s ease-in;
 }
 
 .divider{
@@ -239,19 +238,14 @@ nav#public-navbar ul li a{
 #content{
     position: relative;
     background-color: #fff;
-    padding: 50px;
     box-shadow: 0px 0px 3px 3px #c9c9c9;
-    margin: 70px 50px 10px;
+    margin: 70px 10px 10px;
     z-index: 1;
 }
 
 /* Static page */
 .page-header{
-    position: absolute;
     display: flex;
-    top: 0;
-    left: 0;
-    display: block;
     height: var(--static-header-height);
     width: 100%;
 }
@@ -263,10 +257,6 @@ nav#public-navbar ul li a{
     object-position: center;
     position: absolute;
     z-index: 9;
-}
-
-.static-content{
-    margin-top: var(--static-header-height);
 }
 
 .page-header-content{
@@ -307,7 +297,7 @@ div.cit{
 
 div.cit h2{
     text-align:center;
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
     color: #00588c
 }
 
@@ -411,11 +401,16 @@ nav#footer-nav ul li{
 .http-error-page{
     margin-top: 60px;
     padding: 0 50px;
+    background-color: var(--color-secondary);
     height: calc(100vh - 110px)!important;
 }
 
 .http-error{
     text-align: center;
+}
+
+.http-error h2{
+    color: var(--color-white);
 }
 
 .http-error h1.error-code{
@@ -429,7 +424,7 @@ nav#footer-nav ul li{
 }
 
 .user-profile-container{
-    height: calc(100vh - 230px);
+    height: calc(100vh - 130px)!important;
 }
 
 .info-label{
@@ -445,22 +440,145 @@ nav#footer-nav ul li{
     color: #494949;
 }
 
-.profile-info{
+.account-info{
     margin: 30px 20px;
 }
 
-.user-company-info{
-    border-left: 1px solid #1e252d;
-}
-.user-company-info ul{
+.user-account-info ul{
     list-style: none;
 }
 
+h1.user-welcome{
+    color: var(--color-primary);
+}
 
+.multi-value div{
+    display: inline-block;
+}
+
+.user-data-info ul li{
+    margin: 20px 0;
+}
+
+.user-data-info ul{
+    list-style-type: none;
+}
+
+.user-data-info ul li h3 strong{
+    color: #000000;
+}
+
+.user-data-info ul li.multi-value h3{
+    display: inline-block;
+}
+
+.user-data-info ul li.multi-value h3 span{
+    font-size: 18px;
+}
+
+.user-data-info .data-row h3:nth-child(even){
+    margin: 20px;
+}
+
+.header-product-page{
+    width: 100%;
+    height: 600px;
+    background-color: var(--color-secondary);
+}
+
+.product-overview h1, .product-overview h2, .product-overview h3{
+    color: var(--color-primary);
+}
+
+.product-overview h1.product-name{
+    font-size: 1.9em;
+    margin-bottom: 30px;
+}
+
+.product-overview .product-image{
+    width: 300px;
+    object-fit: scale-down;
+    padding: 30px;
+    background-color: var(--color-white);
+    float: right;
+}
+
+#specifiche-prodotto ul{
+    list-style: none;
+}
+
+#specifiche-prodotto ul li{
+    margin-top: 10px;
+}
+
+#specifiche-prodotto ul li::before {
+    content: "\2022";
+    color: red;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+#specifiche-prodotto ul li p{
+    color: var(--color-white);
+    display: inline-block;
+}
+
+.product-overview #modello{
+    margin-bottom: 30px;
+}
+.product-overview #modello span{
+    color: var(--color-white);
+}
+
+.product-overview .button{
+    font-size: 18px;
+    background-color: var(--color-primary);
+}
+
+.product-overview .button:hover{
+    background-color: #b01328;
+}
+
+.product-overview .malfunzionamenti-btn{
+    background-image: url('/laraProject/public/images/bootstrap_icons/gear.svg');
+}
+
+.product-overview .edit-malfunzionamenti-btn, .product-overview .edit-prodotto-btn {
+    background-image: url('/laraProject/public/images/bootstrap_icons/pencil-square.svg');
+}
+
+div.product-text:nth-child(even){
+    margin: 50px 0;
+}
+
+div.product-text h3{
+    padding: 20px 30px;
+    background-color: var(--color-primary);
+    color: #fff;
+    width: -moz-fit-content;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+div.product-text ul, div#descrizione-prodotto p{
+    background-color: #f1f1f1;
+    padding: 30px 30px!important;
+}
+
+.product-overview .edit-prodotto-btn {
+
+}
+
+.product-overview .product-buttons{
+    margin-top: 30px;
+}
 /* Layout */
 .container{
     display: block;
     height: 100%;
+    padding: 50px 50px;
 }
 
 .flex-content-center{

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
 
@@ -28,19 +28,20 @@ return [
     ],
 
     'prodotto' => [
+        'nome' => 80,
         'modello' => 20,
-        'descrizione' => 400,
-        'specifiche' => 1000,
-        'guida_installazione' => 1000,
-        'note_uso' => 1000,
+        'descrizione' => 5000,
+        'specifiche' => 5000,
+        'guida_installazione' => 5000,
+        'note_uso' => 5000,
     ],
 
     'malfunzionamento' => [
         'descrizione' => 400,
         'causa'=> 400,
-        
+
     ],
-    
+
     'soluzione' => [
         'descrizione' => 1000
     ]

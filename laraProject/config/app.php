@@ -226,6 +226,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Categories' => App\Models\Enums\Categories::class,
+        'CentroAssistenza' => App\Models\Resources\CentroAssistenza::class,
+        'Tecnico' => App\Models\Tecnico::class,
+        'User' => App\User::class,
     ],
 
 ];

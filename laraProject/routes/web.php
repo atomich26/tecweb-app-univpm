@@ -12,13 +12,19 @@
 */
 
 // Rotte al PublicController;
-Route::get('/','PublicController@viewCatalogoPage')->name('catalogo');
+
+Route::get('/', function(){
+    return redirect()->route('catalogo');
+});
+Route::get('/catalogo','PublicController@viewCatalogoPage')->name('catalogo');
 
 Route::get('/centri-assistenza','PublicController@viewCentriAssistenzaPage')->name('centri-assistenza');
 
 Route::view('/legali','pages.static.legali')->name('legali');
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
+
+Route::get('/catalogo/prodotti/{modello}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
