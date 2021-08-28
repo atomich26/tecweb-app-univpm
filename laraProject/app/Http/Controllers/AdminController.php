@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
-use App\Models\Resources\Utente;
+use App\User;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use APP\Models\Resources\CentroAssistenza;
@@ -28,11 +28,19 @@ class AdminController extends Controller
     }
 
     public function saveUtente(UserRequest $request){
-        $user = new Utente;
+        if($request->hasFile('file_img')){
+            $image = $request->file('file_img');
+            $imageName = $image->getClientOriginalName();
+        }
+        else{
+            $imageName = NULL;
+        }
+        $user = new User;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->nome = $request->nome;
         $user->cognome = $request->cognome;
+        $user->file_img = $imageName;
         $user->data_nascita = $request->data_nascita;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
@@ -40,8 +48,8 @@ class AdminController extends Controller
         if($user->role == 'tecnico'){
             $user->centroID = $request->centroID;
         }
-        $user->save;
-        return redirect()->route('home');
+        $user->save();
+        return redirect()->route('catalogo');
 
     }
 
@@ -84,7 +92,8 @@ class AdminController extends Controller
     //funzioni dedicate ai prodotti
 
     public function insertProdotto(){
-        return view ('public.inserisciProdotto');
+        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
+        return view ('public.inserisciProdotto')->with('users', $users);
 
     }
 

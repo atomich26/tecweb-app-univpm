@@ -15,4 +15,6 @@ class Admin
         if(Gate::denies('isAdmin', $user))
             $this->user = null;
     }
+
+    
 }

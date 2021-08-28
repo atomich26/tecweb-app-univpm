@@ -30,7 +30,7 @@ class ProductRequest extends FormRequest
             'specifiche'=>'required|max:1000',
             'guida_installazione'=>'required|max:1000',
             'note_uso'=>'required|max:1000',
-            'file_img'=>'image|size:2048|nullable'
+            'file_img'=>'image|max:2048|nullable'
         ];
     }
 }

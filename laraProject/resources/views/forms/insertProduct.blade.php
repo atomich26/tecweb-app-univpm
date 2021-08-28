@@ -1,7 +1,7 @@
 @php
 use App\Models\Enums\Categories;
 @endphp
-{{  Form::open(array('route'=>'insertProdotto.store', 'id'=>'insertProdotto'))}}
+{{  Form::open(array('route'=>'insertProdotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
 
 <h2>Inserimento Prodotto</h2>
 
@@ -53,7 +53,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('specifiche', 'Specifiche del Prodotto')}}
-        {{Form::textarea('specifiche','EG. Misure, Peso, Alimentazione,...')}}
+        {{Form::textarea('specifiche','')}}
         @if ($errors->first('specifiche'))
                 <ul>
                     @foreach ($errors->get('specifiche') as $message)
@@ -104,7 +104,8 @@ use App\Models\Enums\Categories;
     <br>
     <br>
     <div>
-       
+       {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
+       {{form::select('utenteID',$users,null,['placeholder'=>'Non assegnato'])}}
     <div>
     {{  Form::submit ('Conferma' )}}
     </div>
