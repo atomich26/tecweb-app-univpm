@@ -25,12 +25,12 @@ class ProductRequest extends FormRequest
     {
         return [
             'nome'=>'required|max:50',
-            'modello'=>'required|unique:prodotti,modello|max:20',
+            'modello'=>'required|unique:prodotti,modello,'.$this->productID.'|max:20',
             'descrizione'=>'required|max:400',
             'specifiche'=>'required|max:1000',
             'guida_installazione'=>'required|max:1000',
             'note_uso'=>'required|max:1000',
-            'file_img'=>'image|max:2048|nullable'
+            'file_img'=>'image|max:2048|nullable',
         ];
     }
 }
