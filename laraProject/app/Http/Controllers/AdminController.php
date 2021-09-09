@@ -165,8 +165,9 @@ class AdminController extends Controller
     }
 
     public function modifyProdotto($productID){
+        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
         $product = Prodotto::find($productID);
-        return view('public.modificaProdotto')->with('prodotto',$product);
+        return view('public.modificaProdotto')->with('product',$product)->with('users', $users);
 
     }
 
