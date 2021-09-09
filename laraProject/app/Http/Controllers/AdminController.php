@@ -56,8 +56,9 @@ class AdminController extends Controller
 
 
     public function modificaUser($userID){
+        $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
         $user = User::find($userID);
-        return view ('public.modificauser')->with('user', $user);
+        return view ('public.modificauser')->with('user', $user)->with('centri',$centri);
     }
 
     public function updateUser(UserRequest $request, $userID){
