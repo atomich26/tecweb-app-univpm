@@ -105,7 +105,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
        {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
-       {{form::select('utenteID',$users,$product->userID,['placeholder'=>'Non assegnato'])}}
+       {{form::select('utenteID',$users,$product->utenteID,['placeholder'=>'Non assegnato'])}}
     <div>
     {{  Form::hidden ('_method', 'PUT')}}
     {{  Form::submit ('Conferma' )}}

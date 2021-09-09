@@ -56,8 +56,9 @@ class AdminController extends Controller
 
 
     public function modificaUser($userID){
+        $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
         $user = User::find($userID);
-        return view ('public.modificauser')->with('user', $user);
+        return view ('public.modificauser')->with('user', $user)->with('centri',$centri);
     }
 
     public function updateUser(UserRequest $request, $userID){
@@ -166,8 +167,9 @@ class AdminController extends Controller
     }
 
     public function modifyProdotto($productID){
+        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
         $product = Prodotto::find($productID);
-        return view('public.modificaProdotto')->with('prodotto',$product);
+        return view('public.modificaProdotto')->with('product',$product)->with('users', $users);
 
     }
 
