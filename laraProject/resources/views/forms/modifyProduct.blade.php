@@ -20,7 +20,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('modello', 'Codice Identifico Modello')}}
-        {{Form::text('modello',$product->cognome)}}
+        {{Form::text('modello',$product->modello)}}
         @if ($errors->first('modello'))
                 <ul>
                     @foreach ($errors->get('modello') as $message)
