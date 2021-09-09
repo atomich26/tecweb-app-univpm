@@ -174,6 +174,7 @@ class AdminController extends Controller
     }
 
     public function updateProdotto(ProductRequest $request, $productID){
+        $product = Prodotto::find($productID);
         if($request->hasFile('file_img')){
             $image = $request->file('file_img');
             $imageName = $image->getClientOriginalName();
