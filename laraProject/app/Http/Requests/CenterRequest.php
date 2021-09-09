@@ -31,7 +31,7 @@ class CenterRequest extends FormRequest
             'ragione_sociale'=>'required|unique:centri_assistenza,ragione_sociale,'.$this->centerID.'|max:50',
             'telefono'=>'required|unique:centri_assistenza,telefono,'.$this->centerID.'|digits:10',
             'email'=>'required|unique:centri_assistenza,email,'.$this->centerID.'|email',
-            'sito_web'=>'max:50|unique:centri_assistenza,sito_web'.$this->centerID.'|nullable',
+            'sito_web'=>'max:50|unique:centri_assistenza,sito_web,'.$this->centerID.'|nullable',
             'descrizione'=>'max:900',
             'via'=>'required|string|max:50',
             'città'=>'required|string|max:50',

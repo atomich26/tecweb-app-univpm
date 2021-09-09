@@ -2,7 +2,7 @@
 
     {{  Form::open(array('route'=>['modifyCentro.update',$center->ID], 'files' => true, 'id'=>'insertCenter', 'method'=>'POST'))}}
 
-<h2>Inserimento Centro Assistenza</h2>
+<h2>Modifica Centro Assistenza</h2>
 
 <div>
     {{Form::label('ragione_sociale','Nominativo Azienda')}}
@@ -42,7 +42,7 @@
 
 <div>
     {{Form::label('sito_web', 'Sito Web')}}
-    {{Form::text('sito_web',$center->sito_web)}}
+    {{Form::text('sito_web', $center->sito_web)}}
     @if ($errors->first('sito_web'))
             <ul>
                 @foreach ($errors->get('sito_web') as $message)
