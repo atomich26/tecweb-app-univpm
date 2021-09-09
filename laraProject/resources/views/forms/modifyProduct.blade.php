@@ -1,7 +1,7 @@
 @php
 use App\Models\Enums\Categories;
 @endphp
-{{  Form::open(array('route'=>['insertProdotto.store', $product->ID], 'id'=>'modifyProdotto', 'files'=>'true', 'Method'=>'POST'))}}
+{{  Form::open(array('route'=>['modifyProdotto.update', $product->ID], 'id'=>'modifyProdotto', 'files'=>'true', 'Method'=>'POST'))}}
 
 <h2>Inserimento Prodotto</h2>
 
