@@ -158,6 +158,7 @@ class AdminController extends Controller
         $product->specifiche = $request->specifiche;
         $product->guida_installazione = $request->guida_installazione;
         $product->note_uso = $request->note_uso;
+        $product->utenteID = $request->utenteID;
         $product->file_img = $imageName;
         $product->save();
 
@@ -186,6 +187,7 @@ class AdminController extends Controller
         $product->specifiche = $request->specifiche;
         $product->guida_installazione = $request->guida_installazione;
         $product->note_uso = $request->note_uso;
+        $product->utenteID = $request->utenteID;
         $product->file_img = $imageName;
         $product->save();
 
@@ -208,7 +210,7 @@ class AdminController extends Controller
         $center->via = $request->via;
         $center->città = $request->città;
         $center->cap = $request->cap;
-        
+
         $center->save();
 
         return redirect()->route('catalogo');
@@ -230,11 +232,11 @@ class AdminController extends Controller
         $center->via = $request->via;
         $center->città = $request->città;
         $center->cap = $request->cap;
-        
+
         $center->save();
 
         return redirect()->route('catalogo');
-    
+
     }
 
     public function deleteCentro($centerID){
