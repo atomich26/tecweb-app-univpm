@@ -35,6 +35,8 @@ Route::view('/informativa-privacy','public.static.privacy')->name('privacy');
 Route::view('/profilo','users.user-profile')->name('user-profile')->middleware('can:hasProfilePage');
 
 // Rotte per l'autenticazione
+Route::redirect('accedi', 'login', 302);
+
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login-form');
 
 Route::post('login','Auth\LoginController@login')->name('user-login');

@@ -35,9 +35,9 @@
                     </ul>
                     @endif
                 </div>
-                
 
-    
+
+
     <div>
             {{  Form::label ('nome', 'Nome')  }}
             {{  Form::text ('nome', '')  }}
@@ -80,7 +80,7 @@
                     @foreach($errors->get('data_nascita') as $message)
                     <li>{{$message}}</li>
                     @endforeach
-                </ul>   
+                </ul>
             @endif
         </div>
 
@@ -92,7 +92,7 @@
                     @foreach($errors->get('email') as $message)
                     <li>{{$message}}</li>
                     @endforeach
-                </ul> 
+                </ul>
             @endif
         </div>
 
@@ -111,23 +111,23 @@
 
         <div>
             {{  Form::label ('role', 'Ruolo',['name'=>'role']) }}
-            {{  Form::radio ('role', 'tecnico', ['id' => 'tecnico', 'name' => 'role']) }} Tecnico
-            {{  Form::radio ('role', 'staff', ['id' => 'staff', 'name' => 'role']) }} Staff
+            {{  Form::radio ('role', 'tecnico', true, ['id' => 'tecnico']) }} Tecnico
+            {{  Form::radio ('role', 'staff', false, ['id' => 'staff']) }} Staff
         </div>
-        
+
         <div id="centroID">
-            {{  Form::label ('centroID', 'Centro Assistenza')}}
+            {{  Form::label ('centroID', 'Centro Assistenza') }}
             {{  Form::select ('centroID', $centri, null, ['placeholder' => 'Electrohm Centro'])}}
         </div>
 
-        
-       
 
-        
-        
-        
-     
-        
+
+
+
+
+
+
+
 
 {{  Form::submit ('Inserisci Utente')  }}
 {{  Form::reset ('Reset')}}
@@ -135,16 +135,13 @@
 {{  Form::close()}}
 
 <script>
-  
+
     $(document).ready(function(){
-    $('input[type=radio]').click(function(){
-        if(this.value === "tecnico") 
-        $("#centroID").show();
-        if(this.value === "staff")
-        $("#centroID").hide();
+        $('input[type=radio]').click(function(){
+            (this.value === "tecnico") ? $("#centroID").show() : $("#centroID").hide();
+        });
     });
-});
-      
-    
+
+
 </script>
 
