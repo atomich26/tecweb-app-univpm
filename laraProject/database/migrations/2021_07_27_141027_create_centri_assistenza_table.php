@@ -20,7 +20,7 @@ class CreateCentriAssistenzaTable extends Migration
             $table->string('telefono', Config::get('strings.global.telefono'))->unique();
             $table->string('email')->unique();
             $table->string('sito_web', Config::get('strings.centri_assistenza.sito_web'))->nullable();
-            $table->text('descrizione', Config::get('strings.centro_assistenza.descrizione'));
+            $table->text('descrizione', Config::get('strings.centro_assistenza.descrizione'))->nullable();
             $table->string('via', Config::get('strings.centro_assistenza.via'));
             $table->string('città', Config::get('strings.centro_assistenza.città'));
             $table->string('cap', Config::get('strings.centro_assistenza.cap'));

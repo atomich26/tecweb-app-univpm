@@ -49,6 +49,10 @@ Route::get('/inserisciUtente', 'AdminController@insertUtente')->name('insertUten
 
 Route::post('/inserisciUtente', 'AdminController@saveUtente')->name('insertUtente.store');
 
+Route::get('/user/{userID}/modify', 'AdminController@modifyUtente')->name('modifyUtente');
+
+Route::put('/user/{userID}/modify', 'AdminController@updateUtente')->name('modifyUtente.update');
+
 // Rotte dedicate alle FAQ
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
@@ -68,3 +72,19 @@ Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
 Route::get('/inserisciProdotto', 'AdminController@insertProdotto')->name('insertProdotto');
 
 Route::post('inserisciProdotto', 'AdminController@saveProdotto')->name('insertProdotto.store');
+
+Route::get('/prodotto/{productID}/modify', 'AdminController@modifyProdotto')->name('modifyProdotto');
+
+Route::put('/prodotto/{productID}/modify', 'AdminController@updateProdotto')->name('modifyProdotto.update');
+
+Route::delete('/prodotto/{productID}', 'AdminController@deleteProdotto')->name('deleteProdotto');
+
+//rotte dedicate ai centri assistenza
+
+Route::get('centri-assistenza/inserisciCentro', 'AdminController@insertCentro')->name('insertCentro');
+
+Route::post('centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
+
+Route::get('/centri-assistenza/{centerID}/modify','AdminController@modifyCentro')->name('modifyCentro');
+
+Route::put('/centri-assistenza/{centerID}/modify','AdminController@updateCentro')->name('modifyCentro.update');
