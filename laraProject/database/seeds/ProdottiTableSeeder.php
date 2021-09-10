@@ -192,21 +192,6 @@ class ProdottiTableSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
-
-        DB::table('prodotti')->insert([
-            'ID'=>6,
-            'nome'=> 'Asciugatrice Serie 8 a pompa di calore 8 kg',
-            'modello'=> 'WTW8756s8II',
-            'categoriaID'=> 1,
-            'descrizione'=> "Asciugatrice a pompa di calore con la massima efficienza energetica in classe A+++ e con il condensatore autopulente. Oltre alla tecnologia AuroDry™ e Cestello Sensisitve™, è dotata del Cestello Lana™ per un'asciugatura molto delicata, adatta ai capi in lana. Può essere usato anche per l'asciugatura delle scarpe da ginnastica o sportive. Tutto questo producendo meno rumore possibile con il Design antivibrazioni chestabilizza le pareti laterali e minimizza il rumore, garantendo un'asciugatura particolarmente silenziosa. ",
-            'specifiche'=> "Altezza: 84.2cm, Larghezza: 59.8cm, Profondità: 59.9cm • Capacità max. di carico: 8kg • Rumorosità: 62dBA • Tipologia: condensazione • Tecnologia: pompa di calore con gas R290 • Classe di efficienza energetica: A+++",
-            'guida_installazione'=> " ",
-            'note_uso'=> null,
-            'file_img' => 'WTW8756s8II.png',
-            'utenteID'=> 2,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
     }
 
 }
