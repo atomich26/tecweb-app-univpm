@@ -79,7 +79,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('note_uso',"Note d'uso")}}
-        {{Form::textarea('note_uso', $product->note_use)}}
+        {{Form::textarea('note_uso', $product->note_uso)}}
         @if ($errors->first('note_uso'))
                 <ul>
                     @foreach ($errors->get('note_uso') as $message)
