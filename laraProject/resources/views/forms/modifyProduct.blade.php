@@ -1,7 +1,7 @@
 @php
 use App\Models\Enums\Categories;
 @endphp
-{{  Form::open(array('route'=>['modifyProdotto.update', $product->ID], 'id'=>'modifyProdotto', 'files'=>'true', 'Method'=>'POST'))}}
+{{  Form::open(array('route'=>['prodotto.update', $product->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
 <h2>Modifica Prodotto</h2>
 
@@ -34,7 +34,7 @@ use App\Models\Enums\Categories;
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
     {{Form::select('categoriaID',Categories::CATEGORIES, $product->categoriaID)}}
-        
+
     </div>
     <br>
     <br>

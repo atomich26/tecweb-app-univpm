@@ -18,7 +18,7 @@ use App\Models\Resources\CentroAssistenza;
 class AdminController extends Controller
 {
     public function __construct(){
-        $this->middleware('can:isAdmin');
+
     }
 
     //funzioni dedicate agli users

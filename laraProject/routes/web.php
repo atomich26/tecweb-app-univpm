@@ -24,7 +24,7 @@ Route::view('/legali','pages.static.legali')->name('legali');
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::get('/catalogo/prodotti/{modello}', 'PublicController@viewProdottoPage')->name('prodotto');
+Route::get('/catalogo/{modello}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
@@ -43,48 +43,63 @@ Route::post('login','Auth\LoginController@login')->name('user-login');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');
 
-// Rotte dedicate alla gestione degli utenti
+Route::prefix('admin')->group(function () {
 
-Route::get('/inserisciUtente', 'AdminController@insertUtente')->name('insertUtente');
+    Route::middleware('can:isAdmin')->group(function(){
 
-Route::post('/inserisciUtente', 'AdminController@saveUtente')->name('insertUtente.store');
+        //Rotte CRUD per i prodotti
+        Route::get('gestisci-prodotti', 'AdminController@showProdottiTable')->name('prodotti-table');
 
-Route::get('/user/{userID}/modify', 'AdminController@modifyUtente')->name('modifyUtente');
+        Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
 
-Route::put('/user/{userID}/modify', 'AdminController@updateUtente')->name('modifyUtente.update');
+        Route::post('inserisci-prodotto', 'AdminController@saveProdotto')->name('prodotto.store');
 
-// Rotte dedicate alle FAQ
+        Route::get('modifica-prodotto/{productID}', 'AdminController@modifyProdotto')->name('prodotto.modify');
 
-Route::get('/faq','PublicController@viewFaqPage')->name('faq');
+        Route::put('aggiorna-prodotto/{productID}', 'AdminController@updateProdotto')->name('prodotto.update');
 
-Route::get('/faq/insert', 'AdminController@insertFAQ')->name('insertFAQ');
+        Route::delete('/prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
 
-Route::post('/faq/insert', 'AdminController@saveFAQ')->name('insertFAQ.store');
+        //Rotte CRUD per le faq
+        Route::get('gestisci-faq', 'AdminController@showFaqTable')->name('faq-table');
 
-Route::get('/faq/{faqId}/modify', 'AdminController@modifyFAQ')->name('modifyFAQ');
+        Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::put('/faq/{faqId}/modify', 'AdminController@updateFAQ')->name('modifyFAQ.update');
+        Route::get('/faq/insert', 'AdminController@insertFAQ')->name('insertFAQ');
 
-Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
+        Route::post('/faq/insert', 'AdminController@saveFAQ')->name('insertFAQ.store');
 
-// Rotte dedicate ai prodotti
+        Route::get('/faq/{faqId}/modify', 'AdminController@modifyFAQ')->name('modifyFAQ');
 
-Route::get('/inserisciProdotto', 'AdminController@insertProdotto')->name('insertProdotto');
+        Route::put('/faq/{faqId}/modify', 'AdminController@updateFAQ')->name('modifyFAQ.update');
 
-Route::post('inserisciProdotto', 'AdminController@saveProdotto')->name('insertProdotto.store');
+        Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
 
-Route::get('/prodotto/{productID}/modify', 'AdminController@modifyProdotto')->name('modifyProdotto');
+        //Rotte CRUD per gli utenti
+        Route::get('gestisci-utenti', 'AdminController@showProdottiTable')->name('utenti-table');
 
-Route::put('/prodotto/{productID}/modify', 'AdminController@updateProdotto')->name('modifyProdotto.update');
+        Route::get('/inserisciUtente', 'AdminController@insertUtente')->name('insertUtente');
 
-Route::delete('/prodotto/{productID}', 'AdminController@deleteProdotto')->name('deleteProdotto');
+        Route::post('/inserisciUtente', 'AdminController@saveUtente')->name('insertUtente.store');
 
-//rotte dedicate ai centri assistenza
+        Route::get('/user/{userID}/modify', 'AdminController@modifyUtente')->name('modifyUtente');
 
-Route::get('centri-assistenza/inserisciCentro', 'AdminController@insertCentro')->name('insertCentro');
+        Route::put('/user/{userID}/modify', 'AdminController@updateUtente')->name('modifyUtente.update');
 
-Route::post('centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
+        //Rotte CRUD per i centri assistenza
+        Route::get('gestisci-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri-assistenza-table');
 
-Route::get('/centri-assistenza/{centerID}/modify','AdminController@modifyCentro')->name('modifyCentro');
+        Route::get('centri-assistenza/inserisciCentro', 'AdminController@insertCentro')->name('insertCentro');
 
-Route::put('/centri-assistenza/{centerID}/modify','AdminController@updateCentro')->name('modifyCentro.update');
+        Route::post('centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
+
+        Route::get('/centri-assistenza/{centerID}/modify','AdminController@modifyCentro')->name('modifyCentro');
+
+        Route::put('/centri-assistenza/{centerID}/modify','AdminController@updateCentro')->name('modifyCentro.update');
+
+    });
+
+    Route::middleware('can:editMalfunzionamenti')->group(function(){
+        //Rotte CRUD malfunzionamenti e soluzioni
+    });
+});
