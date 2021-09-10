@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Http\FormRequest;
 
 class userRequest extends FormRequest
@@ -24,15 +25,14 @@ class userRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required|unique:utenti,username,'.$this->userID.'|max:25',
+            'username'=>'required|unique:utenti,username,'.$this->userID.'|max:' . Config::get('strings.utente.username'),
             'password'=>'required|confirmed|max:50',
-            'nome'=>'required|string|max:50',
-            'cognome'=>'required|string|max:50',
-            'file_img'=>'mimes:jpeg,png,jpg,svg|max:4092',
+            'nome'=>'required|string|max:' . Config::get('strings.utente.nome'),
+            'cognome'=>'required|string|max:' . Config::get('strings.utente.cognome'),
+            'file_img'=>'mimes:jpeg,png,jpg|max:4092',
             'data_nascita'=>'required|date|before:today',
-            'email'=>'required|unique:utenti,email,'.$this->userID.'|email|max:200',
-            'telefono'=>'required|unique:utenti,telefono,'.$this->userID.'|digits:10',
-
+            'email'=>'required|unique:utenti,email,'.$this->userID.'|email|max:' . Config::get('strings.global.default'),
+            'telefono'=>'required|unique:utenti,telefono,'.$this->userID.'|digits:' . Config::get('strings.global.telefono'),
         ];
     }
 }

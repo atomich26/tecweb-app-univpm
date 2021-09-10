@@ -24,7 +24,7 @@ class CreateProdottiTable extends Migration
             $table->text('specifiche', Config::get('strings.prodotto.specifiche'));
             $table->text('guida_installazione', Config::get('strings.prodotto.guida_installazione'))->nullable();
             $table->text('note_uso', Config::get('strings.prodotto.note_uso'))->nullable();
-            $table->string('file_img')->default('default-user.jpg');
+            $table->string('file_img')->nullable();
             $table->unsignedBigInteger('utenteID')->nullable();
             $table->foreign('utenteID')->references('ID')->on('utenti');
             $table->timestamps();

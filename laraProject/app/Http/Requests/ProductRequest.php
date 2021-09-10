@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -24,12 +25,12 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'=>'required|max:50',
-            'modello'=>'required|unique:prodotti,modello,'.$this->productID.'|max:20',
-            'descrizione'=>'required|max:400',
-            'specifiche'=>'required|max:1000',
-            'guida_installazione'=>'required|max:1000',
-            'note_uso'=>'required|max:1000',
+            'nome'=>'required|max:'. Config::get('prodotto.nome'),
+            'modello'=>'required|unique:prodotti,modello,'. $this->productID.'|max:' . Config::get('prodotto.modello'),
+            'descrizione'=>'required|max:' . Config::get('prodotto.descrizione'),
+            'specifiche'=>'required|max:' . Config::get('prodotto.specifiche'),
+            'guida_installazione'=>'required|max:' . Config::get('prodotto.guida_installazione'),
+            'note_uso'=>'required|max:' . Config::get('prodotto.note_uso'),
             'file_img'=>'image|max:2048|nullable',
         ];
     }

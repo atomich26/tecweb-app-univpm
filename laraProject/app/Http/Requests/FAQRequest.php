@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FAQRequest extends FormRequest
@@ -24,8 +25,8 @@ class FAQRequest extends FormRequest
     public function rules()
     {
         return [
-            'domanda'=>'required|max:150',
-            'risposta'=>'required|max:350'
+            'domanda'=>'required|max:'. Config::get('strings.faq.domanda'),
+            'risposta'=>'required|max:' . Config::get('strings.faq.risposta'),
         ];
     }
 }

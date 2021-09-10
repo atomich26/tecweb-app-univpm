@@ -16,7 +16,7 @@ class CreateCentriAssistenzaTable extends Migration
     {
         Schema::create('centri_assistenza', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('ragione_sociale', Config::get('strings.global.nome'))->unique();
+            $table->string('ragione_sociale', Config::get('strings.centri_assistenza.ragione_sociale'))->unique();
             $table->string('telefono', Config::get('strings.global.telefono'))->unique();
             $table->string('email')->unique();
             $table->string('sito_web', Config::get('strings.centri_assistenza.sito_web'))->nullable();

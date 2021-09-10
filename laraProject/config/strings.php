@@ -4,7 +4,6 @@ return [
 
     'global' => [
         'default' => 191,
-        'nome' => 50,
         'telefono' => 10
     ],
 
@@ -14,6 +13,7 @@ return [
     ],
 
     'centro_assistenza' => [
+        'ragione_sociale' => 50,
         'descrizione' => 900,
         'sito_web' => 50,
         'via' => 50,
@@ -37,7 +37,7 @@ return [
     ],
 
     'malfunzionamento' => [
-        'descrizione' => 400,
+        'descrizione' => 1000,
         'causa'=> 400,
 
     ],
