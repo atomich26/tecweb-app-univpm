@@ -1,7 +1,7 @@
 @php
 use App\Models\Enums\Categories;
 @endphp
-{{  Form::open(array('route'=>'insertProdotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
+{{  Form::open(array('route'=>'prodotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
 
 <h2>Inserimento Prodotto</h2>
 
@@ -34,7 +34,7 @@ use App\Models\Enums\Categories;
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
     {{Form::select('categoriaID',Categories::CATEGORIES)}}
-        
+
     </div>
     <br>
     <br>
@@ -92,7 +92,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('file_img','Immagine Prodotto')}}
-        {{Form::file('file_img')}}
+        {{Form::file('file_img', ["accept" => 'image/*'])}}
         @if ($errors->first('file_img'))
                 <ul>
                     @foreach ($errors->get('file_img') as $message)
@@ -100,6 +100,8 @@ use App\Models\Enums\Categories;
                     @endforeach
                 </ul>
                 @endif
+                <img id="product-preview-image" src="#" width="150px" height="150px" alt="product-image">
+                <button type="button" id="delete-preview-img" onclick="deletePreview()" style="display:none">Cancella immagine caricata</button>
     </div>
     <br>
     <br>
