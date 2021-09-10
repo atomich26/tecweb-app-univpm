@@ -3,7 +3,7 @@ use App\Models\Enums\Categories;
 @endphp
 {{  Form::open(array('route'=>['modifyProdotto.update', $product->ID], 'id'=>'modifyProdotto', 'files'=>'true', 'Method'=>'POST'))}}
 
-<h2>Inserimento Prodotto</h2>
+<h2>Modifica Prodotto</h2>
 
     <div>
         {{Form::label('nome', 'Nome del prodotto')}}
