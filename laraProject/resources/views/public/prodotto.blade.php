@@ -10,7 +10,7 @@
         <h2 id="modello">Modello: <span>{{$prodotto->modello ?? 'Numero modello mancante'}}</span></h2>
         <div id="specifiche-prodotto">
             <h2>Specifiche:</h2>
-            @include('helpers.product-content-list', ['string' => $prodotto->specifiche])
+            @include('helpers.product-content-list', ['stringToSplit' => $prodotto->specifiche])
         </div>
 
         @auth
@@ -18,7 +18,7 @@
                 <a href="#" class="malfunzionamenti-btn button">Ricerca e risoluzione dei problemi</a>
 
                 @can('isAdmin')
-                    <a href="#" class="edit-prodotto-btn button">Modifica prodotto</a>
+                    {!! link_to_route('prodotto.modify', 'Modifica prodotto',['productID' => $prodotto->ID], ['class' => 'edit-prodotto-btn button']) !!}
                 @endcan
 
                 @can('editMalfunzionamenti', $prodotto)
@@ -37,12 +37,12 @@
 
     <div id="installazione-prodotto" class="product-text">
         <h3>Installazione:</h3>
-        @include('helpers.product-content-list', ['string' => $prodotto->guida_installazione])
+        @include('helpers.product-content-list', ['stringToSplit' => $prodotto->guida_installazione])
     </div>
 
     <div id="note-uso-prodotto" class="product-text">
         <h3>Note di buon uso:</h3>
-        @include('helpers.product-content-list', ['string' => $prodotto->note_uso])
+        @include('helpers.product-content-list', ['stringToSplit' => $prodotto->note_uso])
     </div>
 </div>
 

@@ -1,19 +1,21 @@
 @php
-    $listItems = explode('•', $string);
+    $stringsList;
+
+    if(preg_match_all('/§(.[^§]+)/m', $stringToSplit, $matches, 0, 0))
+        $stringsList = $matches[0];
+    else
+        $stringsList = null;
 @endphp
 
-@isset($listItems)
+
+@isset($stringsList)
     <ul style="padding-left: 20px">
-        @if($listItems[0] != null)
-            @foreach ($listItems as $item)
-                <li style="margin:10px 0"><p>{{ $item }}</p></li>
-            @endforeach
-        @else
-            <h4>{{ __('Nessun contenuto disponibile') }}</h4>
-        @endif
+        @foreach ($stringsList as $string)
+            <li style="margin:10px 0"><p>{{ str_replace('§', '', $string) }}</p></li>
+        @endforeach
     </ul>
 @endisset
 
-@empty($listItems)
+@empty($stringsList)
     <h4>{{ __('Nessun contenuto disponibile') }}</h4>
 @endempty
