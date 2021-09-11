@@ -5,7 +5,8 @@
 <div class="header-product-page">
     <div class="product-overview container">
         <h1 class="product-name">{{ $prodotto->nome ?? 'Prodotto senza nome'}}</h1>
-        <img class="product-image" src="{{ asset('storage/images/products/lavatrici_asciugatrici/'. $prodotto->file_img)}}">
+
+        @include('helpers.product-image', ['image' => $prodotto->file_img, 'width' => 300, 'height' => 400])
 
         <h2 id="modello">Modello: <span>{{$prodotto->modello ?? 'Numero modello mancante'}}</span></h2>
         <div id="specifiche-prodotto">
@@ -15,15 +16,12 @@
 
         @auth
             <div class="product-buttons">
-                <a href="#" class="malfunzionamenti-btn button">Ricerca e risoluzione dei problemi</a>
 
                 @can('isAdmin')
-                    {!! link_to_route('prodotto.modify', 'Modifica prodotto',['productID' => $prodotto->ID], ['class' => 'edit-prodotto-btn button']) !!}
+                {!! link_to_route('prodotto.modify', 'Modifica prodotto',['productID' => $prodotto->ID], ['class' => 'edit-prodotto-btn button']) !!}
                 @endcan
 
-                @can('editMalfunzionamenti', $prodotto)
-                    <a href="#" class="edit-malfunzionamenti-btn button">Modifica malfunzionamenti</a>
-                @endcan
+                <a href="#" class="malfunzionamenti-btn button">Ricerca e risoluzione dei problemi</a>
             </div>
         @endauth
     </div>
