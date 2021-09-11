@@ -174,6 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        // Service provider for package Laravel Debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -227,8 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Categories' => App\Models\Enums\Categories::class,
         'CentroAssistenza' => App\Models\Resources\CentroAssistenza::class,
-        'Tecnico' => App\Models\Tecnico::class,
         'User' => App\User::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
