@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
@@ -99,27 +100,26 @@ class AdminController extends Controller
         return redirect()->route('catalogo');
     }
 
-    //funzioni dedicate alle FAQ
+    //Funzioni dedicate alle FAQ
 
     public function insertFAQ(){
         return view ('public.inserisciFAQ');
     }
 
-    public function saveFAQ(FAQRequest $request){
+    public function storeFAQ(FAQRequest $request){
         $faq = new Faq;
-        $faq->domanda = $request->domanda;
-        $faq->risposta = $request->risposta;
+        $faq->fill($request->validated());
         $faq->save();
         return redirect()->route('faq');
     }
 
-    public function modifyFAQ($faqId){
-        $faq = Faq::find($faqId);
+    public function modifyFAQ($faqID){
+        $faq = Faq::find($faqID);
         return view ('public.modificaFAQ')->with('faq', $faq);
     }
 
-    public function updateFAQ(FAQRequest $request, $faqId){
-        $faq = Faq::find($faqId);
+    public function updateFAQ(FAQRequest $request, $faqID){
+        $faq = Faq::find($faqID);
         $faq->domanda = $request->domanda;
         $faq->risposta = $request->domanda;
         $faq->save();
@@ -127,9 +127,8 @@ class AdminController extends Controller
         return redirect()->route('faq');
     }
 
-    public function deleteFAQ($faqId){
-        $faq = Faq::find($faqId);
-        $faq->delete($faqId);
+    public function deleteFAQ($faqID){
+        Faq::find($faqID)->delete();
 
         return redirect()->return('faq');
     }
@@ -142,26 +141,24 @@ class AdminController extends Controller
 
     }
 
-    public function saveProdotto(ProductRequest $request){
-        if($request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();
-        }
-        else{
-            $imageName = NULL;
-        }
+    public function storeProdotto(ProductRequest $request){
+        $prodotto = new Prodotto;
+        $prodotto->fill($request->validated());
+        $prodotto->categoriaID = $request->categoriaID;
 
-        $product = new Prodotto;
-        $product->nome = $request->nome;
-        $product->modello = $request->modello;
-        $product->categoriaID = $request->categoriaID;
-        $product->descrizione = $request->descrizione;
-        $product->specifiche = $request->specifiche;
-        $product->guida_installazione = $request->guida_installazione;
-        $product->note_uso = $request->note_uso;
-        $product->utenteID = $request->utenteID;
-        $product->file_img = $imageName;
-        $product->save();
+        if($request->hasFile('file_img')){
+            $file = $request->file('file_img');
+            $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
+        }
+        else
+            $imageName = NULL;
+
+        $prodotto->file_img = $imageName;
+        $prodotto->save();
+
+        if(!is_null($file)){
+            $file->storeAs('/public/images/products/', $imageName);
+        }
 
         return redirect()->route('catalogo');
     }

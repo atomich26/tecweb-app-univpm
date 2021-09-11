@@ -48,32 +48,30 @@ Route::prefix('admin')->group(function () {
     Route::middleware('can:isAdmin')->group(function(){
 
         //Rotte CRUD per i prodotti
-        Route::get('gestisci-prodotti', 'AdminController@showProdottiTable')->name('prodotti-table');
+        Route::get('gestisci-prodotti', 'AdminController@showProdottiTable')->name('prodotti.table');
 
         Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
 
-        Route::post('inserisci-prodotto', 'AdminController@saveProdotto')->name('prodotto.store');
+        Route::post('inserisci-prodotto', 'AdminController@storeProdotto')->name('prodotto.store');
 
         Route::get('modifica-prodotto/{productID}', 'AdminController@modifyProdotto')->name('prodotto.modify');
 
         Route::put('aggiorna-prodotto/{productID}', 'AdminController@updateProdotto')->name('prodotto.update');
 
-        Route::delete('/prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
+        Route::delete('/elimina-prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
 
-        //Rotte CRUD per le faq
+        //Rotte CRUD per le FAQ
         Route::get('gestisci-faq', 'AdminController@showFaqTable')->name('faq-table');
 
-        Route::get('/faq','PublicController@viewFaqPage')->name('faq');
+        Route::get('aggiungi-faq', 'AdminController@insertFAQ')->name('faq.new');
 
-        Route::get('/faq/insert', 'AdminController@insertFAQ')->name('insertFAQ');
+        Route::post('inserisci-faq', 'AdminController@storeFAQ')->name('faq.store');
 
-        Route::post('/faq/insert', 'AdminController@saveFAQ')->name('insertFAQ.store');
+        Route::get('modifica-faq/{faqID}', 'AdminController@modifyFAQ')->name('faq.modify');
 
-        Route::get('/faq/{faqId}/modify', 'AdminController@modifyFAQ')->name('modifyFAQ');
+        Route::put('modifica-faq/{faqID}', 'AdminController@updateFAQ')->name('faq.update');
 
-        Route::put('/faq/{faqId}/modify', 'AdminController@updateFAQ')->name('modifyFAQ.update');
-
-        Route::delete('/faq/{faqId}', 'AdminController@deleteFAQ')->name('deleteFAQ');
+        Route::delete('elimina-faq/{faqID}', 'AdminController@deleteFAQ')->name('faq.delete');
 
         //Rotte CRUD per gli utenti
         Route::get('gestisci-utenti', 'AdminController@showProdottiTable')->name('utenti-table');

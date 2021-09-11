@@ -1,8 +1,8 @@
 @php
     $userImgName = Auth::user()->file_img;
 
-    if($userImgName == null)
-        $userImgName = "default-user.jpg";
+    if(is_null($userImgName))
+        $userImgName = Config::get('images.default.user');
 
 @endphp
-<img src="{{ asset('storage/images/profiles/' . $userImgName)}}" width="{{ is_numeric($width) ? $width : 40 }}px" height="{{ is_numeric($width) ? $width : 40 }}px" style="border-radius:50%"> 
+<img src="{{ asset(Config::get('images.paths.user') . $userImgName)}}" class="user-img">

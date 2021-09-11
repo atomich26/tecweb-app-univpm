@@ -9,4 +9,14 @@ class prodotto extends Model
     protected $table ='prodotti';
     protected $primaryKey = 'ID';
     public $timestamps = true;
+    protected $guarded = ['ID'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nome', 'modello', 'categoriaID', 'descrizione', 'specifiche', 'guida_installazione', 'note_uso', 'utenteID'
+    ];
 }

@@ -1,4 +1,4 @@
-{{  Form::open(array('route' => ['modifyFAQ.update', $faq->ID] , 'files' => true, 'method'=>'POST'))  }}
+{{  Form::open(array('route' => ['faq.update', $faq->ID] , 'files' => true, 'method'=>'POST'))  }}
 
 <h2>Modulo modifica FAQ</h2>
         <div class="wrap-input">
