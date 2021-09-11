@@ -4,10 +4,10 @@ window.onload = () => {
 
 // <---- Funzioni per il counter delle textarea ----->
 function setTextAreaCounter() {
-    let textareas = document.querySelectorAll('textarea.input-data.with-counter');
+    const textareas = document.querySelectorAll('textarea.input-data.with-counter');
 
-    if (textareas != null || textareas.length != 0) {
-        for (let i = 0; i < textareas.length; i++){
+    if (textareas != null || textareas.length > 0) {
+        for (let i = 0; i < textareas.length; i++) {
             countTextAreaLength(textareas[i]);
             textareas[i].addEventListener('input', e => {
                 countTextAreaLength(e.target);
