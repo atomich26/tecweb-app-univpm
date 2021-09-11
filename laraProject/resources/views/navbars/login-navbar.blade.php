@@ -11,21 +11,21 @@
             </li>
         @endif
     @endguest
-        
+
     @auth
-        
+
         @can('isAdmin')
             <a class="button header-btn manage-btn" href="#">Gestione dati</a>
         @endcan
 
         <div class="user-info flex-v-center">
-            
-            @include('helpers.user-profile-image', ['width' => 40, 'height' => 40])            
-                
+
+            @include('helpers.user-profile-image')
+
             @if(Auth::user()->checkRole('admin'))
                 <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
             @else
-                <a class="username" href="{{ route('user-profile') }}">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
+                <a class="username" href="{{ route('user.profile') }}">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
             @endif
 
             <div class="user-login">

@@ -1,11 +1,11 @@
-@extends('layouts.public', ['title' => Auth::user()->nome . " " . Auth::user()->cognome ])
+@extends('layouts.public', ['title' => $user->nome . " " . $user->cognome ])
 
 @section('content')
     <div class="user-profile-container container">
         <h1 class="user-welcome">Riepilogo dei tuoi dati</h1>
         <div class="flex-v-center" style="height:100%">
             <div class="col" style="text-align:center">
-                @include('helpers.user-profile-image', ['userImgName' => Auth::user()->file_img, 'width' => 300, 'height' => '300'])
+                @include('helpers.user-profile-image', ['userImgName' => $user->file_img, 'width' => 300, 'height' => '300'])
             </div>
 
             <div class="col user-data-info">
@@ -13,35 +13,35 @@
                     <li class="multi-value">
                         <div>
                             <h3><strong>Nome:</strong></h3>
-                            <p class="info-label-value">{{ Auth::user()->nome }}</p>
+                            <p class="info-label-value">{{ $user->nome }}</p>
                         </div>
                         <div style="margin-left:40px">
                             <h3><strong>Cognome:</strong></h3>
-                            <p class="info-label-value">{{ Auth::user()->cognome }}</p>
+                            <p class="info-label-value">{{ $user->cognome }}</p>
                         </div>
                     </li>
                     <li>
                         <h3><strong>Username:</strong></h3>
-                        <p class="info-label-value">{{ Auth::user()->username }}</p>
+                        <p class="info-label-value">{{ $user->username }}</p>
                     </li>
                     <li>
                         <h3><strong>Email:</strong></h3>
-                        <p class="info-label-value">{{ Auth::user()->email }}</p>
+                        <p class="info-label-value">{{ $user->email }}</p>
                     </li>
                     <li>
                         <h3><strong>Telefono:</strong></span></h3>
-                        <p class="info-label-value">+39 {{ Auth::user()->telefono }}</p>
+                        <p class="info-label-value">+39 {{ $user->telefono }}</p>
                     </li>
                     <li>
                         <h3><strong>Ruolo:</strong><span></span></h3>
-                        <p class="info-label-value">{{ Auth::user()->role }}</p>
+                        <p class="info-label-value">{{ $user->role }}</p>
                     </li>
 
                     @can('isTecnico')
                         <li>
                             <h3><strong>Centro assistenza:</strong></h3>
                             @php
-                                 $tecnicoUser = new Tecnico(Auth::user()->ID);
+                                 $tecnicoUser = new Tecnico($user->ID);
                             @endphp
                             <p class="info-label-value">{{ $tecnicoUser->getCentroAssistenza()->ragione_sociale }}</p>
                         </li>
@@ -53,11 +53,11 @@
                 <ul>
                     <li class="account-info">
                         <h3>Account creato:</h4>
-                        <p class="info-label-value">{{ Auth::user()->created_at->format('d/m/Y') }} alle {{ Auth::user()->created_at->format('H:i') }}</p>
+                        <p class="info-label-value">{{ $user->created_at->format('d/m/Y') }} alle {{ $user->created_at->format('H:i') }}</p>
                     </li>
                     <li class="account-info">
                         <h3>Modificato:</h4>
-                        <p class="info-label-value">{{ Auth::user()->created_at->format('d/m/Y') ?? "Non disponibile"}} alle {{ Auth::user()->created_at->format('H:i') ?? "Non disponibile"}}<p>
+                        <p class="info-label-value">{{ $user->created_at->format('d/m/Y') ?? "Non disponibile"}} alle {{ $user->created_at->format('H:i') ?? "Non disponibile"}}<p>
                     </li>
                     <li class="account-info">
                         <h3>Ultimo accesso:</h4>

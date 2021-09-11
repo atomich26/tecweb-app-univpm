@@ -32,7 +32,7 @@ Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
 Route::view('/informativa-privacy','public.static.privacy')->name('privacy');
 
 // Rotte dedicate agli utenti
-Route::view('/profilo','users.user-profile')->name('user-profile')->middleware('can:hasProfilePage');
+Route::get('/profilo','UserController@index')->name('user.profile');
 
 // Rotte per l'autenticazione
 Route::redirect('accedi', 'login', 302);
