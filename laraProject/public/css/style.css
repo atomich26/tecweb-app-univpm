@@ -181,6 +181,15 @@ header#site-header{
     background-color: var(--color-primary);
 }
 
+img.user-img{
+    border-radius: 50%;
+}
+
+#header-user .user-info img.user-img{
+    width: 40px;
+    height: 40px;
+}
+
 .user-info a:not(.header-btn), #site-footer ul li a{
     color: #fff;
     text-decoration: none;
@@ -427,6 +436,11 @@ nav#footer-nav ul li{
     height: calc(100vh - 130px)!important;
 }
 
+.user-profile-container img.user-img{
+    width: 300px;
+    height: 300px;
+}
+
 .info-label{
     padding: 3px 5px;
     background-color: var(--color-primary);
@@ -497,10 +511,15 @@ h1.user-welcome{
 
 .product-overview .product-image{
     width: 300px;
+    height: 400px;
     object-fit: scale-down;
     padding: 30px;
     background-color: var(--color-white);
     float: right;
+}
+
+.product-overview .product-image.default{
+    object-fit: cover;
 }
 
 #specifiche-prodotto ul{
