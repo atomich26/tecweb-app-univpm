@@ -2,7 +2,6 @@
 
 @section('content')
     @include('forms.insertFAQ')
-    <br>
-    <br>
+
     <a href = "{{route('catalogo')}}"> Torna alla Home</a>
 @endsection
