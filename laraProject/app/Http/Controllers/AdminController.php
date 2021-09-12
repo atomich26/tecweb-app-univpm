@@ -115,7 +115,10 @@ class AdminController extends Controller
 
     public function modifyFAQ($faqID){
         $faq = Faq::find($faqID);
-        return view ('public.modificaFAQ')->with('faq', $faq);
+        if(!is_null($faq))
+            return view ('public.modificaFAQ')->with('faq', $faq);
+        else
+            return redirect()->route('faq.new');
     }
 
     public function updateFAQ(FAQRequest $request, $faqID){
