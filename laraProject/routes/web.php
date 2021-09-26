@@ -95,11 +95,9 @@ Route::prefix('admin')->group(function () {
 
         Route::get('centri-assistenza/nuovo-centro', 'AdminController@insertCentro')->name('centro.new');
 
-<<<<<<< HEAD
         Route::post('/centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
-=======
+
         Route::post('centri-assistenza/inserisci-centro', 'AdminController@saveCentro')->name('centro.store');
->>>>>>> 84b7134b5b7ccc64cc452b4e2ce15b64a45d2037
 
         Route::get('centri-assistenza/modifica-centro/{centroID}','AdminController@modifyCentro')->name('centro.modify');
 
@@ -109,8 +107,7 @@ Route::prefix('admin')->group(function () {
 
     });
 
-<<<<<<< HEAD
-    Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
+   /* Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
 
         Route::get('/catalogo/{productID}/inserisciMalfunzionamento', 'AdminController@insertMalfunzionamento')->name('insertMalfunzionamento');
 
@@ -121,13 +118,11 @@ Route::prefix('admin')->group(function () {
         Route::put('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/modify', 'AdminController@updateMalfunzionamento')->name('modifyMalfunzionamento.update');
 
         Route::delete('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('deleteMalfunzionamento');
-
-=======
+        */
     Route::middleware('can:isAdmin', 'can:editMalfunzionamenti')->group(function(){
         //Rotte CRUD malfunzionamenti e soluzioni
         Route::get('prova', function(){
             redirect('catalogo');
         });
->>>>>>> 84b7134b5b7ccc64cc452b4e2ce15b64a45d2037
     });
 });
