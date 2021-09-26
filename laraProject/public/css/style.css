@@ -70,9 +70,6 @@ ul.text-list{
     padding: 10px 15px;
     color: #fff;
     font-size: 16px;
-    background-repeat: no-repeat;
-    background-position: 10px 52%;
-    padding-left: 40px;
     -webkit-transition: .2s ease-in;
     -moz-transition: .2s ease-in;
     -o-transition: .2s ease-in;
@@ -129,14 +126,10 @@ ul.text-list{
     border-color: var(--color-secondary);
 }
 
-.login-btn{
-    background-image: url('../images/bootstrap_icons/login.svg');
-}
-
 .logout-btn{
     background-color: var(--color-secondary);
-    background-image: url('../images/bootstrap_icons/logout.svg');
 }
+
 .logout-btn:hover, .logout-btn:focus{
     border-color: var(--color-primary);
     background-color: var(--color-primary);
@@ -144,12 +137,10 @@ ul.text-list{
 
 .manage-btn{
     margin: 0 20px;
-    background-image: url('../images/bootstrap_icons/database.svg');
 }
 
 .public-site-btn{
     margin: 0 20px;
-    background-image: url('../images/bootstrap_icons/box-arrow-up-right.svg');
 }
 
 .admin-label

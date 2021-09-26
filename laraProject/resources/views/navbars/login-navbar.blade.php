@@ -2,8 +2,7 @@
     @guest
         @if(!Route::is('login-form'))
             <a href="{{ route('login-form') }}" class="button header-btn login-btn" style="margin-right: 15px">
-                {{ __('Accedi') }}
-            </a>
+                <i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp;Accedi</a>
         @endif
         @if (Route::has('register'))
             <li class="nav-item">
@@ -25,8 +24,8 @@
             <div class="user-login">
                 <a class="button header-btn logout-btn" href="{{ route('user-logout') }}"
                        onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                        {{ __('Esci') }}</a>
+                                     document.getElementById('logout-form').submit();"> 
+                    <i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Esci</a>
                 <form id="logout-form" action="{{ route('user-logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
