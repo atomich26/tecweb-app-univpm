@@ -38,7 +38,6 @@ return [
 
     'malfunzionamento' => [
         'descrizione' => 1000,
-        'causa'=> 400,
 
     ],
 

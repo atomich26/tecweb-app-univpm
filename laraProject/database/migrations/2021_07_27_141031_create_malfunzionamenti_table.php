@@ -19,7 +19,6 @@ class CreateMalfunzionamentiTable extends Migration
             $table->unsignedBigInteger('prodottoID');
             $table->foreign('prodottoID')->references('ID')->on('prodotti');
             $table->string('descrizione', Config::get('strings.malfunzionamento.descrizione'));
-            $table->string('causa', Config::get('strings.malfunzionamento.causa'));
             $table->timestamps();
         });
     }
