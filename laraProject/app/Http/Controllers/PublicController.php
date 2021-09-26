@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
+use App\Http\Requests\GetProductRequest;
 
 class PublicController extends Controller
 {
@@ -17,8 +18,8 @@ class PublicController extends Controller
         return view('public.catalogo');
     }
 
-    public function viewProdottoPage(Request $request){
-        $prodotto = Prodotto::where('modello', $request->modello)->get()->first();
+    public function viewProdottoPage($modello){
+        $prodotto = Prodotto::where('modello', $modello)->get()->first();
 
         if($prodotto != null)
             return view('public.prodotto')->with('prodotto', $prodotto);

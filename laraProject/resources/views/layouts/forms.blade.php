@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.admin', ['incHeader' => true, 'incFooter' => true, 'adminView' => true])
 
 @section('page-content')
 

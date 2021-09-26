@@ -13,12 +13,14 @@
     <title>{{ $title . ' | ' . config('app.name')}}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/ckeditor/ckeditor.js')}}" ></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <!---- Favicon --->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -29,13 +31,13 @@
 </head>
 <body>
 
-    @includeWhen($incHeader, 'layouts.layouts-parts.header')
+    @includeWhen($incHeader, 'layouts-parts.header', ['adminView' => $adminView])
 
     <main id="page-container">
         @yield('page-container')
     </main>
 
-    @includeWhen($incFooter, 'layouts.layouts-parts.footer')
+    @includeWhen($incFooter,'layouts-parts.footer')
 
 </body>
     @yield('js-scripts')
