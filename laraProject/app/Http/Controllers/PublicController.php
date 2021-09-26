@@ -18,11 +18,11 @@ class PublicController extends Controller
         return view('public.catalogo');
     }
 
-    public function viewProdottoPage($modello){
-        $prodotto = Prodotto::where('modello', $modello)->get()->first();
+    public function viewProdottoPage($productID){
+        $prodotto = Prodotto::where('product', $productID)->get()->first();
 
         if($prodotto != null)
-            return view('public.prodotto')->with('prodotto', $prodotto);
+            return view('public.prodotto')->with('product', $productID);
         else
             return abort(404);
     }
