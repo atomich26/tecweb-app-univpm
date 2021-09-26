@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
@@ -195,6 +196,54 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->route('catalogo');
+    }
+
+    public function deleteProdotto($productID){ 
+        $product = CentroAssistenza::find($productID);
+        $product->delete($productID);
+
+        return redirect()->route('catalogo');
+
+    }
+
+    //funzioni dedicate ai malfunzionamenti e soluzioni
+
+    public function insertMalfunzionamento($productID)
+    {
+        return view ('public.InserisciMalfunzionamenti')->with('product', $productID);
+      
+    }
+
+    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
+        $product = Prodotto::find($productID);
+        $error = new Malfunzionamento;
+        $error->prodottoID = $product->ID;
+        $error->descrizione = $request->descrizione;
+        $error->save();
+
+        return redirect()->route('prodotto')->with('product', $productID);
+    }
+
+    public function modifyMalfunzionamento($malfunzionamentoID){
+        $error = Malfunzionamento::find($malfunzionamentoID);
+        $product = $error->prodottoID;
+        return view ('public.ModificaMalfunzionamenti')->with('product', $productID)
+                                                        ->with('malfunzionamento', $error);
+    }
+
+    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $malfunzionamentoID){
+        $error = Malfunzionamento::find($malfunzionamentoID);
+        $error->descrizione = $request->descrizione;
+        $error->save();
+
+        $productID = $error->prodottoID;
+        return redirect()->route('prodotto')->with('product', $productID);
+    }
+
+    public function deleteMalfunzionamento($malfunzionamentoID){
+        $error = Malfunzionamento::find($malfunzionamentoID);
+        $error->delete();
+        return redirect()->route('prodotto')->with('product', $productID);
     }
 
     //funzioni dedicate ai centri

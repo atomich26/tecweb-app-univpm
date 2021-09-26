@@ -24,7 +24,7 @@ Route::view('/legali','pages.static.legali')->name('legali');
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::get('/catalogo/{modello}', 'PublicController@viewProdottoPage')->name('prodotto');
+Route::get('/catalogo/{productID}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
@@ -84,20 +84,34 @@ Route::prefix('admin')->group(function () {
 
         Route::put('/user/{userID}/modify', 'AdminController@updateUtente')->name('modifyUtente.update');
 
+        Route::delete('user/{userID}', 'AdminController@deleteUtente')->name('deleteUtente');
+
         //Rotte CRUD per i centri assistenza
         Route::get('gestisci-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri-assistenza-table');
 
         Route::get('centri-assistenza/inserisciCentro', 'AdminController@insertCentro')->name('insertCentro');
 
-        Route::post('centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
+        Route::post('/centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
 
         Route::get('/centri-assistenza/{centerID}/modify','AdminController@modifyCentro')->name('modifyCentro');
 
         Route::put('/centri-assistenza/{centerID}/modify','AdminController@updateCentro')->name('modifyCentro.update');
 
+        Route::delete('/centri-assistenza/{centerID}', 'AdminController@deleteCentro')->name('deleteCentro');
+
     });
 
-    Route::middleware('can:editMalfunzionamenti')->group(function(){
-        //Rotte CRUD malfunzionamenti e soluzioni
+    Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
+
+        Route::get('/catalogo/{productID}/inserisciMalfunzionamento', 'AdminController@insertMalfunzionamento')->name('insertMalfunzionamento');
+
+        Route::post('/catalogo/{productID}/inserisciMalfunzionamento', 'AdminController@saveMalfunzionamento')->name('insertMalfunzionamento.store');
+
+        Route::get('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/modify', 'AdminController@modifyMalfunzionamento')->name('modifyMalfunzionamento');
+
+        Route::put('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/modify', 'AdminController@updateMalfunzionamento')->name('modifyMalfunzionamento.update');
+
+        Route::delete('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('deleteMalfunzionamento');
+
     });
 });
