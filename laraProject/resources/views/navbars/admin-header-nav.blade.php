@@ -1,7 +1,7 @@
 <nav id="navbar">
     <ul>
         <li>
-            <a href="{{ route('prodotto.new') }}">Prodotti</a>
+            <a href="{{ route('prodotti.table') }}">Prodotti</a>
         </li>
         <li>
             <a href="{{ route('centro.new') }}">Centri assistenza</a>

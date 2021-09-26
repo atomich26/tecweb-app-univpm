@@ -19,25 +19,25 @@ return [
      * Table action icons are defined here.
      */
     'icon' => [
-        'rowsNumber' => '<i class="fas fa-list"></i>',
-        'sort' => '<i class="fas fa-sort fa-fw"></i>',
-        'sortAsc' => '<i class="fas fa-sort-up fa-fw"></i>',
-        'sortDesc' => '<i class="fas fa-sort-down fa-fw"></i>',
-        'search' => '<i class="fas fa-search"></i>',
-        'validate' => '<i class="fas fa-check"></i>',
-        'info' => '<i class="fas fa-info-circle fa-fw"></i>',
-        'cancel' => '<i class="fas fa-times"></i>',
-        'create' => '<i class="fas fa-plus-circle fa-fw "></i>',
-        'edit' => '<i class="fas fa-edit fa-fw"></i>',
-        'destroy' => '<i class="fas fa-trash fa-fw"></i>',
-        'show' => '<i class="fas fa-eye fa-fw"></i>',
+        'rowsNumber' => '<i class="bi bi-list-ol"></i>',
+        'sort' => '<i class="bi bi-funnel-fill"></i>',
+        'sortAsc' => '<i class="bi bi-caret-up-fill"></i>',
+        'sortDesc' => '<i class="bi bi-caret-down-fill"></i>',
+        'search' => '<i class="bi bi-search"></i>',
+        'validate' => '<i class="bi bi-check2-circle"></i>',
+        'info' => '<i class="bi bi-info-circle"></i>',
+        'cancel' => '<i class="bi bi-x-circle"></i>',
+        'create' => '<i class="bi bi-plus-square"></i>',
+        'edit' => '<i class="bi bi-pencil-square"></i>',
+        'destroy' => '<i class="bi bi-trash"></i>',
+        'show' => '<i class="bi bi-eye"></i>',
     ],
 
     /*
      * Default table values
      */
     'value' => [
-        'rowsNumber' => 20,
+        'rowsNumber' => 10,
         'rowsNumberSelectionActivation' => true,
     ],
 

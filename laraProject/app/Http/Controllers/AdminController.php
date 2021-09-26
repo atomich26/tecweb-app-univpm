@@ -16,6 +16,7 @@ use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
 use Illuminate\Support\Facades\Route;
+use App\Tables\ProdottiTable;
 
 class AdminController extends Controller
 {
@@ -184,6 +185,11 @@ class AdminController extends Controller
     }
 
     //funzioni dedicate ai prodotti
+
+    public function showProdottiTable(){
+        $table = new ProdottiTable();
+        return view('admin.prodotti-table')->with('table', $table->index());
+    }
 
     public function insertProdotto(){
         $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
