@@ -15,6 +15,7 @@ use App\User;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
+use Illuminate\Support\Facades\Route;
 
 class AdminController extends Controller
 {
@@ -22,11 +23,15 @@ class AdminController extends Controller
 
     }
 
+    public function index(){
+        return view('admin.dashboard');
+    }
+
     //funzioni dedicate agli users
 
     public function insertUtente(){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
-        return view ('public.registraUser')->with('centri', $centri);
+        return view ('admin.insert-utente')->with('centri', $centri);
     }
 
     public function saveUtente(UserRequest $request){
@@ -37,6 +42,7 @@ class AdminController extends Controller
         else{
             $imageName = NULL;
         }
+
         $user = new User;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
@@ -52,14 +58,13 @@ class AdminController extends Controller
         }
         $user->save();
         return redirect()->route('catalogo');
-
     }
 
 
     public function modificaUser($userID){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
         $user = User::find($userID);
-        return view ('public.modificauser')->with('user', $user)->with('centri',$centri);
+        return view ('admin.modify-utente')->with('user', $user)->with('centri',$centri);
     }
 
     public function updateUser(UserRequest $request, $userID){
@@ -96,6 +101,7 @@ class AdminController extends Controller
 
     public function deleteUser($userID){
         $user = User::find($userID);
+        storage()->delete('/public/images/profiles/' . $user->file_img);
         $user->delete($userID);
         return redirect()->route('catalogo');
     }
@@ -103,31 +109,72 @@ class AdminController extends Controller
     //Funzioni dedicate alle FAQ
 
     public function insertFAQ(){
-        return view ('public.inserisciFAQ');
+        return view ('admin.insert-faq');
     }
 
-    public function storeFAQ(FAQRequest $request){
-        $faq = new Faq;
+    public function storeFAQ(FAQRequest $request, $faqID = null){
+        $callback = $request->query('callback');
+
+        $faq = Faq::find($faqID);
+
+        if(is_null($faq))
+            $faq = new FAQ;
+            /*return redirect()->route('faq.new')
+                ->with('message','validation.form-messages.not-exist.faq')
+                ->with('alertType', 'error');*/
+
         $faq->fill($request->validated());
-        $faq->save();
-        return redirect()->route('faq');
+        $saved = $faq->save();
+
+        if($saved){
+            if($callback == 'close'){
+                return redirect()->route('faq')
+                    ->with('message','validation.form-messages.insert.faq')
+                    ->with('alertType', 'successful');
+            }
+            else if($callback == 'new'){
+                return redirect()->route('faq.new')
+                    ->with('message','validation.form-messages.insert.faq')
+                    ->with('alertType', 'successful');
+            }
+            else{
+                $currentFaq = Faq::orderByDesc('created_at')->first();
+
+                return redirect()->route('faq.modify', ['faqID' => $currentFaq->ID])
+                    ->with('message','validation.form-messages.insert.faq')
+                    ->with('alertType', 'successful');
+            }
+        }
+        else
+            return abort(500);
     }
 
     public function modifyFAQ($faqID){
         $faq = Faq::find($faqID);
-        if(!is_null($faq))
-            return view ('public.modificaFAQ')->with('faq', $faq);
+
+        if(is_null($faq)){
+            return redirect()->route('faq.new')
+                ->with('message','validation.form-messages.not-exist.faq')
+                ->with('alertType', 'error');
+        }
         else
-            return redirect()->route('faq.new');
+            return view ('admin.modify-faq')->with('faq', $faq);
     }
 
     public function updateFAQ(FAQRequest $request, $faqID){
         $faq = Faq::find($faqID);
-        $faq->domanda = $request->domanda;
-        $faq->risposta = $request->domanda;
+        $faq->fill($request->validated());
         $faq->save();
 
-        return redirect()->route('faq');
+        if(is_null($faq)){
+            return redirect()->route('faq.new')
+                ->with('message','validation.form-messages.not-exist.faq')
+                ->with('alertType', 'error');
+        }
+        else{
+            return redirect()->route('faq')->with('message','validation.form-messages.update.faq')
+            ->with('alertType', 'successful');
+        }
     }
 
     public function deleteFAQ($faqID){
@@ -140,7 +187,7 @@ class AdminController extends Controller
 
     public function insertProdotto(){
         $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
-        return view ('public.inserisciProdotto')->with('users', $users);
+        return view ('admin.insert-prodotto')->with('users', $users);
 
     }
 
@@ -159,7 +206,7 @@ class AdminController extends Controller
         $prodotto->file_img = $imageName;
         $prodotto->save();
 
-        if(!is_null($file)){
+        if(!is_null($imageName)){
             $file->storeAs('/public/images/products/', $imageName);
         }
 
@@ -169,38 +216,38 @@ class AdminController extends Controller
     public function modifyProdotto($productID){
         $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
         $product = Prodotto::find($productID);
-        return view('public.modificaProdotto')->with('product',$product)->with('users', $users);
+        return view('admin.modify-prodotto')->with('product',$product)->with('users', $users);
 
     }
 
-    public function updateProdotto(ProductRequest $request, $productID){
-        $product = Prodotto::find($productID);
+    public function updateProdotto(ProductRequest $request, $prodottoID){
+        $prodotto = Prodotto::find($prodottoID);
+        $prodotto->fill($request->validated());
+        $prodotto->categoriaID = $request->categoriaID;
+
         if($request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();
+            $file = $request->file('file_img');
+            $imageName = $file.getClientOriginalName();
         }
-        else{
-            $imageName = $product->file_img;
+        else
+            $imageName = NULL;
+
+        $prodotto->file_img = $imageName;
+        $prodotto->save();
+
+        if(!is_null($imageName)){
+            $file->storeAs('/public/images/products/', $imageName);
         }
 
-        $product->nome = $request->nome;
-        $product->modello = $request->modello;
-        $product->categoriaID = $request->categoriaID;
-        $product->descrizione = $request->descrizione;
-        $product->specifiche = $request->specifiche;
-        $product->guida_installazione = $request->guida_installazione;
-        $product->note_uso = $request->note_uso;
-        $product->utenteID = $request->utenteID;
-        $product->file_img = $imageName;
-        $product->save();
-
-        return redirect()->route('catalogo');
+        return redirect()->route('catalogo')
+            ->with('message', 'validation.form-messages.update.prodotto')
+            ->with('alertType', 'successful');
     }
 
     //funzioni dedicate ai centri
 
     public function insertCentro(){
-        return view('public.inserisciCentro');
+        return view('admin.insert-centro');
     }
 
     public function saveCentro(CenterRequest $request){
@@ -222,7 +269,7 @@ class AdminController extends Controller
 
     public function modifyCentro($centerID){
         $center=CentroAssistenza::find($centerID);
-        return view('public.modificaCentro')->with('center', $center);
+        return view('admin.modify-centro')->with('center', $center);
     }
 
     public function updateCentro(CenterRequest $request, $centerID){
@@ -235,7 +282,6 @@ class AdminController extends Controller
         $center->via = $request->via;
         $center->città = $request->città;
         $center->cap = $request->cap;
-
         $center->save();
 
         return redirect()->route('catalogo');
@@ -249,5 +295,5 @@ class AdminController extends Controller
         return redirect()->return('catalogo');
     }
 
-    }
+}
 

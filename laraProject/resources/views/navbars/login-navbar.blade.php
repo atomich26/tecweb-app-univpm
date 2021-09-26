@@ -13,18 +13,12 @@
     @endguest
 
     @auth
-
-        @can('isAdmin')
-            <a class="button header-btn manage-btn" href="#">Gestione dati</a>
-        @endcan
-
         <div class="user-info flex-v-center">
 
-            @include('helpers.user-profile-image')
-
             @if(Auth::user()->checkRole('admin'))
-                <span class="username" style="color:#fff">{{ __('Amministratore') }}</span>
+                <span class="username {{ 'admin-label' }}" style="color:#fff">{{ __('Amministratore') }}</span>
             @else
+                @include('helpers.user-profile-image')
                 <a class="username" href="{{ route('user.profile') }}">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
             @endif
 

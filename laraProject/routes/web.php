@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware('can:isAdmin')->group(function(){
 
+        Route::get('dashboard', 'AdminController@index')->name('admin.index');
+
         //Rotte CRUD per i prodotti
         Route::get('gestisci-prodotti', 'AdminController@showProdottiTable')->name('prodotti.table');
 
@@ -58,12 +60,12 @@ Route::prefix('admin')->group(function () {
 
         Route::put('aggiorna-prodotto/{productID}', 'AdminController@updateProdotto')->name('prodotto.update');
 
-        Route::delete('/elimina-prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
+        Route::delete('elimina-prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
 
         //Rotte CRUD per le FAQ
-        Route::get('gestisci-faq', 'AdminController@showFaqTable')->name('faq-table');
+        Route::get('gestisci-faq', 'AdminController@showFaqTable')->name('faq.table');
 
-        Route::get('aggiungi-faq', 'AdminController@insertFAQ')->name('faq.new');
+        Route::get('nuova-faq', 'AdminController@insertFAQ')->name('faq.new');
 
         Route::post('inserisci-faq', 'AdminController@storeFAQ')->name('faq.store');
 
@@ -74,26 +76,28 @@ Route::prefix('admin')->group(function () {
         Route::delete('elimina-faq/{faqID}', 'AdminController@deleteFAQ')->name('faq.delete');
 
         //Rotte CRUD per gli utenti
-        Route::get('gestisci-utenti', 'AdminController@showProdottiTable')->name('utenti-table');
+        Route::get('gestisci-utenti', 'AdminController@showProdottiTable')->name('utenti.table');
 
-        Route::get('/inserisciUtente', 'AdminController@insertUtente')->name('insertUtente');
+        Route::get('nuovo-utente', 'AdminController@insertUtente')->name('utente.new');
 
-        Route::post('/inserisciUtente', 'AdminController@saveUtente')->name('insertUtente.store');
+        Route::post('inserisci-utente', 'AdminController@saveUtente')->name('utente.store');
 
-        Route::get('/user/{userID}/modify', 'AdminController@modifyUtente')->name('modifyUtente');
+        Route::get('modifica-utente/{utenteID}', 'AdminController@modifyUtente')->name('utente.modify');
 
-        Route::put('/user/{userID}/modify', 'AdminController@updateUtente')->name('modifyUtente.update');
+        Route::put('modifica-utente/{utenteID}', 'AdminController@updateUtente')->name('utente.update');
+
+        Route::get('elimina-utente/{utenteID}', 'AdminController@deleteUser')->name('utente.delete');
 
         //Rotte CRUD per i centri assistenza
-        Route::get('gestisci-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri-assistenza-table');
+        Route::get('gestisci-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri.table');
 
-        Route::get('centri-assistenza/inserisciCentro', 'AdminController@insertCentro')->name('insertCentro');
+        Route::get('centri-assistenza/nuovo-centro', 'AdminController@insertCentro')->name('centro.new');
 
-        Route::post('centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
+        Route::post('centri-assistenza/inserisci-centro', 'AdminController@saveCentro')->name('centro.store');
 
-        Route::get('/centri-assistenza/{centerID}/modify','AdminController@modifyCentro')->name('modifyCentro');
+        Route::get('centri-assistenza/modifica-centro/{centroID}','AdminController@modifyCentro')->name('centro.modify');
 
-        Route::put('/centri-assistenza/{centerID}/modify','AdminController@updateCentro')->name('modifyCentro.update');
+        Route::put('centri-assistenza/modifica-centro/{centroID}','AdminController@updateCentro')->name('centro.update');
 
     });
 

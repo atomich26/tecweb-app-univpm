@@ -1,12 +1,13 @@
 window.onload = () => {
     setTextareasCounters();
+    loadAlert();
 }
 
 // <---- Funzioni per il counter delle textarea ----->
 function setTextareasCounters() {
 
     // Seleziona tutte le textarea che hanno il counter
-    const textareas = document.querySelectorAll('textarea.input-data.with-counter');
+    const textareas = document.querySelectorAll('.ck-editor__main');
     const form = document.querySelector('.form-admin-data');
 
     /*
@@ -14,7 +15,7 @@ function setTextareasCounters() {
      *  poi assegna il metodo countTextAreaLength  come listener dell'evento input
      */
 
-    if (textareas != null || textareas.length > 0) {
+    if (typeof textareas == undefined || textareas.length > 0) {
         for (let i = 0; i < textareas.length; i++) {
 
             countTextareaLength(textareas[i]);
@@ -25,6 +26,7 @@ function setTextareasCounters() {
         }
     }
 
+    if(form != null)
     form.addEventListener('reset', () => {
         for (let i = 0; i < textareas.length; i++) {
             textareas[i].value = "";
@@ -49,8 +51,31 @@ function countTextareaLength(t) {
 
 // <------------------------------------->
 
+function loadAlert() {
+    let alert = document.querySelector('.alert-message');
+
+    if (typeof alert == undefined)
+        setTimeout(() => {
+            alert.style.display = "none";
+        }, 5000);
+}
 
 // <----- Funzione per la gestione dell'immagine da caricare tramite form ------>
 
+function loadImageProduct() {
+    var preview_img = document.querySelector("input[type='file']");
+    preview_img.addEventListener('input', () => {
+        document.querySelector('#delete-preview-img').style.display = "block";
+        document.querySelector('#product-preview-image').src= URL.createObjectURL(preview_img.files[0]);
+    });   
+}
+
+function deletePreview(e){
+    preview_img.value = null;
+    document.querySelector('#product-preview-image').src = "#";
+    document.querySelector('#delete-preview-img').style.display = "none";
+}
+
+// <------------------------------------->
 
 

@@ -25,6 +25,7 @@ class FAQRequest extends FormRequest
     public function rules()
     {
         return [
+
             'domanda'=>'required|max:'. Config::get('strings.faq.domanda'),
             'risposta'=>'required|max:' . Config::get('strings.faq.risposta'),
         ];

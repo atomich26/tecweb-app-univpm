@@ -13,6 +13,7 @@
     <title>{{ $title . ' | ' . config('app.name')}}</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/ckeditor/ckeditor.js')}}" ></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Fonts -->
@@ -29,13 +30,13 @@
 </head>
 <body>
 
-    @includeWhen($incHeader, 'layouts.layouts-parts.header')
+    @includeWhen($incHeader, 'layouts-parts.header', ['adminView' => $adminView])
 
     <main id="page-container">
         @yield('page-container')
     </main>
 
-    @includeWhen($incFooter, 'layouts.layouts-parts.footer')
+    @includeWhen($incFooter,'layouts-parts.footer')
 
 </body>
     @yield('js-scripts')
