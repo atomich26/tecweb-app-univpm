@@ -26,9 +26,10 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
+        'f209f7fdbcca662528690311da9bc685' => __DIR__ . '/..' . '/okipa/laravel-html-helper/src/helpers.php',
+        '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
-        '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -91,6 +92,8 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         'O' => 
         array (
             'Opis\\Closure\\' => 13,
+            'Okipa\\LaravelTable\\' => 19,
+            'Okipa\\LaravelHtmlHelper\\' => 24,
         ),
         'N' => 
         array (
@@ -313,6 +316,14 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
         ),
+        'Okipa\\LaravelTable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/okipa/laravel-table/src',
+        ),
+        'Okipa\\LaravelHtmlHelper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/okipa/laravel-html-helper/src',
+        ),
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
@@ -452,16 +463,19 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PublicController' => __DIR__ . '/../..' . '/app/Http/Controllers/PublicController.php',
-        'App\\Http\\Controllers\\StaffController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaffController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\PreventBrowserCacheHistory' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventBrowserCacheHistory.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\CenterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CenterRequest.php',
         'App\\Http\\Requests\\FAQRequest' => __DIR__ . '/../..' . '/app/Http/Requests/FAQRequest.php',
+        'App\\Http\\Requests\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductRequest.php',
         'App\\Listeners\\UpdateLastLogin' => __DIR__ . '/../..' . '/app/Listeners/UpdateLastLogin.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Catalogo' => __DIR__ . '/../..' . '/app/Models/Catalogo.php',
@@ -471,8 +485,6 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         'App\\Models\\Resources\\Faq' => __DIR__ . '/../..' . '/app/Models/Resources/Faq.php',
         'App\\Models\\Resources\\Malfunzionamento' => __DIR__ . '/../..' . '/app/Models/Resources/Malfunzionamento.php',
         'App\\Models\\Resources\\Soluzione' => __DIR__ . '/../..' . '/app/Models/Resources/Soluzione.php',
-        'App\\Models\\Staff' => __DIR__ . '/../..' . '/app/Models/Staff.php',
-        'App\\Models\\Tecnico' => __DIR__ . '/../..' . '/app/Models/Tecnico.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -2830,6 +2842,19 @@ class ComposerStaticInit29ececc2d3b85773e51c80005a169c6c
         'NunoMaduro\\Collision\\Highlighter' => __DIR__ . '/..' . '/nunomaduro/collision/src/Highlighter.php',
         'NunoMaduro\\Collision\\Provider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Provider.php',
         'NunoMaduro\\Collision\\Writer' => __DIR__ . '/..' . '/nunomaduro/collision/src/Writer.php',
+        'Okipa\\LaravelHtmlHelper\\HtmlAttributes' => __DIR__ . '/..' . '/okipa/laravel-html-helper/src/HtmlAttributes.php',
+        'Okipa\\LaravelHtmlHelper\\HtmlClassTag' => __DIR__ . '/..' . '/okipa/laravel-html-helper/src/HtmlClassTag.php',
+        'Okipa\\LaravelHtmlHelper\\HtmlHelper' => __DIR__ . '/..' . '/okipa/laravel-html-helper/src/HtmlHelper.php',
+        'Okipa\\LaravelHtmlHelper\\HtmlHelperServiceProvider' => __DIR__ . '/..' . '/okipa/laravel-html-helper/src/HtmlHelperServiceProvider.php',
+        'Okipa\\LaravelTable\\Column' => __DIR__ . '/..' . '/okipa/laravel-table/src/Column.php',
+        'Okipa\\LaravelTable\\LaravelTableServiceProvider' => __DIR__ . '/..' . '/okipa/laravel-table/src/LaravelTableServiceProvider.php',
+        'Okipa\\LaravelTable\\Result' => __DIR__ . '/..' . '/okipa/laravel-table/src/Result.php',
+        'Okipa\\LaravelTable\\Table' => __DIR__ . '/..' . '/okipa/laravel-table/src/Table.php',
+        'Okipa\\LaravelTable\\Traits\\TableClassesCustomizations' => __DIR__ . '/..' . '/okipa/laravel-table/src/Traits/TableClassesCustomizations.php',
+        'Okipa\\LaravelTable\\Traits\\TableColumnsValidationChecks' => __DIR__ . '/..' . '/okipa/laravel-table/src/Traits/TableColumnsValidationChecks.php',
+        'Okipa\\LaravelTable\\Traits\\TableInteractions' => __DIR__ . '/..' . '/okipa/laravel-table/src/Traits/TableInteractions.php',
+        'Okipa\\LaravelTable\\Traits\\TableRoutesValidationChecks' => __DIR__ . '/..' . '/okipa/laravel-table/src/Traits/TableRoutesValidationChecks.php',
+        'Okipa\\LaravelTable\\Traits\\TableTemplatesCustomizations' => __DIR__ . '/..' . '/okipa/laravel-table/src/Traits/TableTemplatesCustomizations.php',
         'Opis\\Closure\\Analyzer' => __DIR__ . '/..' . '/opis/closure/src/Analyzer.php',
         'Opis\\Closure\\ClosureContext' => __DIR__ . '/..' . '/opis/closure/src/ClosureContext.php',
         'Opis\\Closure\\ClosureScope' => __DIR__ . '/..' . '/opis/closure/src/ClosureScope.php',

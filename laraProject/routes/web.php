@@ -101,7 +101,10 @@ Route::prefix('admin')->group(function () {
 
     });
 
-    Route::middleware('can:editMalfunzionamenti')->group(function(){
+    Route::middleware('can:isAdmin', 'can:editMalfunzionamenti')->group(function(){
         //Rotte CRUD malfunzionamenti e soluzioni
+        Route::get('prova', function(){
+            redirect('catalogo');
+        });
     });
 });
