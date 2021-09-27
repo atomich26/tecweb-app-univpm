@@ -674,6 +674,10 @@ div.product-text ul, div#descrizione-prodotto p{
 th{
     text-align: inherit;
 }
+.table thead{
+    position: sticky;
+    top: 60px;
+}
 
 thead td{
     background-color: #fff;
@@ -706,10 +710,14 @@ tbody tr.row-disabled{
     background-color: #ff00224d !important;
 }
 
+tbody tr{
+    transition: 0.3s;
+}
+
 .table-head-container{
     display: flex;
     justify-content: space-between;
-    padding:  10px 30px;
+    padding: 0 30px;
 }
 
 .table-striped tbody tr:nth-of-type(2n+1){
@@ -790,4 +798,17 @@ td.select-box input[type="checkbox"]{
     width: 100%;
 }
 
+tbody.hide-actions .actions-buttons{
+    display: none!important;
+}
+
+input#delete-selected{
+    display: none;
+}
+
+tfoot div.table-foot-container {
+    padding: 30px 30px;
+    background-color: #333f4d;
+    color: white;
+}
 

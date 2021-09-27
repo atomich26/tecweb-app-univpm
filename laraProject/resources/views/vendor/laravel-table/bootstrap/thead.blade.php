@@ -91,6 +91,12 @@
                             </form>
                         </div>
                     @endif
+                    <div class="d-flex align-items-center px-1 creation-container">
+                        {{ Form::open(array('route'=>'utente.mass-delete', 'id'=>'delete-selected'))}}
+                            <input name="items" type="hidden" id="selectedItems" value="">
+                            {!! Form::submit('Elimina selezionati', ['class' => "button", 'id' => 'delete-selected']) !!}
+                       {{ Form::close()}}
+                    </div>
                     {{-- create button --}}
                     @if($table->isRouteDefined('create'))
                         <div class="d-flex align-items-center px-1 creation-container">

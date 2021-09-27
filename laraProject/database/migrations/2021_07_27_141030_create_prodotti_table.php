@@ -26,7 +26,7 @@ class CreateProdottiTable extends Migration
             $table->text('note_uso', Config::get('strings.prodotto.note_uso'))->nullable();
             $table->string('file_img')->nullable();
             $table->unsignedBigInteger('utenteID')->nullable();
-            $table->foreign('utenteID')->references('ID')->on('utenti');
+            $table->foreign('utenteID')->references('ID')->on('utenti')->onDelete('set null');
             $table->timestamps();
         });
     }

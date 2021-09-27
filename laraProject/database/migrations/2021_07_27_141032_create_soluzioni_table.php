@@ -17,7 +17,7 @@ class CreateSoluzioniTable extends Migration
         Schema::create('soluzioni', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('malfunzionamentoID');
-            $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti');
+            $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti')->onDelete('cascade');
             $table->string('descrizione', Config::get('strings.soluzione.descrizione'));
             $table->timestamps();
         });

@@ -115,6 +115,19 @@ class AdminController extends Controller
         return redirect()->route('catalogo');
     }
 
+    public function deleteSelectedUtenti(Request $request){      
+      
+        if(!is_null($request->items) && strlen($request->items) > 0){
+            $users = explode(',', $request->items, 10);
+        
+            foreach($users as $userID){
+                User::destroy($userID);
+            }
+        }
+
+        return redirect()->route('utenti.table');
+    }
+
     //Funzioni dedicate alle FAQ
 
     public function viewFaqTable(){
