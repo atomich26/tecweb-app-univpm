@@ -187,7 +187,6 @@ class ProdottiTableSeeder extends Seeder
                 § Non scollegare mai tirando dal cavo. Premere sempre sulla spina con una mano ed estrarre la spina afferrandola con l'altra mano
             ",
             'file_img' => 'WTW87568II.png',
-            'utenteID'=> 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

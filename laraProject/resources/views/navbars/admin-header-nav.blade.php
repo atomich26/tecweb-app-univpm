@@ -7,10 +7,10 @@
             <a href="{{ route('centro.new') }}">Centri assistenza</a>
         </li>
         <li>
-            <a href="{{ route('faq.new') }}">FAQ</a>
+            <a href="{{ route('faq.table') }}">FAQ</a>
         </li>
         <li>
-            <a href="{{ route('utente.new') }}">Utenti</a>
+            <a href="{{ route('utenti.table') }}">Utenti</a>
         </li>
     </ul>
 </nav>

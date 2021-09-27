@@ -6,7 +6,7 @@
     <div class="product-overview container">
         <h1 class="product-name">{{ $prodotto->nome ?? 'Prodotto senza nome'}}</h1>
 
-        @include('helpers.product-image', ['image' => $prodotto->file_img, 'width' => 300, 'height' => 400])
+        @include('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'product-image'])
 
         <h2 id="modello">Modello: <span>{{$prodotto->modello ?? 'Numero modello mancante'}}</span></h2>
         <div id="specifiche-prodotto">
@@ -18,10 +18,10 @@
             <div class="product-buttons">
 
                 @can('isAdmin')
-                {!! link_to_route('prodotto.modify', 'Modifica prodotto',['productID' => $prodotto->ID], ['class' => 'edit-prodotto-btn button']) !!}
+                <a href="{{ route('prodotto.modify', ['productID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
                 @endcan
 
-                <a href="#" class="malfunzionamenti-btn button">Ricerca e risoluzione dei problemi</a>
+                <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Ricerca e risoluzione dei problemi</a>
             </div>
         @endauth
     </div>

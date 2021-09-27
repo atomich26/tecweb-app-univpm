@@ -27,6 +27,9 @@ class Table implements Htmlable
     /** @property string $identifier */
     public $identifier;
 
+    /** @property string $title */
+    public $title;
+
     /** @property \Illuminate\Database\Eloquent\Model $model */
     public $model;
 
@@ -114,6 +117,20 @@ class Table implements Htmlable
     {
         $this->identifier = Str::slug($identifier);
         $this->redefineInteractionFieldsFromIdentifier();
+
+        return $this;
+    }
+
+    /**
+     * Funziona aggiunta da michbev per assegnare un titolo alla tabella da mostrare nella view.
+     * La lunghezza massima del titolo è 30 caratteri
+     * 
+     * @param string $title
+     * 
+     * @return \Okipa\LaravelTable\Table
+     */
+    public function title($title){
+        $this->title = strip_tags(substr($title, 0, 30));
 
         return $this;
     }

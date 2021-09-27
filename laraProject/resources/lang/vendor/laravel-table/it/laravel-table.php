@@ -7,10 +7,11 @@ return [
     'search'       => 'Cerca per: ',
     'cancelSearch' => 'Annulla la ricerca',
     'actions'      => 'Azioni',
-    'create'       => 'Crea nuovo',
+    'create'       => 'Aggiungi',
     'edit'         => 'Modifica',
     'destroy'      => 'Elimina',
     'cancel'       => 'Annulla',
+    'show'         => 'Mostra',
     'navigation'   => 'Risultati da <b>:start</b> a <b>:stop</b> su un totale di <b>:total</b>',
 
 ];

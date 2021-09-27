@@ -24,7 +24,7 @@ return [
         'sortAsc' => '<i class="bi bi-caret-up-fill"></i>',
         'sortDesc' => '<i class="bi bi-caret-down-fill"></i>',
         'search' => '<i class="bi bi-search"></i>',
-        'validate' => '<i class="bi bi-check2-circle"></i>',
+        'validate' => '<i class="bi bi-arrow-right-circle"></i>',
         'info' => '<i class="bi bi-info-circle"></i>',
         'cancel' => '<i class="bi bi-x-circle"></i>',
         'create' => '<i class="bi bi-plus-square"></i>',

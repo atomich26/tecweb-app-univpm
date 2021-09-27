@@ -17,7 +17,7 @@
             @if(Auth::user()->checkRole('admin'))
                 <span class="username {{ 'admin-label' }}" style="color:#fff">{{ __('Amministratore') }}</span>
             @else
-                @include('helpers.user-profile-image')
+                @include('helpers.user-profile-image', ['image' => Auth::user()->file_img, 'class' => 'user-img'])
                 <a class="username" href="{{ route('user.profile') }}">{{ __(Auth::user()->nome . " " . Auth::user()->cognome) }} </a>
             @endif
 

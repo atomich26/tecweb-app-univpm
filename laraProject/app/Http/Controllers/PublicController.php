@@ -18,8 +18,8 @@ class PublicController extends Controller
         return view('public.catalogo');
     }
 
-    public function viewProdottoPage($modello){
-        $prodotto = Prodotto::where('modello', $modello)->get()->first();
+    public function viewProdottoPage($prodottoID){
+        $prodotto = Prodotto::find($prodottoID);
 
         if($prodotto != null)
             return view('public.prodotto')->with('prodotto', $prodotto);

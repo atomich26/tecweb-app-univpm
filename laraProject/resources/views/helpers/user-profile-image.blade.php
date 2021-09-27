@@ -1,8 +1,8 @@
 @php
-    $userImgName = Auth::user()->file_img;
+    $userImgName = $image;
 
     if(is_null($userImgName))
         $userImgName = Config::get('images.default.user');
 
 @endphp
-<img src="{{ asset(Config::get('images.paths.user') . $userImgName)}}" class="user-img">
+<img src="{{ asset(Config::get('images.paths.user') . $userImgName)}}" class="{{ $class ?? '' }}">

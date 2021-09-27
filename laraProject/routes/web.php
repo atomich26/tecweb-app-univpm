@@ -24,7 +24,7 @@ Route::view('/legali','pages.static.legali')->name('legali');
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::get('/catalogo/{productID}', 'PublicController@viewProdottoPage')->name('prodotto');
+Route::get('/catalogo/{prodottoID}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
         Route::get('dashboard', 'AdminController@index')->name('admin.index');
 
         //Rotte CRUD per i prodotti
-        Route::get('gestisci-prodotti', 'AdminController@showProdottiTable')->name('prodotti.table');
+        Route::get('gestione-prodotti', 'AdminController@viewProdottiTable')->name('prodotti.table');
 
         Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
 
@@ -63,7 +63,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('elimina-prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
 
         //Rotte CRUD per le FAQ
-        Route::get('gestisci-faq', 'AdminController@showFaqTable')->name('faq.table');
+        Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('faq.table');
 
         Route::get('nuova-faq', 'AdminController@insertFAQ')->name('faq.new');
 
@@ -76,7 +76,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('elimina-faq/{faqID}', 'AdminController@deleteFAQ')->name('faq.delete');
 
         //Rotte CRUD per gli utenti
-        Route::get('gestisci-utenti', 'AdminController@showProdottiTable')->name('utenti.table');
+        Route::get('gestione-utenti', 'AdminController@viewUtentiTable')->name('utenti.table');
 
         Route::get('nuovo-utente', 'AdminController@insertUtente')->name('utente.new');
 
@@ -86,12 +86,12 @@ Route::prefix('admin')->group(function () {
 
         Route::put('modifica-utente/{utenteID}', 'AdminController@updateUtente')->name('utente.update');
 
-        Route::get('elimina-utente/{utenteID}', 'AdminController@deleteUser')->name('utente.delete');
+        Route::get('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('utente.delete');
 
         Route::delete('user/{userID}', 'AdminController@deleteUtente')->name('deleteUtente');
 
         //Rotte CRUD per i centri assistenza
-        Route::get('gestisci-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri.table');
+        Route::get('gestione-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri.table');
 
         Route::get('centri-assistenza/nuovo-centro', 'AdminController@insertCentro')->name('centro.new');
 

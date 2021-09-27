@@ -8,4 +8,4 @@
 @endphp
 
 
-<img class="product-image" src="{{ asset($imgPath) }}">
+<img class="{{ $class ?? ''}}" src="{{ asset($imgPath) }}">

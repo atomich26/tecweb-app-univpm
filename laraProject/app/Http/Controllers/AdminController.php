@@ -18,6 +18,8 @@ use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
 use Illuminate\Support\Facades\Route;
 use App\Tables\ProdottiTable;
+use App\Tables\FaqTable;
+use App\Tables\UtentiTable;
 
 class AdminController extends Controller
 {
@@ -29,7 +31,12 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    //funzioni dedicate agli users
+    //Funzioni CRUD utente
+
+    public function viewUtentiTable(){
+        $table = new UtentiTable();
+        return view('admin.utenti-table')->with('table', $table->view());
+    }
 
     public function insertUtente(){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
@@ -63,13 +70,13 @@ class AdminController extends Controller
     }
 
 
-    public function modificaUser($userID){
+    public function modifyUtente($userID){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
         $user = User::find($userID);
         return view ('admin.modify-utente')->with('user', $user)->with('centri',$centri);
     }
 
-    public function updateUser(UserRequest $request, $userID){
+    public function updateUtente(UserRequest $request, $userID){
         $user = User::find($userID);
         if($request->hasFile('file_img')){
             $image = $request->file('file_img');
@@ -101,7 +108,7 @@ class AdminController extends Controller
 
     }
 
-    public function deleteUser($userID){
+    public function deleteUtente($userID){
         $user = User::find($userID);
         storage()->delete('/public/images/profiles/' . $user->file_img);
         $user->delete($userID);
@@ -109,6 +116,11 @@ class AdminController extends Controller
     }
 
     //Funzioni dedicate alle FAQ
+
+    public function viewFaqTable(){
+        $table = new FaqTable();
+        return view('admin.faq-table')->with('table', $table->index());
+    }
 
     public function insertFAQ(){
         return view ('admin.insert-faq');
@@ -187,7 +199,7 @@ class AdminController extends Controller
 
     //funzioni dedicate ai prodotti
 
-    public function showProdottiTable(){
+    public function viewProdottiTable(){
         $table = new ProdottiTable();
         return view('admin.prodotti-table')->with('table', $table->index());
     }
@@ -252,7 +264,7 @@ class AdminController extends Controller
     }
 
     public function deleteProdotto($productID){ 
-        $product = CentroAssistenza::find($productID);
+        $product = Prodotto::find($productID);
         $product->delete($productID);
 
         return redirect()->route('catalogo');

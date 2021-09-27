@@ -5,7 +5,7 @@
         <h1 class="user-welcome">Riepilogo dei tuoi dati</h1>
         <div class="flex-v-center" style="height:100%">
             <div class="col" style="text-align:center">
-                @include('helpers.user-profile-image', ['userImgName' => $user->file_img, 'width' => 300, 'height' => '300'])
+                @include('helpers.user-profile-image', ['image' => Auth::user()->file_img, 'class' => 'user-img'])
             </div>
 
             <div class="col user-data-info">

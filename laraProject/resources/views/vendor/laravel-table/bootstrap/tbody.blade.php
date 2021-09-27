@@ -72,7 +72,7 @@
                 @endforeach
                 {{-- actions --}}
                 @if(($table->isRouteDefined('edit') || $table->isRouteDefined('destroy') || $table->isRouteDefined('show')))
-                    <td{{ classTag($table->tdClasses, 'text-right') }}>
+                    <td{{ classTag($table->tdClasses, 'text-center') }}>
                         @if(! $model->disabledClasses)
                             <div class="d-flex justify-content-end">
                                 {{-- show button --}}
