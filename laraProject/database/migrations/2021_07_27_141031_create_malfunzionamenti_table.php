@@ -17,7 +17,7 @@ class CreateMalfunzionamentiTable extends Migration
         Schema::create('malfunzionamenti', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('prodottoID');
-            $table->foreign('prodottoID')->references('ID')->on('prodotti');
+            $table->foreign('prodottoID')->references('ID')->on('prodotti')->onDelete('cascade');
             $table->string('descrizione', Config::get('strings.malfunzionamento.descrizione'));
             $table->timestamps();
         });

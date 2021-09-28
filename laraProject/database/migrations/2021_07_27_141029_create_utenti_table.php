@@ -25,7 +25,7 @@ class CreateUtentiTable extends Migration
             $table->string('password');
             $table->set('role', ['tecnico', 'staff', 'admin'])->default('tecnico');
             $table->unsignedBigInteger('centroID')->nullable();
-            $table->foreign('centroID')->references('ID')->on('centri_assistenza');
+            $table->foreign('centroID')->references('ID')->on('centri_assistenza')->onDelete('set null');
             $table->string('file_img')->nullable();
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();

@@ -1,6 +1,7 @@
 window.onload = () => {
     setTextareasCounters();
     loadAlert();
+    loadBtn();
 }
 
 // <---- Funzioni per il counter delle textarea ----->
@@ -75,7 +76,7 @@ function deletePreview(e){
     document.querySelector('#product-preview-image').src = "#";
     document.querySelector('#delete-preview-img').style.display = "none";
 }
-
 // <------------------------------------->
 
 
+// Funzioni per la selezione degli elementi in admin

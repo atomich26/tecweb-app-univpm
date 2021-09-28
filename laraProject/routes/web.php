@@ -88,6 +88,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('utente.delete');
 
+        Route::post('elimina-utenti', 'AdminController@deleteSelectedUtenti')->name('utente.mass-delete');
+
         Route::delete('user/{userID}', 'AdminController@deleteUtente')->name('deleteUtente');
 
         //Rotte CRUD per i centri assistenza

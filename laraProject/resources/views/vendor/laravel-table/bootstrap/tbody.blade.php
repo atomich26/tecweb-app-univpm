@@ -74,7 +74,7 @@
                 @if(($table->isRouteDefined('edit') || $table->isRouteDefined('destroy') || $table->isRouteDefined('show')))
                     <td{{ classTag($table->tdClasses, 'text-center') }}>
                         @if(! $model->disabledClasses)
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex actions-buttons justify-content-end">
                                 {{-- show button --}}
                                 @if($table->isRouteDefined('show'))
                                     <form id="show-{{ $model->getKey() }}"

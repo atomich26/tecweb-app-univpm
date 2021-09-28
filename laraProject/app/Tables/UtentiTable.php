@@ -29,6 +29,7 @@ class UtentiTable{
             'create'  => ['name' => 'utente.new'],
             'edit'    => ['name' => 'utente.modify'],
             'destroy' => ['name' => 'utente.delete'],
+           
         ])
         ->title('Gestione utenti')
         ->destroyConfirmationHtmlAttributes(function (User $utente) {
