@@ -12,10 +12,12 @@ use App\Http\Requests\UserRequest;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\CenterRequest;
+use App\Http\Requests\MalfunzionamentoRequest;
 use App\User;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
+use App\Models\Resources\Malfunzionamento;
 use Illuminate\Support\Facades\Route;
 use App\Tables\ProdottiTable;
 use App\Tables\FaqTable;
@@ -274,8 +276,9 @@ class AdminController extends Controller
     //funzioni dedicate ai malfunzionamenti e soluzioni
 
     public function insertMalfunzionamento($productID)
-    {
-        return view ('public.InserisciMalfunzionamenti')->with('product', $productID);
+    {   
+        $product = Prodotto::find($productID);
+        return view ('public.InserisciMalfunzionamento')->with('product', $product);
       
     }
 
@@ -286,7 +289,7 @@ class AdminController extends Controller
         $error->descrizione = $request->descrizione;
         $error->save();
 
-        return redirect()->route('prodotto')->with('product', $productID);
+        return view('public.prodotto')->with('prodotto', $product);
     }
 
     public function modifyMalfunzionamento($malfunzionamentoID){
