@@ -144,7 +144,27 @@ ul.text-list{
     margin: 0 20px;
 }
 
-.admin-label
+.alert-box{
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    width: 400px;
+    height: 100px;
+    z-index: 9999;
+    transform: translateX(0px);
+    opacity: 0;
+    visibility: hidden;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 4px 2px rgb(150, 150, 150);
+    transition: 0.5s cubic-bezier(.01,.98,.78,1) ;
+}
+
+.alert-box.hide{
+    visibility: hidden;
+    transform: translateX(40px);
+    opacity: 1;
+}
+
 /* Input */
 input[type="text"], input[type="password"], input[type="email"],
 select{
@@ -805,7 +825,7 @@ td .btn-link:hover{
 }
 
 tbody.hide-actions .actions-buttons{
-    display: none!important;
+    visibility: hidden!important;
 }
 
 #bulkActionBtn{

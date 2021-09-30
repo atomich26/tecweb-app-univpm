@@ -33,6 +33,11 @@
     @includeWhen($incHeader, 'layouts-parts.header', ['adminView' => $adminView])
 
     <main id="page-container">
+        <div class="alert-box">
+            @if(session('message'))
+                <h4 class="alert-message {{ session('alertType') ?? '' }}">{{ __(session('message')) ?? '' }}</h4>
+            @endif
+        </div>
         @yield('page-container')
     </main>
 
