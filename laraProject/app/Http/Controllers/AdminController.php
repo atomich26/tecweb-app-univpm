@@ -14,11 +14,7 @@ use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\CenterRequest;
 use App\Http\Requests\MalfunzionamentoRequest;
-<<<<<<< HEAD
 use App\Http\Requests\SoluzioneRequest;
-use App\User;
-=======
->>>>>>> 9b15fe9438743965f621e2e514c7447632a26db5
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
