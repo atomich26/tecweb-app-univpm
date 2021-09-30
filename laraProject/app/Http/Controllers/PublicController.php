@@ -22,7 +22,7 @@ class PublicController extends Controller
         $prodotto = Prodotto::find($prodottoID);
 
         if($prodotto != null)
-            return view('public.prodotto')->with('product', $productID);
+            return view('public.prodotto')->with('prodotto', $prodotto);
         else
             return abort(404);
     }

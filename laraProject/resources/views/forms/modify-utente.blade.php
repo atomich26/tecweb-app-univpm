@@ -153,4 +153,6 @@
         $("#centroID").hide();
     });
 });
+
+</script>
      
