@@ -23,9 +23,12 @@ use App\Tables\ProdottiTable;
 use App\Tables\FaqTable;
 use App\Tables\UtentiTable;
 use App\Tables\CentriAssistenzaTable;
+use App\Traits\Malfunzionamenti;
 
 class AdminController extends Controller
 {
+    use Malfunzionamenti;
+    
     public function __construct(){
         $this->middleware('can:isAdmin');
     }
@@ -163,7 +166,7 @@ class AdminController extends Controller
 
         if($saved){
             if($callback == 'close'){
-                return redirect()->route('faq')
+                return redirect()->route('faq.table')
                     ->with('message','validation.form-messages.insert.faq')
                     ->with('alertType', 'successful');
             }
@@ -232,7 +235,7 @@ class AdminController extends Controller
     }
 
     public function storeProdotto(ProductRequest $request){
-        $prodotto = new Prodotto;
+        $prodotto = new Prodotto();
         $prodotto->fill($request->validated());
         $prodotto->categoriaID = $request->categoriaID;
 
