@@ -23,8 +23,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Via Boccaccio 43',
             'città' => 'Venezia',
             'cap' => '30100',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('centri_assistenza')->insert([
@@ -40,8 +40,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Viale Como 14',
             'città' => 'Bari',
             'cap' => '70121',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('centri_assistenza')->insert([
@@ -59,8 +59,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Corso Garibaldi 49',
             'città' => 'Roma',
             'cap' => '00127',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('centri_assistenza')->insert([
@@ -75,8 +75,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Piazza della Repubblica 3a',
             'città' => 'Modena',
             'cap' => '41100',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('centri_assistenza')->insert([
@@ -92,8 +92,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Via Matteotti 98c',
             'città' => 'Messina',
             'cap' => '98121',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('centri_assistenza')->insert([
@@ -109,8 +109,8 @@ class CentriAssistenzaTableSeeder extends Seeder
             'via' => 'Viale Bastioni 32',
             'città' => 'Bologna',
             'cap' => '40126',
-            'created_at' => date('Y-m-d'),
-            'updated_at' => date('Y-m-d'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }

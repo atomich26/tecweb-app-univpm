@@ -1,16 +1,27 @@
 <tbody>
     @if($table->list->isEmpty())
         <tr{{ classTag($table->trClasses) }}>
-            <td{{ classTag($table->tdClasses, 'text-center', 'p-3') }}{{ htmlAttributes($table->columnsCount() > 1 ? ['colspan' => $table->columnsCount()] : null) }} scope="row">
-                <span class="text-info">
-                    {!! config('laravel-table.icon.info') !!}
+            <td{{ classTag($table->tdClasses, 'text-center', 'p-3', 'full-height') }}{{ htmlAttributes($table->columnsCount() > 1 ? ['colspan' => $table->columnsCount()] : null) }} scope="row">
+                <div><span class="text-info icon-alert">
+                    {!! config('laravel-table.icon.empty') !!}
                 </span>
-                @lang('laravel-table::laravel-table.emptyTable')
+                <h2>@lang('laravel-table::laravel-table.emptyTable')</h2></div>
             </td>
         </tr>
     @else
         @foreach($table->list as $model)
             <tr{{ classTag($table->trClasses, $model->conditionnalClasses, $model->disabledClasses) }}>
+                @if($table->rowsSelection->has('closure'))
+                    @php
+                        $canSelect = ($table->rowsSelection['closure'])($model);
+                        $attribute = $table->rowsSelection['attribute'];
+                    @endphp 
+                    <td class="align-middle text-center select-box">
+                        @if($canSelect)
+                            {!! Form::checkbox('', $model->$attribute, false, ['class' => 'selector']) !!}
+                        @endif
+                    </td>
+                @endif
                 @foreach($table->columns as $columnKey => $column)
                     @php
                         $value = $model->{$column->databaseDefaultColumn};

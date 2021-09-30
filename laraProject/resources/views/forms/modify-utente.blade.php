@@ -111,8 +111,8 @@
 
         <div>
             {{  Form::label ('role', 'Ruolo',['name'=>'role']) }}
-            {{  Form::radio ('role', 'tecnico', ['id' => 'tecnico', 'name' => 'role', checked]) }} Tecnico
-            {{  Form::radio ('role', 'staff', ['id' => 'staff', 'name' => 'role']) }} Staff
+            {{  Form::radio ('role', 'tecnico', true, ['id' => 'tecnico', 'name' => 'role']) }} Tecnico
+            {{  Form::radio ('role', 'staff', false,['id' => 'staff', 'name' => 'role']) }} Staff
         </div>
         
         <div id="centroID">

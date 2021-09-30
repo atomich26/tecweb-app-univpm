@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,6 @@ use App\Http\Requests\UserRequest;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\CenterRequest;
-use App\User;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\CentroAssistenza;
@@ -20,11 +20,12 @@ use Illuminate\Support\Facades\Route;
 use App\Tables\ProdottiTable;
 use App\Tables\FaqTable;
 use App\Tables\UtentiTable;
+use App\Tables\CentriAssistenzaTable;
 
 class AdminController extends Controller
 {
     public function __construct(){
-
+        $this->middleware('can:isAdmin');
     }
 
     public function index(){
@@ -35,7 +36,7 @@ class AdminController extends Controller
 
     public function viewUtentiTable(){
         $table = new UtentiTable();
-        return view('admin.utenti-table')->with('table', $table->view());
+        return view('admin.utenti-table')->with('table', $table);
     }
 
     public function insertUtente(){
@@ -108,31 +109,36 @@ class AdminController extends Controller
 
     }
 
-    public function deleteUtente($userID){
-        $user = User::find($userID);
-        storage()->delete('/public/images/profiles/' . $user->file_img);
+    public function deleteUtente($utenteID){
+        $user = User::findOrFail($utenteID);
+
+        if(!$user->checkRole('admin')){
+            return back()->with('error', "Non è consentito eliminare un amministratore!");
+        }
+        else if($user->checkRole('staff'))
+
+            return back()->with('error', 'kokokok');
+        Storage::delete('/public/images/profiles/' . $user->file_img);
         $user->delete($userID);
-        return redirect()->route('catalogo');
+        User::destroy($userID);
+        return back(); 
     }
 
-    public function deleteSelectedUtenti(Request $request){      
-      
+    public function bulkDeleteUtenti(Request $request){        
         if(!is_null($request->items) && strlen($request->items) > 0){
-            $users = explode(',', $request->items, 10);
-        
-            foreach($users as $userID){
-                User::destroy($userID);
+            $utenti = explode(',', $request->items, 10);
+            foreach($utenti as $utenteID){
+                $this->deleteUtente($utenteID);
             }
         }
-
-        return redirect()->route('utenti.table');
+        return back();
     }
 
     //Funzioni dedicate alle FAQ
 
     public function viewFaqTable(){
         $table = new FaqTable();
-        return view('admin.faq-table')->with('table', $table->index());
+        return view('admin.faq-table')->with('table', $table);
     }
 
     public function insertFAQ(){
@@ -214,7 +220,7 @@ class AdminController extends Controller
 
     public function viewProdottiTable(){
         $table = new ProdottiTable();
-        return view('admin.prodotti-table')->with('table', $table->index());
+        return view('admin.prodotti-table')->with('table', $table);
     }
 
     public function insertProdotto(){
@@ -325,6 +331,11 @@ class AdminController extends Controller
     }
 
     //funzioni dedicate ai centri
+
+    public function viewCentriAssistenzaTable(){
+        $table = new CentriAssistenzaTable();
+        return view('admin.centri-assistenza-table')->with('table', $table);
+    }
 
     public function insertCentro(){
         return view('admin.insert-centro');

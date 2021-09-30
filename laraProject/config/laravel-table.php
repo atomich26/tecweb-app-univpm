@@ -31,6 +31,7 @@ return [
         'edit' => '<i class="bi bi-pencil-square"></i>',
         'destroy' => '<i class="bi bi-trash"></i>',
         'show' => '<i class="bi bi-eye"></i>',
+        'empty' => '<i class="bi bi-exclamation-diamond"></i>',
     ],
 
     /*

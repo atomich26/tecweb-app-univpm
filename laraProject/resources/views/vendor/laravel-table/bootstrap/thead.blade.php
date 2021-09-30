@@ -1,13 +1,13 @@
 <thead>
     {{-- rows number / search --}}
-    @if($table->rowsNumberSelectionActivation || ! $table->searchableColumns->isEmpty())
-        <tr{{ classTag($table->trClasses) }}>
-            <td{{ classTag('bg-light', $table->tdClasses) }}{{ htmlAttributes($table->columnsCount() > 1 ? ['colspan' => $table->columnsCount()] : null) }}>
-                <div class="flex-v-center table-head-container">
-                    {{-- title --}}
-                   @if(!is_null($table->title) && strlen($table->title))
-                        <h1 class="table-title">{{ $table->title }}</h1>
-                    @endif
+    <tr{{ classTag($table->trClasses) }}>
+        <td{{ classTag('bg-light', $table->tdClasses) }}{{ htmlAttributes($table->columnsCount() > 1 ? ['colspan' => $table->columnsCount()] : null) }}>
+            <div class="flex-v-center table-head-container">
+                {{-- table title --}}
+                @if(!is_null($table->title))
+                    <h2 class="table-title">{{ $table->title }}</h2>
+                @endif
+                @if($table->rowsNumberSelectionActivation || ! $table->searchableColumns->isEmpty())
                     {{-- searching --}}
                     @if(count($table->searchableColumns))
                         <div class="flex-fill px-3 searching">
@@ -91,12 +91,15 @@
                             </form>
                         </div>
                     @endif
-                    <div class="d-flex align-items-center px-1 creation-container">
-                        {{ Form::open(array('route'=>'utente.mass-delete', 'id'=>'delete-selected'))}}
-                            <input name="items" type="hidden" id="selectedItems" value="">
-                            {!! Form::submit('Elimina selezionati', ['class' => "button", 'id' => 'delete-selected']) !!}
-                       {{ Form::close()}}
-                    </div>
+                    @if(array_key_exists('bulk-destroy', $table->routes))
+                        <div class="d-flex align-items-center px-1 creation-container">
+                            {{ Form::open(array('route'=> $table->routes['bulk-destroy']['name'],'method' => 'DELETE',
+                                'id'=>'delete-selected-form', 'data-confirm' => 'Sei sicuro di voler eliminare :items elementi?'))}}
+                                <input name="items" type="hidden" id="selectedRows" value="">
+                                {!! Form::submit('Elimina selezionati', ['class' => "button", 'id'=> "bulkActionBtn"]) !!}
+                            {{ Form::close()}}
+                        </div>
+                    @endif
                     {{-- create button --}}
                     @if($table->isRouteDefined('create'))
                         <div class="d-flex align-items-center px-1 creation-container">
@@ -108,12 +111,16 @@
                             </a>
                         </div>
                     @endif
-                </div>
-            </td>
-        </tr>
-    @endif
+                @endif
+            </div>
+        </td>
+    </tr>
     {{-- column titles --}}
     <tr{{ classTag($table->trClasses, 'columns-title') }}>
+        {{-- selector rows --}}
+        @if($table->rowsSelection->has('closure'))
+            <th>{!! Form::checkbox('select-all', '', false, ['id' => 'selector-all']) !!}</th>
+        @endif
         @foreach($table->columns as $column)
             <th{{ classTag($table->thClasses) }} scope="col">
                 @if($column->isSortable)
@@ -144,7 +151,7 @@
             </th>
         @endforeach
         @if($table->isRouteDefined('show') || $table->isRouteDefined('edit') || $table->isRouteDefined('destroy'))
-            <th{{ classTag('text-center', $table->thClasses) }} scope="col">
+            <th{{ classTag($table->thClasses) }} scope="col">
                 @lang('laravel-table::laravel-table.actions')
             </th>
         @endif
