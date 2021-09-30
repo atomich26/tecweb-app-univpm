@@ -24,7 +24,7 @@ Route::view('/legali','pages.static.legali')->name('legali');
 
 Route::get('/faq','PublicController@viewFaqPage')->name('faq');
 
-Route::get('/catalogo/{prodottoID}', 'PublicController@viewProdottoPage')->name('prodotto');
+Route::get('/catalogo/{productID}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('/chi-siamo','public.static.chi-siamo')->name('chi-siamo');
@@ -111,7 +111,7 @@ Route::prefix('admin')->group(function () {
 
     });
 
-   /* Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
+    Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
 
         Route::get('/catalogo/{productID}/inserisciMalfunzionamento', 'AdminController@insertMalfunzionamento')->name('insertMalfunzionamento');
 
@@ -122,11 +122,8 @@ Route::prefix('admin')->group(function () {
         Route::put('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/modify', 'AdminController@updateMalfunzionamento')->name('modifyMalfunzionamento.update');
 
         Route::delete('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('deleteMalfunzionamento');
-        */
-    Route::middleware('can:isAdmin', 'can:editMalfunzionamenti')->group(function(){
-        //Rotte CRUD malfunzionamenti e soluzioni
-        Route::get('prova', function(){
-            redirect('catalogo');
-        });
+        
+   // Route::middleware('can:isAdmin', 'can:editMalfunzionamenti')->group(function(){
+        
     });
 });
