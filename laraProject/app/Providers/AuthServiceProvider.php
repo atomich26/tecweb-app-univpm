@@ -42,15 +42,16 @@ class AuthServiceProvider extends ServiceProvider
             return $user->checkRole(['tecnico', 'staff']);
         });
 
-        Gate::define('editMalfunzionamenti', function($user, $product){
+        Gate::define('editMalfunzionamenti', function($user, $prodottoID){
+            $prodotto = Prodotto::findOrFail($prodottoID);
 
             if($user->checkRole('admin')){
                 return true;
             }
             elseif($user->checkRole('staff')){
 
-                if($product->utenteID != null)
-                    return $user->ID == $product->utenteID;
+                if($prodotto->utenteID != null)
+                    return $user->ID == $prodotto->utenteID;
                 else
                     return true;
             }
