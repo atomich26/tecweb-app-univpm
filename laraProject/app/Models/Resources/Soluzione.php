@@ -8,5 +8,5 @@ class Soluzione extends Model
 {
      protected $table = 'soluzioni';
      protected $primaryKey = 'ID';
-     protected $timestamps = true;
+     public $timestamps = true;
 }
