@@ -4,7 +4,7 @@
             <a href="{{ route('prodotti.table') }}">Prodotti</a>
         </li>
         <li>
-            <a href="{{ route('centro.new') }}">Centri assistenza</a>
+            <a href="{{ route('centri.table') }}">Centri assistenza</a>
         </li>
         <li>
             <a href="{{ route('faq.table') }}">FAQ</a>

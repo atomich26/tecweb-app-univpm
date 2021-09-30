@@ -6,6 +6,7 @@ use Closure;
 use ErrorException;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -32,6 +33,9 @@ class Table implements Htmlable
 
     /** @property \Illuminate\Database\Eloquent\Model $model */
     public $model;
+
+    /** @property \Illuminate\Support\Collection $rowsSelection */
+    public $rowsSelection;
 
     /** @property bool $rowsNumberSelectionActivation */
     public $rowsNumberSelectionActivation;
@@ -80,6 +84,7 @@ class Table implements Htmlable
         $this->initializeDefaultComponents();
         $this->initializeTableDefaultClasses();
         $this->rows = config('laravel-table.value.rowsNumber');
+        $this->rowsSelection = new Collection(); //added by @michbev
         $this->rowsNumberSelectionActivation = config('laravel-table.value.rowsNumberSelectionActivation');
         $this->sortableColumns = new Collection();
         $this->searchableColumns = new Collection();
@@ -122,15 +127,16 @@ class Table implements Htmlable
     }
 
     /**
-     * Funziona aggiunta da michbev per assegnare un titolo alla tabella da mostrare nella view.
-     * La lunghezza massima del titolo è 30 caratteri
+     * Set the title of table.
      * 
      * @param string $title
      * 
      * @return \Okipa\LaravelTable\Table
+     * 
+     * @author @michdev7
      */
     public function title($title){
-        $this->title = strip_tags(substr($title, 0, 30));
+        $this->title = strip_tags($title);
 
         return $this;
     }
@@ -213,6 +219,32 @@ class Table implements Htmlable
     }
 
     /**
+     * Set selectable with checkbox all the rows where the $rowsSelectionClosure is true.
+     * If not specified, $attribute take the value of primaryKey of Model.
+     * 
+     * @param \Closure $rowsSelectionClosure
+     * @param any $attribute
+     * 
+     * @return Okipa\LaravelTable\Table
+     * 
+     * @author @michdev7
+     */
+    public function rowsSelection(Closure $rowsSelectionClosure = null, $attribute = null): Table
+    {
+        if(is_null($attribute))
+            $attribute = $this->model->getKeyName();
+    
+        $this->rowsSelection->put('attribute', $attribute);
+        
+        if(is_null($rowsSelectionClosure))
+            $rowsSelectionClosure = function(){ return true; };
+
+        $this->rowsSelection->put('closure', $rowsSelectionClosure);      
+        
+        return $this;
+    }
+
+    /**
      * Set the disable lines closure that will be executed during the table generation.
      * The optional second param let you override the classes that will be applied for the disabled lines.
      * The closure let you manipulate the following attribute : \Illuminate\Database\Eloquent\Model $model.
@@ -282,6 +314,9 @@ class Table implements Htmlable
         $extraColumnsCount = $this->isRouteDefined('show')
         || $this->isRouteDefined('edit')
         || $this->isRouteDefined('destroy') ? 1 : 0;
+
+        //Added by @michbev for rowsSelection feature. Add another column for checkboxes.
+        $extraColumnsCount = $this->rowsSelection->has('closure') ? $extraColumnsCount + 1 : $extraColumnsCount;
 
         return $this->columns->count() + $extraColumnsCount;
     }

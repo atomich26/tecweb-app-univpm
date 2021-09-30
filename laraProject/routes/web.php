@@ -62,6 +62,8 @@ Route::prefix('admin')->group(function () {
 
         Route::delete('elimina-prodotto/{productID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
 
+        Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('prodotti.bulk-delete');
+
         //Rotte CRUD per le FAQ
         Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('faq.table');
 
@@ -75,6 +77,8 @@ Route::prefix('admin')->group(function () {
 
         Route::delete('elimina-faq/{faqID}', 'AdminController@deleteFAQ')->name('faq.delete');
 
+        Route::delete('elimina-faq', 'AdminController@bulkDeleteFaq')->name('faq.bulk-delete');
+
         //Rotte CRUD per gli utenti
         Route::get('gestione-utenti', 'AdminController@viewUtentiTable')->name('utenti.table');
 
@@ -86,18 +90,14 @@ Route::prefix('admin')->group(function () {
 
         Route::put('modifica-utente/{utenteID}', 'AdminController@updateUtente')->name('utente.update');
 
-        Route::get('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('utente.delete');
-
-        Route::post('elimina-utenti', 'AdminController@deleteSelectedUtenti')->name('utente.mass-delete');
-
-        Route::delete('user/{userID}', 'AdminController@deleteUtente')->name('deleteUtente');
+        Route::delete('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('utente.delete');
+        
+        Route::delete('elimina-utenti', 'AdminController@bulkDeleteUtenti')->name('utenti.bulk-delete');
 
         //Rotte CRUD per i centri assistenza
-        Route::get('gestione-centri-assistenza', 'AdminController@showCentriAssistenzaTable')->name('centri.table');
+        Route::get('gestione-centri-assistenza', 'AdminController@viewCentriAssistenzaTable')->name('centri.table');
 
         Route::get('centri-assistenza/nuovo-centro', 'AdminController@insertCentro')->name('centro.new');
-
-        Route::post('/centri-assistenza/inserisciCentro', 'AdminController@saveCentro')->name('insertCentro.store');
 
         Route::post('centri-assistenza/inserisci-centro', 'AdminController@saveCentro')->name('centro.store');
 
@@ -105,7 +105,9 @@ Route::prefix('admin')->group(function () {
 
         Route::put('centri-assistenza/modifica-centro/{centroID}','AdminController@updateCentro')->name('centro.update');
 
-        Route::delete('/centri-assistenza/{centerID}', 'AdminController@deleteCentro')->name('deleteCentro');
+        Route::delete('/centri-assistenza/{centerID}', 'AdminController@deleteCentro')->name('centro.delete');
+
+        Route::delete('elimina-centri', 'AdminController@bulkDeleteCentri')->name('centri.bulk-delete');
 
     });
 

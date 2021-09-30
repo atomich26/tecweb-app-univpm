@@ -2,36 +2,56 @@
 
 namespace App\Tables;
 
+use App\User;
 use \Illuminate\View\View;
+use \Okipa\LaravelTable\Table;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\Categoria;
-use \Okipa\LaravelTable\Table;
-use \App\User;
 
-class ProdottiTable{
+class ProdottiTable extends AdminTable{
 
-    public function index(){
+    public function __construct(){
+        parent::__construct();
+        $this->build();
+    }
 
-        $table = (new Table)->model(Prodotto::class)->routes([
+    protected function build(){
+
+        $this->model(Prodotto::class)->routes([
             'index'   => ['name' => 'prodotti.table'],
             'create'  => ['name' => 'prodotto.new'],
+            'show'    => ['name' => 'prodotto'],
             'edit'    => ['name' => 'prodotto.modify'],
             'destroy' => ['name' => 'prodotto.delete'],
-        ])->destroyConfirmationHtmlAttributes(function (Prodotto $prodotto) {
+            'bulk-destroy' => ['name' => 'prodotti.bulk-delete']
+        ])
+        ->title('Gestione prodotti')
+        ->destroyConfirmationHtmlAttributes(function (Prodotto $prodotto) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare il prodotto ' . $prodotto->nome . '?',
             ];
+        })
+        ->rowsSelection();
+        $this->column('ID')->title('ID')->sortable();
+        $this->column()->title('Immagine')->html(function(Prodotto $prodotto){
+            return view('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'thumb-table'])->render();
         });
-        $table->column('ID')->title('ID')->sortable();
-        $table->column('nome')->title('Nome')->sortable()->searchable();
-        /*$table->column('categoriaID')->title('Categoria')->sortable()
-            ->searchable()
+        $this->column('nome')->title('Nome')->sortable()->searchable();
+        $this->column('categoriaID')->title('Categoria')->sortable()
             ->value(function(Prodotto $prodotto){
-                return $prodotto->belongsTo(Categoria::class, 'categoriaID', 'ID')->first()->nome();
-        });*/
-        $table->column('modello')->title('Modello')->searchable();
-        $table->column('descrizione')->title('Descrizione')->searchable();
-        $table->column('file_img')->title('Immagine')->searchable();
-        return $table;
+                return $prodotto->belongsTo(Categoria::class, 'categoriaID', 'ID')->first()->nome;
+        });
+        $this->column('modello')->title('Modello')->searchable();
+        $this->column('descrizione')->title('Descrizione')->searchable()
+            ->value(function(Prodotto $prodotto){
+                return $this->parseHtmlContent($prodotto->descrizione, 150);
+            });
+        $this->column('utenteID')->title('Assegnato a')->value(function(Prodotto $prodotto){
+            if(!is_null($prodotto->utenteID))
+                return $prodotto->belongsTo(User::class,'utenteID', 'ID')->first()->username;
+            else
+                return "Tutti";
+        });
+        $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();
     }
 }

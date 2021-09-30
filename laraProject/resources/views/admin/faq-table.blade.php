@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title' => 'Gestisci faq'])
+@extends('layouts.admin-table', ['title' => 'Gestione faq'])
 
 @section('content')
     {{ $table}}

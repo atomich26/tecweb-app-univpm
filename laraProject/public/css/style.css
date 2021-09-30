@@ -1,9 +1,10 @@
 :root{
     --color-white : #ececec;
     --color-primary: #ea1835;
-    --color-secondary: #1e252d;
+    --color-secondary: #333f4d;
     --color-tertiary: #00588c;
     --static-header-height : 450px;
+    --table-head-bg : #2b3640;
 }
 
 /*Elements*/
@@ -122,12 +123,12 @@ ul.text-list{
 }
 
 .header-btn:hover{
-    background-color: var(--color-secondary);
-    border-color: var(--color-secondary);
+    background-color: #1b222a;
+    border-color: #1b222a;
 }
 
 .logout-btn{
-    background-color: var(--color-secondary);
+    background-color: #1b222a;
 }
 
 .logout-btn:hover, .logout-btn:focus{
@@ -497,7 +498,7 @@ h1.user-welcome{
 .header-product-page{
     width: 100%;
     height: 600px;
-    background-color: var(--color-secondary);
+    background-color: #232b35;
 }
 
 .product-overview h1, .product-overview h2, .product-overview h3{
@@ -638,7 +639,6 @@ div.product-text ul, div#descrizione-prodotto p{
 .table {
     width: 100%;
     max-width: 100%;
-    margin-bottom: 1rem;
     background-color: transparent;
     font-size: 14px;
     border-collapse: collapse;
@@ -646,6 +646,7 @@ div.product-text ul, div#descrizione-prodotto p{
 .table thead tr.columns-title th{
     padding: 1rem .75rem;
     font-size: 14px;
+    z-index: 9999;
 }
 
 .table thead tr.columns-title th a span{
@@ -658,7 +659,7 @@ div.product-text ul, div#descrizione-prodotto p{
 }
 
 .table-title{
-    color: var(--color-primary);
+    margin-right: 30px;
 }
 
 .table thead th{
@@ -677,21 +678,22 @@ th{
 .table thead{
     position: sticky;
     top: 60px;
+    z-index: 9999;
 }
 
 thead td{
-    background-color: #fff;
+    background-color: var(--table-head-bg);
 }
 
 thead tr{
-    background-color: var(--color-secondary);
+    background-color: var(--table-head-bg);
 }
 
-thead .columns-title th:first-child{
+thead .columns-title th:first-child, tbody tr td:first-child {
     padding-left: 30px!important;
 }
 
-thead .columns-title th:last-child{
+thead .columns-title th:last-child, tbody tr td:last-child{
     padding-right: 30px!important;
 }
 
@@ -701,13 +703,14 @@ thead th, thead th a{
     text-decoration: none;
 }
 
-thead th a:hover{
-    color: var(--color-primary);
-    text-decoration: underline;
+thead th a:hover, .text-danger, .table td.full-height span.icon-alert, ul.pagination .page-link:hover, 
+ul.pagination li.page-item.active .page-link, .table-title{
+    color: var(--color-primary)!important;
 }
 
 tbody tr.row-disabled{
-    background-color: #ff00224d !important;
+    border-left: 10px solid;
+    border-color: var(--color-primary);
 }
 
 tbody tr{
@@ -716,8 +719,10 @@ tbody tr{
 
 .table-head-container{
     display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
+    width: calc(100% - 60px);
+    margin: auto;
+    height: 50px;
+    border-bottom: 1px solid rgb(73, 73, 73);
 }
 
 .table-striped tbody tr:nth-of-type(2n+1){
@@ -740,9 +745,6 @@ span.sort{
     margin: 0 5px;
 }
 
-.text-danger{
-    color: var(--color-primary)!important;
-}
 .text-right {
     text-align: right !important;
 }
@@ -773,7 +775,7 @@ td .btn-link:hover{
     transform: scale(1.2);
 }
 
-td.select-box input[type="checkbox"]{
+.selector, #selector-all{
     transform: scale(1.2);
 }
 
@@ -798,17 +800,70 @@ td.select-box input[type="checkbox"]{
     width: 100%;
 }
 
+.table-container{
+    margin-bottom: 50px;
+}
+
 tbody.hide-actions .actions-buttons{
     display: none!important;
 }
 
-input#delete-selected{
+#bulkActionBtn{
     display: none;
 }
 
-tfoot div.table-foot-container {
-    padding: 30px 30px;
-    background-color: #333f4d;
+.table-footer-bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.table-footer-bottom div.table-foot-container {
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--table-head-bg);
     color: white;
 }
 
+.table-footer-bottom div.table-foot-container h3{
+    font-size: 16px;
+}
+
+.table tbody td.full-height{
+    height: calc(100vh - 210px);
+}
+
+.table td.full-height span.icon-alert{
+    font-size: 50px;
+}
+
+ul.pagination{
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+ul.pagination .page-link{
+    position: relative;
+    display: block;
+    padding: 0 .45rem;
+    line-height: 1;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    transition: color .3s;
+}
+
+ul.pagination li.page-item:first-child, ul.pagination li.page-item:last-child span{
+    color: #fff;
+}
+
+ul.pagination li.page-item:not(:first-child){
+    border-left: 2px solid #d2d2d2;
+}
+
+ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
+    font-size: 19px;
+}
