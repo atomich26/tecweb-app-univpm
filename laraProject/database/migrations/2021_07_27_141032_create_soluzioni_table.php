@@ -18,7 +18,7 @@ class CreateSoluzioniTable extends Migration
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('malfunzionamentoID');
             $table->foreign('malfunzionamentoID')->references('ID')->on('malfunzionamenti')->onDelete('cascade');
-            $table->string('descrizione', Config::get('strings.soluzione.descrizione'));
+            $table->text('descrizione', Config::get('strings.soluzione.descrizione'));
             $table->timestamps();
         });
     }
