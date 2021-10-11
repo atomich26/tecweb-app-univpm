@@ -1,6 +1,3 @@
-@php
-use App\Models\Enums\Categories;
-@endphp
 {{  Form::open(array('route'=>'prodotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
 
 <h2>Inserimento Prodotto</h2>
@@ -33,7 +30,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
-    {{Form::select('categoriaID', Categories::CATEGORIES)}}
+    {{Form::select('categoriaID', Categorie::pluck('nome', 'ID'))}}
 
     </div>
     <br>

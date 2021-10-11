@@ -33,7 +33,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
-    {{Form::select('categoriaID',Categories::CATEGORIES, $product->categoriaID)}}
+    {{Form::select('categoriaID', Categorie::pluck('nome', 'ID'))}}
 
     </div>
     <br>
