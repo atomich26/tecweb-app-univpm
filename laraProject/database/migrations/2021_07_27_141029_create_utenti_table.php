@@ -16,12 +16,12 @@ class CreateUtentiTable extends Migration
     {
         Schema::create('utenti', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('nome', Config::get('strings.utente.nome'))->nullable();
-            $table->string('cognome', Config::get('strings.utente.cognome'))->nullable();
+            $table->string('nome', config('strings.utente.nome'))->nullable();
+            $table->string('cognome', config('strings.utente.cognome'))->nullable();
             $table->timestamp('data_nascita')->nullable();
             $table->string('email')->unique();
-            $table->string('telefono', Config::get('strings.global.telefono'))->unique()->nullable();
-            $table->string('username', Config::get('strings.utente.username'))->unique();
+            $table->string('telefono', config('strings.global.telefono'))->unique()->nullable();
+            $table->string('username', config('strings.utente.username'))->unique();
             $table->string('password');
             $table->set('role', ['tecnico', 'staff', 'admin'])->default('tecnico');
             $table->unsignedBigInteger('centroID')->nullable();

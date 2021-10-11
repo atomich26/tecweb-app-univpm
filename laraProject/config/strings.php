@@ -7,6 +7,10 @@ return [
         'telefono' => 10
     ],
 
+    'categoria' => [
+        'descrizione' => 500,
+    ],
+
     'faq' => [
         'domanda' => 150,
         'risposta' => 350
