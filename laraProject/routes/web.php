@@ -13,9 +13,9 @@
 
 // Rotte al PublicController;
 
-Route::get('/', function(){
-    return redirect()->route('catalogo.view');
-});
+Route::redirect('/', 'catalogo');
+
+Route::redirect('home', 'catalogo', 302);
 
 Route::get('catalogo','PublicController@viewCatalogo')->name('catalogo.view');
 
