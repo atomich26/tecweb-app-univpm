@@ -29,7 +29,7 @@ use App\Traits\Malfunzionamenti;
 
 class AdminController extends Controller
 {
-    use Malfunzionamenti;
+  use Malfunzionamenti;
     
     public function __construct(){
         $this->middleware('can:isAdmin');
@@ -296,74 +296,7 @@ class AdminController extends Controller
         return redirect()->route('catalogo');
 
     }
-
-    //funzioni dedicate ai malfunzionamenti e soluzioni
-
-    public function insertMalfunzionamento($productID)
-    {   
-        $product = Prodotto::find($productID);
-        return view ('admin.insert-malfunzionamento')->with('product', $product);
-      
-    }
-
-    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
-        $product = Prodotto::find($productID);
-        $error = new Malfunzionamento;
-        $error->prodottoID = $product->ID;
-        $error->descrizione = $request->descrizione;
-        $error->save();
-
-        return view('public.prodotto')->with('prodotto', $product);
-    }
-
-    public function modifyMalfunzionamento($productID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
-        if(!($malfunzionamento->prodottoID == $product->ID)){
-            abort(404);
-        }
-        else
-        return view ('admin.modify-malfunzionamento')   ->with('product', $product)
-                                                        ->with('malfunzionamento', $malfunzionamento);
-    }
-
-    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
-        $error = Malfunzionamento::find($malfunzionamentoID);
-        $error->descrizione = $request->descrizione;
-        $productID = $error->prodottoID;
-        $error->save();
-        return redirect()->route('prodotto',['productID'=>$productID]);
-    }
-
-    public function deleteMalfunzionamento($malfunzionamentoID){
-        $error = Malfunzionamento::find($malfunzionamentoID);
-        $product = $error->prodottoID;
-        $error->delete();
-        return redirect()->route('prodotto',['productID'=>$productID]);
-    }
-
-    public function insertSoluzione($productID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
-        if(!($malfunzionamento->prodottoID == $product->ID)){
-            abort(404);
-        }
-        else
-        return view ('admin.insert-soluzione')   ->with('product', $product)
-                                                        ->with('malfunzionamento', $malfunzionamento);
-
-    }
-
-    public function saveSoluzione(SoluzioneRequest $request, $productID, $malfunzionamentoID){
         
-        $soluzione = new Soluzione;
-        $soluzione->descrizione = $request->descrizione;
-        $soluzione->malfunzionamentoID = $malfunzionamentoID;
-
-        $soluzione->save();
-        return redirect()->route('prodotto',['productID'=>$productID]);
-    }
-
     //funzioni dedicate ai centri
 
     public function viewCentriAssistenzaTable(){

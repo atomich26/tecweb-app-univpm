@@ -111,7 +111,7 @@ Route::prefix('admin')->group(function () {
 
     });
 
-    Route::middleware('can:editMalfunzionamenti, productID')->group(function(){
+    Route::middleware('can:editMalfunzionamenti')->group(function(){
 
         Route::get('/catalogo/{productID}/inserisciMalfunzionamento', 'AdminController@insertMalfunzionamento')->name('insertMalfunzionamento');
 
@@ -130,6 +130,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/soluzione/{soluzioneID}/modify', 'AdminController@modifySoluzione')->name('modifySoluzione');
 
         Route::put('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/soluzione/{soluzioneID}/modify', 'AdminController@updateSoluzione')->name('modifySoluzione.update');
+
+        Route::delete('/catalogo/{productID}/malfunzionamento/{malfunzionamentoID}/soluzione/{soluzioneID}', 'AdminController@deleteSoluzione')->name('deleteSoluzione');
         
    // Route::middleware('can:isAdmin', 'can:editMalfunzionamenti')->group(function(){
         

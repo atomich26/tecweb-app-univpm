@@ -1,3 +1,5 @@
+
+
 @extends('layouts.public', ['title' => $prodotto->nome . " - " . $prodotto->modello])
 
 @section('content')
@@ -41,6 +43,38 @@
     <div id="note-uso-prodotto" class="product-text">
         <h3>Note di buon uso:</h3>
         @include('helpers.product-content-list', ['stringToSplit' => $prodotto->note_uso])
+    </div>
+    
+    <div id="malfunzionamento-prodotto" class="product-text">
+    @if(Auth::check())
+        <h3>Malfunzionamenti Riportati:</h3>
+        @if(isset($prodotto->malfunzionamenti))
+        <ul id="malfunzionamento">
+        @foreach($prodotto->malfunzionamenti as $malfunzionamento)
+            <li> {{$malfunzionamento->descrizione}}
+
+                @if(isset($malfunzionamento->soluzioni))
+                <ul id="soluzioni">
+                    @foreach ($malfunzionamento->soluzioni as $soluzione)
+                    <li>
+                    {{$soluzione->descrizione}}
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+            </li>
+        @endforeach
+        </ul>
+
+        @endif
+   
+    <br>
+    <br>
+    @if(isset($prodotto->staff->email))
+    <h3>Ancora problemi? <a href="mailTo:{!!$prodotto->staff->email!!}">Contatta il nostro esperto</a></h3>
+    @endif
+    @endif
+    </div>
     </div>
 </div>
 

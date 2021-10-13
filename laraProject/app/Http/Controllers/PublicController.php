@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Prodotto;
+use app\models\resources\Malfunzionamento;
+use app\models\resources\Soluzione;
 use App\Http\Requests\GetProductRequest;
 
 class PublicController extends Controller
