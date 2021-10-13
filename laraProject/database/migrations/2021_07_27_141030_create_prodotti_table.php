@@ -16,14 +16,14 @@ class CreateProdottiTable extends Migration
     {
         Schema::create('prodotti', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('nome', Config::get('strings.prodotto.nome'));
-            $table->string('modello', Config::get('strings.prodotto.modello'))->unique();
+            $table->string('nome', config('strings.prodotto.nome'));
+            $table->string('modello', config('strings.prodotto.modello'))->unique();
             $table->unsignedBigInteger('categoriaID');
             $table->foreign('categoriaID')->references('ID')->on('categorie');
-            $table->mediumText('descrizione', Config::get('strings.prodotto.descrizione'));
-            $table->mediumText('specifiche', Config::get('strings.prodotto.specifiche'));
-            $table->mediumText('guida_installazione', Config::get('strings.prodotto.guida_installazione'))->nullable();
-            $table->mediumText('note_uso', Config::get('strings.prodotto.note_uso'))->nullable();
+            $table->mediumText('descrizione');
+            $table->mediumText('specifiche');
+            $table->mediumText('guida_installazione')->nullable();
+            $table->mediumText('note_uso')->nullable();
             $table->string('file_img')->nullable();
             $table->unsignedBigInteger('utenteID')->nullable();
             $table->foreign('utenteID')->references('ID')->on('utenti')->onDelete('set null');

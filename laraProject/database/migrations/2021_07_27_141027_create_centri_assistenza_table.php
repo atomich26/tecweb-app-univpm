@@ -16,14 +16,14 @@ class CreateCentriAssistenzaTable extends Migration
     {
         Schema::create('centri_assistenza', function (Blueprint $table) {
             $table->bigIncrements('ID')->index();
-            $table->string('ragione_sociale', Config::get('strings.centri_assistenza.ragione_sociale'))->unique();
-            $table->string('telefono', Config::get('strings.global.telefono'))->unique();
+            $table->string('ragione_sociale', config('strings.centri_assistenza.ragione_sociale'))->unique();
+            $table->string('telefono', config('strings.global.telefono'))->unique();
             $table->string('email')->unique();
-            $table->string('sito_web', Config::get('strings.centri_assistenza.sito_web'))->nullable();
-            $table->text('descrizione', Config::get('strings.centro_assistenza.descrizione'))->nullable();
-            $table->string('via', Config::get('strings.centro_assistenza.via'));
-            $table->string('città', Config::get('strings.centro_assistenza.città'));
-            $table->string('cap', Config::get('strings.centro_assistenza.cap'));
+            $table->string('sito_web', config('strings.centri_assistenza.sito_web'))->nullable();
+            $table->text('descrizione', config('strings.centro_assistenza.descrizione'))->nullable();
+            $table->string('via', config('strings.centro_assistenza.via'));
+            $table->string('città', config('strings.centro_assistenza.città'));
+            $table->string('cap', config('strings.centro_assistenza.cap'));
             $table->timestamps();
         });
     }

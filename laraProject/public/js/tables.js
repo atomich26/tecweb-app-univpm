@@ -15,10 +15,10 @@ function enableBulkAction() {
     
     if (selectedRows.length > 0) {
         tbody.classList.add('hide-actions');
-        document.querySelector('#bulkActionBtn').style.display = "block";
+        $('#bulkActionBtn').css('display', 'block');
     }
     else{
-        document.querySelector('#bulkActionBtn').style.display = "none";
+        $('#bulkActionBtn').css('display', 'none');
         tbody.classList.remove('hide-actions');
     }
 }

@@ -20,10 +20,10 @@ class CentriAssistenzaTable extends AdminTable{
             'edit'    => ['name' => 'centro.modify'],
             'destroy' => ['name' => 'centro.delete'],
             'bulk-destroy' => ['name' => 'centri.bulk-delete']
-        ])->title('Gestione Centri Assistenza')
+        ])->title('Gestione centri assistenza')
         ->destroyConfirmationHtmlAttributes(function (CentroAssistenza $centro) {
             return [
-                'data-confirm' => 'Sei sicuro di voler eliminare il centro assistenza' . $centro->ragione_sociale . '?',
+                'data-confirm' => 'Sei sicuro di voler eliminare il centro assistenza ' . $centro->ragione_sociale . '?',
             ];
         })->rowsSelection();
 
