@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']],function(){
     Route::get('gestione-prodotti', 'AdminController@viewProdottiTable')->name('prodotti.table');
     Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
     Route::post('inserisci-prodotto', 'AdminController@storeProdotto')->name('prodotto.store');
-    Route::get('modifica-prodotto/{prodottoID}', 'AdminController@modifyProdottoView')->name('prodotto.modify');
+    Route::get('modifica-prodotto/{prodottoID}', 'AdminController@modifyProdotto')->name('prodotto.modify');
     Route::put('aggiorna-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
     Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('prodotti.bulk-delete');

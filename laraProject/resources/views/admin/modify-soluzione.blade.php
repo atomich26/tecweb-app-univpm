@@ -3,6 +3,6 @@
 @section('content')
     @include('forms.modify-soluzione')
 
-    <a href = "{{route('prodotti.table')}}"> Torna alla Tabelladei Prodotti</a>
+    <a href = "{{route('prodotti.table')}}"> Torna alla Tabella dei Prodotti</a>
 @endsection
 

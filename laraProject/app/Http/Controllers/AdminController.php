@@ -111,7 +111,7 @@ class AdminController extends Controller
             $user->centroID = NULL;
         }
         $user->save();
-        return redirect()->route('prodotti.table');
+        return redirect()->route('utenti.table');
 
 
     }
@@ -272,7 +272,7 @@ class AdminController extends Controller
 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $file.getClientOriginalName();
+            $imageName = $file->getClientOriginalName();
         }
         else
             $imageName = NULL;
@@ -284,7 +284,7 @@ class AdminController extends Controller
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('catalogo')
+        return redirect()->route('prodotti.table')
             ->with('message', 'validation.form-messages.update.prodotto')
             ->with('alertType', 'successful');
     }
@@ -297,7 +297,16 @@ class AdminController extends Controller
         return redirect()->route('prodotti.table');
 
     }
-        
+    public function bulkDeleteProdotti(Request $request){ 
+        if(!is_null($request->items) && strlen($request->items) > 0){
+            $prodotti = explode(',', $request->items, 10);
+            foreach($prodotti as $prodottiID){
+                $this->deleteProdotto($prodottiID);
+            }
+        }
+        return back();
+
+    }    
     //funzioni dedicate ai centri
 
     public function viewCentriAssistenzaTable(){

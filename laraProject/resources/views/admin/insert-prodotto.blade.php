@@ -4,6 +4,6 @@
     @include('forms.insert-prodotto')
     <br>
     <br>
-    <a href = "{{route('centri.table')}}"> Torna alla Tabella Centri Assistenza</a>
+    <a href = "{{route('prodotti.table')}}"> Torna alla Tabella Prodotti</a>
 @endsection
 
