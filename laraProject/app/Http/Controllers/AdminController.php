@@ -74,7 +74,7 @@ class AdminController extends Controller
             $user->centroID = $request->centroID;
         }
         $user->save();
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
     }
 
 
@@ -111,23 +111,23 @@ class AdminController extends Controller
             $user->centroID = NULL;
         }
         $user->save();
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
 
 
     }
 
     public function deleteUtente($utenteID){
-        $user = User::findOrFail($utenteID);
+        $user = User::find($utenteID);
 
-        if(!$user->checkRole('admin')){
+        if($user->checkRole('admin')){
             return back()->with('error', "Non è consentito eliminare un amministratore!");
         }
-        else if($user->checkRole('staff'))
-
+        else if($user->checkRole('staff')){
             return back()->with('error', 'kokokok');
+        }
         Storage::delete('/public/images/profiles/' . $user->file_img);
-        $user->delete($userID);
-        User::destroy($userID);
+        $user->delete($utenteID);
+       // User::destroy($userID);
         return back(); 
     }
 
@@ -255,7 +255,7 @@ class AdminController extends Controller
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
     }
 
     public function modifyProdotto($productID){
@@ -291,9 +291,10 @@ class AdminController extends Controller
 
     public function deleteProdotto($productID){ 
         $product = Prodotto::find($productID);
+        Storage::delete('/public/images/products/' . $product->file_img);
         $product->delete($productID);
 
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
 
     }
         
@@ -321,13 +322,13 @@ class AdminController extends Controller
 
         $center->save();
 
-        return redirect()->route('catalogo');
+        return redirect()->route('centri.table');
 
     }
 
     public function modifyCentro($centerID){
         $center=CentroAssistenza::find($centerID);
-        return view('admin.modify-centro')->with('center', $center);
+        return view('admin.modify-centro')->with('centro.modify', $center);
     }
 
     public function updateCentro(CenterRequest $request, $centerID){
@@ -342,7 +343,7 @@ class AdminController extends Controller
         $center->cap = $request->cap;
         $center->save();
 
-        return redirect()->route('catalogo');
+        return redirect()->route('centri.table');
 
     }
 
@@ -350,7 +351,7 @@ class AdminController extends Controller
         $center = CentroAssistenza::find($centerID);
         $center->delete($centerID);
 
-        return redirect()->return('catalogo');
+        return redirect()->return('centri.table');
     }
 
 }
