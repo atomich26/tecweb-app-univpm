@@ -7,7 +7,7 @@
 
     @include('forms.insert-faq')
 
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
+    <a href = "{{route('faq.view')}}"> Torna alla Tabella FAQ</a>
 @endsection
 
 @section('js-scripts')

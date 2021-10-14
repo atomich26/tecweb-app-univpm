@@ -4,5 +4,5 @@
     @include('forms.modify-centro')
     <br>
     <br>
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
+    <a href = "{{route('centri.table')}}"> Torna alla Tabella Centri Assistenza</a>
 @endsection

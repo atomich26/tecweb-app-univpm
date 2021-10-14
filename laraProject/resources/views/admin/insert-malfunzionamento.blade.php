@@ -3,6 +3,6 @@
 @section('content')
     @include('forms.insert-malfunzionamento')
 
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
+    <a href = "{{route('prodotti.table')}}"> Torna alla Tabella Prodotti</a>
 @endsection
 

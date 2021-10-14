@@ -5,6 +5,6 @@
     <br>
    
     <br>
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
+    <a href = "{{route('utenti.table')}}"> Torna alla Tabella Utenti</a>
 @endsection
 
