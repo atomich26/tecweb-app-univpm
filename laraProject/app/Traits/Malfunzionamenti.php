@@ -4,6 +4,17 @@
  * Il trait Malfunzionamenti definisce le funzioni che gestiscono le CRUD 
  * per i malfunzionamenti e le soluzioni
  */
+namespace App\Traits;
+
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Resources\Malfunzionamento;
+use App\Models\Resources\Soluzione;
+use App\Models\Resources\Prodotto;
+use App\Http\Requests\MalfunzionamentoRequest;
+use App\Http\Requests\SoluzioneRequest;
+
 trait Malfunzionamenti
 {
     public function insertMalfunzionamento($productID)
