@@ -29,10 +29,10 @@ class CenterRequest extends FormRequest
     {
         return [
 
-            'ragione_sociale'=>'required|unique:centri_assistenza,ragione_sociale,'.$this->ID.'|max:' . Config::get('strings.centro_assistenza.ragione_sociale'),
-            'telefono'=>'required|unique:centri_assistenza,telefono,'.$this->ID.'|digits:' . Config::get('strings.global.telefono'),
-            'email'=>'required|unique:centri_assistenza,email,'.$this->ID.'|email|max:' . Config::get('strings.global.default'),
-            'sito_web'=>'max:50|unique:centri_assistenza,sito_web,'.$this->ID.'|nullable|max:' . Config::get('strings.centro_assistenza.sito_web'),
+            'ragione_sociale'=>'required|unique:centri_assistenza,ragione_sociale,'.$this->route('centroID').'|max:' . Config::get('strings.centro_assistenza.ragione_sociale'),
+            'telefono'=>'required|unique:centri_assistenza,telefono,'.$this->route('centroID').'|digits:' . Config::get('strings.global.telefono'),
+            'email'=>'required|unique:centri_assistenza,email,'.$this->route('centroID').'|email|max:' . Config::get('strings.global.default'),
+            'sito_web'=>'max:50|unique:centri_assistenza,sito_web,'.$this->route('centroID').'|nullable|max:' . Config::get('strings.centro_assistenza.sito_web'),
             'descrizione'=>'max:' . Config::get('strings.centro_assistenza.descrizione'),
             'via'=>'required|string|max:' . Config::get('strings.centro_assistenza.via'),
             'città'=>'required|string|max:' . Config::get('strings.centro_assistenza.città'),

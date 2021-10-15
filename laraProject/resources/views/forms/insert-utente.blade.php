@@ -117,7 +117,7 @@
 
         <div id="centroID">
             {{  Form::label ('centroID', 'Centro Assistenza') }}
-            {{  Form::select ('centroID', $centri, null, ['placeholder' => 'Electrohm Centro'])}}
+            {{  Form::select ('centroID', $centri, null, ['placeholder' => '0 - Nessun Centro'])}}
         </div>
 
 

@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'nome'=>'required|max:'. Config::get('strings.prodotto.nome'),
-            'modello'=>'required|unique:prodotti,modello,'. $this->ID . '|max:' . Config::get('strings.prodotto.modello'),
+            'modello'=>'required|unique:prodotti,modello,'. $this->route('prodottoID') . '|max:' . Config::get('strings.prodotto.modello'),
             'descrizione'=>'required|max:' . Config::get('strings.prodotto.descrizione'),
             'specifiche'=>'required|max:' . Config::get('strings.prodotto.specifiche'),
             'guida_installazione'=>'required|max:' . Config::get('strings.prodotto.guida_installazione'),

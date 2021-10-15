@@ -25,14 +25,14 @@ class userRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required|unique:utenti,username,'.$this->ID.'|max:' . Config::get('strings.utente.username'),
+            'username'=>'required|unique:utenti,username,'.$this->route('utenteID').'|max:' . Config::get('strings.utente.username'),
             'password'=>'required|confirmed|max:50',
             'nome'=>'required|string|max:' . Config::get('strings.utente.nome'),
             'cognome'=>'required|string|max:' . Config::get('strings.utente.cognome'),
-            'file_img'=>'mimes:jpeg,png,jpg|max:4092',
+            'file_img'=>'mimes:jpeg,png,jpg|max:4092|nullable',
             'data_nascita'=>'required|date|before:today',
-            'email'=>'required|unique:utenti,email,'.$this->ID.'|email|max:' . Config::get('strings.global.default'),
-            'telefono'=>'required|unique:utenti,telefono,'.$this->ID.'|digits:' . Config::get('strings.global.telefono'),
+            'email'=>'required|unique:utenti,email,'.$this->route('utenteID').'|email|max:' . Config::get('strings.global.default'),
+            'telefono'=>'required|unique:utenti,telefono,'.$this->route('utenteID').'|digits:' . Config::get('strings.global.telefono'),
         ];
     }
 }
