@@ -155,10 +155,10 @@ return [
             'bulk-delete' => 'Le faq selezionate sono state eliminate.',
         ],
         'prodotto' => [
-            'insert' => 'Il prodotto è stato aggiunto al catalogo.',
+            'insert' => 'Il prodotto con <b>ID :item </b>è stato aggiunto al catalogo.',
             'update' => 'Il prodotto selezionato è stato aggiornato.',
             'delete' => 'Il prodotto selezionato è stato eliminato.',
-            'not-exist' => 'Il prodotto richiesto non esiste.',
+            'not-exist' => 'Il prodotto richiesto con ID :item non esiste.',
             'bulk-delete' => 'I prodotti selezionati sono stati eliminati.',
         ], 
         'centro-assistenza' => [
