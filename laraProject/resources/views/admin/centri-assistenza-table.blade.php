@@ -1,4 +1,4 @@
-@extends('layouts.admin-table', ['title' => 'Gestione Centri Assistenza'])
+@extends('layouts.admin-table', ['title' => 'Gestione centri assistenza'])
 
 @section('content')
     {{ $table }}

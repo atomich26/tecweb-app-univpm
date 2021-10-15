@@ -9,25 +9,12 @@ function loadTable() {
         console.log('Tabella non trovata!');
 }
 
-function enableBulkAction() {
-    let selectedRows = document.querySelectorAll('input[type="checkbox"].selector:checked');
-    let tbody = document.querySelector('.table tbody');
-    
-    if (selectedRows.length > 0) {
-        tbody.classList.add('hide-actions');
-        $('#bulkActionBtn').css('display', 'block');
-    }
-    else{
-        $('#bulkActionBtn').css('display', 'none');
-        tbody.classList.remove('hide-actions');
-    }
-}
-
 function setRowsSelectorsEvent() {
+    let table = $('table.table');
     let rowsSelectors = document.querySelectorAll('input[type="checkbox"].selector');
     let selectAllToggle = document.querySelector('#selector-all');
 
-    if (typeof rowsSelectors == 'undefined' && typeof selectAllToggle == 'undefined')
+    if (typeof rowsSelectors == 'undefined' || typeof selectAllToggle == 'undefined')
         return;
     
     selectAllToggle.onchange = (e) => {
@@ -42,13 +29,38 @@ function setRowsSelectorsEvent() {
             enableBulkAction();
         });
     });
+
+    
+    function enableBulkAction() {
+        const isCheckedInputs = (item) => { return item.checked == true };
+        const isAllChecked = Array.from(rowsSelectors).every(isCheckedInputs);
+
+        if (isAllChecked) {
+            table.addClass('hide-actions');
+            selectAllToggle.indeterminate = !isAllChecked;
+            selectAllToggle.checked = isAllChecked;
+            return;
+        }
+
+        const isSomeChecked = Array.from(rowsSelectors).some(isCheckedInputs);
+        
+        if (isSomeChecked) {
+            table.addClass('hide-actions');
+            selectAllToggle.indeterminate = isSomeChecked;
+        }
+        else {
+            table.removeClass('hide-actions');
+            selectAllToggle.checked = isSomeChecked;
+            selectAllToggle.indeterminate = isSomeChecked;
+        }
+    }
 }
 
 function setBulkDeleteForm() {
     let deleteForm = document.querySelector('form#delete-selected-form');
     let inputForm = document.querySelector('form#delete-selected-form input[name="items"]');
     
-    if (typeof deleteForm == 'undefined' && typeof inputForm == 'undefined')
+    if (typeof deleteForm == 'undefined' || typeof inputForm == 'undefined')
         return;
     
     deleteForm.onsubmit = () => {

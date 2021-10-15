@@ -1,13 +1,7 @@
 @extends('layouts.forms', ['title' => 'Inserisci nuova FAQ'])
 
 @section('content')
-    @if(session('message'))
-        <h4 class="alert-message {{ session('alertType') ?? '' }}">{{ __(session('message')) ?? '' }}</h4>
-    @endif
-
     @include('forms.insert-faq')
-
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
 @endsection
 
 @section('js-scripts')
@@ -36,20 +30,12 @@
 	ClassicEditor.create( document.querySelector( 'textarea#risposta' ), {
 		toolbar: {
 			items: [
-				'heading',
-				'|',
 				'bold',
 				'italic',
 				'fontSize',
 				'fontBackgroundColor',
 				'fontColor',
 				'link',
-				'alignment',
-				'bulletedList',
-				'numberedList',
-				'|',
-				'outdent',
-				'indent',
 				'|',
 				'undo',
 				'redo',

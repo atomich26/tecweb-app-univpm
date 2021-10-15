@@ -1,7 +1,7 @@
 <nav id="navbar">
     <ul>
         <li>
-            <a href="{{ route('catalogo') }}">Catalogo</a>    
+            <a href="{{ route('catalogo.view') }}">Catalogo</a>    
         </li>
         <li>
             <a href="{{ route('centri-assistenza') }}">Centri assistenza</a>    

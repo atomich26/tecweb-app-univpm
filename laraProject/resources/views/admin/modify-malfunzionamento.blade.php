@@ -3,6 +3,6 @@
 @section('content')
     @include('forms.modify-malfunzionamento')
 
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
+    <a href = "{{route('catalogo.view')}}"> Torna alla Home</a>
 @endsection
 

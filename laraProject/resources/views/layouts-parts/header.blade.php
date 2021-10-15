@@ -34,7 +34,7 @@
         @can('isAdmin')
            
             @if($adminView)
-                <a class="button header-btn public-site-btn" href="{{ route('catalogo') }}"><i class="bi bi-arrow-up-right-square"></i>&nbsp;&nbsp;Vai al sito</a>
+                <a class="button header-btn public-site-btn" href="{{ route('catalogo.view') }}"><i class="bi bi-arrow-up-right-square"></i>&nbsp;&nbsp;Vai al sito</a>
             @else
                 <a class="button header-btn manage-btn" href="{{ route('admin.index') }}"><i class="bi bi-server"></i>&nbsp;&nbsp;Gestione dati</a>
             @endif

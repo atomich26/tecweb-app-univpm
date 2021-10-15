@@ -2,8 +2,6 @@
 
 @section('content')
     @include('forms.modify-faq')
-
-    <a href = "{{route('catalogo')}}"> Torna alla Home</a>
 @endsection
 
 @section('js-scripts')

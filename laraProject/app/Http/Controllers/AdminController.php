@@ -25,12 +25,14 @@ use App\Tables\ProdottiTable;
 use App\Tables\FaqTable;
 use App\Tables\UtentiTable;
 use App\Tables\CentriAssistenzaTable;
-use App\Traits\Malfunzionamenti;
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\CrudMalfunzionamenti;
+use App\Traits\CrudSoluzioni;
 
 class AdminController extends Controller
 {
-    use Malfunzionamenti;
-    
+    use CrudSoluzioni, CrudMalfunzionamenti;
+
     public function __construct(){
         $this->middleware('can:isAdmin');
     }
@@ -39,16 +41,21 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    //Funzioni CRUD utente
-
+    // Metodi per le CRUD degli utenti
     public function viewUtentiTable(){
         $table = new UtentiTable();
         return view('admin.utenti-table')->with('table', $table);
     }
 
     public function insertUtente(){
-        $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
-        return view ('admin.insert-utente')->with('centri', $centri);
+        $centriAssistenza = CentroAssistenza::all();
+        $centriMap = array();
+        
+        foreach($centriAssistenza as $centro){
+            $centriMap[$centro->ID] = $centro->ID . " - " . $centro->ragione_sociale;
+        }
+
+        return view ('admin.insert-utente')->with('centri', $centriMap);
     }
 
     public function saveUtente(UserRequest $request){
@@ -93,6 +100,7 @@ class AdminController extends Controller
         else{
             $imageName = $user->file_img;
         }
+
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->nome = $request->nome;
@@ -117,14 +125,17 @@ class AdminController extends Controller
     }
 
     public function deleteUtente($utenteID){
+
+        return back()->with('message',"Impossibile eliminare");
+
         $user = User::findOrFail($utenteID);
 
         if(!$user->checkRole('admin')){
-            return back()->with('error', "Non è consentito eliminare un amministratore!");
+            return back()->with(['alertType', 'message'], ['error', "Non è consentito eliminare un amministratore!"]);
         }
         else if($user->checkRole('staff'))
 
-            return back()->with('error', 'kokokok');
+            return back()->with(['alertType', 'message'], ['error', "Impossibile eliminare"]);
         Storage::delete('/public/images/profiles/' . $user->file_img);
         $user->delete($userID);
         User::destroy($userID);
@@ -132,98 +143,93 @@ class AdminController extends Controller
     }
 
     public function bulkDeleteUtenti(Request $request){        
-        if(!is_null($request->items) && strlen($request->items) > 0){
-            $utenti = explode(',', $request->items, 10);
-            foreach($utenti as $utenteID){
-                $this->deleteUtente($utenteID);
-            }
-        }
-        return back();
+        $this->bulkDeleteItems($request->items, new User);
+        return response()->actionResponse('utenti.table', 'successful', 'validation.action-messages.utente.bulk-delete');
     }
 
-    //Funzioni dedicate alle FAQ
+    // Metodi per le CRUD delle faq       
 
     public function viewFaqTable(){
         $table = new FaqTable();
         return view('admin.faq-table')->with('table', $table);
     }
 
-    public function insertFAQ(){
+    public function insertFAQView(){
         return view ('admin.insert-faq');
     }
 
     public function storeFAQ(FAQRequest $request, $faqID = null){
-        $callback = $request->query('callback');
-
+        $action = $request->query('action');
         $faq = Faq::find($faqID);
 
-        if(is_null($faq))
-            $faq = new FAQ;
-            /*return redirect()->route('faq.new')
-                ->with('message','validation.form-messages.not-exist.faq')
-                ->with('alertType', 'error');*/
+        if($request->isMethod('post')){
+            if(is_null($faq)){}
+            
+        }
 
         $faq->fill($request->validated());
-        $saved = $faq->save();
+        return $faq->save();
+       
 
-        if($saved){
-            if($callback == 'close'){
+        /*if($saved){
+            if($action == 'close'){
                 return redirect()->route('faq.table')
-                    ->with('message','validation.form-messages.insert.faq')
-                    ->with('alertType', 'successful');
+                    ->with('message','validation.action-messages.faq.insert')
+                    ->with('status', 'successful');
             }
-            else if($callback == 'new'){
+            else if($action == 'new'){
                 return redirect()->route('faq.new')
                     ->with('message','validation.form-messages.insert.faq')
-                    ->with('alertType', 'successful');
-            }
-            else{
-                $currentFaq = Faq::orderByDesc('created_at')->first();
-
-                return redirect()->route('faq.modify', ['faqID' => $currentFaq->ID])
-                    ->with('message','validation.form-messages.insert.faq')
-                    ->with('alertType', 'successful');
+                    ->with('status', 'successful');
             }
         }
         else
-            return abort(500);
+            return redirect()->route('faq.table')->with('message', 'validation.form-messages.insert.');*/
     }
 
-    public function modifyFAQ($faqID){
+    public function modifyFAQView($faqID){
         $faq = Faq::find($faqID);
-
-        if(is_null($faq)){
-            return redirect()->route('faq.new')
-                ->with('message','validation.form-messages.not-exist.faq')
-                ->with('alertType', 'error');
-        }
-        else
+        
+        if(!is_null($faq))
             return view ('admin.modify-faq')->with('faq', $faq);
+        
+        return response()->actionResponse('faq.new', 'error', 'validation.form-messages.faq.not-exist');
     }
 
-    public function updateFAQ(FAQRequest $request, $faqID){
-        $faq = Faq::find($faqID);
-        $faq->fill($request->validated());
-        $faq->save();
+    public function updateFAQ(FAQRequest $request, $faqID){ 
+        if(is_null($faq))
+            return response()->actionResponse('faq.new', 'error', __('validation.action-messages.faq.not-exist'));
 
-        if(is_null($faq)){
-            return redirect()->route('faq.new')
-                ->with('message','validation.form-messages.not-exist.faq')
-                ->with('alertType', 'error');
-        }
-        else{
-            return redirect()->route('faq')->with('message','validation.form-messages.update.faq')
-            ->with('alertType', 'successful');
-        }
+        $this->storeFAQ($request, $faqID);
+
+        return response()->actionResponse('faq.new', 'successful', __('validation.action-messages.faq.update'));
     }
 
     public function deleteFAQ($faqID){
-        Faq::find($faqID)->delete();
+        Faq::findOrFail($faqID)->delete();
 
-        return redirect()->return('faq');
+        return response()->actionResponse('faq.table', 'successful', __('validation.action-messages.faq.delete'));
     }
 
-    //funzioni dedicate ai prodotti
+    public function bulkDeleteFaq(Request $request){
+        $perfomedAction = $this->bulkDeleteItems($request->items, new Faq());
+        
+        if($perfomedAction)
+            return response()->actionResponse('faq.table', 'successful', __('validation.action-messages.faq.bulk-delete'));
+        else
+            return response()->actionResponse('faq.table', 'error', __('Alcuni elementi non sono stati eliminati.'));
+    }
+
+    public function bulkDeleteItems(String $itemsID, Model $model){
+        if(!is_null($itemsID) && strlen($itemsID) > 0){
+            $items = explode(',', $itemsID, 10);
+
+            foreach($items as $itemID){
+                $model::find($itemID)->delete();
+            }
+        }
+    }
+    // Metodi per le CRUD dei prodotti
 
     public function viewProdottiTable(){
         $table = new ProdottiTable();
@@ -231,7 +237,7 @@ class AdminController extends Controller
     }
 
     public function insertProdotto(){
-        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
+        $users =  User::where('role','staff')->pluck('username','ID');
         return view ('admin.insert-prodotto')->with('users', $users);
 
     }
@@ -258,11 +264,14 @@ class AdminController extends Controller
         return redirect()->route('catalogo');
     }
 
-    public function modifyProdotto($productID){
-        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
-        $product = Prodotto::find($productID);
-        return view('admin.modify-prodotto')->with('product',$product)->with('users', $users);
+    public function modifyProdottoView($prodottoID){
+        $prodotto = Prodotto::find($prodottoID);
+        
+        if(!$prodotto)
+            return response()->actionResponse('prodotto.new', 'error', 'validation.form-messages.prodotto.not-exist');
 
+        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
+        return view('admin.modify-prodotto')->with('product', $prodotto)->with('users', $users);
     }
 
     public function updateProdotto(ProductRequest $request, $prodottoID){
@@ -289,79 +298,46 @@ class AdminController extends Controller
             ->with('alertType', 'successful');
     }
 
-    public function deleteProdotto($productID){ 
-        $product = Prodotto::find($productID);
-        $product->delete($productID);
-
-        return redirect()->route('catalogo');
-
-    }
-
-    //funzioni dedicate ai malfunzionamenti e soluzioni
-
-    public function insertMalfunzionamento($productID)
-    {   
-        $product = Prodotto::find($productID);
-        return view ('admin.insert-malfunzionamento')->with('product', $product);
-      
-    }
-
-    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
-        $product = Prodotto::find($productID);
-        $error = new Malfunzionamento;
-        $error->prodottoID = $product->ID;
-        $error->descrizione = $request->descrizione;
-        $error->save();
-
-        return view('public.prodotto')->with('prodotto', $product);
-    }
-
-    public function modifyMalfunzionamento($productID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
-        if(!($malfunzionamento->prodottoID == $product->ID)){
-            abort(404);
+    public function deleteProdotto($prodottoID){ 
+        try {
+            $prodotto = Prodotto::findOrFail($prodottoID);
+        } catch (\Throwable $th) {
+            return response()->actionResponse('prodotti.table', 
+            'error', __('validation.action-messages.prodotto.not-exist',['item' => $prodottoID]));
         }
-        else
-        return view ('admin.modify-malfunzionamento')   ->with('product', $product)
-                                                        ->with('malfunzionamento', $malfunzionamento);
-    }
-
-    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
-        $error = Malfunzionamento::find($malfunzionamentoID);
-        $error->descrizione = $request->descrizione;
-        $productID = $error->prodottoID;
-        $error->save();
-        return redirect()->route('prodotto',['productID'=>$productID]);
-    }
-
-    public function deleteMalfunzionamento($malfunzionamentoID){
-        $error = Malfunzionamento::find($malfunzionamentoID);
-        $product = $error->prodottoID;
-        $error->delete();
-        return redirect()->route('prodotto',['productID'=>$productID]);
-    }
-
-    public function insertSoluzione($productID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
-        if(!($malfunzionamento->prodottoID == $product->ID)){
-            abort(404);
-        }
-        else
-        return view ('admin.insert-soluzione')   ->with('product', $product)
-                                                        ->with('malfunzionamento', $malfunzionamento);
-
-    }
-
-    public function saveSoluzione(SoluzioneRequest $request, $productID, $malfunzionamentoID){
         
-        $soluzione = new Soluzione;
-        $soluzione->descrizione = $request->descrizione;
-        $soluzione->malfunzionamentoID = $malfunzionamentoID;
+        if(!is_null($prodotto->file_img) && Storage::exists('images/products/'. $prodotto->file_img)){
+            error_log('_>'. $prodotto->file_img);
+            Storage::delete('images/products/'. $prodotto->file_img);
+        }
 
-        $soluzione->save();
-        return redirect()->route('prodotto',['productID'=>$productID]);
+        $prodotto->delete($prodottoID);
+
+        return response()->actionResponse('prodotti.table', 'successful', __('validation.action-messages.prodotto.delete', ['item' => $prodotto->ID ]));
+    }
+
+    public function assignProdottiUtente(Request $request){
+        $user = User::findOrFail($request->utenteID);
+
+        if(!$user->checkRole('staff'))
+            return response()->json([
+                'status' => 'warning', 
+                'message' => "L'utente <b>". $user->username . "</b> non è un membro dello staff."
+            ], 400);
+        
+        foreach ($request->prodotti as $prodottoID) {
+            $prodotto = Prodotto::findOrFail($prodottoID);
+            
+            if($prodotto->utenteID != $user->ID){
+                $prodotto->utenteID = $user->ID;
+                $prodotto->save();
+            }
+        }
+
+        return response()->json(
+            ['status' => 'successful', 
+            'message' => "Assegnazione prodotti all'utente <b> " . $user->username . "</b> completata!"
+        ], 200);
     }
 
     //funzioni dedicate ai centri

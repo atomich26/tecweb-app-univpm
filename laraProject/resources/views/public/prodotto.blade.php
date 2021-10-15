@@ -1,7 +1,6 @@
-@extends('layouts.public', ['title' => $prodotto->nome . " - " . $prodotto->modello])
+@extends('layouts.public', ['title' => $prodotto->nome . " - " . $prodotto->modello, 'headerPage' => false])
 
 @section('content')
-
 <div class="header-product-page">
     <div class="product-overview container">
         <h1 class="product-name">{{ $prodotto->nome ?? 'Prodotto senza nome'}}</h1>
@@ -18,7 +17,7 @@
             <div class="product-buttons">
 
                 @can('isAdmin')
-                <a href="{{ route('prodotto.modify', ['productID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
+                <a href="{{ route('prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
                 @endcan
 
                 <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Ricerca e risoluzione dei problemi</a>

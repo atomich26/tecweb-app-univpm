@@ -1,5 +1,8 @@
-@extends('layouts.public', ['title' => 'Centri assistenza esterni'])
+@extends('layouts.public', ['title' => 'Centri assistenza', 'headerPage' => true])
 
 @section('content')
-    <h1>Centri assistenza</h1>
+@php
+$imgCover = 'centri_cover.jpg';
+$description = 'Puoi contare su una fitta rete di centri d\'assistenza certificati Electrohm Professional pronti per ogni tuo problema.'
+@endphp
 @endsection

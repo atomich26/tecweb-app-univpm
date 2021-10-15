@@ -17,10 +17,10 @@ class ProdottiTable extends AdminTable{
 
     protected function build(){
 
-        $this->model(Prodotto::class)->routes([
+        $this->model(Prodotto::class)->theadTemplate('prodotti-table.thead')->routes([
             'index'   => ['name' => 'prodotti.table'],
             'create'  => ['name' => 'prodotto.new'],
-            'show'    => ['name' => 'prodotto'],
+            'show'    => ['name' => 'prodotto.view'],
             'edit'    => ['name' => 'prodotto.modify'],
             'destroy' => ['name' => 'prodotto.delete'],
             'bulk-destroy' => ['name' => 'prodotti.bulk-delete']

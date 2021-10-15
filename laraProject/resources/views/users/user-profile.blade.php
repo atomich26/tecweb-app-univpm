@@ -1,4 +1,4 @@
-@extends('layouts.public', ['title' => $user->nome . " " . $user->cognome ])
+@extends('layouts.public', ['title' => $user->nome . " " . $user->cognome, 'headerPage' => false])
 
 @section('content')
     <div class="user-profile-container container">

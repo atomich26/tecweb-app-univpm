@@ -32,9 +32,8 @@
         </div>
 
     <div>
-        {{  Form::submit ('Salva', ['formaction' => route('faq.store')])}}
-        {{  Form::submit ('Salva e chiudi', ['formaction' => route('faq.store', ['callback' => 'close'])]) }}
-        {{  Form::submit ('Salva e nuova faq', ['formaction' => route('faq.store', ['callback' => 'new'])]) }}
+        {{  Form::submit ('Salva e chiudi', ['formaction' => route('faq.store', ['action' => 'close'])]) }}
+        {{  Form::submit ('Salva e nuovo', ['formaction' => route('faq.store', ['action' => 'new'])]) }}
         {{  Form::reset ('Azzera')}}
     </div>
     {{Form::close()}}

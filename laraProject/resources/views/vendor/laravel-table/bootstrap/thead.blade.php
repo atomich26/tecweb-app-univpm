@@ -10,7 +10,7 @@
                 @if($table->rowsNumberSelectionActivation || ! $table->searchableColumns->isEmpty())
                     {{-- searching --}}
                     @if(count($table->searchableColumns))
-                        <div class="flex-fill px-3 searching">
+                        <div class="searching thead-widget">
                             <form role="form" method="GET" action="{{ $table->route('index') }}">
                                 <input type="hidden" name="{{ $table->rowsField }}" value="{{ $table->request->get($table->rowsField) }}">
                                 <input type="hidden" name="{{ $table->sortByField }}" value="{{ $table->request->get($table->sortByField) }}">
@@ -19,11 +19,6 @@
                                     <input type="hidden" name="{{ $appendedKey }}" value="{{ $appendedValue }}">
                                 @endforeach
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-secondary">
-                                            {!! config('laravel-table.icon.search') !!}
-                                        </span>
-                                    </div>
                                     <input class="form-control"
                                            type="text"
                                            name="{{ $table->searchField }}"
@@ -45,11 +40,9 @@
                                         </div>
                                     @else
                                         <div class="input-group-append">
-                                            <span class="input-group-text py-0">
-                                                <button class="btn btn-link p-0 text-primary" type="submit">
-                                                    {!! config('laravel-table.icon.validate') !!}
-                                                </button>
-                                            </span>
+                                            <button class="button" type="submit">
+                                                {!! config('laravel-table.icon.search') !!}
+                                            </button>                                    
                                         </div>
                                     @endif
                                 </div>
@@ -58,7 +51,7 @@
                     @endif
                     {{-- rows number selection --}}
                     @if($table->rowsNumberSelectionActivation)
-                        <div class="px-1 rows-number-selection">
+                        <div class="rows-number-selection thead-widget">
                             <form role="form" method="GET" action="{{ $table->route('index') }}">
                                 <input type="hidden" name="{{ $table->searchField }}" value="{{ $table->request->get($table->searchField) }}">
                                 <input type="hidden" name="{{ $table->sortByField }}" value="{{ $table->request->get($table->sortByField) }}">
@@ -67,11 +60,6 @@
                                     <input type="hidden" name="{{ $appendedKey }}" value="{{ $appendedValue }}">
                                 @endforeach
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            {!! config('laravel-table.icon.rowsNumber') !!}
-                                        </span>
-                                    </div>
                                     <input class="form-control"
                                            type="number"
                                            name="{{ $table->rowsField }}"
@@ -82,8 +70,8 @@
                                            min="1">
                                     <div class="input-group-append">
                                         <div class="input-group-text py-0">
-                                            <button class="btn btn-link p-0 text-primary" type="submit">
-                                                {!! config('laravel-table.icon.validate') !!}
+                                            <button class="button" type="submit">
+                                                {!! config('laravel-table.icon.rowsNumber') !!}
                                             </button>
                                         </div>
                                     </div>
@@ -91,18 +79,19 @@
                             </form>
                         </div>
                     @endif
+                    @yield('selected-items-actions')
                     @if(array_key_exists('bulk-destroy', $table->routes))
-                        <div class="d-flex align-items-center px-1 creation-container">
+                        <div class="thead-widget bulkActionInput">
                             {{ Form::open(array('route'=> $table->routes['bulk-destroy']['name'],'method' => 'DELETE',
                                 'id'=>'delete-selected-form', 'data-confirm' => 'Sei sicuro di voler eliminare :items elementi?'))}}
                                 <input name="items" type="hidden" id="selectedRows" value="">
-                                {!! Form::submit('Elimina selezionati', ['class' => "button", 'id'=> "bulkActionBtn"]) !!}
+                                <button class="button bulkActionBtn" type="submit" value="Elimina selezionati">{!! config('laravel-table.icon.destroy') !!} Elimina selezionati</button>
                             {{ Form::close()}}
                         </div>
                     @endif
                     {{-- create button --}}
                     @if($table->isRouteDefined('create'))
-                        <div class="d-flex align-items-center px-1 creation-container">
+                        <div class="thead-widget">
                             <a href="{{ $table->route('create') }}"
                                class="button btn-create"
                                title="{{ __('laravel-table::laravel-table.create') }}">
@@ -119,7 +108,7 @@
     <tr{{ classTag($table->trClasses, 'columns-title') }}>
         {{-- selector rows --}}
         @if($table->rowsSelection->has('closure'))
-            <th>{!! Form::checkbox('select-all', '', false, ['id' => 'selector-all']) !!}</th>
+            <th class="text-center">{!! Form::checkbox('select-all', '', false, ['id' => 'selector-all']) !!}</th>
         @endif
         @foreach($table->columns as $column)
             <th{{ classTag($table->thClasses) }} scope="col">
@@ -151,7 +140,7 @@
             </th>
         @endforeach
         @if($table->isRouteDefined('show') || $table->isRouteDefined('edit') || $table->isRouteDefined('destroy'))
-            <th{{ classTag($table->thClasses) }} scope="col">
+            <th{{ classTag($table->thClasses,'text-right') }} scope="col">
                 @lang('laravel-table::laravel-table.actions')
             </th>
         @endif
