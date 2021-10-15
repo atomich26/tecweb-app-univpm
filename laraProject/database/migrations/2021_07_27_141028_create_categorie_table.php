@@ -17,8 +17,6 @@ class CreateCategorieTable extends Migration
         Schema::create('categorie', function(BluePrint $table){
             $table->bigIncrements('ID')->index();
             $table->string('nome', config('strings.global.nome'))->unique();
-            $table->string('descrizione', config('strings.categoria.descrizione'));
-            $table->string('file_img');
             $table->timestamps();
         });
     }
