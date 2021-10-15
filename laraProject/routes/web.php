@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,13 +22,15 @@ Route::get('catalogo','PublicController@viewCatalogo')->name('catalogo.view');
 
 Route::post('catalogo', 'PublicController@searchCatalogo')->name('catalogo.search');
 
+Route::get('/catalogo/{prodottoID}', function(Request $request){
+    return redirect()->route('catalogo.view', ['prodotto' => $request->prodottoID]);                             
+})->name('prodotto.view');
+
 Route::get('centri-assistenza','PublicController@viewCentriAssistenzaPage')->name('centri-assistenza');
 
 Route::view('legali','pages.legali')->name('legali');
 
 Route::get('faq','PublicController@viewFaqPage')->name('faq');
-
-Route::get('catalogo/{prodottoID}', 'PublicController@viewProdottoPage')->name('prodotto');
 
 // Rotte pagine statiche
 Route::view('chi-siamo','public.chi-siamo')->name('chi-siamo');
@@ -69,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']],function(){
     Route::get('gestione-prodotti', 'AdminController@viewProdottiTable')->name('prodotti.table');
     Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
     Route::post('inserisci-prodotto', 'AdminController@storeProdotto')->name('prodotto.store');
+    Route::post('assegna-prodotti', 'AdminController@assignProdottiUtente')->name('prodotti.assign');
     Route::get('modifica-prodotto/{prodottoID}', 'AdminController@modifyProdottoView')->name('prodotto.modify');
     Route::put('aggiorna-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('prodotto.delete');
