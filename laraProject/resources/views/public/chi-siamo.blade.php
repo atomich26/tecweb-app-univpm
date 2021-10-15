@@ -1,6 +1,12 @@
-@extends('layouts.public', ['title' => 'Chi siamo', 'pageCover' => 'corporate_cover.jpg'])
+@extends('layouts.public', ['title' => 'Chi siamo', 'headerPage' => true])
 
-@section('static-content')
+@php
+    $imgCover = 'corporate_cover.jpg';
+    $description = 'Noi di Electrohm.'
+@endphp
+
+@section('content')
+<div class="container">
     <div id="chi-siamo" class="cit" style="margin-top:0px">
         <h2>Questi siamo noi</h2>
         <p>La nostra storia ha inizio nel 1955, nel periodo in cui gli elettrodomestici diventano oggetti indispensabili in ogni casa. Da allora siamo diventati il brand di elettrodomestici a libera installazione più richiesto d'Italia.
@@ -53,4 +59,5 @@
             Se sei interessato a questa opportunità puoi inviare la tua candidatura all'indirizzo <strong>email candidate@jobs.electrohm.com</strong>.
         </p>
     </div>
+</div>
 @endsection

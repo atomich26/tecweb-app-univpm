@@ -1,6 +1,12 @@
-@extends('layouts.public', ['title' => 'Informativa sulla privacy', 'pageCover' => 'privacy_cover.jpg'])
+@extends('layouts.public', ['title' => 'Informativa sulla privacy', 'headerPage' => true])
 
-@section('static-content')
+@php
+    $imgCover = 'privacy_cover.jpg';
+    $description = 'Consulta la nostra informativa sulla privacy prima di procedere con la navigazione sul nostro sito web.'
+@endphp
+
+@section('content')
+<div class="container">
     <p>Ultimo aggiornamento: 10 agosto 2021</p>
     <br>
     <p>La presente Informativa sulla privacy descrive le nostre politiche e procedure sulla raccolta, l'uso e la divulgazione delle tue informazioni quando utilizzi il Servizio e ti dice i tuoi diritti sulla privacy e come la legge ti protegge.</p>
@@ -169,4 +175,5 @@
         <li>Via e-mail: supporto@electrohm.com</li>
         <li>Via telefono fisso: 0982001101</li>
     </ul>
+</div>
 @endsection
