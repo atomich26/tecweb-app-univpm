@@ -4,5 +4,5 @@
     @include('forms.modify-utente')
     <br>
     <br>
-    <a href = "{{route('catalogo.view')}}"> Torna alla Home</a>
+    <a href = "{{route('utenti.table')}}"> Torna alla Tabella Utenti</a>
 @endsection

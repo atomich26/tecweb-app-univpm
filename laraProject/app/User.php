@@ -46,4 +46,8 @@ class User extends Authenticatable
         $roleToCheck = (array)$role;
         return in_array($this->role, $roleToCheck);
     }
+
+    public function prodotto(){
+        return $this->hasOne(Prodotto::class,'UtenteID');
+    }
 }

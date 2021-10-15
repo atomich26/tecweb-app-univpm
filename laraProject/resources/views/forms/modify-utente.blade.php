@@ -1,7 +1,7 @@
 
 {{  Form::open (array('route' => ['utente.update', $user->ID] , 'method' => 'POST'))}}
 
-<h2>Inserisci Utente</h2>
+<h2>Modifica Utente</h2>
     <div>
             {{  Form::label ('username', 'Username' )}}
             {{  Form::text ('username', $user->username)  }}
@@ -117,7 +117,7 @@
         
         <div id="centroID">
             {{  Form::label ('centroID', 'Centro Assistenza')}}
-            {{  Form::select ('centroID', $centri, $user->centroID, ['placeholder' => 'Electrohm Centro'])}}
+            {{  Form::select ('centroID', $centri, $user->centroID, ['placeholder' => '0 - Nessun Centro'])}}
         </div>
 
         

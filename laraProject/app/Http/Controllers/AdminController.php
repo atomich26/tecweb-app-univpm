@@ -81,7 +81,7 @@ class AdminController extends Controller
             $user->centroID = $request->centroID;
         }
         $user->save();
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
     }
 
 
@@ -119,15 +119,12 @@ class AdminController extends Controller
             $user->centroID = NULL;
         }
         $user->save();
-        return redirect()->route('catalogo');
+        return redirect()->route('utenti.table');
 
 
     }
 
     public function deleteUtente($utenteID){
-
-        return back()->with('message',"Impossibile eliminare");
-
         $user = User::findOrFail($utenteID);
 
         if(!$user->checkRole('admin')){
@@ -137,8 +134,8 @@ class AdminController extends Controller
 
             return back()->with(['alertType', 'message'], ['error', "Impossibile eliminare"]);
         Storage::delete('/public/images/profiles/' . $user->file_img);
-        $user->delete($userID);
-        User::destroy($userID);
+        $user->delete($utenteID);
+       // User::destroy($userID);
         return back(); 
     }
 
@@ -261,7 +258,7 @@ class AdminController extends Controller
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('catalogo');
+        return redirect()->route('prodotti.table');
     }
 
     public function modifyProdottoView($prodottoID){
@@ -281,7 +278,7 @@ class AdminController extends Controller
 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $file.getClientOriginalName();
+            $imageName = $file->getClientOriginalName();
         }
         else
             $imageName = NULL;
@@ -293,7 +290,7 @@ class AdminController extends Controller
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('catalogo')
+        return redirect()->route('prodotti.table')
             ->with('message', 'validation.form-messages.update.prodotto')
             ->with('alertType', 'successful');
     }
@@ -305,12 +302,7 @@ class AdminController extends Controller
             return response()->actionResponse('prodotti.table', 
             'error', __('validation.action-messages.prodotto.not-exist',['item' => $prodottoID]));
         }
-        
-        if(!is_null($prodotto->file_img) && Storage::exists('images/products/'. $prodotto->file_img)){
-            error_log('_>'. $prodotto->file_img);
-            Storage::delete('images/products/'. $prodotto->file_img);
-        }
-
+        Storage::delete('/public/images/products/' . $product->file_img);
         $prodotto->delete($prodottoID);
 
         return response()->actionResponse('prodotti.table', 'successful', __('validation.action-messages.prodotto.delete', ['item' => $prodotto->ID ]));
@@ -339,7 +331,7 @@ class AdminController extends Controller
             'message' => "Assegnazione prodotti all'utente <b> " . $user->username . "</b> completata!"
         ], 200);
     }
-
+   
     //funzioni dedicate ai centri
 
     public function viewCentriAssistenzaTable(){
@@ -364,13 +356,13 @@ class AdminController extends Controller
 
         $center->save();
 
-        return redirect()->route('catalogo');
+        return redirect()->route('centri.table');
 
     }
 
     public function modifyCentro($centerID){
         $center=CentroAssistenza::find($centerID);
-        return view('admin.modify-centro')->with('center', $center);
+        return view('admin.modify-centro')->with('centro.modify', $center);
     }
 
     public function updateCentro(CenterRequest $request, $centerID){
@@ -385,7 +377,7 @@ class AdminController extends Controller
         $center->cap = $request->cap;
         $center->save();
 
-        return redirect()->route('catalogo');
+        return redirect()->route('centri.table');
 
     }
 
@@ -393,7 +385,7 @@ class AdminController extends Controller
         $center = CentroAssistenza::find($centerID);
         $center->delete($centerID);
 
-        return redirect()->return('catalogo');
+        return redirect()->return('centri.table');
     }
 
 }

@@ -2,6 +2,7 @@
 
 @section('content')
     @include('forms.insert-faq')
+    <a href = "{{route('faq.table')}}"> Torna alla Tabella FAQ</a>
 @endsection
 
 @section('js-scripts')

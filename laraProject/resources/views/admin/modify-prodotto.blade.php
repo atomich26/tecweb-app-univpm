@@ -4,5 +4,5 @@
     @include('forms.modify-prodotto')
     <br>
     <br>
-    <a href = "{{route('catalogo.view')}}"> Torna alla Home</a>
+    <a href = "{{route('prodotti.table')}}"> Torna alla Tabella Dei Prodotti</a>
 @endsection
