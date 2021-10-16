@@ -14,7 +14,7 @@ function setRowsSelectorsEvent() {
     let rowsSelectors = document.querySelectorAll('input[type="checkbox"].selector');
     let selectAllToggle = document.querySelector('#selector-all');
 
-    if (typeof rowsSelectors == 'undefined' || typeof selectAllToggle == 'undefined')
+    if (rowsSelectors.length < 1 || typeof selectAllToggle == 'undefined')
         return;
     
     selectAllToggle.onchange = (e) => {
@@ -65,8 +65,13 @@ function setBulkDeleteForm() {
     
     deleteForm.onsubmit = () => {
         let checkedItems = [];      
-        $('input[type="checkbox"].selector:checked').each(function(){
-            checkedItems.push($(this).val());
+        let checkboxs = document.querySelectorAll('input[type="checkbox"].selector:checked');
+
+        if (checkboxs.length < 1)
+            return;
+        
+       checkboxs.forEach(item => {
+            checkedItems.push(item.value);
         });
 
         if(!confirm(deleteForm.getAttribute('data-confirm').replace(':items', checkedItems.length)))
