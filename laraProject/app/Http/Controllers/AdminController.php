@@ -125,23 +125,25 @@ class AdminController extends Controller
     }
 
     public function deleteUtente($utenteID){
-        $user = User::findOrFail($utenteID);
-
-        if(!$user->checkRole('admin')){
-            return back()->with(['alertType', 'message'], ['error', "Non è consentito eliminare un amministratore!"]);
+        try {
+            $user = User::findOrFail($utenteID);
+        } catch (\Throwable $th) {
+            return response()->actionResponse('utenti.table', 'error', __('message.utente.not-exist'));
         }
-        else if($user->checkRole('staff'))
 
-            return back()->with(['alertType', 'message'], ['error', "Impossibile eliminare"]);
+        if($user->checkRole('admin')){
+            return response()->actionResponse('utenti.table', 'error', "Non è consentito eliminare un amministratore!");
+        }
+
         Storage::delete('/public/images/profiles/' . $user->file_img);
         $user->delete($utenteID);
-       // User::destroy($userID);
-        return back(); 
+       
+        return response()->actionResponse('utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
     }
 
     public function bulkDeleteUtenti(Request $request){        
         $this->bulkDeleteItems($request->items, new User);
-        return response()->actionResponse('utenti.table', 'successful', 'validation.action-messages.utente.bulk-delete');
+        return response()->actionResponse('utenti.table', 'successful', 'message.utente.bulk-delete');
     }
 
     // Metodi per le CRUD delle faq       
@@ -166,22 +168,6 @@ class AdminController extends Controller
 
         $faq->fill($request->validated());
         return $faq->save();
-       
-
-        /*if($saved){
-            if($action == 'close'){
-                return redirect()->route('faq.table')
-                    ->with('message','validation.action-messages.faq.insert')
-                    ->with('status', 'successful');
-            }
-            else if($action == 'new'){
-                return redirect()->route('faq.new')
-                    ->with('message','validation.form-messages.insert.faq')
-                    ->with('status', 'successful');
-            }
-        }
-        else
-            return redirect()->route('faq.table')->with('message', 'validation.form-messages.insert.');*/
     }
 
     public function modifyFAQView($faqID){
@@ -195,39 +181,40 @@ class AdminController extends Controller
 
     public function updateFAQ(FAQRequest $request, $faqID){ 
         if(is_null($faq))
-            return response()->actionResponse('faq.new', 'error', __('validation.action-messages.faq.not-exist'));
+            return response()->actionResponse('faq.new', 'error', __('message.faq.not-exist'));
 
         $this->storeFAQ($request, $faqID);
 
-        return response()->actionResponse('faq.new', 'successful', __('validation.action-messages.faq.update'));
+        return response()->actionResponse('faq.new', 'successful', __('message.faq.update'));
     }
 
     public function deleteFAQ($faqID){
-        Faq::findOrFail($faqID)->delete();
+        try {
+            Faq::findOrFail($faqID)->delete();
+        } catch (\Throwable $th) {
+            return response()->actionResponse('faq.table', 'error', __('message.faq.not-exist'));
+        }
 
-        return response()->actionResponse('faq.table', 'successful', __('validation.action-messages.faq.delete'));
+        return response()->actionResponse('faq.table', 'successful', __('message.faq.delete'));
     }
 
     public function bulkDeleteFaq(Request $request){
-        $perfomedAction = $this->bulkDeleteItems($request->items, new Faq());
+        $perfomedAction = $this->bulkDeleteItems($request->items, new Faq(), 'message.faq.bulk-delete');
         
-        if($perfomedAction)
-            return response()->actionResponse('faq.table', 'successful', __('validation.action-messages.faq.bulk-delete'));
-        else
-            return response()->actionResponse('faq.table', 'error', __('Alcuni elementi non sono stati eliminati.'));
+        return $perfomedAction;
     }
 
-    public function bulkDeleteItems(String $itemsID, Model $model){
-        if(!is_null($itemsID) && strlen($itemsID) > 0){
-            $items = explode(',', $itemsID, 10);
+    public function bulkDeleteItems(String $itemsID = null, Model $model, $success){
+        if(is_null($itemsID) && strlen($itemsID) < 1)
+            return response()->actionResponse('faq.table', 'error', 'Impossibile eliminare gli elementi selezionati.');
+    
+        $items = explode(',', $itemsID, config('laravel-table.value.rowsNumber'));
+        $model::destroy($items);
 
-            foreach($items as $itemID){
-                $model::find($itemID)->delete();
-            }
-        }
+        return response()->actionResponse('faq.table', 'successful', __($success));
     }
+
     // Metodi per le CRUD dei prodotti
-
     public function viewProdottiTable(){
         $table = new ProdottiTable();
         return view('admin.prodotti-table')->with('table', $table);
@@ -300,12 +287,12 @@ class AdminController extends Controller
             $prodotto = Prodotto::findOrFail($prodottoID);
         } catch (\Throwable $th) {
             return response()->actionResponse('prodotti.table', 
-            'error', __('validation.action-messages.prodotto.not-exist',['item' => $prodottoID]));
+            'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
         }
-        Storage::delete('/public/images/products/' . $product->file_img);
+        Storage::delete('/public/images/products/' . $prodotto->file_img);
         $prodotto->delete($prodottoID);
 
-        return response()->actionResponse('prodotti.table', 'successful', __('validation.action-messages.prodotto.delete', ['item' => $prodotto->ID ]));
+        return response()->actionResponse('prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
     }
 
     public function assignProdottiUtente(Request $request){
