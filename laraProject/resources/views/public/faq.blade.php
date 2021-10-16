@@ -26,9 +26,9 @@
     @if($faqs->hasPages())
         <div class="container">
             <div class="faq-paginator flex-v-center">
+                <h4 style="color:white">Disponibili {{ $faqs->total() }} faq</h4>
                 {{ $faqs->links() }}
             </div>
         </div>
     @endif
-
 @endsection

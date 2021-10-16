@@ -1156,7 +1156,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
 .faq-paginator{
     padding: 20px;
     background-color: var(--color-secondary);
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .empty-content{
