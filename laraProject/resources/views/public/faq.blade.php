@@ -7,15 +7,14 @@
 
 @section('content')
     <div class="container" style="min-height: 300px">
-        @if($faqs->total() > 0))
+        @if($faqs->total() > 0)
             <ul class="faq">   
                 @foreach ($faqs as $faq)
                     <li>
                         <h2 class="question">{!! $faq->domanda !!}
                             <div class="plus-minus-toggle collapsed"></div>
                         </h2>
-                        <div class="answer">{!! $faq->risposta !!}</div>
-                    
+                        <div class="answer">{!! $faq->risposta !!}</div>        
                     </li>
                 @endforeach
             </ul>
