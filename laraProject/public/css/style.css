@@ -1153,8 +1153,12 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
   transition: color 0.5s ease;
 }
 
-@media screen and (max-width: 767px) {
-  .faq .question {
-    font-size: 18px;
-  }
+.faq-paginator{
+    padding: 20px;
+    background-color: var(--color-secondary);
+    justify-content: end;
+}
+
+.empty-content{
+    min-height: calc(100vh - 500px);
 }
