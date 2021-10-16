@@ -18,7 +18,7 @@ Route::redirect('/', 'catalogo');
 
 Route::redirect('home', 'catalogo', 302);
 
-Route::get('catalogo','PublicController@viewCatalogoPage')->name('catalogo.view');
+Route::get('catalogo','PublicController@viewCatalogo')->name('catalogo.view');
 
 Route::post('catalogo', 'PublicController@searchCatalogo')->name('catalogo.search');
 
