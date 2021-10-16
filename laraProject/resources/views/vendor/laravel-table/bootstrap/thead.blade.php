@@ -2,7 +2,8 @@
     {{-- rows number / search --}}
     <tr{{ classTag($table->trClasses) }}>
         <td{{ classTag('bg-light', $table->tdClasses) }}{{ htmlAttributes($table->columnsCount() > 1 ? ['colspan' => $table->columnsCount()] : null) }}>
-            <div class="flex-v-center table-head-container">
+            <div class="table-head-container">
+                <div class="flex-v-center">
                 {{-- table title --}}
                 @if(!is_null($table->title))
                     <h2 class="table-title">{{ $table->title }}</h2>
@@ -80,6 +81,8 @@
                         </div>
                     @endif
                     @yield('selected-items-actions')
+                    </div>
+                    <div class="flex-v-center">
                     @if(array_key_exists('bulk-destroy', $table->routes))
                         <div class="thead-widget bulkActionInput">
                             {{ Form::open(array('route'=> $table->routes['bulk-destroy']['name'],'method' => 'DELETE',
@@ -100,6 +103,7 @@
                             </a>
                         </div>
                     @endif
+                    </div>
                 @endif
             </div>
         </td>
