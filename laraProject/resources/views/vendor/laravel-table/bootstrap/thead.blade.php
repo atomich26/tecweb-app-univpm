@@ -6,7 +6,7 @@
                 <div class="flex-v-center">
                 {{-- table title --}}
                 @if(!is_null($table->title))
-                    <h2 class="table-title">{{ $table->title }}</h2>
+                    <h2 class="table-title">{!! $table->icon ?? '' !!} {{ $table->title }}</h2>
                 @endif
                 @if($table->rowsNumberSelectionActivation || ! $table->searchableColumns->isEmpty())
                     {{-- searching --}}

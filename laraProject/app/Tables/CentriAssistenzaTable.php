@@ -21,6 +21,7 @@ class CentriAssistenzaTable extends AdminTable{
             'destroy' => ['name' => 'centro.delete'],
             'bulk-destroy' => ['name' => 'centri.bulk-delete']
         ])->title('Gestione centri assistenza')
+        ->setIcon('centri-assistenza')
         ->destroyConfirmationHtmlAttributes(function (CentroAssistenza $centro) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare il centro assistenza ' . $centro->ragione_sociale . '?',

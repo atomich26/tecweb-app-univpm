@@ -26,6 +26,7 @@ class ProdottiTable extends AdminTable{
             'bulk-destroy' => ['name' => 'prodotti.bulk-delete']
         ])
         ->title('Gestione prodotti')
+        ->setIcon('prodotti')
         ->destroyConfirmationHtmlAttributes(function (Prodotto $prodotto) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare il prodotto ' . $prodotto->nome . '?',

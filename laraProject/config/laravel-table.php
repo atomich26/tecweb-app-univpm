@@ -53,4 +53,17 @@ return [
         'tfoot' => 'bootstrap.tfoot',
     ],
 
+    /**
+     * Icons for the tables
+     */
+
+     'table-icon' => [
+         'prodotti' => '<i class="bi bi-box-seam"></i>', 
+         'utenti' => '<i class="bi bi-people"></i>',
+         'centri-assistenza'=> '<i class="bi bi-headset"></i>',
+         'faq' => '<i class="bi bi-question-circle"></i>' ,
+         'malfunzionamenti' => '<i class="bi bi-x-octagon-fill"></i>',
+         'soluzioni' => '<i class="bi bi-tools"></i>',
+     ],
+
 ];

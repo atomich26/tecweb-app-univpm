@@ -24,6 +24,7 @@ class UtentiTable extends AdminTable{
             'bulk-destroy' => ['name' => 'utenti.bulk-delete']
         ])
         ->title('Gestione utenti')
+        ->setIcon('utenti')
         ->destroyConfirmationHtmlAttributes(function (User $utente) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare l\'utente ' . $utente->nome . " " . $utente->cognome . '?',

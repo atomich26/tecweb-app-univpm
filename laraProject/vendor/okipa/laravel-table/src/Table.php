@@ -31,6 +31,9 @@ class Table implements Htmlable
     /** @property string $title */
     public $title;
 
+    /** @property string $icon */
+    public $icon;
+
     /** @property \Illuminate\Database\Eloquent\Model $model */
     public $model;
 
@@ -139,6 +142,21 @@ class Table implements Htmlable
         $this->title = strip_tags($title);
 
         return $this;
+    }
+
+    /**
+     * Set the icon as html saved in config laravel-table.
+     * 
+     * @param  $iconName config path of icon 
+     * 
+     * @return void
+     * 
+     * @author @michdev7
+     */
+    public function setIcon($iconName){
+         $this->icon = config('laravel-table.table-icon.' . $iconName);
+
+         return $this;
     }
 
     /**

@@ -21,6 +21,7 @@ class MalfunzionamentiTable extends AdminTable{
             'destroy' => ['name' => 'malfunzionamento.delete'],
             'bulk-destroy' => ['name' => 'malfunzionamenti.bulk-delete']
         ])->title('Gestione Malfunzionamenti')
+        ->setIcon('malfunzionamenti')
         ->rowsSelection(function(Malfunzionamenti $malfunzionamento){
             return Gate::allows('editMalfunzionamenti', $malfunzionamento->prodottoID);
         })

@@ -21,6 +21,7 @@ class FaqTable extends AdminTable{
             'destroy' => ['name' => 'faq.delete'],
             'bulk-destroy' => ['name' => 'faq.bulk-delete']
         ])->title('Gestione faq')
+        ->setIcon('faq')
         ->destroyConfirmationHtmlAttributes(function (Faq $faq) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare la faq con ID ' . $faq->ID . '?',

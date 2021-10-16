@@ -189,6 +189,10 @@ ul.text-list{
     border-color: #daad00;
 }
 
+.alert-box.info{
+    border-color: var(--color-tertiary);
+}
+
 .alert-box h4.alert-message{
     font-size: 16px;
     word-wrap: break-word;
@@ -211,6 +215,10 @@ ul.text-list{
 
 .alert-box i.bi-exclamation-triangle{
     color: #daad00;
+}
+
+.alert-box i.bi-info-circle{
+    color: var(--color-tertiary);
 }
 /* Input */
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
