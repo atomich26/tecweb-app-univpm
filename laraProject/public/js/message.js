@@ -1,6 +1,6 @@
 class MsgServiceProvider {
     #current; #duration; #timeout;
-    
+
     constructor() {
         this.#current = null;
         this.#duration = 6;
@@ -13,15 +13,15 @@ class MsgServiceProvider {
      * @returns void
      */
     send(msgObj) {
-        
+
         this.#stop();
         this.#current = new Message(msgObj);
 
         if (msgObj.hasOwnProperty('duration'))
             this.#duration = msgObj.duration;
-        
+
         this.#start()
-        
+
     }
 
     /**
@@ -30,15 +30,15 @@ class MsgServiceProvider {
      * @returns void
      */
     #start(duration) {
-        
+
         if (this.#current == null)
             return;
-        
+
         this.#current.show();
 
         this.#timeout = setTimeout(() => {
             this.#stop();
-         }, this.#duration * 1000);
+        }, this.#duration * 1000);
     }
 
     /**
@@ -47,10 +47,10 @@ class MsgServiceProvider {
      * @returns void
      */
     #stop() {
-        
+
         if (this.#current == null)
             return;
-        
+
         clearTimeout(this.#timeout);
         this.#current.close();
         this.#current = null;

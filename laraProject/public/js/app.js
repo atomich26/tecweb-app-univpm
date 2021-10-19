@@ -74,20 +74,15 @@ function showSearchTip() {
     msgProvider.send({ status: 'info', text: "Puoi cercare i prodotti per descrizione inserendo la parola chiave completa o parte di essa seguita dal carattere wildcard \'*\'.", duration: 10 });
 }
 
-function assegnaProdottiUtente(event) {
+function assegnaProdottiUtente() {
     let checkedItems = [];
     let userNameSelected = $('#assign-user-select option:selected').text();
-    let flag = true;
 
     $('.table tbody tr').filter(':has(:checkbox:checked)').each(function () {
-        if ($(this).find('td:nth-child(8)').html().trim() == userNameSelected) {
-            msgProvider.send({ status: 'warning', text: "Alcuni prodotti selezionati sono già assegnati all'opzione scelta" });
-            return false;
-        }
         checkedItems.push($(this).find('input[type="checkbox"]').val());
     });
 
-    if (!flag || !confirm('Sei sicuro di voler procedere con l\'assegnazione?'))
+    if (!confirm('Sei sicuro di voler procedere con l\'assegnazione?'))
         return;
 
     $.ajax({
@@ -101,10 +96,7 @@ function assegnaProdottiUtente(event) {
         },
         statusCode: {
             400: function (response) {
-                msgProvider.send({ status: response.status, text: response.message });
-            },
-            404: function (response) {
-                msgProvider.send({ status: 'error', text: "Impossibile trovare l'utente o i prodotti selezionati. Controlla i parametri." });
+                msgProvider.send({ status: response.responseJSON.alert, text: response.responseJSON.message});
             },
             500: function (response) {
                 msgProvider.send({ status: 'error', text: "Errore interno al server, contatta l'amministratore." });
@@ -112,7 +104,7 @@ function assegnaProdottiUtente(event) {
             200: function (response) {
                 $('.table tbody tr').filter(':has(:checkbox:checked)').find('td:nth-child(8)').text(userNameSelected);
                 $('#selector-all').prop("checked", false).change();
-                msgProvider.send({ status: response.status, text: response.message });
+                msgProvider.send({ status: response.alert, text: response.message });
             }
         }
     });

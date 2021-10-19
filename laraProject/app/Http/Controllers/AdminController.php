@@ -294,29 +294,21 @@ class AdminController extends Controller
 
         return response()->actionResponse('prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
     }
-
+    
     public function assignProdottiUtente(Request $request){
-        $user = User::findOrFail($request->utenteID);
+        $selected = $request->utenteID;
 
-        if(!$user->checkRole('staff'))
-            return response()->json([
-                'status' => 'warning', 
-                'message' => "L'utente <b>". $user->username . "</b> non è un membro dello staff."
-            ], 400);
+        if($request->utenteID == 0)
+            $selected = null;
+
+        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
         
-        foreach ($request->prodotti as $prodottoID) {
-            $prodotto = Prodotto::findOrFail($prodottoID);
-            
-            if($prodotto->utenteID != $user->ID){
-                $prodotto->utenteID = $user->ID;
-                $prodotto->save();
-            }
-        }
+        if($isAlreadyAssigned)
+            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
 
-        return response()->json(
-            ['status' => 'successful', 
-            'message' => "Assegnazione prodotti all'utente <b> " . $user->username . "</b> completata!"
-        ], 200);
+        Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
+
+        return response()->json(['alert' => 'successful', 'message' => 'Assegnazione prodotti completata.'], 200);
     }
    
     //funzioni dedicate ai centri

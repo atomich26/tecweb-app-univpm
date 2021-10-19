@@ -2,10 +2,11 @@
 
 @php
     $staffUsers = User::where('role', 'staff')->pluck('username', 'ID');
+    $staffUsers->prepend('Tutti', '0');
 @endphp
 
 @section('selected-items-actions')
-    @if(count($staffUsers) > 0)
+    @if(count($staffUsers) > 1)
         <div class="px-1 thead-widget bulkActionInput">
             <div class="input-group">
                 {!! Form::select('Utente', $staffUsers,'', ['id' => 'assign-user-select']) !!}
