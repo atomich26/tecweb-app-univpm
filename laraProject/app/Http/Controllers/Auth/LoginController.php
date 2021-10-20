@@ -35,7 +35,7 @@ class LoginController extends Controller
         switch ($userRole) {
             case 'tecnico': return route('user.profile');
                 break;
-            case 'staff': return route('user.profile');
+            case 'staff': return route('staff.index');
                 break;
             case 'admin': return route('admin.index');
                 break;

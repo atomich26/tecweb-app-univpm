@@ -49,26 +49,34 @@ Route::post('login','Auth\LoginController@login')->name('user-login');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');
 
-Route::group(['prefix' => 'staff', 'middleware' => ['editProdotto']], function(){
+Route::group(['prefix' => 'staff', 'middleware' => 'can:isStaff'], function () {
+
+    Route::redirect('/', 'staff/gestione-prodotti')->name('staff.index');
+
+    Route::get('gestione-prodotti', 'StaffController@viewProdottiTable')->name('staff-prodotti.table');
+
+    Route::middleware('editProdotto')->group(function(){
+        Route::get('modifica-prodotto/{prodottoID}', 'StaffController@modifyProdottoView')->name('prodotto.modify');
+        Route::put('aggiorna-prodotto/{prodottoID}', 'StaffController@updateProdotto')->name('prodotto.update');
     
-    //Rotte CRUD per i malfunzionamenti
-    Route::get('{prodottoID}/inserisciMalfunzionamento', 'StaffController@insertMalfunzionamento')->name('insertMalfunzionamento.insert');
-    Route::post('{prodottoID}/inserisciMalfunzionamento', 'StaffController@saveMalfunzionamento')->name('insertMalfunzionamento.store');
-    Route::get('{prodottoID}/malfunzionamento/{malfunzionamentoID}/modify', 'StaffController@modifyMalfunzionamento')->name('modifyMalfunzionamento');
-    Route::put('{prodottoID}/malfunzionamento/{malfunzionamentoID}/modify', 'StaffController@updateMalfunzionamento')->name('modifyMalfunzionamento.update');
-    Route::delete('{prodottoID}/malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('deleteMalfunzionamento');
-    
-    //Rotte CRUD per le soluzioni
-    Route::get('{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisciSoluzione', 'StaffController@insertSoluzione')->name('insertSoluzione');
-    Route::post('{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisciSoluzione', 'StaffController@saveSoluzione')->name('insertSoluzione.store');
-    Route::get('{prodottoID}/malfunzionamento/{malfunzionamentoID}/soluzione/{soluzioneID}/modify', 'StaffController@modifySoluzione')->name('modifySoluzione');
-    Route::put('{prodottoID}/malfunzionamento/{malfunzionamentoID}/soluzione/{soluzioneID}/modify', 'StaffController@updateSoluzione')->name('modifySoluzione.update');       
+        //Rotte CRUD per i malfunzionamenti
+        Route::get('{prodottoID}/nuovo-malfunzionamento', 'StaffController@insertMalfunzionamento')->name('insertMalfunzionamento.insert');
+        Route::post('{prodottoID}/inserisci-malfunzionamento', 'StaffController@saveMalfunzionamento')->name('insertMalfunzionamento.store');
+        Route::get('{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@modifyMalfunzionamento')->name('modifyMalfunzionamento');
+        Route::put('{prodottoID}/aggiorna-malfunzionamento/{malfunzionamentoID}', 'StaffController@updateMalfunzionamento')->name('modifyMalfunzionamento.update');
+        Route::delete('{prodottoID}/malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('deleteMalfunzionamento');
+        
+        //Rotte CRUD per le soluzioni
+        Route::get('{prodottoID}/malfunzionamento/{malfunzionamentoID}/nuova-soluzione', 'StaffController@insertSoluzione')->name('insertSoluzione');
+        Route::post('{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione/{soluzioneID}', 'StaffController@saveSoluzione')->name('insertSoluzione.store');
+        Route::get('{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@modifySoluzione')->name('modifySoluzione');
+        Route::put('{prodottoID}/malfunzionamento/{malfunzionamentoID}/aggiorna-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('modifySoluzione.update');       
+    });
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['can:isAdmin']],function(){
-    Route::get('dashboard', 'AdminController@index')->name('admin.index');
+    Route::redirect('/', 'admin/gestione-prodotti', 302)->name('admin.index');
     
-    //Rotte CRUD per i prodotti
     Route::get('gestione-prodotti', 'AdminController@viewProdottiTable')->name('prodotti.table');
     Route::get('nuovo-prodotto', 'AdminController@insertProdotto')->name('prodotto.new');
     Route::post('inserisci-prodotto', 'AdminController@storeProdotto')->name('prodotto.store');

@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use App\User;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Resources\Prodotto;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -42,21 +43,18 @@ class AuthServiceProvider extends ServiceProvider
             return $user->checkRole(['tecnico', 'staff']);
         });
 
-        Gate::define('editMalfunzionamenti', function($user, $prodottoID){
+        Gate::define('editProdotto', function($user, $prodottoID){
             $prodotto = Prodotto::findOrFail($prodottoID);
 
             if($user->checkRole('admin')){
                 return true;
             }
-            elseif($user->checkRole('staff')){
-
-                if($prodotto->utenteID != null)
-                    return $user->ID == $prodotto->utenteID;
-                else
+            else if($user->checkRole('staff')){
+                if($prodotto->utenteID == null || $prodotto->utenteID == $user->ID)
                     return true;
+                else
+                    return false;
             }
-            else
-                return false;
         });
     }
 }

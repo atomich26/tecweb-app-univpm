@@ -230,6 +230,7 @@ return [
         'Categorie' => App\Models\Resources\Categoria::class,
         'User' => App\User::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Prodotto' => App\Models\Resources\Prodotto::class,
     ],
 
 ];

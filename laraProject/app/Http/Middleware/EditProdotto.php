@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use \Illuminate\Support\Facades\Auth;
 use \App\Models\Resources\Prodotto;
-use \App\User;
+use \Illuminate\Support\Facades\Gate;
 
 class EditProdotto
 {
@@ -18,21 +17,9 @@ class EditProdotto
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
-        $prodotto = Prodotto::findOrFail($request->route('prodottoID'));
-
-        if(Auth::check()){
-            if($user->checkRole('admin'))
-                return $next($request);
-
-            if($user->checkRole('staff')){
-                if($prodotto->utenteID == null || $prodotto->utenteID == $user->ID)
-                    return $next($request);
-                else
-                    return abort(403); 
-            }
-        }
-
-        return abort(403);
+        if(Gate::allows('editProdotto', $request->route('prodottoID')))
+            return $next($request);
+        else
+            return abort(403);
     }
 }
