@@ -3,35 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\FAQRequest;
-use App\Http\Requests\ProductRequest;
-use App\Http\Requests\CenterRequest;
-use App\Http\Requests\MalfunzionamentoRequest;
-use App\Http\Requests\SoluzioneRequest;
-use App\Models\Resources\Faq;
-use App\Models\Resources\Prodotto;
-use App\Models\Resources\CentroAssistenza;
-use App\Models\Resources\Malfunzionamento;
-use App\Models\Resources\Soluzione;
-use Illuminate\Support\Facades\Route;
-use App\Tables\ProdottiTable;
 use App\Tables\FaqTable;
 use App\Tables\UtentiTable;
+use Illuminate\Http\Request;
+use App\Models\Resources\Faq;
+use App\Traits\ProdottiActions;
+use App\Traits\SoluzioniActions;
+use App\Http\Requests\FAQRequest;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CentroRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use App\Tables\CentriAssistenzaTable;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\CrudMalfunzionamenti;
-use App\Traits\CrudSoluzioni;
+use App\Traits\MalfunzionamentiActions;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Resources\CentroAssistenza;
 
 class AdminController extends Controller
 {
-    use CrudSoluzioni, CrudMalfunzionamenti;
+    use SoluzioniActions, MalfunzionamentiActions, ProdottiActions;
 
     public function __construct(){
         $this->middleware('can:isAdmin');
@@ -214,107 +207,6 @@ class AdminController extends Controller
 
         return response()->actionResponse('faq.table', 'successful', __($success));
     }
-
-    // Metodi per le CRUD dei prodotti
-    public function viewProdottiTable(){
-        $table = new ProdottiTable();
-        return view('admin.prodotti-table')->with('table', $table);
-    }
-
-    public function insertProdotto(){
-        $users =  User::where('role','staff')->pluck('username','ID');
-        return view ('admin.insert-prodotto')->with('users', $users);
-
-    }
-
-    public function storeProdotto(ProductRequest $request){
-        $prodotto = new Prodotto();
-        $prodotto->fill($request->validated());
-        $prodotto->categoriaID = $request->categoriaID;
-
-        if($request->hasFile('file_img')){
-            $file = $request->file('file_img');
-            $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
-        }
-        else
-            $imageName = NULL;
-
-        $prodotto->file_img = $imageName;
-        $prodotto->save();
-
-        if(!is_null($imageName)){
-            $file->storeAs('/public/images/products/', $imageName);
-        }
-
-        return redirect()->route('prodotti.table');
-    }
-
-    public function modifyProdottoView($prodottoID){
-        $prodotto = Prodotto::find($prodottoID);
-        
-        if(!$prodotto)
-            return response()->actionResponse('prodotto.new', 'error', 'validation.form-messages.prodotto.not-exist');
-
-        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
-        return view('admin.modify-prodotto')->with('product', $prodotto)->with('users', $users);
-    }
-
-    public function updateProdotto(ProductRequest $request, $prodottoID){
-        $prodotto = Prodotto::find($prodottoID);
-        $prodotto->fill($request->validated());
-        $prodotto->categoriaID = $request->categoriaID;
-
-        if($request->hasFile('file_img')){
-            $file = $request->file('file_img');
-            $imageName = $file->getClientOriginalName();
-        }
-        else
-            $imageName = NULL;
-
-        $prodotto->file_img = $imageName;
-        $prodotto->save();
-
-        if(!is_null($imageName)){
-            $file->storeAs('/public/images/products/', $imageName);
-        }
-
-        return redirect()->route('prodotti.table')
-            ->with('message', 'validation.form-messages.update.prodotto')
-            ->with('alertType', 'successful');
-    }
-
-    public function deleteProdotto($prodottoID){ 
-        try {
-            $prodotto = Prodotto::findOrFail($prodottoID);
-        } catch (\Throwable $th) {
-            return response()->actionResponse('prodotti.table', 
-            'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
-        }
-        Storage::delete('/public/images/products/' . $prodotto->file_img);
-        $prodotto->delete($prodottoID);
-
-        return response()->actionResponse('prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
-    }
-    
-    public function assignProdottiUtente(Request $request){
-        $selected = $request->utenteID;
-
-        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
-        
-        if($isAlreadyAssigned)
-            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
-
-        Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
-
-        return response()->json([
-            'alert' => 'successful',
-            'message' => 'Assegnazione prodotti completata.', 
-            'updated_at' => Prodotto::find($request->prodotti[0])->updated_at->format('d/m/Y H:i')], 200);
-    }
-   
-    public function bulkDeleteProdotti(Request $request){
-        
-    }
     
     //funzioni dedicate ai centri
 
@@ -327,7 +219,7 @@ class AdminController extends Controller
         return view('admin.insert-centro');
     }
 
-    public function saveCentro(CenterRequest $request){
+    public function saveCentro(CentroRequest $request){
         $center = new CentroAssistenza;
         $center->ragione_sociale = $request->ragione_sociale;
         $center->telefono = $request->telefono;
@@ -349,7 +241,7 @@ class AdminController extends Controller
         return view('admin.modify-centro')->with('centro.modify', $center);
     }
 
-    public function updateCentro(CenterRequest $request, $centerID){
+    public function updateCentro(CentroRequest $request, $centerID){
         $center = CentroAssistenza::find($centerID);
         $center->ragione_sociale = $request->ragione_sociale;
         $center->telefono = $request->telefono;

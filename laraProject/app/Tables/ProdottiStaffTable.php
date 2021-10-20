@@ -4,35 +4,34 @@ namespace App\Tables;
 
 use App\User;
 use \Illuminate\View\View;
+use Illuminate\Http\Request;
 use \Okipa\LaravelTable\Table;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\Categoria;
+use \Illuminate\Support\Facades\Auth;
+use \Illuminate\Database\Eloquent\Builder;
 
-class ProdottiTable extends AdminTable{
+class ProdottiStaffTable extends AdminTable{
 
-    public function __construct(){
-        parent::__construct();
+    public function __construct(Request $request){
+        parent::__construct();  
         $this->build();
     }
 
     protected function build(){
-
-        $this->model(Prodotto::class)->theadTemplate('prodotti-table.thead')->routes([
-            'index'   => ['name' => 'prodotti.table'],
-            'create'  => ['name' => 'prodotto.new'],
+        $this->model(Prodotto::class)->routes([
+            'index'   => ['name' => 'staff-prodotti.table'],
             'show'    => ['name' => 'prodotto.view'],
             'edit'    => ['name' => 'prodotto.modify'],
-            'destroy' => ['name' => 'prodotto.delete'],
-            'bulk-destroy' => ['name' => 'prodotti.bulk-delete']
         ])
         ->title('Gestione prodotti')
         ->setIcon('prodotti')
-        ->destroyConfirmationHtmlAttributes(function (Prodotto $prodotto) {
-            return [
-                'data-confirm' => 'Sei sicuro di voler eliminare il prodotto ' . $prodotto->nome . '?',
-            ];
-        })
-        ->rowsSelection();
+        ->query(function(Builder $query) {
+            $tableName = with(new Prodotto)->getTable();
+            $query->select('*');
+            $query->whereRaw("(`${tableName}`.`utenteID` = " . Auth::user()->ID . " OR `${tableName}`.`utenteID` IS NULL)" );
+        });
+
         $this->column('ID')->title('ID')->sortable();
         $this->column()->title('Immagine')->html(function(Prodotto $prodotto){
             return view('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'thumb-table'])->render();
@@ -47,12 +46,6 @@ class ProdottiTable extends AdminTable{
             ->value(function(Prodotto $prodotto){
                 return $this->parseHtmlContent($prodotto->descrizione, 150);
             });
-        $this->column('utenteID')->title('Assegnato a')->value(function(Prodotto $prodotto){
-            if(!is_null($prodotto->utenteID))
-                return $prodotto->belongsTo(User::class,'utenteID', 'ID')->first()->username;
-            else
-                return "Tutti";
-        });
         $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();
     }
 }

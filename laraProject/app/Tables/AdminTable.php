@@ -2,6 +2,7 @@
 
 namespace App\Tables;
 
+use Illuminate\Http\Request;
 use \Okipa\LaravelTable\Table;
 
 abstract class AdminTable extends Table{

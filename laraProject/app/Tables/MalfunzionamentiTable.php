@@ -4,12 +4,16 @@ namespace App\Tables;
 
 use \Okipa\LaravelTable\Table;
 use App\Models\Resources\Malfunzionamento;
+use \Illuminate\Database\Eloquent\Builder;
 
 class MalfunzionamentiTable extends AdminTable{
 
-    public function __construct(){
+    protected $prodottoID;
+
+    public function __construct($prodottoID){
         parent::__construct();
         $this->build();
+        $this->prodottoID = $prodottoID;
     }
 
     protected function build(){
@@ -25,12 +29,17 @@ class MalfunzionamentiTable extends AdminTable{
         ->rowsSelection(function(Malfunzionamenti $malfunzionamento){
             return Gate::allows('editMalfunzionamenti', $malfunzionamento->prodottoID);
         })
-        ->disableRows
         ->destroyConfirmationHtmlAttributes(function (Malfunzionamenti $malfunzionamento) {
             return [
                 'data-confirm' => 'Sei sicuro di voler eliminare il malfunzionamento con ID ' . $malfunzionamento->ID . '?',
             ];
-        })->rowsSelection();
+        })
+        ->rowsSelection()
+        ->query(function(Builder $query){
+            $tableName = with(new Malfunzionamento)->getTable();
+            $query->select('*');
+            $query->whereRaw("(`${tableName}`.`prodottoID` = ${$this->prodottoID}");
+        });
 
         $this->column('ID')->title('ID')->sortable();
         $this->column('descrizione')->title('Descrizione')->searchable()->sortable();

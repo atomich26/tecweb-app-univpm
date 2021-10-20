@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use App\Listeners\UserDeleted;
 use DateTime;
 
 class User extends Authenticatable
@@ -14,6 +15,10 @@ class User extends Authenticatable
 
     protected $table = 'utenti';
     protected $primaryKey = 'ID';
+
+    protected $dispatchesEvents = [
+        'deleted' => UserDeleted::class,
+    ];
 
     /**
      * The attributes that are mass assignable.

@@ -3,6 +3,7 @@
 namespace App\Models\Resources;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Listeners\ProdottoDeleted;
 
 
 class prodotto extends Model
@@ -11,6 +12,10 @@ class prodotto extends Model
     protected $primaryKey = 'ID';
     public $timestamps = true;
     protected $guarded = ['ID'];
+
+    protected $dispatchesEvents = [
+        'deleted' => ProdottoDeleted::class,
+    ];
 
     /**
      * The attributes that are mass assignable.
