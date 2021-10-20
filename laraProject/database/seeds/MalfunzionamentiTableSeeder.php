@@ -11,6 +11,124 @@ class MalfunzionamentiTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>1,
+            'prodottoID'=>1,
+            'descrizione'=>'La lavatrice non scarica acqua a fine lavaggio.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>2,
+            'prodottoID'=>1,
+            'descrizione'=>'Lo sportello non si apre.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>3,
+            'prodottoID'=>1,
+            'descrizione'=>'Il timer non funziona correttamente.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>4,
+            'prodottoID'=>2,
+            'descrizione'=>'La lavatrice non scarica acqua a fine lavaggio.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>5,
+            'prodottoID'=>2,
+            'descrizione'=>'La centrifuga non parte.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>6,
+            'prodottoID'=>3,
+            'descrizione'=>'La lavatrice perde acqua.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>7,
+            'prodottoID'=>4,
+            'descrizione'=>'L\'asciugatrice fà saltare la luce.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>8,
+            'prodottoID'=>4,
+            'descrizione'=>'Il cestello non gira.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>9,
+            'prodottoID'=>5,
+            'descrizione'=>'L\'asciugatrice fà saltare il salvavita.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>10,
+            'prodottoID'=>5,
+            'descrizione'=>'Il cestello non gira.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>11,
+            'prodottoID'=>5,
+            'descrizione'=>'L\'asciugatrice perde acqua.'
+        ]);
+
+      /*  DB::table('malfunzionamenti')->insert([
+            'ID'=>12,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>13,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>14,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>15,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>16,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>17,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>18,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>19,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);
+       
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>20,
+            'prodottoID'=>1,
+            'descrizione'=>''
+        ]);*/
     }
 }

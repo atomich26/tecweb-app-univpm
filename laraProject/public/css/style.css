@@ -1079,7 +1079,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
 }
 
 .product-card img{
-    width: 170px;
+    width: 250px;
 }
 
 .faq {
@@ -1169,4 +1169,9 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
 
 .empty-content{
     min-height: calc(100vh - 500px);
+}
+
+h4.malfunzionamento{
+    font-size: 20px;
+    font-weight: 800;
 }
