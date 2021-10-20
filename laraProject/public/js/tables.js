@@ -60,7 +60,7 @@ function setBulkDeleteForm() {
     let deleteForm = document.querySelector('form#delete-selected-form');
     let inputForm = document.querySelector('form#delete-selected-form input[name="items"]');
     
-    if (typeof deleteForm == 'undefined' || typeof inputForm == 'undefined')
+    if (deleteForm == null || inputForm == null)
         return;
     
     deleteForm.onsubmit = () => {
