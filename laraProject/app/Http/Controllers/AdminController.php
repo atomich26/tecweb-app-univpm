@@ -143,6 +143,7 @@ class AdminController extends Controller
 
     public function bulkDeleteUtenti(Request $request){        
         $this->bulkDeleteItems($request->items, new User);
+        
         return response()->actionResponse('utenti.table', 'successful', 'message.utente.bulk-delete');
     }
 
@@ -298,9 +299,6 @@ class AdminController extends Controller
     public function assignProdottiUtente(Request $request){
         $selected = $request->utenteID;
 
-        if($request->utenteID == 0)
-            $selected = null;
-
         $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
         
         if($isAlreadyAssigned)
@@ -308,9 +306,16 @@ class AdminController extends Controller
 
         Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
 
-        return response()->json(['alert' => 'successful', 'message' => 'Assegnazione prodotti completata.'], 200);
+        return response()->json([
+            'alert' => 'successful',
+            'message' => 'Assegnazione prodotti completata.', 
+            'updated_at' => Prodotto::find($request->prodotti[0])->updated_at->format('d/m/Y H:i')], 200);
     }
    
+    public function bulkDeleteProdotti(Request $request){
+        
+    }
+    
     //funzioni dedicate ai centri
 
     public function viewCentriAssistenzaTable(){

@@ -77,8 +77,9 @@ function showSearchTip() {
 function assegnaProdottiUtente() {
     let checkedItems = [];
     let userNameSelected = $('#assign-user-select option:selected').text();
-
-    $('.table tbody tr').filter(':has(:checkbox:checked)').each(function () {
+    let rowsSelected = $('.table tbody tr').filter(':has(:checkbox:checked)');
+    
+    rowsSelected.each(function () {
         checkedItems.push($(this).find('input[type="checkbox"]').val());
     });
 
@@ -102,7 +103,8 @@ function assegnaProdottiUtente() {
                 msgProvider.send({ status: 'error', text: "Errore interno al server, contatta l'amministratore." });
             },
             200: function (response) {
-                $('.table tbody tr').filter(':has(:checkbox:checked)').find('td:nth-child(8)').text(userNameSelected);
+                rowsSelected.find('td:nth-child(8)').text(userNameSelected);
+                rowsSelected.find('td:nth-child(9)').text(response.updated_at);
                 $('#selector-all').prop("checked", false).change();
                 msgProvider.send({ status: response.alert, text: response.message });
             }
