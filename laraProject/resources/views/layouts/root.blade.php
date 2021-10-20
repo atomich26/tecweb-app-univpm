@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Response Message --->
-    <meta name="response-message" content="{{ session('message') ?? '' }}" data-status="{{ session('status') ?? '' }}"> 
+    <meta name="response-message" content="{{ session('message') ?? '' }}" data-alert="{{ session('alert') ?? '' }}"> 
 
     <title>{{ $title . ' | ' . config('app.name')}}</title>
 

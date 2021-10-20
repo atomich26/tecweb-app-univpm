@@ -116,7 +116,7 @@ function windowLoadResponseMessage() {
     var metaMessage = $('meta[name="response-message"]');
 
     if (metaMessage.attr('content'))
-        msgProvider.send({ status: metaMessage.attr('data-status'), text: metaMessage.attr('content') });
+        msgProvider.send({ status: metaMessage.attr('data-alert'), text: metaMessage.attr('content') });
 }
 
 function setupFaqButtons() {

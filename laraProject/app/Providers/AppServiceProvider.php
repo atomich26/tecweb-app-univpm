@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(Config::get('strings.global.default'));
 
-        Response::macro('actionResponse', function($routeName, $status, $message){
-            return redirect()->route($routeName)->with('status', $status)
+        Response::macro('actionResponse', function($routeName, $alert, $message){
+            return redirect()->route($routeName)->with('alert', $alert)
                 ->with('message', $message);
         });
     }
