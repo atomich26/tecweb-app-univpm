@@ -15,6 +15,7 @@ use App\Models\Resources\Soluzione;
 
 trait SoluzioniActions
 {   
+
     public function insertSoluzione($productID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
         $product = Prodotto::find($productID);
@@ -34,6 +35,30 @@ trait SoluzioniActions
         $soluzione->malfunzionamentoID = $malfunzionamentoID;
    
         $soluzione->save();
-        return redirect()->route('prodotto',['productID'=>$productID]);
+        return redirect()->route();
+    }
+
+    public function updateSoluzione(SoluzioneRequest $request, $productID, $malfunzionamentoID, $soluzioneID){
+
+        $soluzione = Soluzione::find($soluzioneID);
+        $soluzione->descrizione = $request->descrizione;
+        $soluzione->save();
+
+        return redirect()->route();
+    }
+
+    public function deleteSoluzione($productID, $malfunzionamentoID, $soluzioneID){
+        $soluzione = Soluzione::find($soluzioneID);
+        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
+        if(($malfunzionamento->prodottoID == $productID)&&($soluzione->malfunzionamentoID==$malfunzionamentoID)){
+           
+            $soluzione->delete();
+           
+           return redirect()->route();
+        }
+        
+        else 
+            
+            return abort(403);
     }
 }
