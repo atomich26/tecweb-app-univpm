@@ -19,26 +19,24 @@ class MalfunzionamentiTable extends AdminTable{
     protected function build(){
 
         $this->model(Malfunzionamenti::class)->routes([
-            'index'   => ['name' => 'malfunzionamenti.table'],
-            'create'  => ['name' => 'malfunzionamento.new'],
-            'edit'    => ['name' => 'malfunzionamento.modify'],
-            'destroy' => ['name' => 'malfunzionamento.delete'],
-            'bulk-destroy' => ['name' => 'malfunzionamenti.bulk-delete']
-        ])->title('Gestione Malfunzionamenti')
+            'index'   => ['name' => Auth::user()->role . 'malfunzionamenti.table'],
+            'create'  => ['name' => Auth::user()->role . 'malfunzionamento.new'],
+            'edit'    => ['name' => Auth::user()->role . 'malfunzionamento.modify'],
+            'destroy' => ['name' => Auth::user()->role . 'malfunzionamento.delete'],
+            'bulk-destroy' => ['name' => Auth::user()->role . 'malfunzionamenti.bulk-delete']
+        ])
+        ->title('Gestione Malfunzionamenti')
         ->setIcon('malfunzionamenti')
-        ->rowsSelection(function(Malfunzionamenti $malfunzionamento){
-            return Gate::allows('editMalfunzionamenti', $malfunzionamento->prodottoID);
-        })
         ->destroyConfirmationHtmlAttributes(function (Malfunzionamenti $malfunzionamento) {
             return [
-                'data-confirm' => 'Sei sicuro di voler eliminare il malfunzionamento con ID ' . $malfunzionamento->ID . '?',
+                'data-confirm' => 'Sei sicuro di voler eliminare il malfunzionamento ' . $malfunzionamento->ID . '?',
             ];
         })
         ->rowsSelection()
         ->query(function(Builder $query){
             $tableName = with(new Malfunzionamento)->getTable();
             $query->select('*');
-            $query->whereRaw("(`${tableName}`.`prodottoID` = ${$this->prodottoID}");
+            $query->whereRaw("(`${tableName}`.`prodottoID` = ${$this->prodottoID})");
         });
 
         $this->column('ID')->title('ID')->sortable();

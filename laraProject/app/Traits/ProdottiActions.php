@@ -4,9 +4,10 @@ namespace App\Traits;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Tables\ProdottiAdminTable;
+use App\Tables\ProdottiTable;
 use App\Models\Resources\Prodotto;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ProdottoRequest;
 use Illuminate\Support\Facades\Storage;
@@ -19,9 +20,9 @@ use Illuminate\Support\Facades\Storage;
 trait ProdottiActions
 {
     public function viewProdottiTable(){
-        $table = new ProdottiAdminTable();
+        $table = new ProdottiTable();
 
-        return view('admin.prodotti-table')->with('table', $table);
+        return view(Auth::user()->role . '.prodotti-table')->with('table', $table);
     }
 
     public function insertProdotto(){
@@ -50,7 +51,7 @@ trait ProdottiActions
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('prodotti.table');
+        return redirect()->route('admin.prodotti.table');
     }
 
     public function modifyProdottoView($prodottoID){
@@ -60,14 +61,14 @@ trait ProdottiActions
             return response()->actionResponse('prodotto.new', 'error', 'validation.form-messages.prodotto.not-exist');
 
         $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
-        return view('admin.modify-prodotto')->with('product', $prodotto)->with('users', $users);
+        return view(Auth::user()->role . '.modify-prodotto')->with('product', $prodotto)->with('users', $users);
     }
 
     public function updateProdotto(ProdottoRequest $request, $prodottoID){
         $prodotto = Prodotto::find($prodottoID);
         $prodotto->fill($request->validated());
         $prodotto->categoriaID = $request->categoriaID;
-
+ 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
             $imageName = $file->getClientOriginalName();
@@ -82,7 +83,7 @@ trait ProdottiActions
             $file->storeAs('/public/images/products/', $imageName);
         }
 
-        return redirect()->route('prodotti.table')
+        return redirect()->route(Auth::user()->role . 'prodotti.table')
             ->with('message', 'validation.form-messages.update.prodotto')
             ->with('alertType', 'successful');
     }
@@ -91,13 +92,13 @@ trait ProdottiActions
         try {
             $prodotto = Prodotto::findOrFail($prodottoID);
         } catch (\Throwable $th) {
-            return response()->actionResponse('prodotti.table', 
+            return response()->actionResponse(Auth::user()->role . 'prodotti.table', 
             'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
         }
         Storage::delete('/public/images/products/' . $prodotto->file_img);
         $prodotto->delete($prodottoID);
 
-        return response()->actionResponse('prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
+        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
     }
     
     public function assignProdottiUtente(Request $request){

@@ -30,10 +30,6 @@ class AdminController extends Controller
         $this->middleware('can:isAdmin');
     }
 
-    public function index(){
-        return view('admin.dashboard');
-    }
-
     // Metodi per le CRUD degli utenti
     public function viewUtentiTable(){
         $table = new UtentiTable();
@@ -70,13 +66,14 @@ class AdminController extends Controller
         $user->email = $request->email;
         $user->telefono = $request->telefono;
         $user->role = $request->role;
+       
         if($user->role == 'tecnico'){
             $user->centroID = $request->centroID;
         }
         $user->save();
+        
         return redirect()->route('prodotti.table');
     }
-
 
     public function modifyUtente($userID){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');

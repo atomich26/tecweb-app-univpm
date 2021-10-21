@@ -51,7 +51,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');
 
 Route::prefix('staff')->group(function () {
 
-    Route::redirect('/', 'staff/gestione-prodotti')->name('staff.index');
+    Route::redirect('/', 'staff/gestione-prodotti', 302)->name('staff.index');
 
     Route::get('gestione-prodotti', 'StaffController@viewProdottiTable')->name('staff.prodotti.table');
 

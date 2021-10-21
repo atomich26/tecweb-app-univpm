@@ -1,3 +1,5 @@
+<div class="divider"></div>
+
 <nav id="navbar">
     <ul>
         <li>

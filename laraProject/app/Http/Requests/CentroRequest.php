@@ -35,7 +35,7 @@ class CentroRequest extends FormRequest
             'sito_web'=>'max:50|unique:centri_assistenza,sito_web,'.$this->route('centroID').'|nullable|max:' . Config::get('strings.centro_assistenza.sito_web'),
             'descrizione'=>'max:' . Config::get('strings.centro_assistenza.descrizione'),
             'via'=>'required|string|max:' . Config::get('strings.centro_assistenza.via'),
-            'città'=>'required|string|max:' . Config::get('strings.centro_assistenza.città'),
+            'città'=>'required|alpha|max:' . Config::get('strings.centro_assistenza.città'),
             'cap'=>'required|digits:' . Config::get('strings.centro_assistenza.cap'),
         ];
     }

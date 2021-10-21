@@ -19,14 +19,14 @@ trait MalfunzionamentiActions
         $prodotto = Prodotto::findOrFail($request->prodottoID);
         $table = new MalfunzionamentiTable($prodotto->ID);
 
-        return view('malfunzionamenti-table')->with('table', $table);
+        return view(Auth::user()->role . 'malfunzionamenti-table')->with('table', $table);
     }
 
     //funzioni dedicate ai malfunzionamenti e soluzioni
-    public function insertMalfunzionamento($productID)
-    {   
+    public function insertMalfunzionamento($productID){   
         $product = Prodotto::find($productID);
-        return view ('admin.insert-malfunzionamento')->with('product', $product);
+
+        return view (Auth::user()->role . '.insert-malfunzionamento')->with('product', $product);
     }    
     
     public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
@@ -37,32 +37,35 @@ trait MalfunzionamentiActions
         $error->descrizione = $request->descrizione;
         $error->save();
 
-        return view('public.prodotto')->with('prodotto', $product);
+        return redirect()->route(Auth::user()->role . 'malfunzionamenti-table');
     }
 
- public function modifyMalfunzionamento($productID, $malfunzionamentoID){
-     $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-     $product = Prodotto::find($productID);
-     if(!($malfunzionamento->prodottoID == $product->ID)){
-         abort(404);
-     }
-     else
-     return view ('admin.modify-malfunzionamento')   ->with('product', $product)
-                                                     ->with('malfunzionamento', $malfunzionamento);
- }
+    public function modifyMalfunzionamento($productID, $malfunzionamentoID){
+        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
+        $product = Prodotto::find($productID);
+        
+        if(!($malfunzionamento->prodottoID == $product->ID))
+            return abort(404);
 
- public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
-     $error = Malfunzionamento::find($malfunzionamentoID);
-     $error->descrizione = $request->descrizione;
-     $productID = $error->prodottoID;
-     $error->save();
-     return redirect()->route('prodotto',['productID'=>$productID]);
- }
+        return view (Auth::user()->role . '.modify-malfunzionamento')
+            ->with('product', $product)
+            ->with('malfunzionamento', $malfunzionamento);
+    }
 
- public function deleteMalfunzionamento($malfunzionamentoID){
-     $error = Malfunzionamento::find($malfunzionamentoID);
-     $product = $error->prodottoID;
-     $error->delete();
-     return redirect()->route('prodotto',['productID'=>$productID]);
- }
+    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
+        $error = Malfunzionamento::find($malfunzionamentoID);
+        $error->descrizione = $request->descrizione;
+        $productID = $error->prodottoID;
+        $error->save();
+
+        return redirect()->route('prodotto',['productID'=>$productID]);
+    }
+
+    public function deleteMalfunzionamento($malfunzionamentoID){
+        $error = Malfunzionamento::find($malfunzionamentoID);
+        $product = $error->prodottoID;
+        $error->delete();
+
+        return redirect()->route('prodotto',['productID'=>$productID]);
+    }
 }

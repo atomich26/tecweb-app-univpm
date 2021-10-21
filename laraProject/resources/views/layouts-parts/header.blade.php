@@ -19,8 +19,6 @@
                 </g>
             </svg>
         </div>
-
-        <div class="divider"></div>
         
         @if($adminView)
             @include('navbars.admin-header-nav')
@@ -31,15 +29,14 @@
     </div>
 
     <div id="header-right" class="flex-v-center">
-        @can('isAdmin')
-           
+        @if(Auth::check() && Auth::user()->checkRole(['staff', 'admin']))
             @if($adminView)
                 <a class="button header-btn public-site-btn" href="{{ route('catalogo.view') }}"><i class="bi bi-arrow-up-right-square"></i>&nbsp;&nbsp;Vai al sito</a>
             @else
-                <a class="button header-btn manage-btn" href="{{ route('admin.index') }}"><i class="bi bi-server"></i>&nbsp;&nbsp;Gestione dati</a>
+                <a class="button header-btn manage-btn" href="{{ route(Auth::user()->role . '.index') }}"><i class="bi bi-server"></i>&nbsp;&nbsp;Gestione dati</a>
             @endif
-        @endcan
-
+        @endif
+        
         @include('navbars.login-navbar')
     </div>
 </header>
