@@ -47,7 +47,7 @@ class UtentiTableSeeder extends Seeder
             'cognome' =>  'Alighieri',
             'username' => 'alessandra_staff',
             'data_nascita' => '1996-11-27',
-            'email' => 'alessandrabianchi@staff.electrohm.it',
+            'email' => 'alessandraalighieri@staff.electrohm.it',
             'telefono' => '3200505050',
             'password' => Hash::make('ijADPwLb'),
             'role' => 'staff',

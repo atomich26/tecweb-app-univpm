@@ -88,17 +88,17 @@ Route::prefix('admin')->group(function(){
     Route::get('gestione-prodotti', 'AdminController@viewProdottiTable')->name('admin.prodotti.table');
     Route::get('inserisci-prodotto', 'AdminController@viewInsertProdotto')->name('admin.prodotto.new');
     Route::post('inserisci-prodotto', 'AdminController@storeProdotto')->name('admin.prodotto.store');
-    Route::post('assegna-prodotti', 'AdminController@assignProdottiUtente')->name('admin.prodotti.assign');
-    Route::get('modifica-prodotto/{prodottoID}', 'AdminController@modifyProdottoView')->name('admin.prodotto.modify');
+    Route::post('assegna-prodotti', 'AdminController@assignProdottiToUtente')->name('admin.prodotti.assign');
+    Route::get('modifica-prodotto/{prodottoID}', 'AdminController@viewModifyProdotto')->name('admin.prodotto.modify');
     Route::put('modifica-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('admin.prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('admin.prodotto.delete');
     Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('admin.prodotti.bulk-delete');
     
     //Rotte CRUD per le FAQ
     Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('admin.faq.table');
-    Route::get('inserisci-faq', 'AdminController@insertFAQView')->name('admin.faq.new');
+    Route::get('inserisci-faq', 'AdminController@viewInsertFAQ')->name('admin.faq.new');
     Route::post('inserisci-faq', 'AdminController@storeFAQ')->name('admin.faq.store');
-    Route::get('modifica-faq/{faqID}', 'AdminController@modifyFAQView')->name('admin.faq.modify');
+    Route::get('modifica-faq/{faqID}', 'AdminController@viewModifyFAQ')->name('admin.faq.modify');
     Route::put('modifica-faq/{faqID}', 'AdminController@updateFAQ')->name('admin.faq.update');
     Route::delete('elimina-faq/{faqID}', 'AdminController@deleteFAQ')->name('admin.faq.delete');
     Route::delete('elimina-faq', 'AdminController@bulkDeleteFaq')->name('admin.faq.bulk-delete');
@@ -114,11 +114,11 @@ Route::prefix('admin')->group(function(){
 
     //Rotte CRUD per i centri assistenza
     Route::get('gestione-centri-assistenza', 'AdminController@viewCentriAssistenzaTable')->name('admin.centri.table');
-    Route::get('centri-assistenza/inserisci-centro', 'AdminController@insertCentro')->name('admin.centro.new');
+    Route::get('centri-assistenza/inserisci-centro', 'AdminController@viewInsertCentro')->name('admin.centro.new');
     Route::post('centri-assistenza/inserisci-centro', 'AdminController@saveCentro')->name('admin.centro.store');
-    Route::get('centri-assistenza/modifica-centro/{centroID}','AdminController@modifyCentro')->name('admin.centro.modify');
+    Route::get('centri-assistenza/modifica-centro/{centroID}','AdminController@viewModifyCentro')->name('admin.centro.modify');
     Route::put('centri-assistenza/modifica-centro/{centroID}','AdminController@updateCentro')->name('admin.centro.update');
-    Route::delete('/centri-assistenza/{centerID}', 'AdminController@deleteCentro')->name('admin.centro.delete');
+    Route::delete('/centri-assistenza/{centroID}', 'AdminController@deleteCentro')->name('admin.centro.delete');
     Route::delete('elimina-centri', 'AdminController@bulkDeleteCentri')->name('admin.centri.bulk-delete');
     
     //Rotte CRUD per i malfunzionamenti

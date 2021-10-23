@@ -1,13 +1,13 @@
 @php
 use App\Models\Enums\Categories;
 @endphp
-{{  Form::open(array('route'=>['prodotto.update', $product->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
+{{  Form::open(array('route'=>[Auth::user()->role . '.prodotto.update', $prodotto->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
 <h2>Modifica Prodotto</h2>
 
     <div>
         {{Form::label('nome', 'Nome del prodotto')}}
-        {{Form::text('nome',$product->nome)}}
+        {{Form::text('nome',$prodotto->nome)}}
         @if ($errors->first('nome'))
                 <ul>
                     @foreach ($errors->get('nome') as $message)
@@ -20,7 +20,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('modello', 'Codice Identifico Modello')}}
-        {{Form::text('modello',$product->modello)}}
+        {{Form::text('modello',$prodotto->modello)}}
         @if ($errors->first('modello'))
                 <ul>
                     @foreach ($errors->get('modello') as $message)
@@ -40,7 +40,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('descrizione','Descrizione del Prodotto')}}
-        {{Form::textarea('descrizione',$product->descrizione)}}
+        {{Form::textarea('descrizione',$prodotto->descrizione)}}
         @if ($errors->first('descrizione'))
                 <ul>
                     @foreach ($errors->get('descrizione') as $message)
@@ -53,7 +53,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('specifiche', 'Specifiche del Prodotto')}}
-        {{Form::textarea('specifiche',$product->specifiche)}}
+        {{Form::textarea('specifiche',$prodotto->specifiche)}}
         @if ($errors->first('specifiche'))
                 <ul>
                     @foreach ($errors->get('specifiche') as $message)
@@ -66,7 +66,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('guida_installazione', "Breve Guida all'Installazione")}}
-        {{Form::textarea('guida_installazione',$product->guida_installazione)}}
+        {{Form::textarea('guida_installazione',$prodotto->guida_installazione)}}
         @if ($errors->first('guida_installazione'))
                 <ul>
                     @foreach ($errors->get('guida_installazione') as $message)
@@ -79,7 +79,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
         {{Form::label('note_uso',"Note d'uso")}}
-        {{Form::textarea('note_uso', $product->note_uso)}}
+        {{Form::textarea('note_uso', $prodotto->note_uso)}}
         @if ($errors->first('note_uso'))
                 <ul>
                     @foreach ($errors->get('note_uso') as $message)
@@ -105,7 +105,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
        {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
-       {{form::select('utenteID',$users,$product->utenteID,['placeholder'=>'Non assegnato'])}}
+       {{form::select('utenteID',$staffUtenti,$prodotto->utenteID,['placeholder'=>'Non assegnato'])}}
     <div>
     {{  Form::hidden ('_method', 'PUT')}}
     {{  Form::submit ('Conferma' )}}

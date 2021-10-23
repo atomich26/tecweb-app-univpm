@@ -19,23 +19,94 @@ use Illuminate\Support\Facades\Storage;
 
 trait ProdottiActions
 {
+
     public function viewProdottiTable(){
         $table = new ProdottiTable();
 
-        return view(Auth::user()->role . '.prodotti-table')->with('table', $table);
+        return view('admin.datatable', ['title' => 'Gestione prodotti', 'table' => $table]);
     }
 
-    public function insertProdotto(){
-        $users =  User::where('role','staff')->pluck('username','ID');
+    public function viewInsertProdotto(){
+        $staffUtenti =  User::where('role','staff')->pluck('username','ID');
 
-        return view ('admin.insert-prodotto')->with('users', $users);
-
+        return view('admin.insert-prodotto')->with('staffUtenti', $staffUtenti);
     }
 
     public function storeProdotto(ProdottoRequest $request){
         $prodotto = new Prodotto();
+        $this->fillProdotto($request, $prodotto);
+
+
+
+        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.insert'));
+    }
+
+    public function viewModifyProdotto($prodottoID){
+        $prodotto = Prodotto::find($prodottoID);
+        
+        if(!$prodotto)
+            return response()->actionResponse('prodotto.new', 'error', __('message.prodotto.not-exist'));
+
+        $staffUtenti = User::where('role','staff')->pluck('username','ID');
+
+        return view('admin.modify-prodotto')->with('prodotto', $prodotto)->with('staffUtenti', $staffUtenti);
+    }
+
+    public function updateProdotto(ProdottoRequest $request, $prodottoID){
+        $prodotto = Prodotto::find($prodottoID);
+
+        if(!$prodotto)
+            return response()->actionResponse('prodotto.new', 'error', __('message.prodotto.not-exist'));
+
+        $this->fillProdotto($request, $prodotto);
+
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', 'successful', __('message.prodotto.update'));
+    }
+
+    public function deleteProdotto($prodottoID){ 
+        $prodotto = Prodotto::find($prodottoID);
+        
+        if(!$prodotto)
+            return response()->actionResponse(Auth::user()->role . '.prodotti.table', 
+            'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
+        
+        Storage::delete('/public/images/products/' . $prodotto->file_img);
+        $prodotto->delete($prodottoID);
+
+        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
+    }
+    
+    public function assignProdottiToUtente(Request $request){
+        $selected = $request->optionSelectedID;
+        error_log($selected);
+        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->items)->where('utenteID', $selected)->exists();
+        
+        if($isAlreadyAssigned)
+            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
+
+        Prodotto::whereIn('ID', $request->items)->update(['utenteID' => $selected]);
+
+        return response()->json([
+            'alert' => 'successful',
+            'message' => 'Assegnazione prodotti completata.', 
+            'updated_at' => Prodotto::find($request->items[0])->updated_at->format('d/m/Y H:i')], 200);
+    }
+   
+    public function bulkDeleteProdotti(Request $request){
+        if($request->items == null || strlen($request->items) < 1)
+            return response()->actionResponse("admin.prodotti.table", 'error', 'Impossibile eliminare i prodotti selezionati. Controlla i parametri e riprova.');
+
+        $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
+        Prodotto::destroy($items);
+        
+        return response()->actionResponse("admin.prodotti.table", 'successful', __('message.prodotto.bulk-delete'));
+    }
+
+    // Da completare
+    protected function fillProdotto(ProdottoRequest $request, Prodotto $prodotto){
         $prodotto->fill($request->validated());
         $prodotto->categoriaID = $request->categoriaID;
+        $prodotto->utenteID = $request->utenteID;
 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
@@ -43,81 +114,16 @@ trait ProdottiActions
         }
         else
             $imageName = NULL;
-
-        $prodotto->file_img = $imageName;
-        $prodotto->save();
-
-        if(!is_null($imageName)){
-            $file->storeAs('/public/images/products/', $imageName);
-        }
-
-        return redirect()->route('admin.prodotti.table');
-    }
-
-    public function modifyProdottoView($prodottoID){
-        $prodotto = Prodotto::find($prodottoID);
-        
-        if(!$prodotto)
-            return response()->actionResponse('prodotto.new', 'error', 'validation.form-messages.prodotto.not-exist');
-
-        $users = DB::table('utenti')->where('role','staff')->pluck('username','ID');
-        return view(Auth::user()->role . '.modify-prodotto')->with('product', $prodotto)->with('users', $users);
-    }
-
-    public function updateProdotto(ProdottoRequest $request, $prodottoID){
-        $prodotto = Prodotto::find($prodottoID);
-        $prodotto->fill($request->validated());
-        $prodotto->categoriaID = $request->categoriaID;
- 
-        if($request->hasFile('file_img')){
-            $file = $request->file('file_img');
-            $imageName = $file->getClientOriginalName();
-        }
-        else
-            $imageName = NULL;
-
-        $prodotto->file_img = $imageName;
-        $prodotto->save();
-
-        if(!is_null($imageName)){
-            $file->storeAs('/public/images/products/', $imageName);
-        }
-
-        return redirect()->route(Auth::user()->role . 'prodotti.table')
-            ->with('message', 'validation.form-messages.update.prodotto')
-            ->with('alertType', 'successful');
-    }
-
-    public function deleteProdotto($prodottoID){ 
-        try {
-            $prodotto = Prodotto::findOrFail($prodottoID);
-        } catch (\Throwable $th) {
-            return response()->actionResponse(Auth::user()->role . 'prodotti.table', 
-            'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
-        }
-        Storage::delete('/public/images/products/' . $prodotto->file_img);
-        $prodotto->delete($prodottoID);
-
-        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
-    }
     
-    public function assignProdottiUtente(Request $request){
-        $selected = $request->utenteID;
 
-        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
-        
-        if($isAlreadyAssigned)
-            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
+        if($imageName === $prodotto->file_img){
 
-        Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
+        }
 
-        return response()->json([
-            'alert' => 'successful',
-            'message' => 'Assegnazione prodotti completata.', 
-            'updated_at' => Prodotto::find($request->prodotti[0])->updated_at->format('d/m/Y H:i')], 200);
-    }
-   
-    public function bulkDeleteProdotti(Request $request){
-        
+        if(!is_null($imageName)){
+
+            $file->storeAs('/public/images/products/', $imageName);
+        }
+        $prodotto->save();
     }
 }

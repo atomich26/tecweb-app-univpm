@@ -1,6 +1,6 @@
 <div id="form-insert-faq" class="form-admin-data" >
 
-    {{ Form::open(array('route' => ['faq.store'], 'id' =>'insertFaq', 'Method'=>'POST')) }}
+    {{ Form::open(array('route' => ['admin.faq.store'], 'id' =>'insertFaq', 'Method'=>'POST')) }}
 
     <h2>Aggiungi una nuova FAQ</h2>
         <div class="wrap-input .ckeditor">
@@ -32,8 +32,7 @@
         </div>
 
     <div>
-        {{  Form::submit ('Salva e chiudi', ['formaction' => route('faq.store', ['action' => 'close'])]) }}
-        {{  Form::submit ('Salva e nuovo', ['formaction' => route('faq.store', ['action' => 'new'])]) }}
+        {{  Form::submit ('Salva', ['formaction' => route('admin.faq.store', ['action' => 'close'])]) }}
         {{  Form::reset ('Azzera')}}
     </div>
     {{Form::close()}}

@@ -1,4 +1,4 @@
-{{  Form::open(array('route'=>'prodotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
+{{  Form::open(array('route'=>'admin.prodotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
 
 <h2>Inserimento Prodotto</h2>
 
@@ -104,9 +104,9 @@
     <br>
     <div>
        {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
-       {{form::select('utenteID',$users,null,['placeholder'=>'Non assegnato'])}}
+       {{form::select('utenteID',$staffUtenti, null ,['placeholder'=>'Non assegnato'])}}
     <div>
-    {{  Form::submit ('Conferma' )}}
+    {{  Form::submit ('Conferma')}}
     </div>
     {{Form::reset('Azzera')}}
     {{Form::close()}}

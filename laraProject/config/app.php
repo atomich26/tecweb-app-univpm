@@ -231,6 +231,7 @@ return [
         'User' => App\User::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Prodotto' => App\Models\Resources\Prodotto::class,
+        'CentroAssistenza' => App\Models\Resources\CentroAssistenza::class,
     ],
 
 ];

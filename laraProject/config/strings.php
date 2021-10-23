@@ -18,7 +18,7 @@ return [
         'sito_web' => 50,
         'via' => 50,
         'cap' => 5,
-        'città' => 50
+        'città' => 50,
     ],
 
     'utente' => [

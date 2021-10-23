@@ -1,5 +1,5 @@
 <div id="form-modify-faq" class="form-admin-data" >
-    {{ Form::open(array('route' => ['faq.update', $faq->ID], 'id' =>'modify-Faq', 'Method'=>'POST')) }}
+    {{ Form::open(array('route' => ['admin.faq.update', $faq->ID], 'id' =>'modify-Faq', 'Method'=>'POST')) }}
 
     <h2>Modifica FAQ</h2>
         <div class="wrap-input">
@@ -32,7 +32,6 @@
 
     <div>
         {{  Form::submit ('Aggiorna')}}
-        {{  Form::submit ('Aggiorna e chiudi')}}
         {{  Form::reset ('Azzera')}}
         {{  Form::hidden ('_method', 'PUT')}}
     </div>

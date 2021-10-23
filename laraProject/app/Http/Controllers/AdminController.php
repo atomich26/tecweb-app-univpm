@@ -33,18 +33,14 @@ class AdminController extends Controller
     // Metodi per le CRUD degli utenti
     public function viewUtentiTable(){
         $table = new UtentiTable();
-        return view('admin.utenti-table')->with('table', $table);
+        
+        return view('admin.datatable', ['title' => 'Gestione utenti', 'table' => $table]);
     }
 
     public function insertUtente(){
-        $centriAssistenza = CentroAssistenza::all();
-        $centriMap = array();
-        
-        foreach($centriAssistenza as $centro){
-            $centriMap[$centro->ID] = $centro->ID . " - " . $centro->ragione_sociale;
-        }
+        $centriAssistenza = CentroAssistenza::all()->pluck('ragione_sociale', 'ID');
 
-        return view ('admin.insert-utente')->with('centri', $centriMap);
+        return view ('admin.insert-utente', ['centri', $centriAssistenza]);
     }
 
     public function saveUtente(UserRequest $request){
@@ -110,8 +106,22 @@ class AdminController extends Controller
         }
         $user->save();
         return redirect()->route('utenti.table');
+    }
 
+    public function assignUtenteCategoria(Request $request){
+        $selected = $request->centroID;
 
+        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
+        
+        if($isAlreadyAssigned)
+            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
+
+        Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
+
+        return response()->json([
+            'alert' => 'successful',
+            'message' => 'Assegnazione prodotti completata.', 
+            'updated_at' => Prodotto::find($request->prodotti[0])->updated_at->format('d/m/Y H:i')], 200);
     }
 
     public function deleteUtente($utenteID){
@@ -132,134 +142,151 @@ class AdminController extends Controller
     }
 
     public function bulkDeleteUtenti(Request $request){        
-        $this->bulkDeleteItems($request->items, new User);
+        bulkDeleteItems($request->items, new User);
         
         return response()->actionResponse('utenti.table', 'successful', 'message.utente.bulk-delete');
     }
 
-    // Metodi per le CRUD delle faq       
+    public function assignUtentiToCentro(){
+        $selected = $request->optionSelectedID;
+        
+        $containsNotTecnico = User::whereIn('ID', $request->items)->where('role', '!=', 'tecnico')->exists();
 
+        if($containsNotTecnico)
+            return response()->json(['alert' => 'warning', 'message' => 'Puoi assegnare ad un centro assistenza solo gli utenti con il ruolo di tecnico.'], 400);
+    
+        $isAlreadyAssigned = User::whereIn('ID', $request->items)->where('centroID', $selected)->exists();
+
+        if($isAlreadyAssigned)
+            return response()->json(['alert' => 'warning', 'message' => "Alcuni tecnici selezionati sono stati già assegnati al centro assistenza scelto. Riprova."], 400);
+
+        User::whereIn('ID', $request->items)->update(['centroID' => $selected]);
+
+        return response()->json([
+            'alert' => 'successful',
+            'message' => 'Assegnazione utenti completata.']);
+    }
+
+    // Metodi per le CRUD delle faq       
     public function viewFaqTable(){
         $table = new FaqTable();
-        return view('admin.faq-table')->with('table', $table);
+
+        return view('admin.datatable', ['title' => 'Gestione FAQ', 'table' => $table]);
     }
 
-    public function insertFAQView(){
-        return view ('admin.insert-faq');
+    public function viewInsertFAQ(){
+        return view ('admin.faq-form', ['title' => 'Inserisci FAQ', 'action' => 'insert']);
     }
 
-    public function storeFAQ(FAQRequest $request, $faqID = null){
-        $action = $request->query('action');
+    public function storeFAQ(FAQRequest $request){
+        $faq = new FAQ();
+        $faq->fill($request->validated());
+        $faq->save();
+
+        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.insert'));
+    }
+
+    public function viewModifyFAQ($faqID){
         $faq = Faq::find($faqID);
+        
+        if($faq === null)
+            return response()->actionResponse('admin.faq.new', 'error', __('message.faq.not-exist'));
+        
+        return view('admin.faq-form', ['title' => 'Modifica FAQ ' . $faq->ID, 'action' => 'modify', 'faq'=> $faq]);
+    }
 
-        if($request->isMethod('post')){
-            if(is_null($faq)){}
-            
-        }
+    public function updateFAQ(FAQRequest $request, $faqID){
+        $faq = FAQ::find($faqID);
+
+        if($faq === null)
+            return response()->actionResponse('admin.faq.new', 'error', __('message.faq.not-exist'));
 
         $faq->fill($request->validated());
-        return $faq->save();
-    }
+        $faq->save();
 
-    public function modifyFAQView($faqID){
-        $faq = Faq::find($faqID);
-        
-        if(!is_null($faq))
-            return view ('admin.modify-faq')->with('faq', $faq);
-        
-        return response()->actionResponse('faq.new', 'error', 'validation.form-messages.faq.not-exist');
-    }
-
-    public function updateFAQ(FAQRequest $request, $faqID){ 
-        if(is_null($faq))
-            return response()->actionResponse('faq.new', 'error', __('message.faq.not-exist'));
-
-        $this->storeFAQ($request, $faqID);
-
-        return response()->actionResponse('faq.new', 'successful', __('message.faq.update'));
+        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.update', ['item' => $faq->ID]));
     }
 
     public function deleteFAQ($faqID){
-        try {
-            Faq::findOrFail($faqID)->delete();
-        } catch (\Throwable $th) {
-            return response()->actionResponse('faq.table', 'error', __('message.faq.not-exist'));
-        }
+        $faq = FAQ::find($faqID);
 
-        return response()->actionResponse('faq.table', 'successful', __('message.faq.delete'));
+        if($faq === null)
+            return response()->actionResponse('admin.faq.table', 'error', __('message.faq.not-exist'));
+
+        $faq->delete();
+
+        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.delete', ['item' => $faqID]));
     }
 
     public function bulkDeleteFaq(Request $request){
-        $perfomedAction = $this->bulkDeleteItems($request->items, new Faq(), 'message.faq.bulk-delete');
+        if($request->items == null || strlen($request->items) < 1)
+            return response()->actionResponse("admin.faq.table", 'error', 'Impossibile eliminare le faq selezionate. Controlla i parametri e riprova.');
+
+        $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
+        FAQ::destroy($items);
         
-        return $perfomedAction;
-    }
-
-    public function bulkDeleteItems(String $itemsID = null, Model $model, $success){
-        if(is_null($itemsID) && strlen($itemsID) < 1)
-            return response()->actionResponse('faq.table', 'error', 'Impossibile eliminare gli elementi selezionati.');
-    
-        $items = explode(',', $itemsID, config('laravel-table.value.rowsNumber'));
-        $model::destroy($items);
-
-        return response()->actionResponse('faq.table', 'successful', __($success));
+        return response()->actionResponse("admin.faq.table", 'successful', __('message.faq.bulk-delete'));
     }
     
-    //funzioni dedicate ai centri
-
+    //Metodi per le CRUD per i centri assistenza
     public function viewCentriAssistenzaTable(){
         $table = new CentriAssistenzaTable();
-        return view('admin.centri-assistenza-table')->with('table', $table);
+
+        return view('admin.datatable', ['title' => 'Gestione centri assistenza', 'table' => $table]);
     }
 
-    public function insertCentro(){
-        return view('admin.insert-centro');
+    public function viewInsertCentro(){
+        return view('admin.centro-assistenza-form', ['title' => 'Inserisci centro assistenza', 'action' => 'insert']);
     }
 
-    public function saveCentro(CentroRequest $request){
-        $center = new CentroAssistenza;
-        $center->ragione_sociale = $request->ragione_sociale;
-        $center->telefono = $request->telefono;
-        $center->email = $request->email;
-        $center->sito_web = $request->sito_web;
-        $center->descrizione = $request->descrizione;
-        $center->via = $request->via;
-        $center->città = $request->città;
-        $center->cap = $request->cap;
+    public function storeCentro(CentroRequest $request){
+        $centro = new CentroAssistenza;
+        $centro->fill($request->validate());
+        $centro->save();
 
-        $center->save();
-
-        return redirect()->route('centri.table');
-
+        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.insert'));
     }
 
-    public function modifyCentro($centerID){
-        $center=CentroAssistenza::find($centerID);
-        return view('admin.modify-centro')->with('centro.modify', $center);
+    public function viewModifyCentro($centroID){
+        $centro = CentroAssistenza::find($centroID);
+
+        if($centro === null)
+            return response()->actionResponse('admin.insert-centro', 'successful', __('message.centro-assistenza.not-exists'));
+
+        return view('admin.centro-assistenza-form', ['title' => 'Modifica centro assistenza ' . $centro->ID, 'action' => 'modify', 'centro' => $centro]);
     }
 
-    public function updateCentro(CentroRequest $request, $centerID){
-        $center = CentroAssistenza::find($centerID);
-        $center->ragione_sociale = $request->ragione_sociale;
-        $center->telefono = $request->telefono;
-        $center->email = $request->email;
-        $center->sito_web = $request->sito_web;
-        $center->descrizione = $request->descrizione;
-        $center->via = $request->via;
-        $center->città = $request->città;
-        $center->cap = $request->cap;
-        $center->save();
+    public function updateCentro(CentroRequest $request, $centroID){
+        $centro = CentroAssistenza::find($centroID);
 
-        return redirect()->route('centri.table');
+        if($centro === null)
+            return response()->actionResponse('admin.insert-centro', 'successful', __('message.centro-assistenza.not-exists'));
 
+        $centro->fill($request->validate());
+        $centro->save();
+
+        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));
     }
 
-    public function deleteCentro($centerID){
-        $center = CentroAssistenza::find($centerID);
-        $center->delete($centerID);
+    public function deleteCentro($centroID){
+        $centro = CentroAssistenza::find($centroID);
+        
+        if($centro === null)
+            return response()->actionResponse('admin.centri.table', 'error', __('message.centro-assistenza.not-exist'));
 
-        return redirect()->return('centri.table');
+        $centro->delete($centroID);
+
+        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.delete', ['item' => $centroID]));
     }
 
+    public function bulkDeleteCentri(Request $request){
+        if($request->items == null || strlen($request->items) < 1)
+            return response()->actionResponse("admin.centri.table", 'error', 'Impossibile eliminare i centri assistenza selezionati. Controlla i parametri e riprova.');
+
+        $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
+        CentroAssistenza::destroy($items);
+    
+        return response()->actionResponse("admin.centri.table", 'successful', __('message.centro-assistenza.bulk-delete'));
+    }
 }
 

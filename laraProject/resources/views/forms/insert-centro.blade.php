@@ -1,5 +1,5 @@
 
-{{  Form::open(array('route'=>'centro.store', 'id'=>'insertCenter'))}}
+{{  Form::open(array('route'=>'admin.centro.store', 'id'=>'insertCenter'))}}
 
     <h2>Inserimento Centro Assistenza</h2>
 

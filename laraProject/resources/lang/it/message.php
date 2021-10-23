@@ -4,8 +4,8 @@ return [
 
     'faq' => [
         'insert' => 'Faq creata con successo.',
-        'update' => 'La faq selezionata è stata aggiornata con successo.',
-        'delete' => 'La faq selezionata è stata eliminata.',
+        'update' => 'La faq :item è stata aggiornata con successo.',
+        'delete' => 'La faq :item è stata eliminata.',
         'not-exist' => 'La faq richiesta non esiste.',
         'bulk-delete' => 'Le faq selezionate sono state eliminate.',
     ],
@@ -18,8 +18,8 @@ return [
     ], 
     'centro-assistenza' => [
         'insert' => 'Il centro assistenza è stato creato con successo.',
-        'update' => 'Il centro assistenza è stato aggiornato.',
-        'delete' => 'Il centro assistenza è stato eliminato.',
+        'update' => 'Il centro assistenza :item è stato aggiornato.',
+        'delete' => 'Il centro assistenza :item è stato eliminato.',
         'not-exist' => 'Il centro assistenza richiesto non esiste.',
         'bulk-delete' => 'I centri assistenza selezionati sono stati eliminati.'
     ], 

@@ -15,11 +15,11 @@ class FaqTable extends AdminTable{
     protected function build(){
 
         $this->model(Faq::class)->routes([
-            'index'   => ['name' => 'faq.table'],
-            'create'  => ['name' => 'faq.new'],
-            'edit'    => ['name' => 'faq.modify'],
-            'destroy' => ['name' => 'faq.delete'],
-            'bulk-destroy' => ['name' => 'faq.bulk-delete']
+            'index'   => ['name' => 'admin.faq.table'],
+            'create'  => ['name' => 'admin.faq.new'],
+            'edit'    => ['name' => 'admin.faq.modify'],
+            'destroy' => ['name' => 'admin.faq.delete'],
+            'bulk-destroy' => ['name' => 'admin.faq.bulk-delete']
         ])->title('Gestione faq')
         ->setIcon('faq')
         ->destroyConfirmationHtmlAttributes(function (Faq $faq) {

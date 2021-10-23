@@ -19,11 +19,12 @@ trait SoluzioniActions
     public function insertSoluzione($productID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
         $product = Prodotto::find($productID);
+        
         if(!($malfunzionamento->prodottoID == $product->ID)){
             abort(404);
         }
         else
-        return view ('admin.insert-soluzione') ->with('product', $product)
+        return view ('admin.insert-soluzione')->with('product', $product)
                                                         ->with('malfunzionamento', $malfunzionamento);
    
     }
@@ -60,5 +61,15 @@ trait SoluzioniActions
         else 
             
             return abort(403);
+    }
+
+    public function bulkDeleteItems($itemsID = null, Model $model){
+        if($itemsID == null || strlen($itemsID) < 1)
+            return false;
+
+        $items = explode(',', $itemsID, config('laravel-table.value.rowsNumber'));
+        $model::destroy($items);
+        
+        return true;
     }
 }

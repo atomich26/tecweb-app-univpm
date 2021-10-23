@@ -17,7 +17,7 @@
             <div class="product-buttons">
 
                 @can('isAdmin')
-                <a href="{{ route('prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
+                <a href="{{ route('admin.prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
                 @endcan
 
                 <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Ricerca e risoluzione dei problemi</a>

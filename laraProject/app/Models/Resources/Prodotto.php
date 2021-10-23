@@ -6,24 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use App\Listeners\ProdottoDeleted;
 
 
-class prodotto extends Model
+class Prodotto extends Model
 {
     protected $table ='prodotti';
     protected $primaryKey = 'ID';
     public $timestamps = true;
-    protected $guarded = ['ID'];
-
-    protected $dispatchesEvents = [
-        'deleted' => ProdottoDeleted::class,
-    ];
-
+    protected $guarded = ['ID', 'utenteID', 'categoriaID'];
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nome', 'modello', 'categoriaID', 'descrizione', 'specifiche', 'guida_installazione', 'note_uso', 'utenteID'
+        'nome', 'modello', 'descrizione', 'specifiche', 'guida_installazione', 'note_uso'
     ];
 
     public function malfunzionamenti(){

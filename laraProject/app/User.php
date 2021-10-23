@@ -16,10 +16,6 @@ class User extends Authenticatable
     protected $table = 'utenti';
     protected $primaryKey = 'ID';
 
-    protected $dispatchesEvents = [
-        'deleted' => UserDeleted::class,
-    ];
-
     /**
      * The attributes that are mass assignable.
      *

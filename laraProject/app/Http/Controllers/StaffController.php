@@ -15,15 +15,9 @@ use App\Tables\ProdottiTable;
 
 class StaffController extends Controller
 {   
-    use ProdottiActions, SoluzioniActions;
+    use ProdottiActions, MalfunzionamentiActions, SoluzioniActions;
     
     public function __construct(){
         $this->middleware('can:isStaff');
-    }
-
-    public function viewProdottiTable(Request $request){
-        $table = new ProdottiTable($request);
-
-        return view('admin.staff-prodotti-table')->with('table', $table);
     }
 }

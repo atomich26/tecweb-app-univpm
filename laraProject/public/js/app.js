@@ -74,9 +74,24 @@ function showSearchTip() {
     msgProvider.send({ status: 'info', text: "Puoi cercare i prodotti per descrizione inserendo la parola chiave completa o parte di essa seguita dal carattere wildcard \'*\'.", duration: 10 });
 }
 
-function assegnaProdottiUtente() {
+function assignProdottiUtente() {
+    sendRequestAssegnItems((rowsSelected, optionSelected, response) => {
+        rowsSelected.find('td:nth-child(8)').text(optionSelected);
+        rowsSelected.find('td:nth-child(9)').text(response.updated_at);
+        $('#selector-all').prop("checked", false).change();
+    });
+}
+
+function assignUtentiCentro() {
+    sendRequestAssegnItems((rowsSelected, optionSelected, response) => {
+        rowsSelected.find('td:nth-child(10)').text(optionSelected);
+        $('#selector-all').prop("checked", false).change();
+    });
+}
+
+function sendRequestAssegnItems(callback) {
     let checkedItems = [];
-    let userNameSelected = $('#assign-user-select option:selected').text();
+    let optionSelected = $('#assign-select option:selected').text();
     let rowsSelected = $('.table tbody tr').filter(':has(:checkbox:checked)');
     
     rowsSelected.each(function () {
@@ -91,8 +106,8 @@ function assegnaProdottiUtente() {
         type: 'POST',
         dataType: 'json',
         data: {
-            utenteID: $('#assign-user-select').val(),
-            prodotti: checkedItems,
+            optionSelectedID: $('#assign-select').val(),
+            items: checkedItems,
             _token: $('meta[name="csrf-token"]').attr('content')
         },
         statusCode: {
@@ -103,10 +118,8 @@ function assegnaProdottiUtente() {
                 msgProvider.send({ status: 'error', text: "Errore interno al server, contatta l'amministratore." });
             },
             200: function (response) {
-                rowsSelected.find('td:nth-child(8)').text(userNameSelected);
-                rowsSelected.find('td:nth-child(9)').text(response.updated_at);
-                $('#selector-all').prop("checked", false).change();
                 msgProvider.send({ status: response.alert, text: response.message });
+                callback(rowsSelected, optionSelected, response);
             }
         }
     });

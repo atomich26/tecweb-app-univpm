@@ -64,6 +64,11 @@ h2.text-subtitle, h3.text-subtitle{
 ul.text-list{
     padding-left: 20px;
 }
+
+a.link-col{
+    font-weight: 400;
+}
+
 /* Elements */
 .button{
     display: inline-block;
