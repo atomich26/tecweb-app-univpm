@@ -20,7 +20,7 @@ Route::redirect('home', 'catalogo', 302);
 
 Route::get('catalogo','PublicController@viewCatalogo')->name('catalogo.view');
 
-Route::post('catalogo', 'PublicController@searchCatalogo')->name('catalogo.search');
+Route::get('catalogo/cerca', 'PublicController@searchCatalogo')->name('catalogo.search');
 
 Route::get('/catalogo/{prodottoID}', function(Request $request){
     return redirect()->route('catalogo.view', ['prodotto' => $request->prodottoID]);                             
@@ -58,7 +58,7 @@ Route::prefix('staff')->group(function () {
     Route::middleware('editProdotto')->group(function(){ 
 
         //Rotte CRUD per i prodotti
-        Route::get('modifica-prodotto/{prodottoID}', 'StaffController@modifyProdottoView')->name('staff.prodotto.modify');
+        Route::get('modifica-prodotto/{prodottoID}', 'StaffController@viewModifyProdotto')->name('staff.prodotto.modify');
         Route::put('modifica-prodotto/{prodottoID}', 'StaffController@updateProdotto')->name('staff.prodotto.update');
     
         //Rotte CRUD per i malfunzionamenti
@@ -105,10 +105,11 @@ Route::prefix('admin')->group(function(){
    
     //Rotte CRUD per gli utenti
     Route::get('gestione-utenti', 'AdminController@viewUtentiTable')->name('admin.utenti.table');
-    Route::get('inserisci-utente', 'AdminController@insertUtente')->name('admin.utente.new');
+    Route::get('inserisci-utente', 'AdminController@viewInsertUtente')->name('admin.utente.new');
     Route::post('inserisci-utente', 'AdminController@saveUtente')->name('admin.utente.store');
-    Route::get('modifica-utente/{utenteID}', 'AdminController@modifyUtente')->name('admin.utente.modify');
+    Route::get('modifica-utente/{utenteID}', 'AdminController@viewModifyUtente')->name('admin.utente.modify');
     Route::put('modifica-utente/{utenteID}', 'AdminController@updateUtente')->name('admin.utente.update');
+    Route::post('assegna-utenti', 'AdminController@assignUtentiToCentro')->name('admin.utenti.assign');
     Route::delete('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('admin.utente.delete'); 
     Route::delete('elimina-utenti', 'AdminController@bulkDeleteUtenti')->name('admin.utenti.bulk-delete');
 

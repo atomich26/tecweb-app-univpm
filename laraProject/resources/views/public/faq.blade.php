@@ -32,3 +32,14 @@
         </div>
     @endif
 @endsection
+
+@section('js-scripts')
+    <script> 
+        window.onload = () => { 
+            $('.faq li .question').click(function () {
+                $(this).find('.plus-minus-toggle').toggleClass('collapsed');
+                $(this).parent().toggleClass('active');
+            });
+        };
+    </script>
+@endsection

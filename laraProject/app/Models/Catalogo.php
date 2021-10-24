@@ -10,20 +10,31 @@ class Catalogo extends Model
 {
     const WILDCARD_PATTERN = '/^.[^*]+\*?$/';
     
-    public function getProdotti(){
-        return Prodotto::orderBy('created_at', 'desc');
+    public function getProdotti($keyword = null){
+        if($keyword == null || empty($keyword))
+            return Prodotto::orderBy('nome', 'asc')->paginate(6)->fragment('results');
+        
+        if(strpos($keyword, '*') != false)
+            $searchPattern = preg_quote(str_replace('*', '', $keyword));
+        else
+            $searchPattern = '[[:<:]]' . preg_quote($keyword) . '[[:>:]]';
+
+        $prodotti = Prodotto::whereRaw('descrizione REGEXP ' . '"' .$searchPattern . '"')->paginate(6)
+            ->appends(['keyword' => $keyword])
+            ->fragment('results');
+        
+        return $prodotti;
     }
 
     public function getProdottiByCat($catID){
         $categoria =  Categoria::findOrFail($catID);
-        $this->prodotti = $categoria->hasMany(Prodotto::class, 'categoriaID', 'ID');
+        $prodotti = $categoria->hasMany(Prodotto::class, 'categoriaID', 'ID')->paginate(6)->fragment('results')
+            ->appends(['categoria' => $categoria->ID]);
+
+        return ['categoria' => $categoria->nome ,'prodotti' => $prodotti];
     }
 
     public function getProdotto($prodottoID){
         return Prodotto::findOrFail($prodottoID);
-    }
-
-    public function getCategorieAsMap(){
-        return $this->categorieList->pluck(['ID', 'nome']);
     }
 }

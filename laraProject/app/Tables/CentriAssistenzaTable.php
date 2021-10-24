@@ -38,7 +38,7 @@ class CentriAssistenzaTable extends AdminTable{
             return link_to('mailto:' . $centro->email, $title = $centro->email, $attributes = ['class' => 'link-col']);
         });
         $this->column('sito_web')->title('Sito web')->html(function(CentroAssistenza $centro){
-            return link_to($centro->sito_web, $title = $centro->sito_web, $attributes = ['class' => 'link-col']);
+            return link_to($centro->sito_web, $centro->sito_web,['class' => 'link-col']);
         });
         $this->column('via')->title('Via');
         $this->column('città')->title('Città')->searchable()->sortable();

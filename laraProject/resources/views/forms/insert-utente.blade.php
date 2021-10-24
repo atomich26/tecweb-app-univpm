@@ -1,7 +1,7 @@
 
-{{  Form::open (array('route'=>'utente.store')) }}
+{{  Form::open (array('route'=>'admin.utente.store')) }}
 
-<h2>Inserisci Utente</h2>
+<h2>{{ $title }}</h2>
     <div>
             {{  Form::label ('username', 'Username' )}}
             {{  Form::text ('username', '')  }}
@@ -117,31 +117,12 @@
 
         <div id="centroID">
             {{  Form::label ('centroID', 'Centro Assistenza') }}
-            {{  Form::select ('centroID', $centri, null, ['placeholder' => '0 - Nessun Centro'])}}
+            {{  Form::select ('centroID', $centri, null, ['placeholder' => 'Nessun centro'])}}
         </div>
-
-
-
-
-
-
-
-
-
 
 {{  Form::submit ('Inserisci Utente')  }}
 {{  Form::reset ('Reset')}}
 
 {{  Form::close()}}
 
-<script>
-
-    $(document).ready(function(){
-        $('input[type=radio]').click(function(){
-            (this.value === "tecnico") ? $("#centroID").show() : $("#centroID").hide();
-        });
-    });
-
-
-</script>
 

@@ -50,11 +50,10 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
             else if($user->checkRole('staff')){
-                if($prodotto->utenteID == null || $prodotto->utenteID == $user->ID)
-                    return true;
-                else
-                    return false;
+                return $prodotto->utenteID == null || $prodotto->utenteID == $user->ID;
             }
+            else 
+                return false;
         });
     }
 }

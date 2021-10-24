@@ -1,8 +1,8 @@
 @extends('layouts.public', ['title' => $user->nome . " " . $user->cognome, 'headerPage' => false])
 
 @section('content')
-    <div class="user-profile-container container">
-        <h1 class="user-welcome">Riepilogo dei tuoi dati</h1>
+    <div class="user-profile-container container" style="padding: 0;">
+        <h1 class="user-welcome">{{ $user->nome . " " . $user->cognome}}</h1>
         <div class="flex-v-center" style="height:100%">
             <div class="col" style="text-align:center">
                 @include('helpers.user-profile-image', ['image' => $user->file_img, 'class' => 'user-img'])

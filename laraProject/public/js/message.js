@@ -29,7 +29,7 @@ class MsgServiceProvider {
      * 
      * @returns void
      */
-    #start(duration) {
+    #start() {
 
         if (this.#current == null)
             return;

@@ -1,6 +1,6 @@
 {{ Form::open(array('route'=> ['admin.centro.update', $centro->ID], 'id'=>'insertCenter', 'method'=>'POST')) }}
 
-<h2>Modifica Centro Assistenza</h2>
+<h2>{{ $title }}</h2>
 
 <div>
     {{ Form::label('ragione_sociale','Nominativo Azienda/Ragione sociale') }}

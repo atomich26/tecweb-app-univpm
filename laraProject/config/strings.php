@@ -8,7 +8,7 @@ return [
     ],
 
     'faq' => [
-        'domanda' => 150,
+        'domanda' => 130,
         'risposta' => 350
     ],
 

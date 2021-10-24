@@ -12,39 +12,33 @@ use app\models\resources\Soluzione;
 use App\Http\Requests\GetProductRequest;
 
 class PublicController extends Controller
-{
+{   
+    protected $catalogo;
+
+    public function __construct(){
+        $this->catalogo = new Catalogo();
+    }
 
     public function viewCatalogo(Request $request){
         $prodottoID = $request->query('prodotto');
         $categoriaID = $request->query('categoria');
 
-        $catalogo = new Catalogo();
-
         if(!empty($categoriaID))
-            return view('public.catalogo')->with('prodotti', $catalogo->getProdottiByCat($categoriaID)->paginate(10));
+            return view('public.catalogo', $this->catalogo->getProdottiByCat($categoriaID));
         elseif(!empty($prodottoID))
-            return view('public.prodotto')->with('prodotto', $catalogo->getProdotto($prodottoID));
+            return view('public.prodotto', ['prodotto' => $this->catalogo->getProdotto($prodottoID)]);
         else
-            return view('public.catalogo')->with('prodotti', $catalogo->getProdotti()->paginate(10));
+            return view('public.catalogo', ['prodotti' => $this->catalogo->getProdotti()]);
             
     }
 
     public function searchCatalogo(Request $request){
-        $catalogo = new Catalogo();
+        $prodottiSearched = $this->catalogo->getProdotti($request->keyword);
         
-        if(empty($keyword)){
-            $prodotti = $catalogo->getProdotti()->paginate(10);
-            return;
-        }
+        if($prodottiSearched->total() < 1)
+            return response()->actionResponse('catalogo.view', 'warning', 'La ricerca non ha prodotto risultati');
 
-        if(strpos($keyword, '*') != false)
-            $searchPattern = '[[:<:]]' . str_replace('*', '', $keyword);
-        else
-            $searchPattern = '[[:<:]]' . $keyword . '[[:>:]]';
-
-        $prodotti = $catalogo->getProdotti()->whereRaw('descrizione REGEXP ' . '\'' .$searchPattern . '\'')->paginate(10);
-        
-        return view('public.catalogo')->with('prodotti', $prodotti);
+        return view('public.catalogo', ['prodotti' => $prodottiSearched, 'keyword' => $request->keyword]);
     }
 
     public function viewCentriAssistenzaPage(){
@@ -53,6 +47,7 @@ class PublicController extends Controller
 
     public function viewFaqPage(){
         $faqs = FAQ::paginate(6);
+
         return view('public.faq')->with('faqs', $faqs);
     }
 }

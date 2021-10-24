@@ -2,7 +2,7 @@
 
     {{ Form::open(array('route' => ['admin.faq.store'], 'id' =>'insertFaq', 'Method'=>'POST')) }}
 
-    <h2>Aggiungi una nuova FAQ</h2>
+    <h2>{{ $title }}</h2>
         <div class="wrap-input .ckeditor">
             {{  Form::label('domanda', 'Domanda')}}
             {{  Form::textarea('domanda', old('domanda'), ['class' => 'input-data with-counter', 'max-length' => Config::get('strings.faq.domanda'), 'placeholder' => 'Inserisci qui la domanda']) }}

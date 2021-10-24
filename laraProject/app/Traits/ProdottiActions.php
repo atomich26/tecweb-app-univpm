@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Storage;
 
 trait ProdottiActions
 {
-
     public function viewProdottiTable(){
         $table = new ProdottiTable();
 

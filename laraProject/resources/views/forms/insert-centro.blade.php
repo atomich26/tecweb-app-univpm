@@ -1,7 +1,7 @@
 
 {{  Form::open(array('route'=>'admin.centro.store', 'id'=>'insertCenter'))}}
 
-    <h2>Inserimento Centro Assistenza</h2>
+    <h2>{{ $title }}</h2>
 
     <div>
         {{Form::label('ragione_sociale','Nominativo Azienda')}}

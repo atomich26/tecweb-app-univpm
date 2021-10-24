@@ -103,12 +103,14 @@ use App\Models\Enums\Categories;
     </div>
     <br>
     <br>
-    <div>
-       {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
-       {{form::select('utenteID',$staffUtenti,$prodotto->utenteID,['placeholder'=>'Non assegnato'])}}
-    <div>
+    @can('isAdmin')
+        <div>
+            {{form::label('utenteID','Selezionare membro staff a cui assegnare il prodotto')}}
+            {{form::select('utenteID',$staffUtenti,$prodotto->utenteID,['placeholder'=>'Non assegnato'])}}
+        <div>
+    @endcan
     {{  Form::hidden ('_method', 'PUT')}}
     {{  Form::submit ('Conferma' )}}
+
     </div>
-    {{Form::reset('Azzera')}}
-    {{Form::close()}}
+{{Form::close()}}

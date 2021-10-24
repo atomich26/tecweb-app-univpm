@@ -13,16 +13,12 @@
             @include('helpers.product-content-list', ['stringToSplit' => $prodotto->specifiche])
         </div>
 
-        @auth
+        @can('editProdotto', $prodotto->ID)
             <div class="product-buttons">
-
-                @can('isAdmin')
                 <a href="{{ route('admin.prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
-                @endcan
-
                 <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Ricerca e risoluzione dei problemi</a>
             </div>
-        @endauth
+        @endcan
     </div>
 </div>
 
@@ -68,11 +64,11 @@
 
         @endif
    
-    <br>
-    <br>
-    @if(isset($prodotto->staff->email))
-    <h3>Ancora problemi? <a href="mailTo:{!!$prodotto->staff->email!!}">Contatta il nostro esperto</a></h3>
-    @endif
+        <br>
+        <br>
+        @if(isset($prodotto->staff->email))
+            <h3>Ancora problemi? <a href="mailTo:{!!$prodotto->staff->email!!}">Contatta il nostro esperto</a></h3>
+        @endif
     @endif
     </div>
     </div>

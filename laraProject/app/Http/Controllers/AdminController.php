@@ -37,10 +37,10 @@ class AdminController extends Controller
         return view('admin.datatable', ['title' => 'Gestione utenti', 'table' => $table]);
     }
 
-    public function insertUtente(){
+    public function viewInsertUtente(){
         $centriAssistenza = CentroAssistenza::all()->pluck('ragione_sociale', 'ID');
 
-        return view ('admin.insert-utente', ['centri', $centriAssistenza]);
+        return view('admin.utente-form', ['title' => 'Inserisci un nuovo utente', 'action' => 'insert', 'centri' => $centriAssistenza]);
     }
 
     public function saveUtente(UserRequest $request){
@@ -71,10 +71,10 @@ class AdminController extends Controller
         return redirect()->route('prodotti.table');
     }
 
-    public function modifyUtente($userID){
+    public function viewModifyUtente($utenteID){
         $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
-        $user = User::find($userID);
-        return view ('admin.modify-utente')->with('user', $user)->with('centri',$centri);
+        $utente = User::find($utenteID);
+        return view ('admin.utente-form', ['title' => 'Modifica ' . $utente->username, 'utente' => $utente, 'centri' => $centri, 'action' => 'modify']);
     }
 
     public function updateUtente(UserRequest $request, $userID){
@@ -105,7 +105,7 @@ class AdminController extends Controller
             $user->centroID = NULL;
         }
         $user->save();
-        return redirect()->route('utenti.table');
+        return redirect()->route('admin.utenti.table');
     }
 
     public function assignUtenteCategoria(Request $request){
@@ -147,13 +147,13 @@ class AdminController extends Controller
         return response()->actionResponse('utenti.table', 'successful', 'message.utente.bulk-delete');
     }
 
-    public function assignUtentiToCentro(){
+    public function assignUtentiToCentro(Request $request){
         $selected = $request->optionSelectedID;
         
         $containsNotTecnico = User::whereIn('ID', $request->items)->where('role', '!=', 'tecnico')->exists();
 
         if($containsNotTecnico)
-            return response()->json(['alert' => 'warning', 'message' => 'Puoi assegnare ad un centro assistenza solo gli utenti con il ruolo di tecnico.'], 400);
+            return response()->json(['alert' => 'warning', 'message' => 'Puoi effettuare l\'assegnazione solo agli utenti con il ruolo di tecnico. Riprova.'], 400);
     
         $isAlreadyAssigned = User::whereIn('ID', $request->items)->where('centroID', $selected)->exists();
 
@@ -175,7 +175,7 @@ class AdminController extends Controller
     }
 
     public function viewInsertFAQ(){
-        return view ('admin.faq-form', ['title' => 'Inserisci FAQ', 'action' => 'insert']);
+        return view ('admin.faq-form', ['title' => 'Inserisci una nuova FAQ', 'action' => 'insert']);
     }
 
     public function storeFAQ(FAQRequest $request){
@@ -236,7 +236,7 @@ class AdminController extends Controller
     }
 
     public function viewInsertCentro(){
-        return view('admin.centro-assistenza-form', ['title' => 'Inserisci centro assistenza', 'action' => 'insert']);
+        return view('admin.centro-assistenza-form', ['title' => 'Inserisci un nuovo centro assistenza', 'action' => 'insert']);
     }
 
     public function storeCentro(CentroRequest $request){
@@ -253,7 +253,7 @@ class AdminController extends Controller
         if($centro === null)
             return response()->actionResponse('admin.insert-centro', 'successful', __('message.centro-assistenza.not-exists'));
 
-        return view('admin.centro-assistenza-form', ['title' => 'Modifica centro assistenza ' . $centro->ID, 'action' => 'modify', 'centro' => $centro]);
+        return view('admin.centro-assistenza-form', ['title' => 'Modifica ' . $centro->ragione_sociale, 'action' => 'modify', 'centro' => $centro]);
     }
 
     public function updateCentro(CentroRequest $request, $centroID){

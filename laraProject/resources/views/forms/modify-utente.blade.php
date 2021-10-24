@@ -1,10 +1,9 @@
+{{  Form::open (array('route' => ['admin.utente.update', $utente->ID] , 'method' => 'POST'))}}
 
-{{  Form::open (array('route' => ['utente.update', $user->ID] , 'method' => 'POST'))}}
-
-<h2>Modifica Utente</h2>
+<h2>{{ $title }}</h2>
     <div>
             {{  Form::label ('username', 'Username' )}}
-            {{  Form::text ('username', $user->username)  }}
+            {{  Form::text ('username', $utente->username)  }}
             @if ($errors->first('username'))
                 <ul>
                     @foreach ($errors->get('username') as $message)
@@ -40,7 +39,7 @@
     
     <div>
             {{  Form::label ('nome', 'Nome')  }}
-            {{  Form::text ('nome', $user->nome)  }}
+            {{  Form::text ('nome', $utente->nome)  }}
           @if ($errors->first('nome'))
                 <ul>
                     @foreach ($errors->get('nome') as $message)
@@ -52,7 +51,7 @@
 
  <div>
             {{  Form::label ('cognome', 'Cognome')}}
-            {{  Form::text ('cognome', $user->cognome)}}
+            {{  Form::text ('cognome', $utente->cognome)}}
             @if ($errors->first('cognome'))
                 <ul>
                     @foreach($errors->get('cognome') as $message)
@@ -74,7 +73,7 @@
         </div>
 <div>
             {{  Form::label ('data_nascita', 'Data di Nascita')}}
-            {{  Form::date('data_nascita', $user->data_nascita )}}
+            {{  Form::date('data_nascita', $utente->data_nascita )}}
             @if ($errors->first('data_nascita'))
                 <ul>
                     @foreach($errors->get('data_nascita') as $message)
@@ -86,7 +85,7 @@
 
 <div>
             {{  Form::label ('email', 'Indirizzo E-Mail')}}
-            {{  Form::email ('email', $user->email)}}
+            {{  Form::email ('email', $utente->email)}}
             @if ($errors->first('email'))
                 <ul>
                     @foreach($errors->get('email') as $message)
@@ -99,7 +98,7 @@
 
 	<div>
             {{  Form::label ('telefono', 'Telefono')}}
-            {{  Form::text ('telefono', $user->telefono)}}
+            {{  Form::text ('telefono', $utente->telefono)}}
             @if ($errors->first('telefono'))
             <ul>
                     @foreach($errors->get('telefono') as $message)
@@ -111,48 +110,25 @@
 
         <div>
             {{  Form::label ('role', 'Ruolo',['name'=>'role']) }}
-            {{  Form::radio ('role', 'tecnico', true, ['id' => 'tecnico', 'name' => 'role']) }} Tecnico
-            {{  Form::radio ('role', 'staff', false,['id' => 'staff', 'name' => 'role']) }} Staff
+            {{  Form::radio ('role', 'tecnico', $utente->role === 'tecnico', ['id' => 'tecnico', 'name' => 'role']) }} Tecnico
+            {{  Form::radio ('role', 'staff', $utente->role === 'staff', ['id' => 'staff', 'name' => 'role']) }} Staff
         </div>
         
         <div id="centroID">
             {{  Form::label ('centroID', 'Centro Assistenza')}}
-            {{  Form::select ('centroID', $centri, $user->centroID, ['placeholder' => '0 - Nessun Centro'])}}
-        </div>
-
-        
-       
-
-        
-        
-        
-     
-        
+            {{  Form::select ('centroID', $centri, $utente->centroID, ['placeholder' => 'Nessun centro'])}}
+        </div>        
 {{  Form::hidden('_method', 'PUT')}}
 {{  Form::submit ('Modifica Utente')  }}
-{{  Form::reset ('Reset')}}
-
 {{  Form::close()}}
 
 <script>
-
     $(document).ready(function(){
-    $('input[type=radio]').load(function(){
-        if(this.value === "tecnico") 
-        $("#centroID").show();
-        if(this.value === "staff")
-        $("#centroID").hide();
+        $('input[type=radio]').load(function(){
+            if(this.value === "tecnico") 
+                $("#centroID").show();
+            });
         });
-    });
-  
-    $(document).ready(function(){
-    $('input[type=radio]').click(function(){
-        if(this.value === "tecnico") 
-        $("#centroID").show();
-        if(this.value === "staff")
-        $("#centroID").hide();
-    });
 });
-
 </script>
      

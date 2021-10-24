@@ -1,4 +1,4 @@
-@extends('layouts.forms', ['title' => $title])
+@extends('layouts.admin', ['title' => $title])
 
 @section('content')
 

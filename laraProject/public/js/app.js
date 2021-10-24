@@ -4,7 +4,6 @@ var msgProvider = new MsgServiceProvider();
 //Inizializza le funzioni da eseguire alla fine del caricamento del DOM.
 $('document').ready(() => {
     windowLoadResponseMessage();
-    setupFaqButtons();
 });
 
 // <---- Funzioni per il counter delle textarea ----->
@@ -132,9 +131,3 @@ function windowLoadResponseMessage() {
         msgProvider.send({ status: metaMessage.attr('data-alert'), text: metaMessage.attr('content') });
 }
 
-function setupFaqButtons() {
-    $('.faq li .question').click(function () {
-        $(this).find('.plus-minus-toggle').toggleClass('collapsed');
-        $(this).parent().toggleClass('active');
-    });
-}

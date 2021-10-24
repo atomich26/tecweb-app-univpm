@@ -1,7 +1,7 @@
 <div id="form-modify-faq" class="form-admin-data" >
     {{ Form::open(array('route' => ['admin.faq.update', $faq->ID], 'id' =>'modify-Faq', 'Method'=>'POST')) }}
 
-    <h2>Modifica FAQ</h2>
+    <h2> {{ $title }}</h2>
         <div class="wrap-input">
             {{  Form::label('domanda', 'Domanda')}}
             {{  Form::textarea('domanda', $faq->domanda, ['class' => 'input-data with-counter', 'max-length' => Config::get('strings.faq.domanda'), 'placeholder' => 'Inserisci qui la domanda']) }}
