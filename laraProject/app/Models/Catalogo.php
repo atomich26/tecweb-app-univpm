@@ -7,19 +7,20 @@ use App\Models\Resources\Prodotto;
 use Illuminate\Database\Eloquent\Model;
 
 class Catalogo extends Model
-{
-    const WILDCARD_PATTERN = '/^.[^*]+\*?$/';
-    
+{ 
     public function getProdotti($keyword = null){
-        if($keyword == null || empty($keyword))
+        if($keyword == null)
             return Prodotto::orderBy('nome', 'asc')->paginate(6)->fragment('results');
-        
-        if(strpos($keyword, '*') != false)
-            $searchPattern = preg_quote(str_replace('*', '', $keyword));
-        else
-            $searchPattern = '[[:<:]]' . preg_quote($keyword) . '[[:>:]]';
 
-        $prodotti = Prodotto::whereRaw('descrizione REGEXP ' . '"' .$searchPattern . '"')->paginate(6)
+        $pos = strpos($keyword, '*');
+
+        if($pos !== false && $pos == strlen($keyword) - 1){
+            $searchPattern = '[[:<:]]' . preg_quote(substr_replace($keyword,'', $pos, 1), "\\");
+        }
+        else
+            $searchPattern =  '[[:<:]]' . preg_quote($keyword, "\\") . '[[:>:]]';
+
+        $prodotti = Prodotto::whereRaw('descrizione REGEXP ' . '"' . addslashes($searchPattern) . '"')->paginate(6)
             ->appends(['keyword' => $keyword])
             ->fragment('results');
         

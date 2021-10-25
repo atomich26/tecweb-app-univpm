@@ -1,10 +1,10 @@
 @extends('layouts.public', ['title' => $user->nome . " " . $user->cognome, 'headerPage' => false])
 
 @section('content')
-    <div class="user-profile-container container" style="padding: 0;">
-        <h1 class="user-welcome">{{ $user->nome . " " . $user->cognome}}</h1>
+    <div class="user-profile-container container" style="padding: 50px 5%">
+        <h1 class="user-welcome">Riepilogo dei tuoi dati</h1>
         <div class="flex-v-center" style="height:100%">
-            <div class="col" style="text-align:center">
+            <div class="col">
                 @include('helpers.user-profile-image', ['image' => $user->file_img, 'class' => 'user-img'])
             </div>
 
@@ -26,7 +26,7 @@
                     </li>
                     <li>
                         <h3><strong>Email:</strong></h3>
-                        <p class="info-label-value">{{ $user->email }}</p>
+                        <p class="info-label-value"> {!! link_to('emailto:' . $user->email, $user->email, true) !!}</p>
                     </li>
                     <li>
                         <h3><strong>Telefono:</strong></span></h3>

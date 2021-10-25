@@ -1,8 +1,8 @@
 @extends('layouts.public', ['title' => $prodotto->nome . " - " . $prodotto->modello, 'headerPage' => false])
 
 @section('content')
-<div class="header-product-page">
-    <div class="product-overview container">
+<div class="header-product-page flex-v-center">
+    <div class="product-overview container" style="height: auto; width:100%">
         <h1 class="product-name">{{ $prodotto->nome ?? 'Prodotto senza nome'}}</h1>
 
         @include('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'product-image'])
@@ -15,8 +15,8 @@
 
         @can('editProdotto', $prodotto->ID)
             <div class="product-buttons">
-                <a href="{{ route('admin.prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
-                <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Ricerca e risoluzione dei problemi</a>
+                <a href="{{ route(Auth::user()->role . '.prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
+                <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Modifica i malfunzionamenti noti</a>
             </div>
         @endcan
     </div>
@@ -39,37 +39,25 @@
     </div>
     
     <div id="malfunzionamento-prodotto" class="product-text">
-    @if(Auth::check())
-        <h3>Malfunzionamenti Riportati:</h3>
-        @if(isset($prodotto->malfunzionamenti))
-        <ul >
-        @foreach($prodotto->malfunzionamenti as $malfunzionamento)
-            <li>
-                <h4 class="malfunzionamento"> 
-                {{$malfunzionamento->descrizione}}
-                </h4>
-                @if(isset($malfunzionamento->soluzioni))
+        @if(Auth::check())
+            <h3>Malfunzionamenti noti:</h3>
+            @if(isset($prodotto->malfunzionamenti))
                 <ul>
-                    @foreach ($malfunzionamento->soluzioni as $soluzione)
-                    <li>
-                        {{$soluzione->descrizione}}
-                    </li>
-                    <br>
+                    @foreach($prodotto->malfunzionamenti as $malfunzionamento)
+                        <li>
+                            <h4 class="malfunzionamento-content"> {{$malfunzionamento->descrizione}}</h4>
+                            @if(isset($malfunzionamento->soluzioni))
+                                <ol>
+                                    @foreach ($malfunzionamento->soluzioni as $soluzione)
+                                        <li class="soluzione-content"><p>{{$soluzione->descrizione}}</p></li>
+                                    @endforeach
+                                </ol>
+                            @endif
+                        </li>
                     @endforeach
-                </ul>
-                @endif
-            </li>
-        @endforeach
-        </ul>
-
+                </ul>         
+            @endif
         @endif
-   
-        <br>
-        <br>
-        @if(isset($prodotto->staff->email))
-            <h3>Ancora problemi? <a href="mailTo:{!!$prodotto->staff->email!!}">Contatta il nostro esperto</a></h3>
-        @endif
-    @endif
     </div>
     </div>
 </div>
