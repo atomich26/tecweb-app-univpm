@@ -67,7 +67,7 @@ Route::prefix('staff')->group(function () {
         Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'StaffController@saveMalfunzionamento')->name('staff.malfunzionamento.store');
         Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@modifyMalfunzionamento')->name('staff.malfunzionamento.modify');
         Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@updateMalfunzionamento')->name('staff.malfunzionamento.update');
-        Route::delete('prod/{prodottoID}elimina-malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamento.delete');
+        Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamento.delete');
         Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamento.bulk-delete');
         
         //Rotte CRUD per le soluzioni
@@ -128,7 +128,7 @@ Route::prefix('admin')->group(function(){
     Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@saveMalfunzionamento')->name('admin.malfunzionamento.store');
     Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@modifyMalfunzionamento')->name('admin.malfunzionamento.modify');
     Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@updateMalfunzionamento')->name('admin.malfunzionamento.update');
-    Route::delete('prod/{prodottoID}elimina-malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamento.delete');
+    Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamento.delete');
     Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamento.bulk-delete');
     
     //Rotte CRUD per le soluzioni
