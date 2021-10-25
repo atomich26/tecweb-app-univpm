@@ -28,16 +28,17 @@ trait ProdottiActions
     public function viewInsertProdotto(){
         $staffUtenti =  User::where('role','staff')->pluck('username','ID');
 
-        return view('admin.insert-prodotto')->with('staffUtenti', $staffUtenti);
+        return view('admin.prodotto-form', [
+            'title' => 'Inserisci un nuovo prodotto',
+            'staffUtenti' => $staffUtenti,
+            'action' => 'insert']);
     }
 
     public function storeProdotto(ProdottoRequest $request){
         $prodotto = new Prodotto();
         $this->fillProdotto($request, $prodotto);
 
-
-
-        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.insert'));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', 'successful', __('message.prodotto.insert'));
     }
 
     public function viewModifyProdotto($prodottoID){
@@ -48,7 +49,11 @@ trait ProdottiActions
 
         $staffUtenti = User::where('role','staff')->pluck('username','ID');
 
-        return view('admin.modify-prodotto')->with('prodotto', $prodotto)->with('staffUtenti', $staffUtenti);
+        return view('admin.prodotto-form', [
+            'title' => "Modifica prodotto $prodotto->name",
+            'prodotto' => $prodotto,
+            'staffUtenti' => $staffUtenti,
+            'action' => 'modify']);
     }
 
     public function updateProdotto(ProdottoRequest $request, $prodottoID){

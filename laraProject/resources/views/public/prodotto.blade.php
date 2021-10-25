@@ -42,16 +42,16 @@
         @if(Auth::check())
             <h3>Malfunzionamenti noti:</h3>
             @if(isset($prodotto->malfunzionamenti))
-                <ul>
+                <ul style="padding: 20px 40px!important">
                     @foreach($prodotto->malfunzionamenti as $malfunzionamento)
                         <li>
-                            <h4 class="malfunzionamento-content"> {{$malfunzionamento->descrizione}}</h4>
+                            <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
                             @if(isset($malfunzionamento->soluzioni))
-                                <ol>
+                                <ul style="padding: 10px!important">
                                     @foreach ($malfunzionamento->soluzioni as $soluzione)
-                                        <li class="soluzione-content"><p>{{$soluzione->descrizione}}</p></li>
+                                        <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
                                     @endforeach
-                                </ol>
+                                </ul>
                             @endif
                         </li>
                     @endforeach

@@ -1,6 +1,3 @@
-@php
-use App\Models\Enums\Categories;
-@endphp
 {{  Form::open(array('route'=>[Auth::user()->role . '.prodotto.update', $prodotto->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
 <h2>Modifica Prodotto</h2>
@@ -33,7 +30,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
-    {{Form::select('categoriaID', Categorie::pluck('nome', 'ID'))}}
+    {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'), $prodotto->categoriaID)}}
 
     </div>
     <br>
@@ -91,8 +88,9 @@ use App\Models\Enums\Categories;
     <br>
     <br>
     <div>
-        {{Form::label('file_img','Immagine Prodotto')}}
-        {{Form::file('file_img')}}
+        {{ Form::hidden('img_current', $prodotto->file_img) }}
+        {{ Form::label('file_img','Immagine Prodotto') }}
+        {{ Form::file('file_img') }}
         @if ($errors->first('file_img'))
                 <ul>
                     @foreach ($errors->get('file_img') as $message)

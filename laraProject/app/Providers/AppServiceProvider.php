@@ -3,13 +3,14 @@
 namespace App\Providers;
 
 use App\User;
-use App\Models\Resources\Prodotto;
 use App\Observers\UserObserver;
+use App\Models\Resources\Prodotto;
 use App\Observers\ProdottoObserver;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
+use App\Models\Resources\CentroAssistenza;
 
 
 class AppServiceProvider extends ServiceProvider

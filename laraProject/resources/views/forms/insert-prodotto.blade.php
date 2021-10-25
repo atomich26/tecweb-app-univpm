@@ -30,7 +30,7 @@
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
-    {{Form::select('categoriaID', Categorie::pluck('nome', 'ID'))}}
+    {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'))}}
 
     </div>
     <br>
