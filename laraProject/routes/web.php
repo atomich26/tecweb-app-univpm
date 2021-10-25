@@ -38,7 +38,9 @@ Route::view('chi-siamo','public.chi-siamo')->name('chi-siamo');
 Route::view('informativa-privacy','public.privacy')->name('privacy');
 
 // Rotte dedicate agli utenti
-Route::get('profilo','UserController@index')->name('user.profile');
+Route::get('profilo',function() {
+    return view('users.user-profile')->with('user', Auth::user());
+})->name('user.profile')->middleware('can:hasProfilePage');
 
 // Rotte per l'autenticazione
 Route::redirect('accedi', 'login', 302);

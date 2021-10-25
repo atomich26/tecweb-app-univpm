@@ -108,43 +108,28 @@ class AdminController extends Controller
         return redirect()->route('admin.utenti.table');
     }
 
-    public function assignUtenteCategoria(Request $request){
-        $selected = $request->centroID;
-
-        $isAlreadyAssigned = Prodotto::whereIn('ID', $request->prodotti)->where('utenteID', $selected)->exists();
-        
-        if($isAlreadyAssigned)
-            return response()->json(['alert' => 'warning', 'message' => "Alcuni prodotti selezionati sono stati già assegnati all'utente scelto. Riprova."], 400);
-
-        Prodotto::whereIn('ID', $request->prodotti)->update(['utenteID' => $selected]);
-
-        return response()->json([
-            'alert' => 'successful',
-            'message' => 'Assegnazione prodotti completata.', 
-            'updated_at' => Prodotto::find($request->prodotti[0])->updated_at->format('d/m/Y H:i')], 200);
-    }
-
     public function deleteUtente($utenteID){
-        try {
-            $user = User::findOrFail($utenteID);
-        } catch (\Throwable $th) {
-            return response()->actionResponse('utenti.table', 'error', __('message.utente.not-exist'));
+        $user = User::find($utenteID);
+        
+        if($user === null)
+            return response()->actionResponse(Auth::user()->role . 'utenti.table', 'error', __('message.utente.not-exist'));
+        else if($user->checkRole('admin')){
+            return response()->actionResponse(Auth::user()->role . 'utenti.table', 'error', "Non è consentito eliminare un amministratore!");
         }
 
-        if($user->checkRole('admin')){
-            return response()->actionResponse('utenti.table', 'error', "Non è consentito eliminare un amministratore!");
-        }
-
-        Storage::delete('/public/images/profiles/' . $user->file_img);
         $user->delete($utenteID);
        
-        return response()->actionResponse('utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
+        return response()->actionResponse(Auth::user()->role . 'utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
     }
 
     public function bulkDeleteUtenti(Request $request){        
-        bulkDeleteItems($request->items, new User);
+        if($request->items == null || strlen($request->items) < 1)
+            return response()->actionResponse(Auth::user()->role . ".utenti.table", 'error', 'Impossibile gli utenti selezionati. Controlla i parametri e riprova.');
+
+        $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
+        User::destroy($items);
         
-        return response()->actionResponse('utenti.table', 'successful', 'message.utente.bulk-delete');
+        return response()->actionResponse(Auth::user()->role . 'utenti.table', 'successful', 'message.utente.bulk-delete');
     }
 
     public function assignUtentiToCentro(Request $request){

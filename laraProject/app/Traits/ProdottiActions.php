@@ -69,7 +69,6 @@ trait ProdottiActions
             return response()->actionResponse(Auth::user()->role . '.prodotti.table', 
             'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
         
-        Storage::delete('/public/images/products/' . $prodotto->file_img);
         $prodotto->delete($prodottoID);
 
         return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
