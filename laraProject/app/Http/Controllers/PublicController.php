@@ -14,6 +14,7 @@ use App\Http\Requests\GetProductRequest;
 class PublicController extends Controller
 {   
     protected $catalogo;
+    const ILLEGAL_CHAR = '/\$|\%|\^|\&|\(|\)|\+|\=|\-|\[|\]|\'|\;|\,|\.|\/|\{|\}|\||\:|\<|\>|\?|\~/m';
 
     public function __construct(){
         $this->catalogo = new Catalogo();
@@ -33,12 +34,19 @@ class PublicController extends Controller
     }
 
     public function searchCatalogo(Request $request){
-        $prodottiSearched = $this->catalogo->getProdotti($request->keyword);
+        $keyword = rtrim($request->keyword);
+
+        if($keyword == null || empty($keyword))
+            return redirect()->route('catalogo.view');
+        else if(preg_match(self::ILLEGAL_CHAR, $keyword))
+            return response()->actionResponse('catalogo.view','error', "Il pattern di ricerca non può contenere i caratteri: $ % ^ & ( ) + = - [ ] ' ; , . / { } | : < > ? ~");
+
+        $prodottiSearched = $this->catalogo->getProdotti($keyword);
         
         if($prodottiSearched->total() < 1)
-            return response()->actionResponse('catalogo.view', 'warning', 'La ricerca non ha prodotto risultati');
+            return response()->actionResponse('catalogo.view', 'warning', "La ricerca per <b>${keyword}</b> non ha prodotto risultati");
 
-        return view('public.catalogo', ['prodotti' => $prodottiSearched, 'keyword' => $request->keyword]);
+        return view('public.catalogo', ['prodotti' => $prodottiSearched, 'keyword' => $keyword]);
     }
 
     public function viewCentriAssistenzaPage(){
