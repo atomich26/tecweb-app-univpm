@@ -63,7 +63,7 @@ class ProdottiTable extends AdminTable{
         if(Auth::user()->checkRole('admin')){
             $this->rowsSelection()->destroyConfirmationHtmlAttributes(function (Prodotto $prodotto) {
                 return [
-                    'data-confirm' => 'Sei sicuro di voler eliminare il prodotto ' . $prodotto->nome . '?',
+                    'data-confirm' => 'Eliminando il prodotto ' . $prodotto->nome . ' cancellerai anche i suoi malfunzionamenti e le relative soluzioni. Procedere?',
                 ];
             });
 

@@ -1029,7 +1029,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
     flex: 1 0 0;
     margin-left: 30px;
 }
-.sidebar .sidebar-widget, .catalog-title{
+.sidebar .sidebar-widget, .catalog-title, .centri-title{
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0px 0px 5px 5px #0000000a;
@@ -1169,29 +1169,29 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
     background-color: #1b222a;
 }
 
-.faq {
+.accordion {
   list-style: none;
   padding-left: 40px;
   padding-right: 20px;
 }
 
-.faq li {
+.accordion li {
   border-bottom: 1px solid #999999;
   margin-bottom: 15px;
 }
 
-.faq li.active .answer {
-  max-height: 275px !important;
+.accordion li.active .content{
+  max-height: 350px !important;
   padding-bottom: 25px;
   transition: max-height 0.5s ease, padding-bottom 0.5s ease;
 }
 
-.faq li.active .question {
+.accordion li.active .title {
   color: var(--color-primary);
   transition: color 0.5s ease;
 }
 
-.faq .answer {
+.accordion .content {
   color: #090909;
   font-size: 17px;
   line-height: 24px;
@@ -1200,7 +1200,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
   transition: max-height 0.5s ease, padding-bottom 0.5s ease;
 }
 
-.faq .plus-minus-toggle {
+.accordion .plus-minus-toggle {
   cursor: pointer;
   height: 21px;
   position: absolute;
@@ -1210,7 +1210,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
   z-index: 2;
 }
 
-.faq .plus-minus-toggle:before, .faq .plus-minus-toggle:after {
+.accordion .plus-minus-toggle:before, .accordion .plus-minus-toggle:after {
   background: var(--color-primary);
   content: '';
   height: 5px;
@@ -1221,23 +1221,23 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
   transition: transform 500ms ease;
 }
 
-.faq .plus-minus-toggle:after {
+.accordion .plus-minus-toggle:after {
   transform-origin: center;
 }
 
-.faq .plus-minus-toggle.collapsed:after {
+.accordion .plus-minus-toggle.collapsed:after {
   transform: rotate(90deg);
 }
  
-.faq .plus-minus-toggle.collapsed:before {
+.accordion .plus-minus-toggle.collapsed:before {
   transform: rotate(180deg);
 }
 
-.faq .plus-minus-toggle.collapsed:after, .faq .plus-minus-toggle.collapsed:before {
+.accordion .plus-minus-toggle.collapsed:after, .accordion .plus-minus-toggle.collapsed:before {
     background-color: #000;
 }
 
-.faq .question {
+.accordion .title {
   color: #090909;
   font-size: 20px;
   font-weight: 800;
@@ -1248,7 +1248,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
   transition: color 0.5s ease;
 }
 
-.faq-paginator{
+.item-paginator{
     padding: 20px;
     background-color: var(--color-secondary);
     justify-content: space-between;
@@ -1261,4 +1261,27 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
 h4.malfunzionamento{
     font-size: 20px;
     font-weight: 800;
+}
+
+h4.centro-info{
+    color: var(--color-primary);
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+h4.centro-info span{
+    color: black;
+    font-weight: 400;
+}
+
+h4.centro-info i{
+    color: var(--color-primary);
+}
+
+select#place-select{
+    margin: 0 10px;
+}
+
+.soluzione-content{
+    margin: 10px 0;
 }

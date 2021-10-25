@@ -53,7 +53,7 @@ class UtentiTable extends AdminTable{
         $this->column('centroID')->title('Centro assistenza')->value(function(User $utente){
              $centro = $utente->belongsTo(CentroAssistenza::class, 'centroID', 'ID')->first();
             if(!is_null($centro))
-                return  link_to('centro-assistenza.view', $centro->ragione_sociale, ['class' => 'link-col']);
+                return  $centro->ragione_sociale;
             else
                 return "Nessun centro";
         });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catalogo;
 use App\Models\Resources\Faq;
+use App\Models\Resources\CentroAssistenza;
 use App\Models\Resources\Prodotto;
 use app\models\resources\Malfunzionamento;
 use app\models\resources\Soluzione;
@@ -49,8 +50,17 @@ class PublicController extends Controller
         return view('public.catalogo', ['prodotti' => $prodottiSearched, 'keyword' => $keyword]);
     }
 
-    public function viewCentriAssistenzaPage(){
-        return view('public.centri-assistenza');
+    public function viewCentriAssistenzaPage(Request $request){
+        $selected = $request->query('place');
+        
+        if($selected == null || empty($selected))
+            $centri = CentroAssistenza::orderBy('ragione_sociale', 'asc')->paginate(6);
+        else
+            $centri = CentroAssistenza::where('città', $selected)->paginate(6)->appends(['place' => $selected ]);
+            
+        $città = CentroAssistenza::groupBy('città')->distinct()->pluck('città','città');
+
+        return view('public.centri-assistenza', ['centri' => $centri, 'città' => $città, 'selected' => $selected]);
     }
 
     public function viewFaqPage(){

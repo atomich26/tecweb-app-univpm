@@ -76,7 +76,7 @@ Route::prefix('staff')->group(function () {
         Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione/{soluzioneID}', 'StaffController@saveSoluzione')->name('staff.soluzione.store');
         Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@modifySoluzione')->name('staff.soluzione.modify');
         Route::put('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('staff.soluzione.update');       
-        Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('staff.soluzione.delete');       
+        Route::delete('prod/{prodottoID}/elimina-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('staff.soluzione.delete');       
         Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzioni', 'StaffController@updateSoluzione')->name('staff.soluzione.bulk-delete');       
     });
 });
