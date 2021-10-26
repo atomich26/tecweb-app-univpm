@@ -12,8 +12,8 @@ class SoluzioniTable extends AdminTable{
 
     public function __construct($malfunzionamentoID){
         parent::__construct();
-        $this->build();
         $this->malfunzionamentoID = $malfunzionamentoID;
+        $this->build();
     }
 
     protected function build(){

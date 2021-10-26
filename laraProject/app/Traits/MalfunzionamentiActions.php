@@ -5,6 +5,7 @@ namespace App\Traits;
 use Illuminate\Http\Request;
 use App\Http\Requests\MalfunzionamentoRequest;
 use App\Models\Resources\Prodotto;
+use App\Tables\MalfunzionamentiTable;
 use App\Models\Resources\Malfunzionamento;
 use App\Models\Resources\Soluzione;
 
@@ -17,10 +18,10 @@ trait MalfunzionamentiActions
 {
     public function viewMalfunzionamentiTable(Request $request){
         
-        $prodotto = Prodotto::findOrFail($request->prodottoID);
+        $prodotto = Prodotto::find($request->prodottoID);
         $table = new MalfunzionamentiTable($prodotto->ID);
 
-        return view(Auth::user()->role . 'malfunzionamenti-table')->with('table', $table);
+        return view('admin.datatable', ['title' => "Gestione malfunzionamenti prodotto $prodotto->ID", 'table' => $table]);
     }
 
     //funzioni dedicate ai malfunzionamenti e soluzioni

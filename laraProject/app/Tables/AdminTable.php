@@ -7,8 +7,8 @@ use \Okipa\LaravelTable\Table;
 
 abstract class AdminTable extends Table{
 
-    public function __constructor(){
-        parent::__constructor();
+    public function __construct(){
+        parent::__construct();
     }
 
     abstract protected function build();
