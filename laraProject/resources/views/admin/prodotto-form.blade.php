@@ -1,9 +1,13 @@
-@extends('layouts.forms', ['title' => 'Inserisci un nuovo prodotto'])
+@extends('layouts.admin', ['title' => $title])
 
 @section('content')
-    @include('forms.insert-prodotto')
-    <br>
-    <br>
-    <a href= "{{route('admin.prodotti.table')}}"> Torna alla Tabella Prodotti</a>
+   
+    @if($action === 'insert')
+        @include('forms.insert-prodotto')
+    @elseif($action === 'modify')
+        @include('forms.modify-prodotto')
+    @endif
+
+    <a href= "{{route(Auth::user()->role . '.prodotti.table')}}"> Torna alla Tabella Prodotti</a>
 @endsection
 

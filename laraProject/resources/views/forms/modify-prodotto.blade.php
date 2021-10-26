@@ -33,7 +33,11 @@ use App\Models\Resources\Categoria;
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
+<<<<<<< HEAD
     {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'))}}
+=======
+    {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'), $prodotto->categoriaID)}}
+>>>>>>> 9c5f39424c90d90424f0608653e2d36bc17c9315
 
     </div>
     <br>
@@ -91,8 +95,9 @@ use App\Models\Resources\Categoria;
     <br>
     <br>
     <div>
-        {{Form::label('file_img','Immagine Prodotto')}}
-        {{Form::file('file_img')}}
+        {{ Form::hidden('img_current', $prodotto->file_img) }}
+        {{ Form::label('file_img','Immagine Prodotto') }}
+        {{ Form::file('file_img') }}
         @if ($errors->first('file_img'))
                 <ul>
                     @foreach ($errors->get('file_img') as $message)

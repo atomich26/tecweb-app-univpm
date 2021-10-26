@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Prodotto;
+use App\Models\Resources\Prodotto;
 use Illuminate\Support\Facades\Storage;
 
 class ProdottoObserver
@@ -10,7 +10,7 @@ class ProdottoObserver
     /**
      * Handle the prodotto "created" event.
      *
-     * @param  \App\Prodotto  $prodotto
+     * @param  \App\Models\Resources\Prodotto  $prodotto
      * @return void
      */
     public function created(Prodotto $prodotto)
@@ -21,7 +21,7 @@ class ProdottoObserver
     /**
      * Handle the prodotto "updated" event.
      *
-     * @param  \App\Prodotto  $prodotto
+     * @param  \App\Models\Resources\Prodotto  $prodotto
      * @return void
      */
     public function updated(Prodotto $prodotto)
@@ -32,7 +32,7 @@ class ProdottoObserver
     /**
      * Handle the prodotto "deleted" event.
      *
-     * @param  \App\Prodotto  $prodotto
+     * @param  \App\Models\Resources\Prodotto  $prodotto
      * @return void
      */
     public function deleted(Prodotto $prodotto)
@@ -44,7 +44,7 @@ class ProdottoObserver
     /**
      * Handle the prodotto "restored" event.
      *
-     * @param  \App\Prodotto  $prodotto
+     * @param  \App\Models\Resources\Prodotto  $prodotto
      * @return void
      */
     public function restored(Prodotto $prodotto)
@@ -55,7 +55,7 @@ class ProdottoObserver
     /**
      * Handle the prodotto "force deleted" event.
      *
-     * @param  \App\Prodotto  $prodotto
+     * @param  \App\Models\Resources\Prodotto  $prodotto
      * @return void
      */
     public function forceDeleted(Prodotto $prodotto)

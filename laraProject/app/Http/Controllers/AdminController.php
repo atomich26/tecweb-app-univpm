@@ -14,6 +14,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CentroRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Tables\CentriAssistenzaTable;
@@ -112,14 +113,14 @@ class AdminController extends Controller
         $user = User::find($utenteID);
         
         if($user === null)
-            return response()->actionResponse(Auth::user()->role . 'utenti.table', 'error', __('message.utente.not-exist'));
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', __('message.utente.not-exist'));
         else if($user->checkRole('admin')){
-            return response()->actionResponse(Auth::user()->role . 'utenti.table', 'error', "Non è consentito eliminare un amministratore!");
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', "Non è consentito eliminare un amministratore!");
         }
 
         $user->delete($utenteID);
        
-        return response()->actionResponse(Auth::user()->role . 'utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
     }
 
     public function bulkDeleteUtenti(Request $request){        
