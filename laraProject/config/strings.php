@@ -8,8 +8,8 @@ return [
     ],
 
     'faq' => [
-        'domanda' => 130,
-        'risposta' => 350
+        'domanda' => 250,
+        'risposta' => 1200
     ],
 
     'centro_assistenza' => [
@@ -30,8 +30,8 @@ return [
     'prodotto' => [
         'nome' => 80,
         'modello' => 20,
-        'descrizione' => 5000,
-        'specifiche' => 5000,
+        'descrizione' => 1500,
+        'specifiche' => 1500,
         'guida_installazione' => 5000,
         'note_uso' => 5000,
     ],

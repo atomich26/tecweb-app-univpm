@@ -22,8 +22,8 @@ class CreateProdottiTable extends Migration
             $table->foreign('categoriaID')->references('ID')->on('categorie');
             $table->string('descrizione', config('strings.prodotto.descrizione'));
             $table->string('specifiche', config('strings.prodotto.specifiche'));
-            $table->string('guida_installazione', config('strings.prodotto.guida_installazione'))->nullable();
-            $table->string('note_uso', config('strings.prodotto.note_uso'))->nullable();
+            $table->text('guida_installazione')->nullable();
+            $table->text('note_uso')->nullable();
             $table->string('file_img')->nullable();
             $table->unsignedBigInteger('utenteID')->nullable();
             $table->foreign('utenteID')->references('ID')->on('utenti')->onDelete('set null');
