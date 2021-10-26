@@ -37,11 +37,11 @@ return [
     ],
 
     'malfunzionamento' => [
-        'descrizione' => 1000,
+        'descrizione' => 300,
 
     ],
 
     'soluzione' => [
-        'descrizione' => 1000
+        'descrizione' => 500
     ]
 ];

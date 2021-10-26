@@ -18,7 +18,7 @@ class CreateMalfunzionamentiTable extends Migration
             $table->bigIncrements('ID')->index();
             $table->unsignedBigInteger('prodottoID');
             $table->foreign('prodottoID')->references('ID')->on('prodotti')->onDelete('cascade');
-            $table->text('descrizione');
+            $table->string('descrizione', config('strings.malfunzionamento.descrizione'));
             $table->timestamps();
         });
     }
