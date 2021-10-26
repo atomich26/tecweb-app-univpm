@@ -1,3 +1,6 @@
+@php
+use App\Models\Resources\Categoria;
+@endphp
 {{  Form::open(array('route'=>[Auth::user()->role . '.prodotto.update', $prodotto->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
 <h2>Modifica Prodotto</h2>
@@ -30,7 +33,11 @@
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
+<<<<<<< HEAD
+    {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'))}}
+=======
     {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'), $prodotto->categoriaID)}}
+>>>>>>> 9c5f39424c90d90424f0608653e2d36bc17c9315
 
     </div>
     <br>
