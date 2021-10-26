@@ -227,7 +227,7 @@ class AdminController extends Controller
 
     public function storeCentro(CentroRequest $request){
         $centro = new CentroAssistenza;
-        $centro->fill($request->validate());
+        $centro->fill($request->validated());
         $centro->save();
 
         return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.insert'));
