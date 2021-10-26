@@ -118,7 +118,7 @@ Route::prefix('admin')->group(function(){
     //Rotte CRUD per i centri assistenza
     Route::get('gestione-centri-assistenza', 'AdminController@viewCentriAssistenzaTable')->name('admin.centri.table');
     Route::get('inserisci-centro', 'AdminController@viewInsertCentro')->name('admin.centro.new');
-    Route::post('inserisci-centro', 'AdminController@saveCentro')->name('admin.centro.store');
+    Route::post('inserisci-centro', 'AdminController@storeCentro')->name('admin.centro.store');
     Route::get('modifica-centro/{centroID}','AdminController@viewModifyCentro')->name('admin.centro.modify');
     Route::put('modifica-centro/{centroID}','AdminController@updateCentro')->name('admin.centro.update');
     Route::delete('elimina-centro/{centroID}', 'AdminController@deleteCentro')->name('admin.centro.delete');

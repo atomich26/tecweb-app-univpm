@@ -1,4 +1,4 @@
-@extends('layouts.forms', ['title' => 'Inserimento Soluzione' ])
+@extends('layouts.admin', ['title' => 'Inserimento Soluzione' ])
 
 @section('content')
     @include('forms.insert-soluzione')

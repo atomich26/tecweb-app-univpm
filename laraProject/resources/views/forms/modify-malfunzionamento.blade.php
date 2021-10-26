@@ -17,6 +17,6 @@
 {{  Form::hidden('_method','PUT')}}
 {{  Form::submit('Modifica Malfunzionamento')}}
 <br>
-{{  Form::reset('Reset Campi')}}
+{{ Form::reset ('Annulla modifiche') }}
 {{  Form::close()}}
 </div>

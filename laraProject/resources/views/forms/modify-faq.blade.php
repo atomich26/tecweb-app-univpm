@@ -31,9 +31,9 @@
         </div>
 
     <div>
-        {{  Form::submit ('Aggiorna')}}
-        {{  Form::reset ('Azzera')}}
-        {{  Form::hidden ('_method', 'PUT')}}
+        {{ Form::submit ('Aggiorna')}}
+        {{ Form::reset ('Annulla modifiche') }}
+        {{ Form::hidden ('_method', 'PUT')}}
     </div>
     {{Form::close()}}
 </div>

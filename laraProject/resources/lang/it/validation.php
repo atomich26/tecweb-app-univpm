@@ -35,7 +35,7 @@ return [
     'date_equals'          => "':attribute' deve essere uguale a :date.",
     'date_format'          => "':attribute' non corrisponde al formato :format.",
     'different'            => "':attribute' e :other devono essere diversi.",
-    'digits'               => "':attribute' deve essere lungo :digits caratteri.",
+    'digits'               => "':attribute' deve essere lungo :digits cifre.",
     'digits_between'       => "':attribute' deve essere compreso tra :min e :max caratteri.",
     'dimensions'           => "Le dimensioni immagine di ':attribute' non sono valide",
     'distinct'             => "':attribute' contiene dei valori duplicati",

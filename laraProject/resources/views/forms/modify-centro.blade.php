@@ -103,6 +103,7 @@
 <div>
     {{ Form::hidden('_method','PUT') }}
     {{ Form::submit('Conferma') }}
+    {{ Form::reset ('Annulla modifiche') }}
 </div>
 
 {{Form::close()}}

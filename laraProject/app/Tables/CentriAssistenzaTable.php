@@ -25,7 +25,7 @@ class CentriAssistenzaTable extends AdminTable{
         ->setIcon('centri-assistenza')
         ->destroyConfirmationHtmlAttributes(function (CentroAssistenza $centro) {
             return [
-                'data-confirm' => "Sei sicuro di voler eliminare il centro assistenza $centro->ragione_sociale",
+                'data-confirm' => "Sei sicuro di voler eliminare il centro assistenza $centro->ragione_sociale ?",
             ];
         })->rowsSelection();
 

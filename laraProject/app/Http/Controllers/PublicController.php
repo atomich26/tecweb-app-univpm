@@ -54,9 +54,9 @@ class PublicController extends Controller
         $selected = $request->query('place');
         
         if($selected == null || empty($selected))
-            $centri = CentroAssistenza::orderBy('ragione_sociale', 'asc')->paginate(6);
+            $centri = CentroAssistenza::orderBy('ragione_sociale', 'asc')->paginate(5);
         else
-            $centri = CentroAssistenza::where('città', $selected)->paginate(6)->appends(['place' => $selected ]);
+            $centri = CentroAssistenza::where('città', $selected)->paginate(5)->appends(['place' => $selected ]);
             
         $città = CentroAssistenza::groupBy('città')->distinct()->pluck('città','città');
 

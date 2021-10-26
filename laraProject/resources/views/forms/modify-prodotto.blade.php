@@ -107,8 +107,9 @@
             {{form::select('utenteID',$staffUtenti,$prodotto->utenteID,['placeholder'=>'Non assegnato'])}}
         <div>
     @endcan
-    {{  Form::hidden ('_method', 'PUT')}}
-    {{  Form::submit ('Conferma' )}}
+    {{ Form::hidden ('_method', 'PUT') }}
+    {{ Form::submit ('Conferma' ) }}
+    {{ Form::reset ('Annulla modifiche') }}
 
     </div>
 {{Form::close()}}

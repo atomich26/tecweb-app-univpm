@@ -52,16 +52,18 @@
             <div class="col user-account-info">
                 <ul>
                     <li class="account-info">
-                        <h3>Account creato:</h4>
+                        <h3>Account creato:</h3>
                         <p class="info-label-value">{{ $user->created_at->format('d/m/Y') }} alle {{ $user->created_at->format('H:i') }}</p>
                     </li>
                     <li class="account-info">
-                        <h3>Modificato:</h4>
+                        <h3>Modificato:</h3>
                         <p class="info-label-value">{{ $user->created_at->format('d/m/Y') ?? "Non disponibile"}} alle {{ $user->created_at->format('H:i') ?? "Non disponibile"}}<p>
                     </li>
                     <li class="account-info">
-                        <h3>Ultimo accesso:</h4>
-                        <p class="info-label-value">{{ Cache::get('last_login_timestamp')->format('d/m/Y') ?? "Non disponibile"}} alle {{ Cache::get('last_login_timestamp')->format('H:i') ?? "Non disponibile"}}<p>
+                        @if(Cache::get('last_login_timestamp'))
+                        <h3>Ultimo accesso:</h3>
+                            <p class="info-label-value">{{ Cache::get('last_login_timestamp')->format('d/m/Y')}} alle {{ Cache::get('last_login_timestamp')->format('H:i') ?? "Non disponibile"}}<p>
+                        @endif
                     </li>
                 </ul>
             </div>

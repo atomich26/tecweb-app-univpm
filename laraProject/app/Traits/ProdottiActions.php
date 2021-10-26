@@ -38,6 +38,7 @@ trait ProdottiActions
         $prodotto = new Prodotto();
         $this->fillProdotto($request, $prodotto);
 
+
         return response()->actionResponse(Auth::user()->role . '.prodotti.table', 'successful', __('message.prodotto.insert'));
     }
 
@@ -117,11 +118,6 @@ trait ProdottiActions
         }
         else
             $imageName = NULL;
-    
-
-        if($imageName === $prodotto->file_img){
-
-        }
 
         if(!is_null($imageName)){
 

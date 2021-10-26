@@ -1,7 +1,5 @@
-
 {{  Form::open (array('route'=>'admin.utente.store')) }}
-
-<h2>{{ $title }}</h2>
+    <h2>{{ $title }}</h2>
     <div>
             {{  Form::label ('username', 'Username' )}}
             {{  Form::text ('username', '')  }}
@@ -35,9 +33,6 @@
                     </ul>
                     @endif
                 </div>
-
-
-
     <div>
             {{  Form::label ('nome', 'Nome')  }}
             {{  Form::text ('nome', '')  }}
@@ -62,15 +57,15 @@
             @endif
         </div>
         <div>
-        {{Form::label('file_img','Foto Profilo')}}
-        {{Form::file('file_img')}}
-        @if ($errors->first('file_img'))
+            {{Form::label('file_img', 'Aggiungi una foto profilo')}}
+            {{Form::file('file_img')}}
+            @if ($errors->first('file_img'))
                 <ul>
                     @foreach ($errors->get('file_img') as $message)
-                    <li>{{ $message }}</li>
+                        <li>{{ $message }}</li>
                     @endforeach
                 </ul>
-                @endif
+            @endif
         </div>
 <div>
             {{  Form::label ('data_nascita', 'Data di Nascita')}}

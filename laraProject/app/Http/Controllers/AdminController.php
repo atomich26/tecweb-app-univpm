@@ -11,7 +11,7 @@ use App\Traits\ProdottiActions;
 use App\Traits\SoluzioniActions;
 use App\Http\Requests\FAQRequest;
 use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\DB;
+use App\Models\Resources\Prodotto;
 use App\Http\Requests\CentroRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -45,20 +45,11 @@ class AdminController extends Controller
     }
 
     public function saveUtente(UserRequest $request){
-        if($request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();
-        }
-        else{
-            $imageName = NULL;
-        }
-
         $user = new User;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->nome = $request->nome;
         $user->cognome = $request->cognome;
-        $user->file_img = $imageName;
         $user->data_nascita = $request->data_nascita;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
@@ -67,46 +58,67 @@ class AdminController extends Controller
         if($user->role == 'tecnico'){
             $user->centroID = $request->centroID;
         }
+
+        if($request->hasFile('file_img')){
+            $image = $request->file('file_img');
+            $imageName = $image->getClientOriginalName();
+        }
+        else{
+            $imageName = NULL;
+        }
+
+        $user->file_img = $imageName;
         $user->save();
         
-        return redirect()->route('prodotti.table');
+        return redirect()->route(Auth::user()->role . '.utenti.table');
     }
 
     public function viewModifyUtente($utenteID){
-        $centri = DB::table('centri_assistenza')->pluck('ragione_sociale','ID');
+        $centri = CentroAssistenza::pluck('ragione_sociale','ID');
         $utente = User::find($utenteID);
         return view ('admin.utente-form', ['title' => 'Modifica ' . $utente->username, 'utente' => $utente, 'centri' => $centri, 'action' => 'modify']);
     }
 
     public function updateUtente(UserRequest $request, $userID){
         $user = User::find($userID);
-        if($request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();
-        }
-        else{
-            $imageName = $user->file_img;
-        }
+
+        if($user == null)
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', __('message.utenti.not-exists'));
 
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->nome = $request->nome;
         $user->cognome = $request->cognome;
-        $user->file_img = $imageName;
         $user->data_nascita = $request->data_nascita;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
         $user->role = $request->role;
+
+       
+
+        // Se il ruolo del membro cambia in tecnico, tutti i prodotti a lui assegnati sono resi disponibili per tutto lo staff.
         if($user->role == 'tecnico'){
             $user->centroID = $request->centroID;
-            $prodotto = DB::table('utenti')->where('utenteID',$user->ID);
-            $prodotto->utenteID = NULL;
+            $prodotti = $user->hasMany(Prodotto::class, 'utenteID', 'ID');
+            $prodotti->utenteID = NULL;
         }
+
+        //Se il ruolo dell'utente cambia in staff, viene annulata l'assegnazione al centro assistenza attuale
         if($user->role == 'staff'){
             $user->centroID = NULL;
         }
+
+        //Controlla se è presente l'immagine
+        if($request->current_img == null && $request->hasFile('file_img')){
+            $image = $request->file('file_img');
+            $imageName = $image->getClientOriginalName();  
+            $user->file_img = $imageName;  
+            Storage::delete('/public/images/profiles/' . $user->file_img);
+        }
+
         $user->save();
-        return redirect()->route('admin.utenti.table');
+
+        return redirect()->route(Auth::user()->role . '.utenti.table');
     }
 
     public function deleteUtente($utenteID){
@@ -226,8 +238,8 @@ class AdminController extends Controller
     }
 
     public function storeCentro(CentroRequest $request){
-        $centro = new CentroAssistenza;
-        $centro->fill($request->validate());
+        $centro = new CentroAssistenza();
+        $centro->fill($request->validated());
         $centro->save();
 
         return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.insert'));

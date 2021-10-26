@@ -10,3 +10,13 @@
 
     <a href = "{{route('admin.faq.table')}}"> Torna alla Tabella FAQ</a>
 @endsection
+
+@section('js-scripts')
+    <script type="module"> 
+        import { loadImageProduct, deletePreview } from '{{ asset('js/form.js')}}';
+        window.onload = () => {
+            loadImageProduct();
+            deletePreview();
+        };
+    </script>
+@endsection

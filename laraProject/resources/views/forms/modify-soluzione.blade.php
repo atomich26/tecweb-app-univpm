@@ -20,7 +20,7 @@
 {{  Form::hidden('_method'=>'PUT')}}
 {{  Form::submit('Inserisci Soluzione')}}
 <br>
-{{  Form::reset('Reset')}}
+{{ Form::reset ('Annulla modifiche') }}
 <br>
 {{  Form::close()}}
 </div>

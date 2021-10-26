@@ -1,4 +1,4 @@
-@extends('layouts.forms', ['title' => 'Inserisci malfunzionamento per {{$product->nome}}' ])
+@extends('layouts.admin', ['title' => 'Inserisci malfunzionamento per {{$product->nome}}' ])
 
 @section('content')
     @include('forms.insert-malfunzionamento')
