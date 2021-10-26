@@ -1,5 +1,5 @@
 @php
-use App\Models\Enums\Categories;
+use App\Models\Resources\Categoria;
 @endphp
 {{  Form::open(array('route'=>[Auth::user()->role . '.prodotto.update', $prodotto->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
@@ -33,7 +33,7 @@ use App\Models\Enums\Categories;
     <br>
     <div>
     {{Form::label('categoriaID','Categoria Prodotto')}}
-    {{Form::select('categoriaID', Categorie::pluck('nome', 'ID'))}}
+    {{Form::select('categoriaID', Categoria::pluck('nome', 'ID'))}}
 
     </div>
     <br>

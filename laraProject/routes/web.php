@@ -125,7 +125,7 @@ Route::prefix('admin')->group(function(){
     Route::delete('elimina-centri', 'AdminController@bulkDeleteCentri')->name('admin.centri.bulk-delete');
     
     //Rotte CRUD per i malfunzionamenti
-    Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'AdminController@viewSoluzioniTable')->name('admin.soluzioni.table');
+    Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'AdminController@viewMalfunzionamentiTable')->name('admin.malfunzionamenti.table');
     Route::get('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@insertMalfunzionamento')->name('admin.malfunzionamento.new');
     Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@saveMalfunzionamento')->name('admin.malfunzionamento.store');
     Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@modifyMalfunzionamento')->name('admin.malfunzionamento.modify');

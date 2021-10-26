@@ -48,7 +48,7 @@ trait ProdottiActions
 
         $staffUtenti = User::where('role','staff')->pluck('username','ID');
 
-        return view('admin.modify-prodotto')->with('prodotto', $prodotto)->with('staffUtenti', $staffUtenti);
+        return view('forms.modify-prodotto')->with('prodotto', $prodotto)->with('staffUtenti', $staffUtenti);
     }
 
     public function updateProdotto(ProdottoRequest $request, $prodottoID){
