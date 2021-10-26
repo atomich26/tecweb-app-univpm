@@ -29,8 +29,8 @@ class ProdottoRequest extends FormRequest
             'modello'=>'required|unique:prodotti,modello,'. $this->route('prodottoID') . '|max:' . Config::get('strings.prodotto.modello'),
             'descrizione'=>'required|max:' . Config::get('strings.prodotto.descrizione'),
             'specifiche'=>'required|max:' . Config::get('strings.prodotto.specifiche'),
-            'guida_installazione'=>'required|max:' . Config::get('strings.prodotto.guida_installazione'),
-            'note_uso'=>'required|max:' . Config::get('strings.prodotto.note_uso'),
+            'guida_installazione'=>'nullable|max:' . Config::get('strings.prodotto.guida_installazione'),
+            'note_uso'=>'nullable|max:' . Config::get('strings.prodotto.note_uso'),
             'file_img'=>'image|max:2048|nullable',
         ];
     }
