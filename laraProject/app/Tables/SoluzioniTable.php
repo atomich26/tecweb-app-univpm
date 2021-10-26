@@ -3,44 +3,48 @@
 namespace App\Tables;
 
 use \Okipa\LaravelTable\Table;
+use App\Models\Resources\Prodotto;
+use App\Models\Resources\Soluzione;
 use App\Models\Resources\Malfunzionamento;
 use \Illuminate\Database\Eloquent\Builder;
+use \Illuminate\Support\Facades\Auth;
 
 class SoluzioniTable extends AdminTable{
 
-    protected $malfunzionamentoID;
+    protected $malfunzionamento;
 
     public function __construct($malfunzionamentoID){
         parent::__construct();
-        $this->malfunzionamentoID = $malfunzionamentoID;
+        $this->malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
         $this->build();
     }
 
     protected function build(){
-        $this->model(Soluzioni::class)->routes([
-            'index'   => ['name' => Auth::user()->role . 'soluzioni.table'],
-            'create'  => ['name' => Auth::user()->role . 'soluzioni.new'],
-            'edit'    => ['name' => Auth::user()->role . 'soluzioni.modify'],
-            'destroy' => ['name' => Auth::user()->role . 'soluzioni.delete'],
-            'bulk-destroy' => ['name' => Auth::user()->role . 'soluzioni.bulk-delete']
+        $prodottoID = $this->malfunzionamento->prodottoID;
+
+        $this->model(Soluzione::class)->routes([
+            'index'   => ['name' => Auth::user()->role . '.soluzioni.table', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
+            'create'  => ['name' => Auth::user()->role . '.soluzione.new', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
+            'edit'    => ['name' => Auth::user()->role . '.soluzione.modify', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
+            'destroy' => ['name' => Auth::user()->role . '.soluzione.delete', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
+            'bulk-destroy' => ['name' => Auth::user()->role . '.soluzioni.bulk-delete', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]]
         ])
-        ->title('Gestione Malfunzionamenti')
-        ->setIcon('malfunzionamenti')
-        ->destroyConfirmationHtmlAttributes(function (Malfunzionamenti $malfunzionamento) {
+        ->title('Gestione soluzioni')
+        ->setIcon('soluzioni')
+        ->destroyConfirmationHtmlAttributes(function (Soluzione $soluzione) {
             return [
-                'data-confirm' => 'Sei sicuro di voler eliminare il malfunzionamento ' . $malfunzionamento->ID . '?',
+                'data-confirm' => 'Sei sicuro di voler eliminare la soluzione ' . $soluzione->ID . '?',
             ];
         })
         ->rowsSelection()
         ->query(function(Builder $query){
-            $tableName = with(new Malfunzionamento)->getTable();
+            $tableName = with(new Soluzione)->getTable();
             $query->select('*');
-            $query->whereRaw("(`${tableName}`.`prodottoID` = ${$this->prodottoID}");
+            $query->whereRaw("(`${tableName}`.`malfunzionamentoID` = " . $this->malfunzionamento->ID . ")");
         });
 
         $this->column('ID')->title('ID')->sortable();
         $this->column('descrizione')->title('Descrizione')->searchable()->sortable();
-        $this->column('prodottoID')->title('Associato a')->searchable()->sortable();
         $this->column('created_at')->title('Data creazione')->dateTimeFormat('d/m/Y H:i')->sortable();
         $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();
     }

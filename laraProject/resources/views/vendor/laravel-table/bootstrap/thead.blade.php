@@ -85,7 +85,13 @@
                     <div class="flex-v-center">
                     @if(array_key_exists('bulk-destroy', $table->routes))
                         <div class="thead-widget bulkActionInput">
-                            {{ Form::open(array('route'=> $table->routes['bulk-destroy']['name'],'method' => 'DELETE',
+                            @php
+                                $route = array($table->routes['bulk-destroy']['name']);
+                                
+                                if(array_key_exists('params', $table->routes['bulk-destroy']))
+                                    $route = array_merge($route, $table->routes['bulk-destroy']['params']);
+                            @endphp
+                            {{ Form::open(array('route'=> $route,'method' => 'DELETE',
                                 'id'=>'delete-selected-form', 'data-confirm' => 'Sei sicuro di voler eliminare :items elementi?'))}}
                                 <input name="items" type="hidden" id="selectedRows" value="">
                                 <button class="button bulkActionBtn" type="submit" value="Elimina selezionati">{!! config('laravel-table.icon.destroy') !!} Elimina selezionati</button>

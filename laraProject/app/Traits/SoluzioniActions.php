@@ -7,6 +7,7 @@ use App\Http\Requests\SoluzioneRequest;
 use App\Models\Resources\Prodotto;
 use App\Models\Resources\Malfunzionamento;
 use App\Models\Resources\Soluzione;
+use App\Tables\SoluzioniTable;
 
 /**
  * Il trait Soluzioni definisce le funzioni che gestiscono le CRUD 
@@ -15,6 +16,12 @@ use App\Models\Resources\Soluzione;
 
 trait SoluzioniActions
 {   
+
+    public function viewSoluzioniTable($prodottoID, $malfunzionamentoID){
+        $table = new SoluzioniTable($malfunzionamentoID);
+
+        return view('admin.datatable', ['title' => 'Gestisci soluzioni', 'table' => $table]);
+    }
 
     public function insertSoluzione($productID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);

@@ -23,7 +23,7 @@ class MalfunzionamentiTable extends AdminTable{
             'create'  => ['name' => Auth::user()->role . '.malfunzionamento.new', 'params' => ['prodottoID' => $this->prodottoID]],
             'edit'    => ['name' => Auth::user()->role . '.malfunzionamento.modify', 'params' => ['prodottoID' => $this->prodottoID]],
             'destroy' => ['name' => Auth::user()->role . '.malfunzionamento.delete', 'params' => ['prodottoID' => $this->prodottoID]],
-            'bulk-destroy' => ['name' => 'admin.malfunzionamenti.bulk-delete']
+            'bulk-destroy' => ['name' => Auth::user()->role . '.malfunzionamenti.bulk-delete', 'params' => ['prodottoID' => $this->prodottoID]]
         ])
         ->title('Gestione Malfunzionamenti')
         ->setIcon('malfunzionamenti')

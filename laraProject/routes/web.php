@@ -134,11 +134,10 @@ Route::prefix('admin')->group(function(){
     Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@modifyMalfunzionamento')->name('admin.malfunzionamento.modify');
     Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@updateMalfunzionamento')->name('admin.malfunzionamento.update');
     Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamento.delete');
-    Route::get('prod/{prodottoID}/elimina-malfunzionamenti', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamenti.bulk-delete');
+    Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamenti.bulk-delete');
     
     //Rotte CRUD per le soluzioni
-    Route::get('prod/{prodottoID}/gestione-soluzioni')->name('admin.soluzioni.table');
-    Route::get('prod/{prodottoID}/malfuzionamento/{malfunzionamentoID}/gestione-soluzioni', 'AdminController@viewSoluzioniTable')->name('admin.soluzioni.table');
+    Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/gestione-soluzioni', 'AdminController@viewSoluzioniTable')->name('admin.soluzioni.table');
     Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@insertSoluzione')->name('admin.soluzione.new');
     Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@saveSoluzione')->name('admin.soluzione.store');
     Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'AdminController@modifySoluzione')->name('admin.soluzione.modify');
