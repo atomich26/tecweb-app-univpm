@@ -66,34 +66,38 @@ trait SoluzioniActions
         $soluzione->save();
 
         //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'success', __('message.soluzione.update'));
-        return redirect()->route(Auth::user()->role . '.soluzione.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
+        return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
         
     }
 
     public function deleteSoluzione($prodottoID, $malfunzionamentoID, $soluzioneID){
         $soluzione = Soluzione::find($soluzioneID);
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        if(($malfunzionamento->prodottoID == $prodottoID)&&($soluzione->malfunzionamentoID==$malfunzionamento->ID)){
+        $prodotto = Prodotto::find($prodottoID);
+        
+        if(($malfunzionamento->prodottoID == $prodotto->ID)&&($soluzione->malfunzionamentoID==$malfunzionamento->ID)){
            
             $soluzione->delete($soluzioneID);
-            return redirect()->route(Auth::user()->role . '.soluzione.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
+            return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodottoID, 'malfunzionamento' => $malfunzionamento->ID]);
             //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'success', __('message.soluzione.delete'));
         }
         
         else 
             //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'error', __('message.soluzione.not-exist'));
-            return redirect()->route(Auth::user()->role . '.soluzione.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
+            return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
     }
 
-    public function bulkDeleteItems(Request $request){
+    public function bulkDeleteSoluzioni(Request $request, $prodottoID, $malfunzionamentoID){
        /* if($request->items == null || strlen($request->items) < 1)
             //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'error', __('message.soluzione.not-selected'));
             return redirect()->route(Auth::user()->role . '.soluzione.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);*/
+        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
+        $prodotto = Prodotto::find($prodottoID);
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         Soluzione::destroy($items);
         
             //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'success', __('message.soluzione.bulk-delete'));
-            return redirect()->route(Auth::user()->role . '.soluzione.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
+            return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodottoID'=> $prodotto->ID, 'malfunzionamentoID' => $malfunzionamento->ID]);
     }
 }

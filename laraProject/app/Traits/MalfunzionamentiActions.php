@@ -9,7 +9,7 @@ use App\Models\Resources\Prodotto;
 use App\Tables\MalfunzionamentiTable;
 use App\Models\Resources\Malfunzionamento;
 use App\Models\Resources\Soluzione;
-use Illuminate\Support\Facades\Auth;
+
 
 /**
  * Il trait Malfunzionamenti definisce le funzioni che gestiscono le CRUD 
@@ -27,32 +27,32 @@ trait MalfunzionamentiActions
     }
 
     //funzioni dedicate ai malfunzionamenti e soluzioni
-    public function insertMalfunzionamento($productID){   
-        $product = Prodotto::find($productID);
+    public function insertMalfunzionamento($prodottoID){   
+        $prodotto = Prodotto::find($prodottoID);
 
-        return view (Auth::user()->role . '.insert-malfunzionamento')->with('product', $product);
+        return view (Auth::user()->role . '.insert-malfunzionamento')->with('prodotto', $prodotto);
     }    
     
-    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
+    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $prodottoID){
     
-        $product = Prodotto::find($productID);
+        $prodotto = Prodotto::find($prodottoID);
         $error = new Malfunzionamento;
-        $error->prodottoID = $product->ID;
+        $error->prodottoID = $prodotto->ID;
         $error->descrizione = $request->descrizione;
         $error->save();
 
         return redirect()->route(Auth::user()->role . 'malfunzionamenti-table');
     }
 
-    public function modifyMalfunzionamento($productID, $malfunzionamentoID){
+    public function modifyMalfunzionamento($prodottoID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
+        $prodotto = Prodotto::find($prodottoID);
         
-        if(!($malfunzionamento->prodottoID == $product->ID))
+        if(!($malfunzionamento->prodottoID == $prodotto->ID))
             return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.malfunzionamento.not-found'));
         
         return view ('forms.modify-malfunzionamento')
-            ->with('product', $product)
+            ->with('prodotto', $prodotto)
             ->with('malfunzionamento', $malfunzionamento);
     }
 
@@ -81,7 +81,7 @@ trait MalfunzionamentiActions
 
         $malfunzionamento->delete();
 
-        //return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
+        /*return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
         return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
             return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
         else if($malfunzionamento->prodottoID != $prodottoID)
@@ -89,15 +89,15 @@ trait MalfunzionamentiActions
 
         $malfunzionamento->delete();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));*/
     }
 
-    public function bulkDeleteMalfunzionamento(Request $request){
+    public function bulkDeleteMalfunzionamenti(Request $request){
         if($request->items == null || strlen($request->items) < 1)
             return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'error', 'Impossibile eliminare i malfunzionamenti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
-        Prodotto::destroy($items);
+        Malfunzionamento::destroy($items);
         
         return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'successful', __('message.prodotto.bulk-delete'));
     }
