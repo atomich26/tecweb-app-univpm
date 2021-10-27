@@ -32,8 +32,7 @@ trait SoluzioniActions
             return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.soluzione.not-exist'));
         }
         else
-        return view ('admin.insert-soluzione')->with('product', $product)
-                                                        ->with('malfunzionamento', $malfunzionamento);
+        return redirect()->route(Auth::user()->role . '.soluzione.insert', ['prodotto'=>$prodottoID, 'malfunzionamento'=>$malfunzionamentoID]);
    
     }
    
