@@ -1,10 +1,10 @@
 <div id="form-modify-faq" class="form-admin-data" >
-{{  Form::open(array('route' => ['insertSoluzione.store', $malfunzionamento->ID, $soluzione->ID], 'id' =>'modify-malfunzionamento', 'Method'=>'POST')) }}
+{{  Form::open(array('route' => [Auth::user()->role . '.soluzione.update', $prodottoID, $malfunzionamento->ID, $soluzione->ID], 'id' =>'modify-malfunzionamento', 'method'=>'POST')) }}
 <br>
-<h2>Inserisci Soluzione Malfunzionamento</h2>
+<h2>Modifica soluzione {{ $soluzione->ID }}</h2>
 <br>
-{{  Form::textarea('descrizioneMalfunzione',$malfunzionamento->descrizione, ['readonly'])}}
-<br>
+<h3>{{ $malfunzionamento->descrizione }}</h3>
+
 {{  Form::label('descrizione', 'Descrivi Soluzione')}}
 <br>
 {{  Form::textarea('descrizione', $soluzione->descrizione)}}
@@ -17,7 +17,7 @@
     @endif
 <br>
 <br>
-{{  Form::hidden('_method'=>'PUT')}}
+{{  Form::hidden('_method', 'PUT')}}
 {{  Form::submit('Inserisci Soluzione')}}
 <br>
 {{ Form::reset ('Annulla modifiche') }}
