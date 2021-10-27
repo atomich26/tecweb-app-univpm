@@ -53,9 +53,7 @@ class CentriAssistenzaTableSeeder extends Seeder
             'descrizione' => 'Il gruppo AvaTech, rivenditore e centro assistenza autorizzato Electrohm, ha uno standard elevato su tutti i processi aziendali in modo da poter soddisfare pienamente le richieste dei clienti
              e con un livello di precisione e professionalità altissimo. Siamo riusciti a mantenere il livello talmente alto da riuscire ad affermarci pienamente sul mercato italiano 
              e sul mercato europeo in molte nazioni. L’importo dell’assistenza è il più basso che potrete mai trovare sul mercato, in quanto abbiamo trascorso anni ed anni nello studio e 
-             nella riparazione delle schede logiche e non dobbiamo appoggiarci a strutture esterne.
-             Le riparazioni spesso vengono effettuate anche in tempi da record, perché il nostro personale è stato istruito dal direttore del laboratorio che è considerato uno dei maggiori esperti 
-             a livello internazionale.',
+             nella riparazione delle schede logiche e non dobbiamo appoggiarci a strutture esterne.',
             'via' => 'Corso Garibaldi 49',
             'città' => 'Roma',
             'cap' => '00127',
@@ -86,9 +84,7 @@ class CentriAssistenzaTableSeeder extends Seeder
             'email' => 'support@axiosrepair.com',
             'sito_web' => 'https://www.axiosrepair.com',
             'descrizione' => "Axios Repair nasce a Messina nel 1996 ha sede e negozio in Via Matteotti 98c(sotto i portici con possibilita’ di sosta).        
-             Oltre alla rivendita di prodotti offriamo servizi di consulenza e assistenza hardware di elettrodomestici Electrohm, autorizzati con Electrohm Professional.
-             Il servizio che offriamo, muovendo dalle esigenze particolari del cliente, può essere sinteticamente descritto come segue: assistenza nella scelta del prodotto, 
-             installazione degli elettrodomestici , nonchè manutenzione dei sistemi esistenti presso il cliente e supporto nell’ottimizzazione degli stessi.",
+             Oltre alla rivendita di prodotti offriamo servizi di consulenza e assistenza hardware di elettrodomestici Electrohm, autorizzati con Electrohm Professional.",
             'via' => 'Via Matteotti 98c',
             'città' => 'Messina',
             'cap' => '98121',
@@ -103,8 +99,7 @@ class CentriAssistenzaTableSeeder extends Seeder
             'email' => 'info@techpro.it',
             'sito_web' => 'https://www.techpro.it',
             'descrizione' => 'Techpro offre assistenza autorizzata Electrohm: tecnici certificati, ricambi originali, 
-             consulenza hardware e massima attenzione alle esigenze del cliente. Il nostro centro assistenza offre un servizio con personale certificato pronto
-             a risolvere qualsiasi problema di natura software e hardware. Il nostro centro assistenza ha ricevuto il riconoscimento Electrohm Premium Service Provider
+             consulenza hardware e massima attenzione alle esigenze del cliente. Il nostro centro assistenza ha ricevuto il riconoscimento Electrohm Premium Service Provider
              per aver fornito un servizio di eccellente qualità ed elevati livelli di soddisfazione ai loro clienti.',
             'via' => 'Viale Bastioni 32',
             'città' => 'Bologna',
