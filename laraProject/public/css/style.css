@@ -65,10 +65,10 @@ ul.text-list{
     padding-left: 20px;
 }
 
-a.link-col{
+a.link-col, a.link-col:visited, a.link-col:hover, a.link-col:focus{
     font-weight: 400;
+    color: #026fad;
 }
-
 /* Elements */
 .button{
     display: inline-block;
@@ -848,6 +848,14 @@ span.sort{
 
 .btn-create:hover, .btn-create:focus{
     background-color: #108838;
+}
+
+.btn-back{
+    background-color: #0079be;
+}
+
+.btn-back:hover, .btn-back:focus{
+    background-color: var(--color-tertiary);    
 }
 
 td .btn-link{

@@ -18,7 +18,7 @@ trait TableRoutesValidationChecks
     protected function checkRoutesValidity(array $routes): void
     {
         $requiredRouteKeys = ['index'];
-        $optionalRouteKeys = ['create', 'edit', 'destroy', 'show', 'bulk-destroy'];
+        $optionalRouteKeys = ['create', 'edit', 'destroy', 'show', 'bulk-destroy', 'show-parent'];
         $allowedRouteKeys = array_merge($requiredRouteKeys, $optionalRouteKeys);
         $this->checkRequiredRoutesValidity($routes, $requiredRouteKeys);
         $this->checkAllowedRoutesValidity($routes, $allowedRouteKeys);

@@ -20,7 +20,7 @@ class ProdottiTable extends AdminTable{
     protected function build(){
         $routes = array(
             'index'=> ['name' => Auth::user()->role . ".prodotti.table"],
-            'show' => ['name' => 'prodotto.view'],
+            'show' => ['name' => Auth::user()->role . '.malfunzionamenti.table'],
             'edit' => ['name' => Auth::user()->role . ".prodotto.modify"]);
 
         if(Auth::user()->checkRole('admin')){
@@ -49,7 +49,9 @@ class ProdottiTable extends AdminTable{
         $this->column()->title('Immagine')->html(function(Prodotto $prodotto){
             return view('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'thumb-table'])->render();
         });
-        $this->column('nome')->title('Nome')->sortable()->searchable();
+        $this->column('nome')->title('Nome')->html(function(Prodotto $prodotto){
+            return link_to_route('catalogo.view', $prodotto->nome, ['prodotto' => $prodotto->ID], ['class' => 'link-col']);
+        })->sortable()->searchable();
         $this->column('categoriaID')->title('Categoria')->sortable()
             ->value(function(Prodotto $prodotto){
                 return $prodotto->belongsTo(Categoria::class, 'categoriaID', 'ID')->first()->nome;

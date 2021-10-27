@@ -64,24 +64,22 @@ Route::prefix('staff')->group(function () {
         Route::put('modifica-prodotto/{prodottoID}', 'StaffController@updateProdotto')->name('staff.prodotto.update');
     
         //Rotte CRUD per i malfunzionamenti
-        Route::get('prod/{prodottoID}/gestione-malfunzionamenti')->name('staff.malfunzionamenti.table');
-        Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'StaffController@viewSoluzioniTable')->name('staff.soluzioni.table');
-        Route::get('prod/{prodottoID}/inserisci-malfunzionamento', 'StaffController@insertMalfunzionamento')->name('staff.malfunzionamento.new');
-        Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'StaffController@saveMalfunzionamento')->name('staff.malfunzionamento.store');
-        Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@modifyMalfunzionamento')->name('staff.malfunzionamento.modify');
+        Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'StaffController@viewMalfunzionamentiTable')->name('staff.malfunzionamenti.table');
+        Route::get('prod/{prodottoID}/inserisci-malfunzionamento', 'StaffController@viewInsertMalfunzionamento')->name('staff.malfunzionamento.new');
+        Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'StaffController@storeMalfunzionamento')->name('staff.malfunzionamento.store');
+        Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@viewModifyMalfunzionamento')->name('staff.malfunzionamento.modify');
         Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@updateMalfunzionamento')->name('staff.malfunzionamento.update');
         Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamento.delete');
-        Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamenti.bulk-delete');
+        Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'StaffController@deleteBulkMalfunzionamenti')->name('staff.malfunzionamenti.bulk-delete');
         
         //Rotte CRUD per le soluzioni
-        Route::get('prod/{prodottoID}/gestione-soluzioni')->name('staff.soluzioni.table');
         Route::get('prod/{prodottoID}/malfuzionamento/{malfunzionamentoID}/gestione-soluzioni', 'StaffController@viewSoluzioniTable')->name('staff.soluzioni.table');
-        Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'StaffController@insertSoluzione')->name('staff.soluzione.new');
-        Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione/{soluzioneID}', 'StaffController@saveSoluzione')->name('staff.soluzione.store');
-        Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@modifySoluzione')->name('staff.soluzione.modify');
+        Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'StaffController@viewInsertSoluzione')->name('staff.soluzione.new');
+        Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione/{soluzioneID}', 'StaffController@storeSoluzione')->name('staff.soluzione.store');
+        Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@viewModifySoluzione')->name('staff.soluzione.modify');
         Route::put('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('staff.soluzione.update');       
-        Route::delete('prod/{prodottoID}/elimina-soluzione/{soluzioneID}', 'StaffController@updateSoluzione')->name('staff.soluzione.delete');       
-        Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzioni', 'StaffController@updateSoluzione')->name('staff.soluzioni.bulk-delete');       
+        Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzione/{soluzioneID}', 'StaffController@deleteSoluzione')->name('staff.soluzione.delete');       
+        Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzioni', 'StaffController@bulkDeleteSoluzioni')->name('staff.soluzioni.bulk-delete');       
     });
 });
 
@@ -127,21 +125,20 @@ Route::prefix('admin')->group(function(){
     Route::delete('elimina-centri', 'AdminController@bulkDeleteCentri')->name('admin.centri.bulk-delete');
     
     //Rotte CRUD per i malfunzionamenti
-    Route::get('prod/{prodottoID}/gestione-malfunzionamenti')->name('admin.malfunzionamenti.table');
     Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'AdminController@viewMalfunzionamentiTable')->name('admin.malfunzionamenti.table');
-    Route::get('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@insertMalfunzionamento')->name('admin.malfunzionamento.new');
-    Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@saveMalfunzionamento')->name('admin.malfunzionamento.store');
-    Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@modifyMalfunzionamento')->name('admin.malfunzionamento.modify');
+    Route::get('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@viewInsertMalfunzionamento')->name('admin.malfunzionamento.new');
+    Route::post('prod/{prodottoID}/inserisci-malfunzionamento', 'AdminController@storeMalfunzionamento')->name('admin.malfunzionamento.store');
+    Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@viewModifyMalfunzionamento')->name('admin.malfunzionamento.modify');
     Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'AdminController@updateMalfunzionamento')->name('admin.malfunzionamento.update');
     Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamento.delete');
-    Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'AdminController@deleteMalfunzionamento')->name('admin.malfunzionamenti.bulk-delete');
+    Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'AdminController@bulkDeleteMalfunzionamenti')->name('admin.malfunzionamenti.bulk-delete');
     
     //Rotte CRUD per le soluzioni
     Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/gestione-soluzioni', 'AdminController@viewSoluzioniTable')->name('admin.soluzioni.table');
-    Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@insertSoluzione')->name('admin.soluzione.new');
-    Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@saveSoluzione')->name('admin.soluzione.store');
-    Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'AdminController@modifySoluzione')->name('admin.soluzione.modify');
+    Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@viewInsertSoluzione')->name('admin.soluzione.new');
+    Route::post('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/inserisci-soluzione', 'AdminController@storeSoluzione')->name('admin.soluzione.store');
+    Route::get('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'AdminController@viewModifySoluzione')->name('admin.soluzione.modify');
     Route::put('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/modifica-soluzione/{soluzioneID}', 'AdminController@updateSoluzione')->name('admin.soluzione.update');       
-    Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzione/{soluzioneID}', 'AdminController@updateSoluzione')->name('admin.soluzione.delete');       
-    Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzioni', 'AdminController@updateSoluzione')->name('admin.soluzioni.bulk-delete');       
+    Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzione/{soluzioneID}', 'AdminController@deleteSoluzione')->name('admin.soluzione.delete');       
+    Route::delete('prod/{prodottoID}/malfunzionamento/{malfunzionamentoID}/elimina-soluzioni', 'AdminController@bulkDeleteSoluzioni')->name('admin.soluzioni.bulk-delete');       
 });

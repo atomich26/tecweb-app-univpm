@@ -1,8 +1,13 @@
-@extends('layouts.admin', ['title' => 'Inserisci malfunzionamento per {{$product->nome}}' ])
+@extends('layouts.admin', ['title' => $title ])
 
 @section('content')
-    @include('forms.insert-malfunzionamento')
 
-    <a href = "{{route('prodotti.table')}}"> Torna alla Tabella Prodotti</a>
+    @if($action === 'insert')
+        @include('forms.insert-malfunzionamento')
+    @elseif($action === 'modify')
+        @include('forms.modify-malfunzionamento')
+    @endif
+
+    <a href = "{{route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodotto->ID])}}"> Torna alla Tabella Prodotti</a>
 @endsection
 

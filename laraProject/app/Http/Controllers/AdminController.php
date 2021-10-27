@@ -83,7 +83,7 @@ class AdminController extends Controller
         $user = User::find($userID);
 
         if($user == null)
-            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', __('message.utenti.not-exists'));
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utenti.not-exists'));
 
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
@@ -92,21 +92,18 @@ class AdminController extends Controller
         $user->data_nascita = $request->data_nascita;
         $user->email = $request->email;
         $user->telefono = $request->telefono;
-        $user->role = $request->role;
-
        
-
         // Se il ruolo del membro cambia in tecnico, tutti i prodotti a lui assegnati sono resi disponibili per tutto lo staff.
-        if($user->role == 'tecnico'){
+        if($request->role == "tecnico"){
             $user->centroID = $request->centroID;
-            $prodotti = $user->hasMany(Prodotto::class, 'utenteID', 'ID');
-            $prodotti->utenteID = NULL;
-        }
-
-        //Se il ruolo dell'utente cambia in staff, viene annulata l'assegnazione al centro assistenza attuale
-        if($user->role == 'staff'){
+            
+            if($user->role == 'staff')
+                Prodotto::where('utenteID', $user->ID)->update(['utenteID' => null]);
+        }else{
             $user->centroID = NULL;
         }
+
+        $user->role = $request->role;
 
         //Controlla se è presente l'immagine
         if($request->current_img == null && $request->hasFile('file_img')){
@@ -125,24 +122,24 @@ class AdminController extends Controller
         $user = User::find($utenteID);
         
         if($user === null)
-            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', __('message.utente.not-exist'));
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utente.not-exist'));
         else if($user->checkRole('admin')){
-            return response()->actionResponse(Auth::user()->role . '.utenti.table', 'error', "Non è consentito eliminare un amministratore!");
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', null,  'error', "Non è consentito eliminare un amministratore!");
         }
 
         $user->delete($utenteID);
        
-        return response()->actionResponse(Auth::user()->role . '.utenti.table', 'successful', __('message.utente.delete', ['item' => $user->username])); 
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.delete', ['item' => $user->username])); 
     }
 
     public function bulkDeleteUtenti(Request $request){        
         if($request->items == null || strlen($request->items) < 1)
-            return response()->actionResponse(Auth::user()->role . ".utenti.table", 'error', 'Impossibile gli utenti selezionati. Controlla i parametri e riprova.');
+            return response()->actionResponse(Auth::user()->role . ".utenti.table", null, 'error', 'Impossibile gli utenti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         User::destroy($items);
         
-        return response()->actionResponse(Auth::user()->role . 'utenti.table', 'successful', 'message.utente.bulk-delete');
+        return response()->actionResponse(Auth::user()->role . 'utenti.table', null, 'successful', 'message.utente.bulk-delete');
     }
 
     public function assignUtentiToCentro(Request $request){
@@ -181,14 +178,14 @@ class AdminController extends Controller
         $faq->fill($request->validated());
         $faq->save();
 
-        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.insert'));
+        return response()->actionResponse('admin.faq.table', null, 'successful', __('message.faq.insert'));
     }
 
     public function viewModifyFAQ($faqID){
         $faq = Faq::find($faqID);
         
         if($faq === null)
-            return response()->actionResponse('admin.faq.new', 'error', __('message.faq.not-exist'));
+            return response()->actionResponse('admin.faq.new', null, 'error', __('message.faq.not-exist'));
         
         return view('admin.faq-form', ['title' => 'Modifica FAQ ' . $faq->ID, 'action' => 'modify', 'faq'=> $faq]);
     }
@@ -197,33 +194,33 @@ class AdminController extends Controller
         $faq = FAQ::find($faqID);
 
         if($faq === null)
-            return response()->actionResponse('admin.faq.new', 'error', __('message.faq.not-exist'));
+            return response()->actionResponse('admin.faq.new', null, 'error', __('message.faq.not-exist'));
 
         $faq->fill($request->validated());
         $faq->save();
 
-        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.update', ['item' => $faq->ID]));
+        return response()->actionResponse('admin.faq.table', null, 'successful', __('message.faq.update', ['item' => $faq->ID]));
     }
 
     public function deleteFAQ($faqID){
         $faq = FAQ::find($faqID);
 
         if($faq === null)
-            return response()->actionResponse('admin.faq.table', 'error', __('message.faq.not-exist'));
+            return response()->actionResponse('admin.faq.table', null,  'error', __('message.faq.not-exist'));
 
         $faq->delete();
 
-        return response()->actionResponse('admin.faq.table', 'successful', __('message.faq.delete', ['item' => $faqID]));
+        return response()->actionResponse('admin.faq.table', null, 'successful', __('message.faq.delete', ['item' => $faqID]));
     }
 
     public function bulkDeleteFaq(Request $request){
         if($request->items == null || strlen($request->items) < 1)
-            return response()->actionResponse("admin.faq.table", 'error', 'Impossibile eliminare le faq selezionate. Controlla i parametri e riprova.');
+            return response()->actionResponse("admin.faq.table", null,'error', 'Impossibile eliminare le faq selezionate. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         FAQ::destroy($items);
         
-        return response()->actionResponse("admin.faq.table", 'successful', __('message.faq.bulk-delete'));
+        return response()->actionResponse("admin.faq.table", null, 'successful', __('message.faq.bulk-delete'));
     }
     
     //Metodi per le CRUD per i centri assistenza
@@ -242,14 +239,14 @@ class AdminController extends Controller
         $centro->fill($request->validated());
         $centro->save();
 
-        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.insert'));
+        return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.insert'));
     }
 
     public function viewModifyCentro($centroID){
         $centro = CentroAssistenza::find($centroID);
 
         if($centro === null)
-            return response()->actionResponse('admin.insert-centro', 'successful', __('message.centro-assistenza.not-exists'));
+            return response()->actionResponse('admin.insert-centro', null, 'successful', __('message.centro-assistenza.not-exists'));
 
         return view('admin.centro-assistenza-form', ['title' => 'Modifica ' . $centro->ragione_sociale, 'action' => 'modify', 'centro' => $centro]);
     }
@@ -258,33 +255,33 @@ class AdminController extends Controller
         $centro = CentroAssistenza::find($centroID);
 
         if($centro === null)
-            return response()->actionResponse('admin.insert-centro', 'successful', __('message.centro-assistenza.not-exists'));
+            return response()->actionResponse('admin.insert-centro', null, 'successful', __('message.centro-assistenza.not-exists'));
 
         $centro->fill($request->validate());
         $centro->save();
 
-        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));
+        return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));
     }
 
     public function deleteCentro($centroID){
         $centro = CentroAssistenza::find($centroID);
         
         if($centro === null)
-            return response()->actionResponse('admin.centri.table', 'error', __('message.centro-assistenza.not-exist'));
+            return response()->actionResponse('admin.centri.table', null, 'error', __('message.centro-assistenza.not-exist'));
 
         $centro->delete($centroID);
 
-        return response()->actionResponse('admin.centri.table', 'successful', __('message.centro-assistenza.delete', ['item' => $centroID]));
+        return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.delete', ['item' => $centroID]));
     }
 
     public function bulkDeleteCentri(Request $request){
         if($request->items == null || strlen($request->items) < 1)
-            return response()->actionResponse("admin.centri.table", 'error', 'Impossibile eliminare i centri assistenza selezionati. Controlla i parametri e riprova.');
+            return response()->actionResponse("admin.centri.table", null, 'error', 'Impossibile eliminare i centri assistenza selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         CentroAssistenza::destroy($items);
     
-        return response()->actionResponse("admin.centri.table", 'successful', __('message.centro-assistenza.bulk-delete'));
+        return response()->actionResponse("admin.centri.table", null, 'successful', __('message.centro-assistenza.bulk-delete'));
     }
 }
 
