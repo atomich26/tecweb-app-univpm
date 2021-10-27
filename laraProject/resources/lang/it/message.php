@@ -28,14 +28,16 @@ return [
         'update' => 'Il malfunzionamento selezionato è stato aggiornato.',
         'delete' => 'Il malfunzionamento selezionato è stato eliminato.',
         'not-exist' => 'Il malfunzionamento richiesto non esiste.',
-        'bulk-delete' => 'I malfunzionamenti selezionati sono stati rimossi.'
+        'bulk-delete' => 'I malfunzionamenti selezionati sono stati rimossi.',
+        'not-selected' => 'La selezione è vuota.'
     ], 
     'soluzione' => [
         'insert' => 'La soluzione al malfunzionamento è stata registrata.',
         'update' => 'La soluzione selezionato è stata aggiornata.',
         'delete' => 'La soluzione selezionata è stata eliminata.',
         'not-exist' => 'La soluzione richiesta non esiste.',
-        'bulk-delete' => 'Le soluzioni selezionate sono state rimosse.'
+        'bulk-delete' => 'Le soluzioni selezionate sono state rimosse.',
+        'not-selected' => 'La selezione è vuota.'
     ], 
     'utente' => [
         'insert' => 'L\'account utente è stato creato.',

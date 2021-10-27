@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MalfunzionamentoRequest;
 use App\Models\Resources\Prodotto;
 use App\Tables\MalfunzionamentiTable;
@@ -47,33 +48,36 @@ trait MalfunzionamentiActions
         $product = Prodotto::find($productID);
         
         if(!($malfunzionamento->prodottoID == $product->ID))
-            return abort(404);
-
-        return view (Auth::user()->role . '.modify-malfunzionamento')
+            return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.malfunzionamento.not-found'));
+        
+        return view ('forms.modify-malfunzionamento')
             ->with('product', $product)
             ->with('malfunzionamento', $malfunzionamento);
     }
 
-    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
+    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $prodottoID, $malfunzionamentoID){
         $error = Malfunzionamento::find($malfunzionamentoID);
         
         $error->descrizione = $request->descrizione;
-        $productID = $error->prodottoID;
+        $prodottoID = $error->prodottoID;
         $error->save();
 
-        return redirect()->route('prodotto',['productID'=>$productID]);
+        return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
     }
 
     public function deleteMalfunzionamento($prodottoID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
 
         if($malfunzionamento == null)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.malfunzionamento.not-exists'));
+            //return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.malfunzionamento.not-exists'));
+            return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
         else if($malfunzionamento->prodottoID != $prodottoID)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.prodotto.not-exists'));
+            //return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.prodotto.not-exists'));
+            return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
 
         $malfunzionamento->delete();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
+        //return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
+        return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
     }
 }
