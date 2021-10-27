@@ -75,11 +75,11 @@ trait MalfunzionamentiActions
         $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
 
         if($malfunzionamento == null)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
 
-        $malfunzionamento->delete();
+            $malfunzionamento->delete();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));*/
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));
     }
 
     public function bulkDeleteMalfunzionamenti(Request $request){
