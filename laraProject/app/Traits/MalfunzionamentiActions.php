@@ -9,7 +9,6 @@ use App\Models\Resources\Prodotto;
 use App\Tables\MalfunzionamentiTable;
 use App\Models\Resources\Malfunzionamento;
 use App\Models\Resources\Soluzione;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Il trait Malfunzionamenti definisce le funzioni che gestiscono le CRUD 
@@ -18,87 +17,78 @@ use Illuminate\Support\Facades\Auth;
 
 trait MalfunzionamentiActions
 {
-    public function viewMalfunzionamentiTable(Request $request){
-        
-        $prodotto = Prodotto::find($request->prodottoID);
+    public function viewMalfunzionamentiTable($prodottoID){
+        $prodotto = Prodotto::findOrFail($prodottoID);
         $table = new MalfunzionamentiTable($prodotto->ID);
 
         return view('admin.datatable', ['title' => "Gestione malfunzionamenti prodotto $prodotto->ID", 'table' => $table]);
     }
 
     //funzioni dedicate ai malfunzionamenti e soluzioni
-    public function insertMalfunzionamento($productID){   
-        $product = Prodotto::find($productID);
+    public function viewInsertMalfunzionamento($prodottoID){   
+        $prodotto = Prodotto::find($prodottoID);
 
-        return view (Auth::user()->role . '.insert-malfunzionamento')->with('product', $product);
+        return view ('admin.malfunzionamento-form', [
+            'title' => 'Inserisci un nuovo malfunzionamento', 
+            'action' => 'insert',
+            'prodottoID' => $prodotto->ID]);
     }    
     
-    public function saveMalfunzionamento(MalfunzionamentoRequest $request, $productID){
-    
-        $product = Prodotto::find($productID);
-        $error = new Malfunzionamento;
-        $error->prodottoID = $product->ID;
-        $error->descrizione = $request->descrizione;
-        $error->save();
+    public function storeMalfunzionamento(MalfunzionamentoRequest $request, $prodottoID){
+        $prodotto = Prodotto::findOrFail($prodottoID);
 
-        return redirect()->route(Auth::user()->role . 'malfunzionamenti-table');
+        $malfunzionamento = new Malfunzionamento;
+        $malfunzionamento->prodottoID = $prodotto->ID;
+        $malfunzionamento->descrizione = $request->descrizione;
+        $malfunzionamento->save();
+
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.insert'));
     }
 
-    public function modifyMalfunzionamento($productID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $product = Prodotto::find($productID);
+    public function viewModifyMalfunzionamento($prodottoID, $malfunzionamentoID){
+        $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
         
-        if(!($malfunzionamento->prodottoID == $product->ID))
-            return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.malfunzionamento.not-found'));
+        if($malfunzionamento == null)
+            return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.malfunzionamento.not-exists'));
         
-        return view ('forms.modify-malfunzionamento')
-            ->with('product', $product)
-            ->with('malfunzionamento', $malfunzionamento);
+        return view ('admin.malfunzionamento-form', [
+            'title' => "Modifica malfunzionamento $malfunzionamento->ID",
+            'action' => 'modify', 
+            'prodottoID' => $prodottoID,
+            'malfunzionamento' => $malfunzionamento]);
     }
 
     public function updateMalfunzionamento(MalfunzionamentoRequest $request, $prodottoID, $malfunzionamentoID){
-        $error = Malfunzionamento::find($malfunzionamentoID);
+        $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
 
-        if($error == null)
-            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', __('message.malfunzionamento.not-exists'));
+        if($malfunzionamento == null)
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table',['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
         
-        $error->descrizione = $request->descrizione;
-        $prodottoID = $error->prodottoID;
-        $error->save();
+        $malfunzionamento->descrizione = $request->descrizione;
+        $malfunzionamento->save();
 
-        return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));
     }
 
     public function deleteMalfunzionamento($prodottoID, $malfunzionamentoID){
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
+        $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
 
         if($malfunzionamento == null)
-            //return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.malfunzionamento.not-exists'));
-            return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
-        else if($malfunzionamento->prodottoID != $prodottoID)
-            //return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.prodotto.not-exists'));
-            return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
-
-        $malfunzionamento->delete();
-
-        //return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
-        return redirect()->route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID]);
             return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
-        else if($malfunzionamento->prodottoID != $prodottoID)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID],  'error', __('message.malfunzionamento.not-exists'));
 
         $malfunzionamento->delete();
 
         return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));
     }
 
-    public function bulkDeleteMalfunzionamento(Request $request){
+    public function bulkDeleteMalfunzionamenti(Request $request, $prodottoID){
         if($request->items == null || strlen($request->items) < 1)
             return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'error', 'Impossibile eliminare i malfunzionamenti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
-        Prodotto::destroy($items);
         
-        return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'successful', __('message.prodotto.bulk-delete'));
+        Malfunzionamento::where('prodottoID', $prodottoID)->whereIn('ID', $items)->delete();
+        
+        return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'successful', __('message.malfunzionamento.bulk-delete'));
     }
 }

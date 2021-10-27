@@ -62,9 +62,10 @@
         </div>
 
         <div>
-        {{  Form::hidden('current_img', $utente->file_img ) }}
-        {{Form::label('file_img','Nuova Foto Profilo')}}
-        {{Form::file('file_img')}}
+        {{ Form::hidden('current_img', $utente->file_img ) }}
+        <img class="preview-img" src=""/>
+        {{ Form::label('file_img','Nuova Foto Profilo') }}
+        {{ Form::file('file_img') }}
         @if ($errors->first('file_img'))
             <ul>
                 @foreach ($errors->get('file_img') as $message)
