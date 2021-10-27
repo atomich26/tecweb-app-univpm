@@ -40,8 +40,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(Config::get('strings.global.default'));
 
         //Crea una macro per gestire i redirect con i messaggi all'utente.
-        Response::macro('actionResponse', function($routeName, $alert, $message){
-            return redirect()->route($routeName)->with('alert', $alert)
+        Response::macro('actionResponse', function($routeName, $routeParams = null, $alert, $message){
+            return redirect()->route($routeName, $routeParams)->with('alert', $alert)
                 ->with('message', $message);
         });
     }

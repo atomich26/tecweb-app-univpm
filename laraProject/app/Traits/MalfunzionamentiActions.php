@@ -8,6 +8,7 @@ use App\Models\Resources\Prodotto;
 use App\Tables\MalfunzionamentiTable;
 use App\Models\Resources\Malfunzionamento;
 use App\Models\Resources\Soluzione;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Il trait Malfunzionamenti definisce le funzioni che gestiscono le CRUD 
@@ -54,8 +55,11 @@ trait MalfunzionamentiActions
             ->with('malfunzionamento', $malfunzionamento);
     }
 
-    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $productID, $malfunzionamentoID){
+    public function updateMalfunzionamento(MalfunzionamentoRequest $request, $prodottoID, $malfunzionamentoID){
         $error = Malfunzionamento::find($malfunzionamentoID);
+
+        if($error == null)
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', __('message.malfunzionamento.not-exists'));
         
         $error->descrizione = $request->descrizione;
         $productID = $error->prodottoID;
@@ -68,12 +72,22 @@ trait MalfunzionamentiActions
         $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
 
         if($malfunzionamento == null)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.malfunzionamento.not-exists'));
+            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
         else if($malfunzionamento->prodottoID != $prodottoID)
-            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', 'error', __('message.prodotto.not-exists'));
+            return response()->responseAction(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID],  'error', __('message.malfunzionamento.not-exists'));
 
         $malfunzionamento->delete();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 'successful', __());
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete'));
+    }
+
+    public function bulkDeleteMalfunzionamento(Request $request){
+        if($request->items == null || strlen($request->items) < 1)
+            return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'error', 'Impossibile eliminare i malfunzionamenti selezionati. Controlla i parametri e riprova.');
+
+        $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
+        Prodotto::destroy($items);
+        
+        return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'successful', __('message.prodotto.bulk-delete'));
     }
 }

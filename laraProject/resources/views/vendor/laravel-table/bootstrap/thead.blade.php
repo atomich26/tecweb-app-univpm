@@ -98,6 +98,17 @@
                             {{ Form::close()}}
                         </div>
                     @endif
+                    {{-- show-parent button --}}
+                    @if($table->isRouteDefined('show-parent'))
+                        <div class="thead-widget">
+                            <a href="{{ $table->route('show-parent') }}"
+                               class="button btn-back"
+                               title="Torna indietro">
+                                {!! config('laravel-table.icon.back') !!}
+                                Torna indietro
+                            </a>
+                        </div>
+                    @endif
                     {{-- create button --}}
                     @if($table->isRouteDefined('create'))
                         <div class="thead-widget">

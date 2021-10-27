@@ -16,7 +16,7 @@
         @can('editProdotto', $prodotto->ID)
             <div class="product-buttons">
                 <a href="{{ route(Auth::user()->role . '.prodotto.modify', ['prodottoID' => $prodotto->ID]) }}" class="edit-prodotto-btn button"><i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Modifica prodotto</a>
-                <a href="#" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Modifica i malfunzionamenti noti</a>
+                <a href="{{ route(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodotto->ID])}}" class="malfunzionamenti-btn button"><i class="bi bi-gear"></i>&nbsp;&nbsp;Modifica i malfunzionamenti noti</a>
             </div>
         @endcan
     </div>

@@ -27,7 +27,8 @@ class SoluzioniTable extends AdminTable{
             'create'  => ['name' => Auth::user()->role . '.soluzione.new', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
             'edit'    => ['name' => Auth::user()->role . '.soluzione.modify', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
             'destroy' => ['name' => Auth::user()->role . '.soluzione.delete', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
-            'bulk-destroy' => ['name' => Auth::user()->role . '.soluzioni.bulk-delete', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]]
+            'bulk-destroy' => ['name' => Auth::user()->role . '.soluzioni.bulk-delete', 'params' => ['prodottoID' => $prodottoID, 'malfunzionamentoID' => $this->malfunzionamento->ID ]],
+            'show-parent' => ['name' => Auth::user()->role . '.malfunzionamenti.table', 'params' => ['prodottoID' => $prodottoID]]
         ])
         ->title('Gestione soluzioni')
         ->setIcon('soluzioni')

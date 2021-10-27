@@ -21,9 +21,11 @@ class MalfunzionamentiTable extends AdminTable{
         $this->model(Malfunzionamento::class)->routes([
             'index'   => ['name' => Auth::user()->role . '.malfunzionamenti.table', 'params' => ['prodottoID' => $this->prodottoID]],
             'create'  => ['name' => Auth::user()->role . '.malfunzionamento.new', 'params' => ['prodottoID' => $this->prodottoID]],
+            'show' => ['name' => Auth::user()->role . '.soluzioni.table', 'params' => ['prodottoID' => $this->prodottoID]],
             'edit'    => ['name' => Auth::user()->role . '.malfunzionamento.modify', 'params' => ['prodottoID' => $this->prodottoID]],
             'destroy' => ['name' => Auth::user()->role . '.malfunzionamento.delete', 'params' => ['prodottoID' => $this->prodottoID]],
-            'bulk-destroy' => ['name' => Auth::user()->role . '.malfunzionamenti.bulk-delete', 'params' => ['prodottoID' => $this->prodottoID]]
+            'bulk-destroy' => ['name' => Auth::user()->role . '.malfunzionamenti.bulk-delete', 'params' => ['prodottoID' => $this->prodottoID]],
+            'show-parent' => ['name' => Auth::user()->role . '.prodotti.table']
         ])
         ->title('Gestione Malfunzionamenti')
         ->setIcon('malfunzionamenti')

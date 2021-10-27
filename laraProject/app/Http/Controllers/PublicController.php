@@ -40,12 +40,12 @@ class PublicController extends Controller
         if($keyword == null || empty($keyword))
             return redirect()->route('catalogo.view');
         else if(preg_match(self::ILLEGAL_CHAR, $keyword))
-            return response()->actionResponse('catalogo.view','error', "Il pattern di ricerca non può contenere i caratteri: $ % ^ & ( ) + = - [ ] ' ; , . / { } | : < > ? ~");
+            return response()->actionResponse('catalogo.view', null, 'error', "Il pattern di ricerca non può contenere i caratteri: $ % ^ & ( ) + = - [ ] ' ; , . / { } | : < > ? ~");
 
         $prodottiSearched = $this->catalogo->getProdotti($keyword);
         
         if($prodottiSearched->total() < 1)
-            return response()->actionResponse('catalogo.view', 'warning', "La ricerca per <b>${keyword}</b> non ha prodotto risultati");
+            return response()->actionResponse('catalogo.view', null, 'warning', "La ricerca per <b>${keyword}</b> non ha prodotto risultati");
 
         return view('public.catalogo', ['prodotti' => $prodottiSearched, 'keyword' => $keyword]);
     }
