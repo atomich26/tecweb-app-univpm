@@ -1,10 +1,7 @@
 
 <div id="form-modify-faq" class="form-admin-data" >
-{{  Form::open(array('route' => [Auth::user()->role . 'malfunzionamento.store', $product->ID], 'id' =>'insert-malfunzionamento', 'Method'=>'POST')) }}
+{{  Form::open(array('route' => [Auth::user()->role . '.malfunzionamento.store', $prodottoID], 'id' =>'insert-malfunzionamento', 'Method'=>'POST')) }}
 
-<br>
-<h2>Inserisci Descrizione Malfunzionamento del prodotto {{$product->nome}}</h2>
-<br>
 {{  Form::textarea('descrizione','')}}
             @if ($errors->first('descrizione'))
                 <ul>
@@ -17,6 +14,6 @@
 <br>
 {{  Form::submit('Inserisci Malfunzionamento')}}
 <br>
-{{  Form::reset('Azzera Campi')}}
+{{  Form::reset('Annulla modifiche')}}
 {{  Form::close()}}
 </div>

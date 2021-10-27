@@ -70,7 +70,7 @@ Route::prefix('staff')->group(function () {
         Route::get('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@viewModifyMalfunzionamento')->name('staff.malfunzionamento.modify');
         Route::put('prod/{prodottoID}/modifica-malfunzionamento/{malfunzionamentoID}', 'StaffController@updateMalfunzionamento')->name('staff.malfunzionamento.update');
         Route::delete('prod/{prodottoID}/elimina-malfunzionamento/{malfunzionamentoID}', 'StaffController@deleteMalfunzionamento')->name('staff.malfunzionamento.delete');
-        Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'StaffController@deleteBulkMalfunzionamenti')->name('staff.malfunzionamenti.bulk-delete');
+        Route::delete('prod/{prodottoID}/elimina-malfunzionamenti', 'StaffController@bulkDeleteMalfunzionamenti')->name('staff.malfunzionamenti.bulk-delete');
         
         //Rotte CRUD per le soluzioni
         Route::get('prod/{prodottoID}/malfuzionamento/{malfunzionamentoID}/gestione-soluzioni', 'StaffController@viewSoluzioniTable')->name('staff.soluzioni.table');
