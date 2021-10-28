@@ -668,6 +668,10 @@ div.product-text:nth-child(even){
     margin: 50px 0;
 }
 
+div.product-text-content{
+    background-color: #fff;
+    padding: 30px;
+}
 div.product-text h3{
     padding: 20px 30px;
     background-color: var(--color-primary);
@@ -677,10 +681,6 @@ div.product-text h3{
     text-transform: uppercase;
 }
 
-div.product-text ul, div#descrizione-prodotto p{
-    background-color: #f1f1f1;
-    padding: 30px 30px!important;
-}
 
 .product-overview .product-buttons{
     margin-top: 30px;
@@ -766,6 +766,7 @@ th{
 }
 .table thead{
     position: sticky;
+    position: -webkit-sticky;
     top: 60px;
     z-index: 9999;
 }
