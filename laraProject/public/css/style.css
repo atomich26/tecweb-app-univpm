@@ -1293,3 +1293,20 @@ select#place-select{
 .soluzione{
     margin: 10px 0;
 }
+
+#specifiche-prodotto p{
+    color: white;
+}
+
+form{
+
+}
+
+.form-input-group{
+    display: block;
+}
+
+.form-input-group .col-d{
+    display: flex;
+    flex-direction: column;
+}

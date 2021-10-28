@@ -1,7 +1,6 @@
 {{  Form::open(array('route'=>'admin.prodotto.store', 'id'=>'insertProdotto', 'files'=>'true'))}}
 
-<h2>Inserimento Prodotto</h2>
-
+<h2>{{ $title }}</h2>
     <div>
         {{Form::label('nome', 'Nome del prodotto')}}
         {{Form::text('nome','')}}
@@ -49,7 +48,10 @@
     <br>
     <br>
     <div>
-        {{Form::label('specifiche', 'Specifiche del Prodotto')}}
+        <div style="display:block">
+            {{Form::label('specifiche', 'Specifiche del Prodotto')}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        <div>
         {{Form::textarea('specifiche','')}}
         @if ($errors->first('specifiche'))
                 <ul>
@@ -62,7 +64,10 @@
     <br>
     <br>
     <div>
-        {{Form::label('guida_installazione', "Breve Guida all'Installazione")}}
+        <div style="display:block">
+            {{Form::label('guida_installazione', "Breve Guida all'Installazione")}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        </div>
         {{Form::textarea('guida_installazione','')}}
         @if ($errors->first('guida_installazione'))
                 <ul>
@@ -75,7 +80,10 @@
     <br>
     <br>
     <div>
-        {{Form::label('note_uso',"Note d'uso")}}
+        <div style="display:block">
+            {{Form::label('note_uso',"Note d'uso")}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        </div>
         {{Form::textarea('note_uso','')}}
         @if ($errors->first('note_uso'))
                 <ul>

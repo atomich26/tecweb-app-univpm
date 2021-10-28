@@ -76,9 +76,9 @@ trait MalfunzionamentiActions
         if($malfunzionamento == null)
             return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
 
-            $malfunzionamento->delete();
-
-            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete', ['item' => $malfunzionamentoID]));
+        $malfunzionamento->delete();
+        
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.delete', ['item' => $malfunzionamentoID]));
     }
 
     public function bulkDeleteMalfunzionamenti(Request $request){

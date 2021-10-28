@@ -37,28 +37,30 @@
         <h3>Note di buon uso:</h3>
         @include('helpers.product-content-list', ['stringToSplit' => $prodotto->note_uso])
     </div>
-    
+
+    @if(Auth::check())
     <div id="malfunzionamento-prodotto" class="product-text">
-        @if(Auth::check())
-            <h3>Malfunzionamenti noti:</h3>
-            @if(isset($prodotto->malfunzionamenti))
-                <ul style="padding: 20px 40px!important">
-                    @foreach($prodotto->malfunzionamenti as $malfunzionamento)
-                        <li>
-                            <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
-                            @if(isset($malfunzionamento->soluzioni))
-                                <ul style="padding: 10px!important">
-                                    @foreach ($malfunzionamento->soluzioni as $soluzione)
-                                        <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>         
-            @endif
+        <h3>Malfunzionamenti noti:</h3>
+        @if(count($prodotto->malfunzionamenti) > 0)
+            <ul style="padding: 20px 40px!important">
+                @foreach($prodotto->malfunzionamenti as $malfunzionamento)
+                    <li>
+                        <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
+                        @if(isset($malfunzionamento->soluzioni))
+                            <ul style="padding: 10px!important">
+                                @foreach ($malfunzionamento->soluzioni as $soluzione)
+                                    <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <h4>Nessun malfunzionamento disponibile.</h4>
         @endif
-    </div>
+        </div>
+    @endif
     </div>
 </div>
 

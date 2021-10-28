@@ -38,15 +38,14 @@ trait ProdottiActions
         $prodotto = new Prodotto();
         $this->fillProdotto($request, $prodotto);
 
-
-        return response()->actionResponse(Auth::user()->role . '.prodotti.table', 'successful', __('message.prodotto.insert'));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 'successful', __('message.prodotto.insert'));
     }
 
     public function viewModifyProdotto($prodottoID){
         $prodotto = Prodotto::find($prodottoID);
         
-        if(!$prodotto)
-            return response()->actionResponse('prodotto.new', 'error', __('message.prodotto.not-exist'));
+        if($prodotto == null)
+            return response()->actionResponse('prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $staffUtenti = User::where('role','staff')->pluck('username','ID');
 
@@ -60,29 +59,29 @@ trait ProdottiActions
     public function updateProdotto(ProdottoRequest $request, $prodottoID){
         $prodotto = Prodotto::find($prodottoID);
 
-        if(!$prodotto)
-            return response()->actionResponse('prodotto.new', 'error', __('message.prodotto.not-exist'));
+        if($prodotto == null)
+            return response()->actionResponse('prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $this->fillProdotto($request, $prodotto);
 
-        return response()->actionResponse(Auth::user()->role . '.prodotti.table', 'successful', __('message.prodotto.update'));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 'successful', __('message.prodotto.update', ['item' => $prodotto->ID]));
     }
 
     public function deleteProdotto($prodottoID){ 
         $prodotto = Prodotto::find($prodottoID);
         
-        if(!$prodotto)
-            return response()->actionResponse(Auth::user()->role . '.prodotti.table', 
+        if($prodotto == null)
+            return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 
             'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
         
         $prodotto->delete($prodottoID);
 
-        return response()->actionResponse('admin.prodotti.table', 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
+        return response()->actionResponse('admin.prodotti.table', null, 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
     }
     
     public function assignProdottiToUtente(Request $request){
         $selected = $request->optionSelectedID;
-        error_log($selected);
+    
         $isAlreadyAssigned = Prodotto::whereIn('ID', $request->items)->where('utenteID', $selected)->exists();
         
         if($isAlreadyAssigned)
@@ -98,24 +97,42 @@ trait ProdottiActions
    
     public function bulkDeleteProdotti(Request $request){
         if($request->items == null || strlen($request->items) < 1)
-            return response()->actionResponse("admin.prodotti.table", 'error', 'Impossibile eliminare i prodotti selezionati. Controlla i parametri e riprova.');
+            return response()->actionResponse("admin.prodotti.table", null, 'error', 'Impossibile eliminare i prodotti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         Prodotto::destroy($items);
         
-        return response()->actionResponse("admin.prodotti.table", 'successful', __('message.prodotto.bulk-delete'));
+        return response()->actionResponse("admin.prodotti.table", null, 'successful', __('message.prodotto.bulk-delete'));
     }
 
-    // Da completare
+    public function eliminaImmagineProdotto(Request $request){
+        $prodotto = Prodotto::findOrFail($request->prodottoID);
+        Storage::delete('/public/images/products/' . $prodotto->file_img);
+        $prodotto->file_img = NULL;
+        $prodotto->save();
+        
+        return response()->json(['alert' => 'successful', 'message' => 'Immagine attuale rimossa']);
+    }
+
     protected function fillProdotto(ProdottoRequest $request, Prodotto $prodotto){
-        $prodotto->fill($request->validated());
+        $current = $prodotto->file_img;
+
+        $prodotto->nome = $request->nome;
+        $prodotto->modello = $request->modello;
         $prodotto->categoriaID = $request->categoriaID;
+        $prodotto->descrizione = $request->descrizione;
+        $prodotto->specifiche = $request->specifiche;
+        $prodotto->guida_installazione = $request->guida_installazione;
+        $prodotto->note_uso = $request->note_uso;
         $prodotto->utenteID = $request->utenteID;
 
-        if($request->hasFile('file_img')){
+        if($request->has('current') && $request->current == $prodotto->file_img){
+            $imageName = NULL;
+        }
+        else if($request->hasFile('file_img')){
             $file = $request->file('file_img');
             $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
-        }
+        } 
         else
             $imageName = NULL;
 

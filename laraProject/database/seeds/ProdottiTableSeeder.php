@@ -262,7 +262,7 @@ class ProdottiTableSeeder extends Seeder
 
         DB::table('prodotti')->insert([
             'ID'=>8,
-            'nome'=> 'Serie | 6 Frigo-congelatore combinato da libero posizionamento Stainless steel (with anti-fingerprint)',
+            'nome'=> 'Serie | 6 Frigo-congelatore combinato da libero posizionamento Stainless steel',
             'modello'=> 'WRQ34210MW',
             'categoriaID'=> 3,
             'descrizione'=> "Una piccola modifica, una grande differenza. Grazie alle nuove misure, i nostri frigoriferi possono andare a contenere teglie, grandi angurie e ben altro in un volume poco superiore ai normali frigoriferi sul mercato. ",
