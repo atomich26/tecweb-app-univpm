@@ -1,5 +1,5 @@
 <div id="form-modify-faq" class="form-admin-data" >
-{{  Form::open(array('route' => [Auth::user()->role . '.soluzione.store', $prodottoID, $malfunzionamento->ID], 'id' =>'insert-malfunzionamento', 'Method'=>'POST')) }}
+{{  Form::open(array('route' => [Auth::user()->role . '.soluzione.store', 'prodottoID' => $prodottoID, 'malfunzionamentoID' => $malfunzionamento->ID], 'id' =>'insert-malfunzionamento', 'Method'=>'POST')) }}
 
     <h3>Descrizione malfunzionamento: {{ $malfunzionamento->descrizione }} </h3)}}
 <br>

@@ -44,8 +44,10 @@ class MalfunzionamentiTable extends AdminTable{
         $this->column('ID')->title('ID')->sortable();
         $this->column('descrizione')->title('Descrizione')->searchable()->sortable();
         $this->column()->title('Soluzioni')->value(function(Malfunzionamento $malfunzionamento){
-            $soluzioni = $malfunzionamento->hasMany(Soluzione::class,'malfunzionamentoID', 'ID')->get();
-            return count($soluzioni);
+            $soluzioniCount = count($malfunzionamento->hasMany(Soluzione::class,'malfunzionamentoID', 'ID')->get());
+            if($soluzioniCount < 1 )
+                return "Nessuna soluzione";
+            return $soluzioniCount;
         });
         $this->column('created_at')->title('Data creazione')->dateTimeFormat('d/m/Y H:i')->sortable();
         $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();

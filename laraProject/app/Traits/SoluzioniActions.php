@@ -31,7 +31,7 @@ trait SoluzioniActions
     public function viewInsertSoluzione($prodottoID, $malfunzionamentoID){   
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
 
-        if(!$malfunzionamento->exists())
+        if($malfunzionamento == null)
            abort(404);
         
         return view ('admin.soluzione-form', [
@@ -45,56 +45,79 @@ trait SoluzioniActions
     public function storeSoluzione(SoluzioneRequest $request, $prodottoID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
 
-        if(!$malfunzionamento->exists())
+        if($malfunzionamento == null)
            abort(404);
         
         $soluzione = new Soluzione();
         $soluzione->descrizione = $request->descrizione;
-        $soluzione->malfunzionamentoID = $malfunzionamentoID;
-   
+        $soluzione->malfunzionamentoID = $malfunzionamento->ID;
         $soluzione->save();
-        return response()->actionResponse(Auth::user()->role . '.soluzioni.table', ['prodottoID'=>$prodottoID, 'malfunzionamentoID'=>$malfunzionamentoID], 'successful', __('message.soluzione.insert'));
+
+        return response()->actionResponse(Auth::user()->role . '.soluzioni.table', [
+            'prodottoID'=>$prodottoID, 
+            'malfunzionamentoID'=>$malfunzionamento->ID], 
+            'successful', 
+            __('message.soluzione.insert', ['item' => $malfunzionamentoID]));
     }
 
     public function viewModifySoluzione($prodottoID, $malfunzionamentoID, $soluzioneID){
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
-        if(!$malfunzionamento->exists())
+        
+        if($malfunzionamento != null)
+            $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID)->first();
+        else
+            return abort(404);
+
+        if($soluzione == null)
            return abort(404);
+
+        return view('admin.soluzione-form', [
+            'title' => "Modifica soluzione " . $soluzione->ID, 
+            'action' => 'modify', 
+            'prodottoID' => $prodottoID, 
+            'malfunzionamento' => $malfunzionamento,
+            'soluzione' => $soluzione]);
+    }
+
+    public function updateSoluzione(SoluzioneRequest $request, $prodottoID, $malfunzionamentoID, $soluzioneID){
+        $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
         
-        $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID);
-        
+        if($malfunzionamento->exists())
+            $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID)->first();
+        else
+            return abort(404);
+
         if(!$soluzione->exists())
            return abort(404);
 
-        return view('admin.soluzione-form', ['title' => "Modifica soluzione $soluzione->ID", 'action' => 'insert', 'malfunzionamento' => $malfunzionamento]);
-    }
-
-    public function updateSoluzione(SoluzioneRequest $request, $prodottID, $malfunzionamentoID, $soluzioneID){
-
-        $soluzione = Soluzione::find($soluzioneID);
         $soluzione->descrizione = $request->descrizione;
         $soluzione->save();
 
-        //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'success', __('message.soluzione.update'));
-        return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
-        
+        return response()->actionResponse(Auth::user()->role . '.soluzioni.table', [
+            'prodottoID'=> $prodottoID, 
+            'malfunzionamentoID' => $malfunzionamento->ID], 
+            'successful', 
+            __('message.soluzione.update', ['item' => $soluzione->ID]));
     }
 
     public function deleteSoluzione($prodottoID, $malfunzionamentoID, $soluzioneID){
-        $soluzione = Soluzione::find($soluzioneID);
-        $malfunzionamento = Malfunzionamento::find($malfunzionamentoID);
-        $prodotto = Prodotto::find($prodottoID);
+       $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
         
-        if(($malfunzionamento->prodottoID == $prodotto->ID)&&($soluzione->malfunzionamentoID==$malfunzionamento->ID)){
-           
-            $soluzione->delete($soluzioneID);
-            return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodottoID, 'malfunzionamento' => $malfunzionamento->ID]);
-            //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'success', __('message.soluzione.delete'));
-        }
+        if($malfunzionamento != null)
+            $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID)->first();
+        else
+            return abort(404);
+
+        if($soluzione == null)
+           return abort(404);
+
+        $soluzione->delete();
         
-        else 
-            //return response()->actionResponse(Auth::user()->role . '.soluzioni.table', 'error', __('message.soluzione.not-exist'));
-            return redirect()->route(Auth::user()->role . '.soluzioni.table', ['prodotto'=> $prodotto->ID, 'malfunzionamento' => $malfunzionamento->ID]);
+        return response()->actionResponse(Auth::user()->role . '.soluzioni.table', [
+            'prodottoID'=> $prodottoID, 
+            'malfunzionamentoID' => $malfunzionamento->ID],
+            'successful',
+            __('message.soluzione.delete', ['item' => $soluzioneID]));
     }
 
     public function bulkDeleteSoluzioni(Request $request){
@@ -105,6 +128,10 @@ trait SoluzioniActions
     
         Soluzione::where('malfunzionamentoID', $request->malfunzionamentoID)->whereIn('ID', $items)->delete();
     
-        return response()->actionResponse(Auth::user()->role . ".soluzioni.table", ['prodottoID' => $request->prodottoID, 'malfunzionamentoID' => $request->malfunzionamentoID], 'successful', __('message.soluzione.bulk-delete'));
+        return response()->actionResponse(Auth::user()->role . ".soluzioni.table", [
+            'prodottoID' => $request->prodottoID, 
+            'malfunzionamentoID' => $request->malfunzionamentoID], 
+            'successful', 
+            __('message.soluzione.bulk-delete'));
     }
 }

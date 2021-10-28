@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>{{ $title }}</h2>
-    <a href = "{{route(Auth::user()->role . '.soluzioni.table', ['prodottoID' => $prodottoID, 'malfunzionamentoID' =>$malfunzionamento->ID ])}}"> Torna alla Tabella Prodotti</a>
+    <a href = "{{route(Auth::user()->role . '.soluzioni.table', ['prodottoID' => $prodottoID, 'malfunzionamentoID' =>$malfunzionamento->ID])}}"> Torna alla Tabella Prodotti</a>
 
     @if($action === 'insert')
         @include('forms.insert-soluzione')
