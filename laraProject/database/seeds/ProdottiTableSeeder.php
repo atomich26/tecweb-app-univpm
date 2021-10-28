@@ -187,6 +187,208 @@ class ProdottiTableSeeder extends Seeder
                 § Non scollegare mai tirando dal cavo. Premere sempre sulla spina con una mano ed estrarre la spina afferrandola con l'altra mano
             ",
             'file_img' => 'WTW87568II.png',
+            'utenteID'=> 2,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>6,
+            'nome'=> 'Lavastoviglie QuadWash ad incastro scomparsa totale',
+            'modello'=> 'WTW96475CZ',
+            'categoriaID'=> 2,
+            'descrizione'=> "Con l’introduzione di Electrohm QuadWash, Electrohm completa la propria offerta tecnologica per la casa, diventando il partner ideale per chi cerca efficienza, semplicità d’uso e qualità per la propria casa. Nello specifico, igiene, performance elevate, semplicità d’utilizzo e combinazione tra durabilità ed efficienza sono gli elementi ricercati dai consumatori nel momento dell’acquisto. ",
+            'specifiche'=> "§ Altezza: 84.5cm, Larghezza: 45.0cm, Profondità: 60cm § Peso netto: 38kg § Rumorosità: 48dBA § Capacità: 9 coperti § Tecnologia: QuadWash, Aquasensor, Precise Glass Protection § Classe di efficienza energetica: C",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § La preparazione del luogo e le installazioni elettriche, idriche e dell'acqua di scarico sul luogo dell' installazione sono una responsabilità del cliente.
+                § Assicurarsi che i flessibili di ingresso e scarico dell'acqua nonché il cavo di alimentazione non siano piegati, schiacciati o strappati quando si riposiziona l'elettrodomestico dopo le procedure di installazione o pulizia.
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+                § Posizionare l'elettrodomestico su una superficie rigida e uniforme. Non collocarlo su un tappeto con superficie in pile alta o simili. Mettere l'elettrodomestico su una superficie solida e piana che abbia una sufficiente capacità di sopportare il carico!
+                § Non posizionare l'elettrodomestico sul cavo di alimentazione. § Non installare l'elettrodomestico in ambienti in cui la temperatura può scendere al di sotto di 0
+                § Allentare tutti i bulloni con una chiave adeguata finché non ruotano in modo libero. § Rimuovere i bulloni di sicurezza di trasporto ruotandoli leggermente.
+                § Collegare l'apparecchio a un attacco dell'acqua potabile utilizzando i componenti acclusi.
+                § Prestare attenzione che l'attacco dell'acqua potabile non sia piegato, schiacciato o avvolto su se stesso.
+                § Inserire la spina di alimentazione dell'apparecchio in una presa nei pressi dell'apparecchio. I dati di collegamento dell'apparecchio sono indicati sulla targhetta identificativa.
+            ",
+            'note_uso'=> "§ Non mettere mai l'elettrodomestico su un pavimento coperto da tappeto. Altrimenti la mancanza di aria sotto l'elettrodomestico provocherà il surriscaldamento delle parti elettriche. Ciò può provocare malfunzionamenti dell'elettrodomestico.
+                § Non utilizzare cavi di prolunga o prese multiple§ Se il cavo di alimentazione è troppo corto, contattare il servizio di assistenza clienti
+                § Il produttore non sarà ritenuto responsabile perdanni che possono derivare da procedure eseguite da persone non autorizzate.
+                § L'alimentazione dell'acqua e i flessibili di scarico devono essere montati in modo sicuro e restare privi di danni. Altrimenti c'è il rischio di perdite di acqua.
+                § Non mettere mai il cavo di allacciamento alla rete a contatto con fonti di calore o parti dell'apparecchio calde.
+                § Non introdurre mai solventi nella vasca di lavaggio dell'apparecchio.
+                §  Non utilizzare mai detergenti alcalini altamente corrosivi o ad elevato contenuto di acidi, in particolare del settore commerciale o industriale, in abbinamento a pezzi di alluminio (ad es. filtro per grassi di cappe aspiranti o pentole in alluminio), ad es. per la manutenzione di macchinari.
+                § Osservare le istruzioni di sicurezza e per l’uso riportate sulle confezioni di detersivo e brillantante
+                § Non toccare mai la presa con le mani bagnate!
+            ",
+            'file_img' => 'WTW96475CZ.png',
+            'utenteID'=> null,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>7,
+            'nome'=> 'Lavastoviglie Serie 5 Optimal Wash&Dry',
+            'modello'=> 'WES77587DA',
+            'categoriaID'=> 2,
+            'descrizione'=> "Fiore all'occhiello della nuova serie di lavastoviglie, la Optimal Wash&Dry offre tutti gli accessori di ultima generazione, compresi nuova tecnologia Easy Start e il sistema di lavaggio ActiveWater ",
+            'specifiche'=> "§ Altezza: 84.5cm, Larghezza: 45.0cm, Profondità: 60cm § Peso netto: 38kg § Rumorosità: 48dBA § Capacità: 9 coperti, Triplo Carrello § Tecnologia: Easy Start, Aquasensor, Precise Glass Protection, ActiveWater § Classe di efficienza energetica: A++",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § La preparazione del luogo e le installazioni elettriche, idriche e dell'acqua di scarico sul luogo dell' installazione sono una responsabilità del cliente.
+                § Assicurarsi che i flessibili di ingresso e scarico dell'acqua nonché il cavo di alimentazione non siano piegati, schiacciati o strappati quando si riposiziona l'elettrodomestico dopo le procedure di installazione o pulizia.
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+                § Posizionare l'elettrodomestico su una superficie rigida e uniforme. Non collocarlo su un tappeto con superficie in pile alta o simili. Mettere l'elettrodomestico su una superficie solida e piana che abbia una sufficiente capacità di sopportare il carico!
+                § Non posizionare l'elettrodomestico sul cavo di alimentazione. § Non installare l'elettrodomestico in ambienti in cui la temperatura può scendere al di sotto di 0
+                § Allentare tutti i bulloni con una chiave adeguata finché non ruotano in modo libero. § Rimuovere i bulloni di sicurezza di trasporto ruotandoli leggermente.
+                § Collegare l'apparecchio a un attacco dell'acqua potabile utilizzando i componenti acclusi.
+                § Prestare attenzione che l'attacco dell'acqua potabile non sia piegato, schiacciato o avvolto su se stesso.
+                § Inserire la spina di alimentazione dell'apparecchio in una presa nei pressi dell'apparecchio. I dati di collegamento dell'apparecchio sono indicati sulla targhetta identificativa.
+            ",
+            'note_uso'=> "§ Non mettere mai l'elettrodomestico su un pavimento coperto da tappeto. Altrimenti la mancanza di aria sotto l'elettrodomestico provocherà il surriscaldamento delle parti elettriche. Ciò può provocare malfunzionamenti dell'elettrodomestico.
+                § Non utilizzare cavi di prolunga o prese multiple§ Se il cavo di alimentazione è troppo corto, contattare il servizio di assistenza clienti
+                § Il produttore non sarà ritenuto responsabile perdanni che possono derivare da procedure eseguite da persone non autorizzate.
+                § L'alimentazione dell'acqua e i flessibili di scarico devono essere montati in modo sicuro e restare privi di danni. Altrimenti c'è il rischio di perdite di acqua.
+                § Non mettere mai il cavo di allacciamento alla rete a contatto con fonti di calore o parti dell'apparecchio calde.
+                § Non introdurre mai solventi nella vasca di lavaggio dell'apparecchio.
+                §  Non utilizzare mai detergenti alcalini altamente corrosivi o ad elevato contenuto di acidi, in particolare del settore commerciale o industriale, in abbinamento a pezzi di alluminio (ad es. filtro per grassi di cappe aspiranti o pentole in alluminio), ad es. per la manutenzione di macchinari.
+                § Osservare le istruzioni di sicurezza e per l’uso riportate sulle confezioni di detersivo e brillantante
+                § Non toccare mai la presa con le mani bagnate!
+            ",
+            'file_img' => 'WES77587DA.png',
+            'utenteID'=> null,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>8,
+            'nome'=> 'Serie | 6 Frigo-congelatore combinato da libero posizionamento Stainless steel (with anti-fingerprint)',
+            'modello'=> 'WRQ34210MW',
+            'categoriaID'=> 3,
+            'descrizione'=> "Una piccola modifica, una grande differenza. Grazie alle nuove misure, i nostri frigoriferi possono andare a contenere teglie, grandi angurie e ben altro in un volume poco superiore ai normali frigoriferi sul mercato. ",
+            'specifiche'=> "§ Altezza: 186.0cm, Larghezza: 86.0cm, Profondità: 81.0cm § Peso netto: 108kg § Rumorosità: 34 dBA § Capacità: 631 l § Tecnologia: No Frost, Vitafresh § Classe di efficienza energetica: B",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § Il luogo d’installazione idoneo è un locale asciutto, ventilabile.
+                § Installare l’apparecchio in modo da garantire un angolo di apertura della porta di 90°
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+                § Posizionare l'elettrodomestico su una superficie rigida e uniforme. La superficie d'installazione deve essere capace di sopportare il peso dell'elettrodomestico
+                § Non posizionare l'elettrodomestico sul cavo di alimentazione. § Non installare l'elettrodomestico in ambienti in cui la temperatura può scendere al di sotto di 0
+                § Allentare tutti i bulloni con una chiave adeguata finché non ruotano in modo libero. § Rimuovere i bulloni di sicurezza di trasporto ruotandoli leggermente.
+                § Inserire la spina di alimentazione dell'apparecchio in una presa nei pressi dell'apparecchio. I dati di collegamento dell'apparecchio sono indicati sulla targhetta identificativa.
+                § Dopo avere posizionato l’apparecchio, attendere circa 1 ore prima di metterlo in funzione, questo assicura che l’olio lubrificante si raccolga nella parte bassa del motore e non penetri nel circuito di raffreddamento.
+            ",
+            'note_uso'=> "§ Non utilizzare cavi di prolunga o prese multiple§ Se il cavo di alimentazione è troppo corto, contattare il servizio di assistenza clienti
+                § Il produttore non sarà ritenuto responsabile perdanni che possono derivare da procedure eseguite da persone non autorizzate.
+                § Non introdurre mai apparecchi elettrici all’interno di questo elettrodomestico (es. apparecchi di riscaldamento, produttori di ghiaccio elettrici ecc.). Pericolo di esplosione!
+                § Evitare assolutamente di coprire o di ostruire le aperture di afflusso e deflusso dell’aria.
+                § Non utilizzare mai detergenti alcalini altamente corrosivi o ad elevato contenuto di acidi, in particolare del settore commerciale o industriale, in abbinamento a pezzi di alluminio (ad es. filtro per grassi di cappe aspiranti o pentole in alluminio), ad es. per la manutenzione di macchinari.
+                § Non sbrinare o pulire mai l’apparecchio con una pulitrice a vapore! Il vapore può raggiungere parti elettriche e provocare un cortocircuito. Pericolo di scossa elettrica!
+                § Nei tubi del circuito di raffreddamento scorre una piccola quantità di refrigerante non inquinante, ma infiammabile (R600a). Non danneggia lo strato di ozono e non aumenta l'effetto serra. In caso di fuoriuscita, il refrigerante può ferire gli occhi o incendiarsi.
+            ",
+            'file_img' => 'WRQ34210MW.png',
+            'utenteID'=> 3,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>9,
+            'nome'=> 'Serie | 4 Frigorifero da libero posizionamento Inox look',
+            'modello'=> 'WEV14856BS',
+            'categoriaID'=> 3,
+            'descrizione'=> "Avanguardia dei frigoriferi, elegante e performante, questo modello copre tutte le esigenze che i nostri clienti hanno.",
+            'specifiche'=> "§ Altezza: 192.0cm, Larghezza: 60.0cm, Profondità: 55.0cm § Peso netto: 68.8kg § Rumorosità: 34 dBA § Capacità: 631 l § Tecnologia: No Frost, Vitafresh § Classe di efficienza energetica: B",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § Il luogo d’installazione idoneo è un locale asciutto, ventilabile.
+                § Installare l’apparecchio in modo da garantire un angolo di apertura della porta di 90°
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+                § Posizionare l'elettrodomestico su una superficie rigida e uniforme. La superficie d'installazione deve essere capace di sopportare il peso dell'elettrodomestico
+                § Non posizionare l'elettrodomestico sul cavo di alimentazione. § Non installare l'elettrodomestico in ambienti in cui la temperatura può scendere al di sotto di 0
+                § Allentare tutti i bulloni con una chiave adeguata finché non ruotano in modo libero. § Rimuovere i bulloni di sicurezza di trasporto ruotandoli leggermente.
+                § Inserire la spina di alimentazione dell'apparecchio in una presa nei pressi dell'apparecchio. I dati di collegamento dell'apparecchio sono indicati sulla targhetta identificativa.
+                § Dopo avere posizionato l’apparecchio, attendere circa 1 ore prima di metterlo in funzione, questo assicura che l’olio lubrificante si raccolga nella parte bassa del motore e non penetri nel circuito di raffreddamento.
+            ",
+            'note_uso'=> "§ Non utilizzare cavi di prolunga o prese multiple§ Se il cavo di alimentazione è troppo corto, contattare il servizio di assistenza clienti
+                § Il produttore non sarà ritenuto responsabile perdanni che possono derivare da procedure eseguite da persone non autorizzate.
+                § Non introdurre mai apparecchi elettrici all’interno di questo elettrodomestico (es. apparecchi di riscaldamento, produttori di ghiaccio elettrici ecc.). Pericolo di esplosione!
+                § Evitare assolutamente di coprire o di ostruire le aperture di afflusso e deflusso dell’aria.
+                § Non utilizzare mai detergenti alcalini altamente corrosivi o ad elevato contenuto di acidi, in particolare del settore commerciale o industriale, in abbinamento a pezzi di alluminio (ad es. filtro per grassi di cappe aspiranti o pentole in alluminio), ad es. per la manutenzione di macchinari.
+                § Non sbrinare o pulire mai l’apparecchio con una pulitrice a vapore! Il vapore può raggiungere parti elettriche e provocare un cortocircuito. Pericolo di scossa elettrica!
+                § Nei tubi del circuito di raffreddamento scorre una piccola quantità di refrigerante non inquinante, ma infiammabile (R600a). Non danneggia lo strato di ozono e non aumenta l'effetto serra. In caso di fuoriuscita, il refrigerante può ferire gli occhi o incendiarsi.
+            ",
+            'file_img' => 'WEV14856BS.png',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>10,
+            'nome'=> 'Piano cottura elettrico TouchSelect Borderless',
+            'modello'=> 'WNF62498JD',
+            'categoriaID'=> 4,
+            'descrizione'=> "Con il nuovo pannello di controllo, potete regolare facilmente la zona di cottura desiderata. Dovete semplicemente selezionare il livello di potenza necessario. E le nuove funzioni QuickStart- e ReStart rendono la cottura ancora più semplice.",
+            'specifiche'=> "§ Altezza: 4.0cm, Larghezza: 59.0cm, Lunghezza: 52.0cm § Livelli cottura: 17 § Posizione utilizzabili contemporaneamente: 4 § Tecnologia: TouchControl, ReStart § Classe di efficienza energetica: A",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § Il luogo d’installazione idoneo è un locale ventilabile.
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+            ",
+            'note_uso'=> "§ La pulizia e la manutenzione di competenza dell’utente non devono essere eseguite da bambini, a meno che non abbiano un’età di 15 anni o superiore e non siano sorvegliati.
+                § Il produttore non sarà ritenuto responsabile perdanni che possono derivare da procedure eseguite da persone non autorizzate.
+                § La pulizia e la manutenzione di competenza dell’utente non devono essere eseguite da bambini, a meno che non abbiano un’età di 15 anni o superiore e non siano sorvegliati.
+                § Non tentare mai di spegnere un incendio con dell'acqua, ma spegnere l'apparecchio e coprire le fiamme, ad esempio con un coperchio o una coperta ignifuga.
+                § Se tra il fondo della pentola e la zona di cottura è presente del liquido, le pentole possono improvvisamente saltare in aria. Tenere sempre asciutti la zona di cottura e il fondo delle pentole
+                § Non lavare l'apparecchio con pulitori a vapore o idropulitrici.
+                § Non riporre mai oggetti infiammabili o spray nei cassetti sotto il piano cottura.
+            ",
+            'file_img' => 'WNF62498JD.png',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>11,
+            'nome'=> 'Piano cottura elettrico TouchSelect Borderless',
+            'modello'=> 'WNF62498JD',
+            'categoriaID'=> 4,
+            'descrizione'=> "Con il nuovo pannello di controllo, potete regolare facilmente la zona di cottura desiderata. Dovete semplicemente selezionare il livello di potenza necessario. E le nuove funzioni QuickStart- e ReStart rendono la cottura ancora più semplice.",
+            'specifiche'=> "§ Altezza: 4.0cm, Larghezza: 59.0cm, Lunghezza: 52.0cm § Livelli cottura: 17 § Posizione utilizzabili contemporaneamente: 4 § Tecnologia: TouchControl, ReStart § Classe di efficienza energetica: A",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § Il luogo d’installazione idoneo è un locale ventilabile.
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+            ",
+            'note_uso'=> "§ Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate.
+                § La pulizia e la manutenzione di competenza dell’utente non devono essere eseguite da bambini, a meno che non abbiano un’età di 15 anni o superiore e non siano sorvegliati.
+                § Non tentare mai di spegnere un incendio con dell'acqua, ma spegnere l'apparecchio e coprire le fiamme, ad esempio con un coperchio o una coperta ignifuga.
+                § Se tra il fondo della pentola e la zona di cottura è presente del liquido, le pentole possono improvvisamente saltare in aria. Tenere sempre asciutti la zona di cottura e il fondo delle pentole
+                § Non lavare l'apparecchio con pulitori a vapore o idropulitrici.
+                § Non riporre mai oggetti infiammabili o spray nei cassetti sotto il piano cottura.
+            ",
+            'file_img' => 'WNF62498JD.png',
+            'utenteID'=> null,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('prodotti')->insert([
+            'ID'=>12,
+            'nome'=> 'Forno VaporHybrid ad incastro',
+            'modello'=> 'WHD20877SN',
+            'categoriaID'=> 4,
+            'descrizione'=> "Forno ad incastro con tecnologia HyperVapor la quale utilizza la potenza del vapore per rendere più semplice la vita in cucina.",
+            'specifiche'=> "§ Altezza: 59.4cm, Larghezza: 59.5cm, Lunghezza: 52.0cm § Intervallo Temperatura: 30-300 °C § Volume: 71 l § Tecnologia: HyperVapor, Pulizia EcoClean, Display TFT § Classe di efficienza energetica: A+",
+            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
+                § Il luogo d’installazione idoneo è un locale ventilabile.
+                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
+            ",
+            'note_uso'=> "§ Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate.
+                § La pulizia e la manutenzione di competenza dell’utente non devono essere eseguite da bambini, a meno che non abbiano un’età di 15 anni o superiore e non siano sorvegliati.
+                § Non utilizzare alcun detergente abrasivo né raschietti in metallo taglienti per la pulizia del vetro dello sportello del forno, poiché possono graffiare la superficie.
+                § I vapori dell'alcol nel vano di cottura caldo potrebbero prendere fuoco. Utilizzare esclusivamente piccole quantità di bevande ad alta gradazione alcolica nelle pietanze.
+                § Non lavare l'apparecchio con pulitori a vapore o idropulitrici.
+                § Non riporre mai oggetti infiammabili o spray nei cassetti sotto il piano cottura.
+            ",
+            'file_img' => 'WHD20877SN.png',
+            'utenteID'=> null,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
