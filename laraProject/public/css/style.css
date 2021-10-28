@@ -820,6 +820,8 @@ tbody tr{
 }
 
 img.thumb-table, img.thumb-table-user{
+    max-height: 70px;
+    object-fit: contain;
     width: 60px;
 }
 
