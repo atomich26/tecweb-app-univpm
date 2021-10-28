@@ -262,7 +262,7 @@ class ProdottiTableSeeder extends Seeder
 
         DB::table('prodotti')->insert([
             'ID'=>8,
-            'nome'=> 'Serie | 6 Frigo-congelatore combinato da libero posizionamento Stainless steel (with anti-fingerprint)',
+            'nome'=> 'Serie 6 Frigo-congelatorelibero posizionamento Zirconiu',
             'modello'=> 'WRQ34210MW',
             'categoriaID'=> 3,
             'descrizione'=> "Una piccola modifica, una grande differenza. Grazie alle nuove misure, i nostri frigoriferi possono andare a contenere teglie, grandi angurie e ben altro in un volume poco superiore ai normali frigoriferi sul mercato. ",
@@ -293,7 +293,7 @@ class ProdottiTableSeeder extends Seeder
 
         DB::table('prodotti')->insert([
             'ID'=>9,
-            'nome'=> 'Serie | 4 Frigorifero da libero posizionamento Inox look',
+            'nome'=> 'Serie 4 Frigorifero da libero posizionamento Inox',
             'modello'=> 'WEV14856BS',
             'categoriaID'=> 3,
             'descrizione'=> "Avanguardia dei frigoriferi, elegante e performante, questo modello copre tutte le esigenze che i nostri clienti hanno.",
@@ -341,30 +341,6 @@ class ProdottiTableSeeder extends Seeder
                 § Non riporre mai oggetti infiammabili o spray nei cassetti sotto il piano cottura.
             ",
             'file_img' => 'WNF62498JD.png',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('prodotti')->insert([
-            'ID'=>11,
-            'nome'=> 'Piano cottura elettrico TouchSelect Borderless',
-            'modello'=> 'WNF62498JD',
-            'categoriaID'=> 4,
-            'descrizione'=> "Con il nuovo pannello di controllo, potete regolare facilmente la zona di cottura desiderata. Dovete semplicemente selezionare il livello di potenza necessario. E le nuove funzioni QuickStart- e ReStart rendono la cottura ancora più semplice.",
-            'specifiche'=> "§ Altezza: 4.0cm, Larghezza: 59.0cm, Lunghezza: 52.0cm § Livelli cottura: 17 § Posizione utilizzabili contemporaneamente: 4 § Tecnologia: TouchControl, ReStart § Classe di efficienza energetica: A",
-            'guida_installazione'=> "§ Rivolgersi al più vicino agente autorizzato per l'assistenza per l'installazione dell'elettrodomestico.
-                § Il luogo d’installazione idoneo è un locale ventilabile.
-                § Far eseguire installazione e collegamenti elettrici dell'apparecchio dall'agente autorizzato per l'assistenza.Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate
-            ",
-            'note_uso'=> "§ Il produttore non sarà ritenuto responsabile per danni che possono derivare da procedure eseguite da persone non autorizzate.
-                § La pulizia e la manutenzione di competenza dell’utente non devono essere eseguite da bambini, a meno che non abbiano un’età di 15 anni o superiore e non siano sorvegliati.
-                § Non tentare mai di spegnere un incendio con dell'acqua, ma spegnere l'apparecchio e coprire le fiamme, ad esempio con un coperchio o una coperta ignifuga.
-                § Se tra il fondo della pentola e la zona di cottura è presente del liquido, le pentole possono improvvisamente saltare in aria. Tenere sempre asciutti la zona di cottura e il fondo delle pentole
-                § Non lavare l'apparecchio con pulitori a vapore o idropulitrici.
-                § Non riporre mai oggetti infiammabili o spray nei cassetti sotto il piano cottura.
-            ",
-            'file_img' => 'WNF62498JD.png',
-            'utenteID'=> null,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
