@@ -16,11 +16,11 @@
 
 @section('js-scripts')
 <script type="module"> 
-    import { initInputLoadImg } from '{{ asset('js/forms.js')}}';
+    import { initInputLoadImg, initRadioRole } from '{{ asset('js/forms.js')}}';
     
     $('document').ready(function() {
-       initInputLoadImg();
-
+        initInputLoadImg();
+        initRadioRole();
     });
 </script>
 @endsection

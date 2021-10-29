@@ -65,7 +65,7 @@
 
     <div class="input-group single">
         {{ Form::label('descrizione','Descrizione*') }}
-        {{ Form::textarea('descrizione',$prodotto->descrizione, ['max-length' => config('strings.prodotto.descrizione'), 'required', 'placeholder' => 'Inserisci testo qui...']) }}
+        {{ Form::textarea('descrizione',$prodotto->descrizione, ['max-length' => config('strings.prodotto.descrizione'), 'required', 'placeholder' => 'Inserisci il testo qui...']) }}
         @if($errors->first('descrizione'))
             <ul class="input-errors-list">
                 @foreach ($errors->get('descrizione') as $message)
@@ -80,7 +80,7 @@
             {{ Form::label('specifiche', 'Specifiche*') }}
             <i class="bi bi-info-circle"></i>
         </div>
-        {{ Form::textarea('specifiche', $prodotto->specifiche, ['max-length' => config('strings.prodotto.specifiche'), 'required', 'placeholder' => 'Inserisci testo qui...']) }}
+        {{ Form::textarea('specifiche', $prodotto->specifiche, ['max-length' => config('strings.prodotto.specifiche'), 'required', 'placeholder' => 'Inserisci il testo qui...']) }}
         @if($errors->first('specifiche'))
             <ul class="input-errors-list">
                 @foreach ($errors->get('specifiche') as $message)
@@ -95,7 +95,7 @@
             {{ Form::label('guida_installazione', "Guida all'installazione") }}
             <i class="bi bi-info-circle"></i>
         </div>
-        {{Form::textarea('guida_installazione', $prodotto->guida_installazione, ['max-length' => config('strings.prodotto.guida_installazione'), 'placeholder' => 'Inserisci testo qui...']) }}
+        {{Form::textarea('guida_installazione', $prodotto->guida_installazione, ['max-length' => config('strings.prodotto.guida_installazione'), 'placeholder' => 'Inserisci il testo qui...']) }}
         @if ($errors->first('guida_installazione'))
             <ul class="input-errors-list"> 
                 @foreach ($errors->get('guida_installazione') as $message)
@@ -110,7 +110,7 @@
             {{ Form::label('note_uso',"Note di buon uso") }}
             <i class="bi bi-info-circle"></i>
         </div>
-        {{ Form::textarea('note_uso', $prodotto->note_uso, ['max-length' => config('strings.prodotto.note_uso'), 'placeholder' => 'Inserisci testo qui...']) }}
+        {{ Form::textarea('note_uso', $prodotto->note_uso, ['max-length' => config('strings.prodotto.note_uso'), 'placeholder' => 'Inserisci il testo qui...']) }}
         @if ($errors->first('note_uso'))
             <ul class="input-errors-list">
                 @foreach ($errors->get('note_uso') as $message)

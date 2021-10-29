@@ -137,7 +137,7 @@
             </div>
             <div id="centroID" style="margin: 10px 0">
                 {{ Form::label ('centroID', 'Centro Assistenza') }}
-                {{ Form::select ('centroID', $centri, null, ['placeholder' => 'Nessun centro', 'style' => 'width: 40%'])}}
+                {{ Form::select ('centroID', $centri, $utente->centroID, ['placeholder' => 'Nessun centro', 'style' => 'width: 40%'])}}
             </div>
         </div>
     {{ Form::submit('Aggiorna', ['class' => 'button btn-form']) }}

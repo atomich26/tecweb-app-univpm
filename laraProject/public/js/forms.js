@@ -1,13 +1,20 @@
-export { initInputLoadImg, showTextareaTip };
+export { initInputLoadImg, initRadioRole, showTextareaTip };
 
 var inputImage = $("input[type='file']#load-image");
 var imageItem = $('#item-image');
 var deletePreviewBtn = $('#delete-preview');
 
-var currentExists = () => { 
+let currentExists = () => { 
     let currentImg = deletePreviewBtn.attr('data-url');
 
     return typeof currentImg !== 'undefined' && currentImg.trim() !== "";
+};
+
+let changeStatus = (obj) => {
+    if(obj.val() === "tecnico") 
+        $("#centroID").show();
+    else
+        $("#centroID").hide();
 };
 
 
@@ -85,25 +92,16 @@ function showTextareaTip() {
     msgProvider.send({ status: 'info', text: "É possibile creare una lista per questo campo. Inserire per ogni elemento della lista il carattere § all'inizio di ogni frase.", duration: 10 });
 }
 
-function user() {
-    $(document).ready(function(){
-        let inputRadio = $('input[name="role"]:checked');
-        
-        let changeStatus = (obj) => {
-            if(obj.val() === "tecnico") 
-                $("#centroID").show();
-            else
-                $("#centroID").hide();
-        };
+function initRadioRole() {
+    let inputRadio = $('input[name="role"]:checked');
 
-        changeStatus(inputRadio);
-        
-        inputRadio.change(function(event){
-            changeStatus($(event.target));
-        });
+    changeStatus(inputRadio);
+    
+    $('input[name="role"]').change(function(event){
+        changeStatus($(event.target));
+    });
 
-        $('form#modify-utente').on('reset', function(event){
-            changeStatus($(event.target));
-        });
+    $('form#modify-utente').on('reset', function(event){
+        changeStatus($(event.target));
     });
 }
