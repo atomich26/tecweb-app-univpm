@@ -54,6 +54,10 @@ class AdminController extends Controller
     public function viewModifyUtente($utenteID){
         $centri = CentroAssistenza::pluck('ragione_sociale','ID');
         $utente = User::find($utenteID);
+
+        if($utente == NULL)
+            return response()->actionResponse(Auth::user()->role . '.utente.new', null, 'error', __('message.utente.not-exist'));
+
         return view ('admin.utente-form', ['title' => 'Modifica ' . $utente->username, 'utente' => $utente, 'centri' => $centri, 'action' => 'modify']);
     }
 
@@ -157,8 +161,9 @@ class AdminController extends Controller
                 
             $file->storeAs('/public/images/profiles/', $imageName);
         }
-
-        $utente->file_img = $imageName;
+        else if($utente->file_img == NULL)
+            $utente->file_img = $imageName;
+        
         $utente->save();
     }
 

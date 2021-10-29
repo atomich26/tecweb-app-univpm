@@ -138,8 +138,9 @@ trait ProdottiActions
                 
             $file->storeAs('/public/images/products/', $imageName);
         }
+        else if($prodotto->file_img == NULL)
+            $prodotto->file_img = $imageName;
 
-        $prodotto->file_img = $imageName;
         $prodotto->save();
     }
 }
