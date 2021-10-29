@@ -1,4 +1,4 @@
-{{ Form::open (array('route'=>'admin.utente.store', 'files'=>'true')) }}
+{{ Form::open (array('route'=>'admin.utente.store', 'id' => 'user-form', 'files'=>'true')) }}
 
     <div class="input-group">
         <div class="input-inline">

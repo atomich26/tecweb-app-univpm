@@ -101,7 +101,7 @@ function initRadioRole() {
         changeStatus($(event.target));
     });
 
-    $('form#modify-utente').on('reset', function(event){
-        changeStatus($(event.target));
+    $('form#user-form').on('reset', function(event){
+        inputRadio.trigger("change");
     });
 }
