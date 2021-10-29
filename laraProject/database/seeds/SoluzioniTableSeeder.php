@@ -229,5 +229,228 @@ class SoluzioniTableSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 
+        DB::table('soluzioni')->insert([
+            'ID'=>25,
+            'malfunzionamentoID'=>12,
+            'descrizione'=>'Controllare che non vi siano oggetti ce possano andare ad impattare contro l\'elica di lavaggio in rotazione. Rimuovere ogni oggetto estraneo presente.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>26,
+            'malfunzionamentoID'=>12,
+            'descrizione'=>'Controllare ed eventualmente sostituire i cuscinetti di rotazione interni alla elica di lavaggio. Utilizzare ricambio certificato dalla casa produttrice.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>28,
+            'malfunzionamentoID'=>13,
+            'descrizione'=>'Controllare ed eventualmente sostituire le guarnizioni dello sportello.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>29,
+            'malfunzionamentoID'=>13,
+            'descrizione'=>'Controllare ed eventualmente pulire i filtri di lavaggio presenti sul fondo della macchina',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>27,
+            'malfunzionamentoID'=>13,
+            'descrizione'=>'Se la causa della perdita non è trovata oppure si trova in un punto inaccessibile, portare l\'elettrodomenstico in un centro assistenza per una più accurata analisi.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>32,
+            'malfunzionamentoID'=>14,
+            'descrizione'=>'Se la causa della perdita non è trovata oppure si trova in un punto inaccessibile, portare l\'elettrodomenstico in un centro assistenza per una più accurata analisi.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>31,
+            'malfunzionamentoID'=>14,
+            'descrizione'=>'Controllare ed eventualmente sostituire le guarnizioni dello sportello.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>30,
+            'malfunzionamentoID'=>14,
+            'descrizione'=>'Controllare ed eventualmente pulire i filtri di lavaggio presenti sul fondo della macchina',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>33,
+            'malfunzionamentoID'=>15,
+            'descrizione'=>'La causa può essere data da un problema con il rilascio del detergente. Controllare che la vaschetta funzioni e non sia danneggiata',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>34,
+            'malfunzionamentoID'=>15,
+            'descrizione'=>'La causa può essere data da una insufficiente pressione dell\'acqua. Verificare che la pressione dell\'acqua sia nei parametri descritti dal produttore ed eventualmente sostituire i pezzi necessari.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>35,
+            'malfunzionamentoID'=>16,
+            'descrizione'=>'Premere il pulsante di reset (se non presente, ESC e MENU insieme) per 2 secondi.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>36,
+            'malfunzionamentoID'=>16,
+            'descrizione'=>'Eseguire una diagnostica tramite APP fornitavi dala casa produttrice e, in caso di errore software, compiere un hard reset o reinstallare il sistema embedded.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>37,
+            'malfunzionamentoID'=>16,
+            'descrizione'=>'Eseguire una diagnostica tramite APP fornitavi dala casa produttrice e, in caso di errore hardware, portare l\'elettrodomestico in centro assistenza per poter sostituire le parti malfunzionanti.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>38,
+            'malfunzionamentoID'=>17,
+            'descrizione'=>'Se la temperatura è di molto più bassa di quella impostata, provare a riavviare il sistema ed aspettare un paio d\'ore.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>39,
+            'malfunzionamentoID'=>17,
+            'descrizione'=>'Se la temperatura è di molto più alta di quella impostata, provare ad impostare una temperatura più bassa. Se raggiunge la nuova temperatura, reimpostare la temperatura desiderata.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>40,
+            'malfunzionamentoID'=>17,
+            'descrizione'=>'Se il problema persiste, avviare una diagnostica software per individuare il problema, eventualmente riportando l\'elettrodomestico in un centro assistenza per sostitire le parti malfunzionanti',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>41,
+            'malfunzionamentoID'=>18,
+            'descrizione'=>'Premere il pulsante di reset (se non presente, ESC e MENU insieme) per 2 secondi.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>42,
+            'malfunzionamentoID'=>18,
+            'descrizione'=>'Eseguire una diagnostica tramite APP fornitavi dala casa produttrice e, in caso di errore software, compiere un hard reset o reinstallare il sistema embedded.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>43,
+            'malfunzionamentoID'=>18,
+            'descrizione'=>'Eseguire una diagnostica tramite APP fornitavi dala casa produttrice e, in caso di errore hardware, portare l\'elettrodomestico in centro assistenza per poter sostituire le parti malfunzionanti.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>44,
+            'malfunzionamentoID'=>19,
+            'descrizione'=>'Pulire il convogliatore dell\' acqua di sbrinamento ed il tubo di scarico da eventuali ostruzioni',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>45,
+            'malfunzionamentoID'=>20,
+            'descrizione'=>'La tensione di esercizio risulta difettosa. Portare (se possibile) il piano cottura in un centro di assistenza per poter individuare e sostituire gli elementi difettosi.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>46,
+            'malfunzionamentoID'=>21,
+            'descrizione'=>'Tenere premuto il bottone del sensore temperatura per 8-10 secondi, o finchè il sensore non si sia riacceso.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>47,
+            'malfunzionamentoID'=>21,
+            'descrizione'=>'Sostituire la batteria del sensore con un\'altra batteria omologata 3V',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>48,
+            'malfunzionamentoID'=>22,
+            'descrizione'=>'Il serbatoio dell\'acqua non è innestato. Inserire correttamente il serbatoio dell\'acqua in modo tale che si innesti nel supporto.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>49,
+            'malfunzionamentoID'=>22,
+            'descrizione'=>'l serbatoio dell\'acqua è caduto. Per la caduta si sono staccati dei componenti all\'interno del serbatoio dell\'acqua. Il serbatoio dell’acqua non è ermetico. Installare un nuovo serbatoio.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>50,
+            'malfunzionamentoID'=>22,
+            'descrizione'=>'Il sensore è difettoso. Controllare che questo funzioni tramite diagnostica ed eventualmente sostituire l\'elemento danneggiato',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>51,
+            'malfunzionamentoID'=>23,
+            'descrizione'=>'La modalità demo è attivata nelle impostazioni di base, sul display compare D01. Staccare brevemente l\'apparecchio dalla corrente disattivando il fusibile all\'interno della scatola e riaccendendolo. Disattivare la modalità demo entro 3 minuti nel menu ',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('soluzioni')->insert([
+            'ID'=>52,
+            'malfunzionamentoID'=>23,
+            'descrizione'=>'Se il problema si è verificato dopo un\'interruzione di corrente, aprire e richiudere lo sportello. Se non funziona, eseguire diagnostica per individuare elemento danneggiato.',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
     }
 }

@@ -99,58 +99,76 @@ class MalfunzionamentiTableSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 
-      /*  DB::table('malfunzionamenti')->insert([
+        DB::table('malfunzionamenti')->insert([
             'ID'=>12,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>6,
+            'descrizione'=>'La lavastoviglie fà un forte rumore in funzione'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>13,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>6,
+            'descrizione'=>'La lavastoviglie perde acqua'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>14,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>7,
+            'descrizione'=>'La lavastoviglie perde acqua'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>15,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>7,
+            'descrizione'=>'La lavastoviglie non pulisce bene i piatti'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>16,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>8,
+            'descrizione'=>'L’apparecchio non raffredda, le spie di temperatura e l’illuminazione sono accese.'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>17,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>8,
+            'descrizione'=>'La temperatura si discosta notevolmente dalle impostazioni iniziali.'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>18,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>9,
+            'descrizione'=>'La temperatura si discosta notevolmente dalle impostazioni iniziali.'
         ]);
 
         DB::table('malfunzionamenti')->insert([
             'ID'=>19,
-            'prodottoID'=>1,
-            'descrizione'=>''
+            'prodottoID'=>9,
+            'descrizione'=>'Il fondo del vano frigorifero rimane bagnato'
         ]);
        
         DB::table('malfunzionamenti')->insert([
             'ID'=>20,
-            'prodottoID'=>1,
-            'descrizione'=>''
-        ]);*/
+            'prodottoID'=>10,
+            'descrizione'=>'Display produce errore E9000'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>21,
+            'prodottoID'=>10,
+            'descrizione'=>'Il sensore di temperatura non funziona'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>22,
+            'prodottoID'=>11,
+            'descrizione'=>'Sul display compare "Riempire il serbatoio dell\'acqua", nonostante il serbatoio sia pieno.'
+        ]);
+
+        DB::table('malfunzionamenti')->insert([
+            'ID'=>23,
+            'prodottoID'=>11,
+            'descrizione'=>'L\'apparecchio non scalda.'
+        ]);
     }
 }
