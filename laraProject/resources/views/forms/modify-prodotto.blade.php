@@ -110,7 +110,7 @@
             {{ Form::label('note_uso',"Note di buon uso") }}
             <i class="bi bi-info-circle"></i>
         </div>
-        {{ Form::textarea('note_uso', $prodotto->note_uso, ['max-length' => config('strings.prodotto.specifiche'), 'placeholder' => 'Inserisci testo qui...']) }}
+        {{ Form::textarea('note_uso', $prodotto->note_uso, ['max-length' => config('strings.prodotto.note_uso'), 'placeholder' => 'Inserisci testo qui...']) }}
         @if ($errors->first('note_uso'))
             <ul class="input-errors-list">
                 @foreach ($errors->get('note_uso') as $message)

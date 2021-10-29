@@ -1,39 +1,27 @@
-<div id="form-insert-faq" class="form-admin-data" >
-
-    {{ Form::open(array('route' => ['admin.faq.store'], 'id' =>'insertFaq', 'Method'=>'POST')) }}
-
-    <h2>{{ $title }}</h2>
-        <div class="wrap-input">
-            {{  Form::label('domanda', 'Domanda')}}
-            {{  Form::textarea('domanda', old('domanda'), ['class' => 'input-data with-counter', 'max-length' => Config::get('strings.faq.domanda'), 'placeholder' => 'Inserisci qui la domanda']) }}
-            <h4 data-name="counter-domanda" class="textarea-counter"><span class="current-length">0</span>/{{ Config::get('strings.faq.domanda') }}</h4>
-
-            @if ($errors->first('domanda'))
-                <ul>
-                    @foreach ($errors->get('domanda') as $message)
+{{ Form::open(array('route' => ['admin.faq.store'], 'id' =>'insertFaq', 'Method'=>'POST')) }}
+    <div class="input-group single">
+        {{ Form::label('domanda', 'Domanda*') }}
+        {{ Form::textarea('domanda', '', ['max-length' => config('strings.faq.domanda'), 'placeholder' => 'Inserisci qui la domanda...', 'required']) }}
+        @if($errors->first('domanda'))
+            <ul class="input-errors-list">
+                @foreach ($errors->get('domanda') as $message)
                     <li class="errors">{{ $message }}</li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
-
-        <div class="wrap-input textarea-with-counter">
-            {{  Form::label('risposta',  'Risposta')}}
-            {{  Form::textarea('risposta', old('risposta'), ['class' => 'input-data with-counter','max-length' => Config::get('strings.faq.risposta'), 'placeholder' => 'Inserisci qui la risposta']) }}
-            <h4 data-name="counter-risposta" class="textarea-counter"><span class="current-length">0</span>/{{ Config::get('strings.faq.risposta') }}</h4>
-
-            @if ($errors->first('risposta'))
-                <ul>
-                    @foreach ($errors->get('risposta') as $message)
-                    <li class="errors">{{ $message }}</li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
-
-    <div>
-        {{  Form::submit ('Salva', ['formaction' => route('admin.faq.store', ['action' => 'close'])]) }}
-        {{  Form::reset ('Azzera')}}
+                @endforeach
+            </ul>
+        @endif
     </div>
-    {{Form::close()}}
-</div>
+
+    <div class="input-group single">
+        {{ Form::label('risposta',  'Risposta*') }}
+        {{ Form::textarea('risposta','', ['max-length' => config('strings.faq.risposta'), 'placeholder' => 'Inserisci qui la risposta...', 'required']) }}
+        @if($errors->first('risposta'))
+            <ul class="input-errors-list">
+                @foreach ($errors->get('risposta') as $message)
+                    <li class="errors">{{ $message }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+    {{ Form::submit ('Salva', ['class' => 'button btn-form']) }}
+    {{ Form::reset ('Annulla modifiche', ['class' => 'button btn-form'])}}
+{{Form::close()}}

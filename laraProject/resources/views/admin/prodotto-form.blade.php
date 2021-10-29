@@ -1,7 +1,6 @@
 @extends('layouts.admin', ['title' => $title])
 
 @section('content')
-   
     <div class="container-form">
         <div class="form-header">
             <h2 class="form-title">{{ $title }}</h2>

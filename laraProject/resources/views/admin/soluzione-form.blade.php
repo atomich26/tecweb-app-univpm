@@ -1,14 +1,17 @@
-@extends('layouts.admin', ['title' => 'Inserimento Soluzione' ])
+@extends('layouts.admin', ['title' => $title])
 
 @section('content')
-    <h2>{{ $title }}</h2>
-    <a href = "{{route(Auth::user()->role . '.soluzioni.table', ['prodottoID' => $prodottoID, 'malfunzionamentoID' =>$malfunzionamento->ID])}}"> Torna alla Tabella Prodotti</a>
+    <div class="container-form">
+        <div class="form-header">
+            <h2 class="form-title">{{ $title }}</h2>
+            {!! link_to_route(Auth::user()->role . '.soluzioni.table', 'Torna a Gestione soluzioni', ['prodottoID' => $prodottoID, 'malfunzionamentoID' =>$malfunzionamento->ID], ['class' => "button btn-back"]) !!}
+        </div>
 
-    @if($action === 'insert')
-        @include('forms.insert-soluzione')
-    @elseif($action === 'modify')
-        @include('forms.modify-soluzione')
-    @endif
-
+        @if($action === 'insert')
+            @include('forms.insert-soluzione')
+        @elseif($action === 'modify')
+            @include('forms.modify-soluzione')
+        @endif
+    </div>
 @endsection
 

@@ -240,8 +240,8 @@ a.link-col, a.link-col:visited, a.link-col:hover, a.link-col:focus{
     color: var(--color-tertiary);
 }
 /* Input */
-input[type="text"], input[type="password"], input[type="email"], input[type="number"],
-select{
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], 
+input[type="password"], input[type="date"],select{
     padding: 8px 15px;
     margin: 10px;
     font-family: inherit;
@@ -1339,7 +1339,8 @@ select#place-select{
     color: var(--color-primary);
 }
 
-.container-form form input[type='text'], .container-form form select, .container-form form textarea{
+.container-form form input[type='text'], .container-form form select, .container-form form input[type="email"],
+.container-form form input[type="password"], .container-form form input[type="date"], .container-form form textarea{
     margin: 5px 0!important;
     display: block;
     background-color: #fff;
@@ -1381,6 +1382,9 @@ select#place-select{
     margin-left: 14px;
 }
 
+.container-form form .input-group input:not(input[type="radio"]){
+    width: 100%;
+}
 .container-form form .input-group{
     margin: 30px 0;
     max-width: 60%;
@@ -1462,4 +1466,14 @@ button.delete-preview{
 
 button.delete-preview:hover{
     background-color: #b01328;
+}
+
+.descrizione-malf{
+    margin: 30px 0;
+}
+
+.descrizione-malf h4{
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-tertiary);
 }

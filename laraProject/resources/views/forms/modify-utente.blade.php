@@ -1,153 +1,145 @@
-{{  Form::open (array('route' => ['admin.utente.update', $utente->ID], 'id' => 'modify-utente', 'method' => 'POST'))}}
+{{ Form::open (array('route' => ['admin.utente.update', $utente->ID], 'id' => 'modify-utente', 'method' => 'POST')) }}
+    
+    {{ Form::hidden('_method', 'PUT') }}
 
-<h2>{{ $title }}</h2>
-    <div>
-            {{  Form::label ('username', 'Username' )}}
-            {{  Form::text ('username', $utente->username)  }}
-            @if ($errors->first('username'))
-                <ul>
-                    @foreach ($errors->get('username') as $message)
-                    <li class="errors">{{ $message }}</li>
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label ('nome', 'Nome*')  }}
+            {{ Form::text ('nome', $utente->nome, ['max-length' => config('strings.utente.nome'), 'required']) }}
+            @if($errors->first('nome'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('nome') as $message)
+                        <li class="errors">{{ $message }}</li>
                     @endforeach
                 </ul>
-                @endif
+            @endif
+        </div>
+
+        <div class="input-inline">
+            {{ Form::label ('cognome', 'Cognome*') }}
+            {{ Form::text ('cognome', $utente->cognome, ['max-length' => config('strings.utente.cognome'), 'required']) }}
+            @if ($errors->first('cognome'))
+                <ul class="input-errors-list">
+                    @foreach($errors->get('cognome') as $message)
+                        <li>{{$message}}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
     </div>
-    <div>
-            {{  Form::label ('password', 'Password')}}
-            {{  Form::password ('password')  }}
+
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label ('username', 'Username*' ) }}
+            {{ Form::text ('username', $utente->username, ['max-length' => config('strings.utente.username'), 'required', 'style' => 'width: 60%'] ) }}
+            @if($errors->first('username'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('username') as $message)
+                        <li class="errors">{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label ('email', 'E-Mail*') }}
+            {{ Form::email ('email', $utente->email, ['max-length' => config('strings.global.default'), 'required', 'style' => 'width: 60%']) }}
+            @if ($errors->first('email'))
+                <ul class="input-errors-list">
+                    @foreach($errors->get('email') as $message)
+                        <li>{{$message}}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label ('password', 'Password*') }}
+            {{ Form::password ('password', ['max-length' => 30,'required']) }}
             @if ($errors->first('password'))
-                <ul>
+                <ul class="input-errors-list">
                     @foreach ($errors->get('password') as $message)
                     <li class="errors">{{ $message }}</li>
                     @endforeach
                 </ul>
-                @endif
-            </div>
-    <div>
-            {{  Form::label ('password_confirmation', 'Conferma Password')}}
-            {{  Form::password ('password_confirmation')  }}
-            @if ($errors->first('password'))
-                    <ul>
-                        @foreach ($errors->get('password') as $message)
+            @endif
+        </div>
+
+        <div class="input-inline">
+            {{ Form::label ('password_confirmation', 'Conferma password*') }}
+            {{ Form::password ('password_confirmation', ['max-length' => 30,'required']) }}
+            @if($errors->first('password'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('password') as $message)
                         <li class="errors">{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
-                </div>
-                
-
-    
-    <div>
-            {{  Form::label ('nome', 'Nome')  }}
-            {{  Form::text ('nome', $utente->nome)  }}
-          @if ($errors->first('nome'))
-                <ul>
-                    @foreach ($errors->get('nome') as $message)
-                    <li class="errors">{{ $message }}</li>
                     @endforeach
                 </ul>
             @endif
         </div>
+    </div>
 
-        <div>
-            {{  Form::label ('cognome', 'Cognome')}}
-            {{  Form::text ('cognome', $utente->cognome)}}
-            @if ($errors->first('cognome'))
-                <ul>
-                    @foreach($errors->get('cognome') as $message)
-                    <li>{{$message}}</li>
-                    @endforeach
-                </ul>
-            @endif
+    <div class="input-group single" style="width: 50%">
+        {{ Form::label('file_img','Foto profilo') }}
+        <div class="preview-img-container">
+            @php
+                $hasImage = !($utente->file_img == null || rtrim($utente->file_img) == ''); 
+            @endphp
+            <img id="item-image" src="{{ $hasImage ? asset('/storage/images/profiles/' . $utente->file_img) : '' }}" style="border-radius:50%" alt="item-image">
+            <button class="button delete-preview" type="button" id="delete-preview" style="display:none"
+                @if($hasImage)
+                    data-url="{{ route(Auth::user()->role . '.utente.delete-img', ['utenteID' => $utente->ID])}}"
+                @endif
+            >{!! config('laravel-table.icon.destroy') !!} Rimuovi immagine</button>
         </div>
-
-        <div>
-        {{ Form::hidden('current_img', $utente->file_img ) }}
-        <img class="preview-img" src=""/>
-        {{ Form::label('file_img','Nuova Foto Profilo') }}
-        {{ Form::file('file_img') }}
+        {{ Form::file('file_img', ["accept" => 'image/*', 'id' => 'load-image']) }}
         @if ($errors->first('file_img'))
-            <ul>
+            <ul class="input-errors-list">
                 @foreach ($errors->get('file_img') as $message)
-                <li>{{ $message }}</li>
+                    <li>{{ $message }}</li>
                 @endforeach
             </ul>
-            @endif
-        </div>
+        @endif
+    </div>
 
-        <div>
-            {{  Form::label ('data_nascita', 'Data di Nascita')}}
-            {{  Form::date('data_nascita', $utente->data_nascita )}}
-            @if ($errors->first('data_nascita'))
-                <ul>
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label ('data_nascita', 'Data di Nascita*') }}
+            {{ Form::date('data_nascita', $utente->data_nascita, ['required']) }}
+            @if($errors->first('data_nascita'))
+                <ul class="input-errors-list">
                     @foreach($errors->get('data_nascita') as $message)
-                    <li>{{$message}}</li>
+                        <li>{{$message}}</li>
                     @endforeach
-                </ul>   
+                </ul>
             @endif
         </div>
 
-        <div>
-            {{  Form::label ('email', 'Indirizzo E-Mail')}}
-            {{  Form::email ('email', $utente->email)}}
-            @if ($errors->first('email'))
-                <ul>
-                    @foreach($errors->get('email') as $message)
-                    <li>{{$message}}</li>
-                    @endforeach
-                </ul> 
-            @endif
-        </div>
-
-
-	    <div>
-            {{  Form::label ('telefono', 'Telefono')}}
-            {{  Form::text ('telefono', $utente->telefono)}}
-            
+        <div class="input-inline">
+            {{ Form::label ('telefono', 'Telefono*') }}
+            {{ Form::text ('telefono', $utente->telefono, ['max-length' => config('strings.global.telefono'),'required']) }}
             @if ($errors->first('telefono'))
-            <ul>
-                @foreach($errors->get('telefono') as $message)
-                    <li>{{$message}}</li>
-                @endforeach
-            </ul>
+                <ul class="input-errors-list">
+                    @foreach($errors->get('telefono') as $message)
+                        <li>{{$message}}</li>
+                    @endforeach
+                </ul>
             @endif
         </div>
-
-        <div>
-            {{  Form::label ('role', 'Ruolo',['name'=>'role']) }}
-            {{  Form::radio ('role', 'tecnico', $utente->role === 'tecnico', ['id' => 'tecnico', 'name' => 'role']) }} Tecnico
-            {{  Form::radio ('role', 'staff', $utente->role === 'staff', ['id' => 'staff', 'name' => 'role']) }} Staff
+    </div>
+        <div class="input-group" style="flex-direction: column">
+            {{ Form::label ('role', 'Ruolo',['name'=>'role']) }}
+            <div style="margin: 10px 0">
+                {{ Form::radio ('role', 'tecnico', $utente->role == 'tecnico', ['id' => 'tecnico']) }} Tecnico
+                {{ Form::radio ('role', 'staff', $utente->role == 'staff', ['id' => 'staff']) }} Staff
+            </div>
+            <div id="centroID" style="margin: 10px 0">
+                {{ Form::label ('centroID', 'Centro Assistenza') }}
+                {{ Form::select ('centroID', $centri, null, ['placeholder' => 'Nessun centro', 'style' => 'width: 40%'])}}
+            </div>
         </div>
-        
-        <div id="centroID">
-            {{  Form::label ('centroID', 'Centro Assistenza')}}
-            {{  Form::select ('centroID', $centri, $utente->centroID, ['placeholder' => 'Nessun centro'])}}
-        </div>        
-{{ Form::hidden('_method', 'PUT') }}
-{{ Form::submit ('Modifica Utente') }}
-{{ Form::reset ('Annulla modifiche') }}
+    {{ Form::submit('Aggiorna', ['class' => 'button btn-form']) }}
+    {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{ Form::close() }}
-
-<script>
-    $(document).ready(function(){
-        let inputRadio = $('input[name="role"]:checked');
-        
-        let changeStatus = (obj) => {
-            if(obj.val() === "tecnico") 
-                $("#centroID").show();
-            else
-                $("#centroID").hide();
-        };
-
-        changeStatus(inputRadio);
-        
-        inputRadio.change(function(event){
-            changeStatus($(event.target));
-        });
-
-        $('form#modify-utente').on('reset', function(event){
-            changeStatus($(event.target));
-        });
-    });
-</script>
-     

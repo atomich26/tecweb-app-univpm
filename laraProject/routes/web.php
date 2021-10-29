@@ -116,6 +116,7 @@ Route::prefix('admin')->group(function(){
     Route::post('assegna-utenti', 'AdminController@assignUtentiToCentro')->name('admin.utenti.assign');
     Route::delete('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('admin.utente.delete'); 
     Route::delete('elimina-utenti', 'AdminController@bulkDeleteUtenti')->name('admin.utenti.bulk-delete');
+    Route::get('elimina-immagine-utente', 'AdminController@eliminaImmagineUtente')->name('admin.utente.delete-img');
 
     //Rotte CRUD per i centri assistenza
     Route::get('gestione-centri-assistenza', 'AdminController@viewCentriAssistenzaTable')->name('admin.centri.table');

@@ -84,3 +84,26 @@ function sendRequestRemoveImg(callback) {
 function showTextareaTip() {
     msgProvider.send({ status: 'info', text: "É possibile creare una lista per questo campo. Inserire per ogni elemento della lista il carattere § all'inizio di ogni frase.", duration: 10 });
 }
+
+function user() {
+    $(document).ready(function(){
+        let inputRadio = $('input[name="role"]:checked');
+        
+        let changeStatus = (obj) => {
+            if(obj.val() === "tecnico") 
+                $("#centroID").show();
+            else
+                $("#centroID").hide();
+        };
+
+        changeStatus(inputRadio);
+        
+        inputRadio.change(function(event){
+            changeStatus($(event.target));
+        });
+
+        $('form#modify-utente').on('reset', function(event){
+            changeStatus($(event.target));
+        });
+    });
+}

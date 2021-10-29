@@ -1,109 +1,110 @@
 {{ Form::open(array('route'=> ['admin.centro.update', $centro->ID], 'id'=>'insertCenter', 'method'=>'POST')) }}
 
-<h2>{{ $title }}</h2>
-
-<div>
-    {{ Form::label('ragione_sociale','Nominativo Azienda/Ragione sociale') }}
-    {{ Form::text('ragione_sociale', $centro->ragione_sociale) }}
-    
-    @if($errors->first('ragione_sociale'))
-        <ul>
-            @foreach ($errors->get('ragione_sociale') as $message)
-            <li>{{ $message }}</li>
-            @endforeach
-        </ul>
-    @endif  
-</div>
-
-<div>
-    {{ Form::label('telefono', 'Recapito Telefonico') }}
-    {{ Form::text('telefono', $centro->telefono) }}
-    
-    @if($errors->first('telefono'))
-        <ul>
-            @foreach ($errors->get('telefono') as $message)
-                <li>{{ $message }}</li>
-            @endforeach
-        </ul>
-    @endif
-</div>
-
-<div>
-    {{ Form::label('email', 'E-Mail') }}
-    {{ Form::email('email',$centro->email) }}
-
-    @if($errors->first('email'))
-        <ul>
-            @foreach ($errors->get('email') as $message)
-                <li>{{ $message }}</li>
-            @endforeach
-        </ul>
-    @endif
-</div>
-
-<div>
-    {{Form::label('sito_web', 'Sito Web')}}
-    {{Form::text('sito_web', $centro->sito_web)}}
-    @if ($errors->first('sito_web'))
-            <ul>
-                @foreach ($errors->get('sito_web') as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </ul>
-            @endif
-</div>
-
-<div>
-    {{Form::label('descizione','Descrizione Azienda')}}
-    {{Form::textarea('descrizione',$centro->descrizione)}}
-    @if ($errors->first('descrizione'))
-            <ul>
-                @foreach ($errors->get('descrizione') as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </ul>
-            @endif
-</div>
-
-<div>
-    {{Form::label('via', 'Via')}}
-    {{Form::text('via',$centro->via)}}
-    @if ($errors->first('via'))
-            <ul>
-                @foreach ($errors->get('via') as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </ul>
-            @endif
-</div>
-
-<div>
-    {{Form::label('città', 'Città')}}
-    {{Form::text('città',$centro->città)}}
-    @if ($errors->first('città'))
-            <ul>
-                @foreach ($errors->get('città') as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </ul>
-            @endif
-</div>
-
-<div>
-    {{Form::label('cap','CAP')}}
-    {{Form::text('cap',$centro->cap)}}
-    @if ($errors->first('cap'))
-            <ul>
-                @foreach ($errors->get('cap') as $message)
-                <li>{{ $message }}</li>
-                @endforeach
-            </ul>
-            @endif
-</div>
-<div>
     {{ Form::hidden('_method','PUT') }}
-    {{ Form::submit('Conferma') }}
-    {{ Form::reset ('Annulla modifiche') }}
-</div>
 
+    <div class="input-group">
+        <div class="input-inline">
+            {{ Form::label('ragione_sociale','Ragione sociale*') }}
+            {{ Form::text('ragione_sociale', $centro->ragione_sociale, ['max-length' => config('strings.centro_assistenza.ragione_sociale'), 'required']) }}
+            @if($errors->first('ragione_sociale'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('ragione_sociale') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif  
+        </div>
+
+        <div class="input-inline">
+            {{ Form::label('email', 'E-Mail*') }}
+            {{ Form::email('email', $centro->email, ['max-length' => config('strings.global.default'), 'required']) }}
+            @if ($errors->first('email'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('email') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div>
+            {{Form::label('telefono', 'Recapito telefonico*')}}
+            {{Form::text('telefono', $centro->telefono, ['max-length' => config('strings.global.telefono'), 'required'])}}
+            @if ($errors->first('telefono'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('telefono') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
+
+        <div class="input-inline">
+            {{ Form::label('sito_web', 'URL sito web*') }}
+            {{ Form::text('sito_web', $centro->sito_web, ['max-length' => config('strings.global.sito_web'), 'required']) }}
+            @if ($errors->first('sito_web'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('sito_web') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="input-inline">
+            {{Form::label('via', 'Via*')}}
+            {{Form::text('via', $centro->via, ['max-length' => config('strings.centro_assistenza.via'), 'required'])}}
+            @if ($errors->first('via'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('via') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
+        <div class="input-inline">
+            {{Form::label('città', 'Città*')}}
+            {{Form::text('città', $centro->città, ['max-length' => config('strings.centro_assistenza.città'), 'required'])}}
+            @if ($errors->first('città'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('città') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
+        <div class="input-inline">
+            {{Form::label('cap','CAP*')}}
+            {{Form::text('cap', $centro->cap, ['max-length' => config('strings.centro_assistenza.cap'), 'required'])}}
+            @if($errors->first('cap'))
+                <ul class="input-errors-list">
+                    @foreach ($errors->get('cap') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+
+    <div class="input-group single">
+        {{ Form::label('descizione','Descrizione azienda') }}
+        {{ Form::textarea('descrizione', $centro->descrizione, ['max-length' => config('strings.global.descrizione'), 'placeholder' => 'Inserisci il testo qui...']) }}
+        @if ($errors->first('descrizione'))
+            <ul class="input-errors-list">
+                @foreach ($errors->get('descrizione') as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+
+    {{ Form::submit('Aggiorna', ['class' => 'button btn-form']) }}
+    {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{Form::close()}}
