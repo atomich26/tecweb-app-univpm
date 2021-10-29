@@ -29,7 +29,7 @@
     </div>
 
     <div class="input-group">
-        <div>
+        <div class="input-inline">
             {{Form::label('telefono', 'Recapito telefonico*')}}
             {{Form::text('telefono', $centro->telefono, ['max-length' => config('strings.global.telefono'), 'required'])}}
             @if ($errors->first('telefono'))
