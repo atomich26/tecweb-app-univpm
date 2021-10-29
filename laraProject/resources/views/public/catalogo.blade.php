@@ -75,15 +75,8 @@
 
 @section('js-scripts')
     <script>
-        window.onload = () => {
-            $('#search-form').submit((event) => {
-                let keyword = $.trim($(event.target).find('input[type="text"]').val());
-                
-                if (!keyword || keyword.length == 0) {
-                    msgProvider.send({ status: 'warning', text: 'Inserisci una parola chiave per effettuare una ricerca.' });   
-                    return false;
-                }
-            });
-        };
+        $('document').ready(function(){
+            validateSearch();
+        });
     </script>
 @endsection

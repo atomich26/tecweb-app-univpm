@@ -95,6 +95,7 @@ Route::prefix('admin')->group(function(){
     Route::put('modifica-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('admin.prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('admin.prodotto.delete');
     Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('admin.prodotti.bulk-delete');
+    Route::post('elimina-immagine-prodotto', 'AdminController@eliminaImmagineProdotto')->name('admin.prodotto.delete-img');
     
     //Rotte CRUD per le FAQ
     Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('admin.faq.table');

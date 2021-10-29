@@ -257,7 +257,7 @@ class AdminController extends Controller
         if($centro === null)
             return response()->actionResponse('admin.insert-centro', null, 'successful', __('message.centro-assistenza.not-exists'));
 
-        $centro->fill($request->validate());
+        $centro->fill($request->validated());
         $centro->save();
 
         return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));

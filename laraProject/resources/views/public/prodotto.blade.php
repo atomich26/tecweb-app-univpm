@@ -25,40 +25,49 @@
 <div class="container">
     <div id="descrizione-prodotto" class="product-text">
         <h3>Descrizione:</h3>
-        <p>{{ $prodotto->descrizione ?? "Descrizione non disponibile" }}</p>
+        <div class="product-text-content">
+            <p>{{ $prodotto->descrizione ?? "Descrizione non disponibile" }}</p>
+        </div>
     </div>
 
     <div id="installazione-prodotto" class="product-text">
         <h3>Installazione:</h3>
-        @include('helpers.product-content-list', ['stringToSplit' => $prodotto->guida_installazione])
+        <div class="product-text-content">
+            @include('helpers.product-content-list', ['stringToSplit' => $prodotto->guida_installazione])
+        </div>
     </div>
 
     <div id="note-uso-prodotto" class="product-text">
         <h3>Note di buon uso:</h3>
-        @include('helpers.product-content-list', ['stringToSplit' => $prodotto->note_uso])
+        <div class="product-text-content">
+            @include('helpers.product-content-list', ['stringToSplit' => $prodotto->note_uso])
+        </div>
     </div>
-    
+
+    @if(Auth::check())
     <div id="malfunzionamento-prodotto" class="product-text">
-        @if(Auth::check())
-            <h3>Malfunzionamenti noti:</h3>
-            @if(isset($prodotto->malfunzionamenti))
-                <ul style="padding: 20px 40px!important">
-                    @foreach($prodotto->malfunzionamenti as $malfunzionamento)
-                        <li>
-                            <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
-                            @if(isset($malfunzionamento->soluzioni))
-                                <ul style="padding: 10px!important">
-                                    @foreach ($malfunzionamento->soluzioni as $soluzione)
-                                        <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>         
-            @endif
+        <h3>Malfunzionamenti noti:</h3>
+        <div class="product-text-content">
+        @if(count($prodotto->malfunzionamenti) > 0)
+            <ul style="padding: 20px 40px!important">
+                @foreach($prodotto->malfunzionamenti as $malfunzionamento)
+                    <li>
+                        <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
+                        @if(isset($malfunzionamento->soluzioni))
+                            <ul style="padding: 10px!important">
+                                @foreach ($malfunzionamento->soluzioni as $soluzione)
+                                    <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <h4>Nessun malfunzionamento disponibile.</h4>
         @endif
     </div>
+    @endif
     </div>
 </div>
 

@@ -70,3 +70,69 @@ function windowLoadResponseMessage() {
         msgProvider.send({ status: metaMessage.attr('data-alert'), text: metaMessage.attr('content') });
 }
 
+function loadImageProduct() {
+    var imageItem = $("input[type='file']#image-item");
+    
+    if (imageItem == null)
+        return;
+    
+    imageItem.addEventListener('input', () => {
+        $('#delete-item-img').css('display', 'block');
+        $('#product-preview-image').attr('src', URL.createObjectURL(preview_img.files[0]));
+    });
+
+    msgProvider.send({ status: 'successful', text: 'Immagine caricata' });
+}
+
+function deletePreview() {
+    preview_img.value = null;
+    $('#product-preview-image').attr('src', '#');
+    $('#delete-preview-img').css('display', 'none');
+    msgProvider.send({ status: 'successful', text: 'Immagine eliminata' });
+}
+
+function deleteCurrent(event) {
+    const imgPreview = $('#product-preview-image');
+
+    if (imgPreview.attr('src') == '' || imgPreview.attr('src') == null)
+        return;
+    
+    if (!confirm("Sicuro di rimuovere l'immagine attuale? L'operazione non è reversibile."))
+        return;
+    
+    $.ajax({
+        url: $('#delete-current-img').attr('data-url'),
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        statusCode: {
+            400: function (response) {
+                msgProvider.send({ status: response.responseJSON.alert, text: response.responseJSON.message});
+            },
+            500: function (response) {
+                msgProvider.send({ status: 'error', text: "Errore interno al server, contatta l'amministratore." });
+            },
+            200: function (response) {
+                msgProvider.send({ status: response.alert, text: response.message });
+                imgPreview.attr('src', '#');
+            }
+        }
+    });
+}
+
+function showTextareaTip() {
+    msgProvider.send({ status: 'info', text: "É possibile creare una lista per questo campo. Inserire per ogni elemento della lista il carattere § all'inizio di ogni frase.", duration: 10 });
+}
+
+function validateSearch() {
+    $('#search-form').submit((event) => {
+        let keyword = $.trim($(event.target).find('input[type="text"]').val());
+        
+        if (!keyword || keyword.length == 0) {
+            msgProvider.send({ status: 'warning', text: 'Inserisci una parola chiave per effettuare una ricerca.' });   
+            return false;
+        }
+    });
+}

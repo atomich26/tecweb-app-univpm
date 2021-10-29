@@ -3,9 +3,9 @@ use App\Models\Resources\Categoria;
 @endphp
 {{  Form::open(array('route'=>[Auth::user()->role . '.prodotto.update', $prodotto->ID], 'id'=>'modify-prodotto', 'files'=>'true', 'Method'=>'POST'))}}
 
-<h2>Modifica Prodotto</h2>
+<h2>{{ $title }}</h2>
 
-    <div>
+    <div class="form-input-group row-d">
         {{Form::label('nome', 'Nome del prodotto')}}
         {{Form::text('nome',$prodotto->nome)}}
         @if ($errors->first('nome'))
@@ -52,7 +52,10 @@ use App\Models\Resources\Categoria;
     <br>
     <br>
     <div>
-        {{Form::label('specifiche', 'Specifiche del Prodotto')}}
+        <div style="display:block">
+            {{Form::label('specifiche', 'Specifiche del Prodotto')}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        <div>
         {{Form::textarea('specifiche',$prodotto->specifiche)}}
         @if ($errors->first('specifiche'))
                 <ul>
@@ -65,8 +68,11 @@ use App\Models\Resources\Categoria;
     <br>
     <br>
     <div>
-        {{Form::label('guida_installazione', "Breve Guida all'Installazione")}}
-        {{Form::textarea('guida_installazione',$prodotto->guida_installazione)}}
+        <div style="display:block">
+            {{Form::label('guida_installazione', "Breve Guida all'Installazione")}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        </div>
+            {{Form::textarea('guida_installazione',$prodotto->guida_installazione)}}
         @if ($errors->first('guida_installazione'))
                 <ul>
                     @foreach ($errors->get('guida_installazione') as $message)
@@ -78,8 +84,11 @@ use App\Models\Resources\Categoria;
     <br>
     <br>
     <div>
-        {{Form::label('note_uso',"Note d'uso")}}
-        {{Form::textarea('note_uso', $prodotto->note_uso)}}
+        <div style="display:block">
+            {{Form::label('note_uso',"Note d'uso")}}
+            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+        </div>
+            {{Form::textarea('note_uso', $prodotto->note_uso)}}
         @if ($errors->first('note_uso'))
                 <ul>
                     @foreach ($errors->get('note_uso') as $message)
@@ -91,7 +100,6 @@ use App\Models\Resources\Categoria;
     <br>
     <br>
     <div>
-        {{ Form::hidden('img_current', $prodotto->file_img) }}
         {{ Form::label('file_img','Immagine Prodotto') }}
         {{ Form::file('file_img') }}
         @if ($errors->first('file_img'))
@@ -101,6 +109,20 @@ use App\Models\Resources\Categoria;
                     @endforeach
                 </ul>
                 @endif
+                @php
+                $hasImage = $prodotto->file_img != null && !empty($prodotto->file_img);
+                    if($hasImage)  
+                        $urlImg = asset('storage/images/products/') ."/" . $prodotto->file_img;
+                    else 
+                        $urlImg = "#";
+                @endphp
+
+        <img id="product-preview-image" src="{{ $urlImg }}" width="150px" height="150px" alt="product-image">
+        <button type="button" id="delete-preview-img" onclick="deletePreview()" style="display:none">Cancella immagine caricata</button>
+
+        @if($hasImage)
+            <button type="button" id="delete-current-img" onclick="deleteCurrent()" style="display:block" data-url="{{ route(Auth::user()->role . '.prodotto.delete-img', ['prodottoID' => $prodotto->ID])}}">Rimuovi immagine corrente</button>
+        @endif
     </div>
     <br>
     <br>
