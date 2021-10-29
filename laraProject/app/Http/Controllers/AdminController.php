@@ -45,32 +45,10 @@ class AdminController extends Controller
     }
 
     public function saveUtente(UserRequest $request){
-        $user = new User;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-        $user->nome = $request->nome;
-        $user->cognome = $request->cognome;
-        $user->data_nascita = $request->data_nascita;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-        $user->role = $request->role;
-       
-        if($user->role == 'tecnico'){
-            $user->centroID = $request->centroID;
-        }
-
-        if($request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();
-        }
-        else{
-            $imageName = NULL;
-        }
-
-        $user->file_img = $imageName;
-        $user->save();
+        $utente = new User;
+        $this->fillUtente($request, $utente);
         
-        return redirect()->route(Auth::user()->role . '.utenti.table');
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.insert'));
     }
 
     public function viewModifyUtente($utenteID){
@@ -79,57 +57,29 @@ class AdminController extends Controller
         return view ('admin.utente-form', ['title' => 'Modifica ' . $utente->username, 'utente' => $utente, 'centri' => $centri, 'action' => 'modify']);
     }
 
-    public function updateUtente(UserRequest $request, $userID){
-        $user = User::find($userID);
+    public function updateUtente(UserRequest $request, $utenteID){
+        $utente = User::find($utenteID);
 
-        if($user == null)
-            return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utenti.not-exists'));
+        if($utente == null)
+            return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utente.not-exist'));
 
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-        $user->nome = $request->nome;
-        $user->cognome = $request->cognome;
-        $user->data_nascita = $request->data_nascita;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-       
-        // Se il ruolo del membro cambia in tecnico, tutti i prodotti a lui assegnati sono resi disponibili per tutto lo staff.
-        if($request->role == "tecnico"){
-            $user->centroID = $request->centroID;
-            
-            if($user->role == 'staff')
-                Prodotto::where('utenteID', $user->ID)->update(['utenteID' => null]);
-        }else{
-            $user->centroID = NULL;
-        }
+        $this->fillUtente($request, $utente);
 
-        $user->role = $request->role;
-
-        //Controlla se è presente l'immagine
-        if($request->current_img == null && $request->hasFile('file_img')){
-            $image = $request->file('file_img');
-            $imageName = $image->getClientOriginalName();  
-            $user->file_img = $imageName;  
-            Storage::delete('/public/images/profiles/' . $user->file_img);
-        }
-
-        $user->save();
-
-        return redirect()->route(Auth::user()->role . '.utenti.table');
+        return response()->responseAction(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.update', ['item' => $utente->username]));
     }
 
     public function deleteUtente($utenteID){
-        $user = User::find($utenteID);
+        $utente = User::find($utenteID);
         
-        if($user === null)
+        if($utente === null)
             return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utente.not-exist'));
-        else if($user->checkRole('admin')){
+        else if($utente->checkRole('admin')){
             return response()->actionResponse(Auth::user()->role . '.utenti.table', null,  'error', "Non è consentito eliminare un amministratore!");
         }
 
-        $user->delete($utenteID);
+        $utente->delete($utenteID);
        
-        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.delete', ['item' => $user->username])); 
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.delete', ['item' => $utente->username])); 
     }
 
     public function bulkDeleteUtenti(Request $request){        
@@ -160,6 +110,56 @@ class AdminController extends Controller
         return response()->json([
             'alert' => 'successful',
             'message' => 'Assegnazione utenti completata.']);
+    }
+
+    public function eliminaImmagineUtente(Request $request){
+        $utente = User::findOrFail($request->utenteID);
+        Storage::delete('/public/images/profiles/' . $utente->file_img);
+        $utente->file_img = NULL;
+        $utente->save();
+        
+        return response()->json(['alert' => 'successful', 'message' => 'Immagine attuale rimossa']);
+    }
+
+    public function fillUtente(UserRequest $request, User $utente){
+        $utente->username = $request->username;
+        $utente->password = Hash::make($request->password);
+        $utente->nome = $request->nome;
+        $utente->cognome = $request->cognome;
+        $utente->data_nascita = $request->data_nascita;
+        $utente->email = $request->email;
+        $utente->telefono = $request->telefono;
+       
+        // Se il ruolo del membro cambia in tecnico, tutti i prodotti a lui assegnati sono resi disponibili per tutto lo staff.
+        if($request->role == "tecnico"){
+            $utente->centroID = $request->centroID;
+            
+            if($utente->role == 'staff')
+                Prodotto::where('utenteID', $utente->ID)->update(['utenteID' => null]);
+        }
+        else
+            $utente->centroID = NULL;
+
+        $utente->role = $request->role;
+
+        //Controlla se è presente l'immagine
+        if($request->hasFile('file_img')){
+            $file = $request->file('file_img');
+            $imageName = $file->getClientOriginalName();
+        }
+        else{
+            $imageName = NULL;
+        }
+
+        if($imageName != NULL){
+            if($utente->file_img != NULL && rtrim($utente->file_img) !='')
+                Storage::delete('/public/images/profiles/' . $utente->file_img);
+                
+            $file->storeAs('/public/images/profiles/', $imageName);
+        }
+
+        $utente->file_img = $imageName;
+        $utente->save();
     }
 
     // Metodi per le CRUD delle faq       

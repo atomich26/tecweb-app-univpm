@@ -45,7 +45,7 @@ trait ProdottiActions
         $prodotto = Prodotto::find($prodottoID);
         
         if($prodotto == null)
-            return response()->actionResponse('prodotto.new', null, 'error', __('message.prodotto.not-exist'));
+            return response()->actionResponse(Auth::user()->role. '.prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $staffUtenti = User::where('role','staff')->pluck('username','ID');
 
@@ -60,7 +60,7 @@ trait ProdottiActions
         $prodotto = Prodotto::find($prodottoID);
 
         if($prodotto == null)
-            return response()->actionResponse('prodotto.new', null, 'error', __('message.prodotto.not-exist'));
+            return response()->actionResponse(Auth::user()->role . '.prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $this->fillProdotto($request, $prodotto);
 
@@ -72,7 +72,7 @@ trait ProdottiActions
         
         if($prodotto == null)
             return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 
-            'error', __('message.prodotto.not-exist',['item' => $prodottoID]));
+            'error', __('message.prodotto.not-exist', ['item' => $prodottoID]));
         
         $prodotto->delete($prodottoID);
 
@@ -115,8 +115,6 @@ trait ProdottiActions
     }
 
     protected function fillProdotto(ProdottoRequest $request, Prodotto $prodotto){
-        $current = $prodotto->file_img;
-
         $prodotto->nome = $request->nome;
         $prodotto->modello = $request->modello;
         $prodotto->categoriaID = $request->categoriaID;
@@ -126,20 +124,25 @@ trait ProdottiActions
         $prodotto->note_uso = $request->note_uso;
         $prodotto->utenteID = $request->utenteID;
 
-        if($request->has('current') && $request->current == $prodotto->file_img){
+        if($request->hasFile('file_img')){
+            $file = $request->file('file_img');
+            $imageName = $file->getClientOriginalName();
+
+            if($prodotto->file_img != NULL && rtrim($prodotto->file_img) !='')
+                Storage::delete('/public/images/profiles/' . $prodotto->file_img);
+        }
+        else{
             $imageName = NULL;
         }
-        else if($request->hasFile('file_img')){
-            $file = $request->file('file_img');
-            $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
-        } 
-        else
-            $imageName = NULL;
 
-        if(!is_null($imageName)){
-
+        if($imageName != NULL){
+            if($prodotto->file_img != NULL && rtrim($prodotto->file_img) !='')
+                Storage::delete('/public/images/products/' . $prodotto->file_img);
+                
             $file->storeAs('/public/images/products/', $imageName);
         }
+
+        $prodotto->file_img = $imageName;
         $prodotto->save();
     }
 }
