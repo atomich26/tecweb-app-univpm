@@ -1,4 +1,4 @@
-{{ Form::open (array('route' => ['admin.utente.update', $utente->ID], 'id' => 'modify-utente', 'method' => 'POST')) }}
+{{ Form::open (array('route' => ['admin.utente.update', $utente->ID], 'id' => 'modify-utente', 'files'=>'true', 'method' => 'POST')) }}
     
     {{ Form::hidden('_method', 'PUT') }}
 

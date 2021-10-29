@@ -126,10 +126,7 @@ trait ProdottiActions
 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $file->getClientOriginalName();
-
-            if($prodotto->file_img != NULL && rtrim($prodotto->file_img) !='')
-                Storage::delete('/public/images/profiles/' . $prodotto->file_img);
+            $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
         }
         else{
             $imageName = NULL;

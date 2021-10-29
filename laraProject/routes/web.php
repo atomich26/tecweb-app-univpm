@@ -110,7 +110,7 @@ Route::prefix('admin')->group(function(){
     //Rotte CRUD per gli utenti
     Route::get('gestione-utenti', 'AdminController@viewUtentiTable')->name('admin.utenti.table');
     Route::get('inserisci-utente', 'AdminController@viewInsertUtente')->name('admin.utente.new');
-    Route::post('inserisci-utente', 'AdminController@saveUtente')->name('admin.utente.store');
+    Route::post('inserisci-utente', 'AdminController@storeUtente')->name('admin.utente.store');
     Route::get('modifica-utente/{utenteID}', 'AdminController@viewModifyUtente')->name('admin.utente.modify');
     Route::put('modifica-utente/{utenteID}', 'AdminController@updateUtente')->name('admin.utente.update');
     Route::post('assegna-utenti', 'AdminController@assignUtentiToCentro')->name('admin.utenti.assign');

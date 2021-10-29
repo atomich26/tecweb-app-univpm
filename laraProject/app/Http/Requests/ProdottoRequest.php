@@ -31,7 +31,7 @@ class ProdottoRequest extends FormRequest
             'specifiche'=>'required|max:' . Config::get('strings.prodotto.specifiche'),
             'guida_installazione'=>'nullable|max:' . Config::get('strings.prodotto.guida_installazione'),
             'note_uso'=>'nullable|max:' . Config::get('strings.prodotto.note_uso'),
-            'file_img'=>'image|max:2048|nullable',
+            'file_img'=>'mimes:jpeg,png,jpg|max:2048|nullable',
         ];
     }
 }

@@ -44,7 +44,7 @@ class AdminController extends Controller
         return view('admin.utente-form', ['title' => 'Inserisci un nuovo utente', 'action' => 'insert', 'centri' => $centriAssistenza]);
     }
 
-    public function saveUtente(UserRequest $request){
+    public function storeUtente(UserRequest $request){
         $utente = new User;
         $this->fillUtente($request, $utente);
         
@@ -65,7 +65,7 @@ class AdminController extends Controller
 
         $this->fillUtente($request, $utente);
 
-        return response()->responseAction(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.update', ['item' => $utente->username]));
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.update', ['item' => $utente->username]));
     }
 
     public function deleteUtente($utenteID){
@@ -145,7 +145,7 @@ class AdminController extends Controller
         //Controlla se è presente l'immagine
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $file->getClientOriginalName();
+            $imageName = $request->username . '.' . $file->getClientOriginalExtension();
         }
         else{
             $imageName = NULL;
