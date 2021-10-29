@@ -55,7 +55,8 @@ trait SoluzioniActions
 
         return response()->actionResponse(Auth::user()->role . '.soluzioni.table', [
             'prodottoID'=>$prodottoID, 
-            'malfunzionamentoID'=>$malfunzionamento->ID], 
+            'malfunzionamentoID'=>$malfunzionamento->ID,
+            'sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 
             'successful', 
             __('message.soluzione.insert', ['item' => $malfunzionamentoID]));
     }
@@ -95,7 +96,8 @@ trait SoluzioniActions
 
         return response()->actionResponse(Auth::user()->role . '.soluzioni.table', [
             'prodottoID'=> $prodottoID, 
-            'malfunzionamentoID' => $malfunzionamento->ID], 
+            'malfunzionamentoID' => $malfunzionamento->ID,
+            'sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 
             'successful', 
             __('message.soluzione.update', ['item' => $soluzione->ID]));
     }

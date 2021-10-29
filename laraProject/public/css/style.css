@@ -98,6 +98,7 @@ a.link-col, a.link-col:visited, a.link-col:hover, a.link-col:focus{
 
 .button.primary-btn, .button.secondary-btn, .button.delete{
     background-color: var(--btn-bg);
+    color: white;
 }
 
 .button.primary-btn:hover, .button.secondary-btn:hover, .button.delete:hover{
@@ -240,7 +241,7 @@ select{
     margin: 10px;
     font-family: inherit;
     font-size: 17px;
-    border-radius: 0;
+    border-radius: 2px;
     border: 0px;
 }
 
@@ -1043,6 +1044,7 @@ ul.pagination li.page-item.previous, ul.pagination li.page-item.next{
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0px 0px 5px 5px #0000000a;
+    border-radius: 2px;
 }
 .sidebar .sidebar-widget:not(:last-child){
     margin-bottom: 20px;
@@ -1124,6 +1126,7 @@ form .bi-info-circle:hover{
     justify-content: space-between;
     flex: 1 30%;
     max-width: 31%;
+    border-radius: 2px;
     background-color: #fff;
     box-shadow: 0px 0px 5px 5px #0000000a;
     transition: 0.4s;
@@ -1263,6 +1266,7 @@ form .bi-info-circle:hover{
 
 .item-paginator{
     padding: 20px;
+    border-radius: 2px;
     background-color: var(--color-secondary);
     justify-content: space-between;
 }
@@ -1309,6 +1313,7 @@ select#place-select{
     margin: 80px auto;
     background-color: #fafafa;
     box-shadow: 0px 0px 3px 2px #b6b6b685;
+    border-radius: 2px;
 }
 
 .container-form .form-header{
@@ -1320,11 +1325,15 @@ select#place-select{
     color: var(--color-primary);
 }
 
-.container-form form input[type='text'], .container-form form select, .container-form form textarea, .container-form form input[type="radio"]{
+.container-form form input[type='text'], .container-form form select, .container-form form textarea{
     margin: 5px 0!important;
     display: block;
     background-color: #fff;
     border: 1px solid var(--color-tertiary);
+}
+
+.container-form form input[type="file"]{
+    margin: 5px 0!important;
 }
 
 .container-form input[type="file"]{
@@ -1417,4 +1426,25 @@ select#place-select{
 
 .container-form form input[type="reset"].btn-form:hover{
     background-color: #961123;
+}
+
+.container-form form #item-image{
+    display: none;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;   
+}
+
+.container-form form .preview-img-container{
+    display: flex;
+    align-items: center;
+}
+
+button.delete-preview{
+    background-color: var(--color-primary);
+    color: white;
+}
+
+button.delete-preview:hover{
+    background-color: #b01328;
 }

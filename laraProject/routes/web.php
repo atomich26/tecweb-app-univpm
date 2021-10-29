@@ -62,6 +62,7 @@ Route::prefix('staff')->group(function () {
         //Rotte CRUD per i prodotti
         Route::get('modifica-prodotto/{prodottoID}', 'StaffController@viewModifyProdotto')->name('staff.prodotto.modify');
         Route::put('modifica-prodotto/{prodottoID}', 'StaffController@updateProdotto')->name('staff.prodotto.update');
+        Route::get('elimina-immagine-prodotto', 'StaffController@eliminaImmagineProdotto')->name('staff.prodotto.delete-img');
     
         //Rotte CRUD per i malfunzionamenti
         Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'StaffController@viewMalfunzionamentiTable')->name('staff.malfunzionamenti.table');
@@ -95,7 +96,7 @@ Route::prefix('admin')->group(function(){
     Route::put('modifica-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('admin.prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('admin.prodotto.delete');
     Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('admin.prodotti.bulk-delete');
-    Route::post('elimina-immagine-prodotto', 'AdminController@eliminaImmagineProdotto')->name('admin.prodotto.delete-img');
+    Route::get('elimina-immagine-prodotto', 'AdminController@eliminaImmagineProdotto')->name('admin.prodotto.delete-img');
     
     //Rotte CRUD per le FAQ
     Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('admin.faq.table');

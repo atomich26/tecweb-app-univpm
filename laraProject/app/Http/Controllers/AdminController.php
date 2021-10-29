@@ -178,7 +178,7 @@ class AdminController extends Controller
         $faq->fill($request->validated());
         $faq->save();
 
-        return response()->actionResponse('admin.faq.table', null, 'successful', __('message.faq.insert'));
+        return response()->actionResponse('admin.faq.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.faq.insert'));
     }
 
     public function viewModifyFAQ($faqID){
@@ -199,7 +199,7 @@ class AdminController extends Controller
         $faq->fill($request->validated());
         $faq->save();
 
-        return response()->actionResponse('admin.faq.table', null, 'successful', __('message.faq.update', ['item' => $faq->ID]));
+        return response()->actionResponse('admin.faq.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.faq.update', ['item' => $faq->ID]));
     }
 
     public function deleteFAQ($faqID){
@@ -239,7 +239,7 @@ class AdminController extends Controller
         $centro->fill($request->validated());
         $centro->save();
 
-        return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.insert'));
+        return response()->actionResponse('admin.centri.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.centro-assistenza.insert'));
     }
 
     public function viewModifyCentro($centroID){
@@ -260,7 +260,7 @@ class AdminController extends Controller
         $centro->fill($request->validated());
         $centro->save();
 
-        return response()->actionResponse('admin.centri.table', null, 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));
+        return response()->actionResponse('admin.centri.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.centro-assistenza.update', ['item' => $centroID]));
     }
 
     public function deleteCentro($centroID){

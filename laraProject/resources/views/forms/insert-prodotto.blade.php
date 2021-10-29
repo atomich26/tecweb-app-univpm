@@ -24,9 +24,13 @@
         </div>
     </div>
 
-    <div class="input-group single">
+    <div class="input-group single" style="width: 50%">
         {{ Form::label('file_img','Immagine Prodotto') }}
-        {{ Form::file('file_img', ["accept" => 'image/*']) }}
+        <div class="preview-img-container">
+            <img id="item-image" src="" alt="item-image">
+            <button class="button delete-preview" type="button" id="delete-preview" style="display:none">{!! config('laravel-table.icon.destroy') !!} Rimuovi immagine</button>
+        </div>
+        {{ Form::file('file_img', ["accept" => 'image/*', 'id' => 'load-image']) }}
         @if ($errors->first('file_img'))
             <ul class="input-errors-list">
                 @foreach ($errors->get('file_img') as $message)
@@ -34,8 +38,6 @@
                 @endforeach
             </ul>
         @endif
-        <img id="product-preview-image" src="#" width="150px" height="150px" alt="product-image">
-        <button type="button" id="delete-preview-img" onclick="deletePreview()" style="display:none">Cancella immagine caricata</button>
     </div>
 
     <div class="input-group">
@@ -64,7 +66,7 @@
     <div class="input-group single">
         <div>
             {{ Form::label('specifiche', 'Specifiche*') }}
-            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+            <i class="bi bi-info-circle"></i>
         </div>
         {{ Form::textarea('specifiche','', ['max-length' => config('strings.prodotto.specifiche'), 'required', 'placeholder' => 'Inserisci testo qui...']) }}
         @if($errors->first('specifiche'))
@@ -79,7 +81,7 @@
     <div class="input-group single">
         <div>
             {{ Form::label('guida_installazione', "Guida all'installazione") }}
-            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+            <i class="bi bi-info-circle"></i>
         </div>
         {{Form::textarea('guida_installazione','', ['max-length' => config('strings.prodotto.guida_installazione'), 'placeholder' => 'Inserisci testo qui...']) }}
         @if ($errors->first('guida_installazione'))
@@ -94,7 +96,7 @@
     <div class="input-group single">
         <div>
             {{ Form::label('note_uso',"Note di buon uso") }}
-            <i class="bi bi-info-circle" onclick="showTextareaTip()"></i>
+            <i class="bi bi-info-circle"></i>
         </div>
         {{ Form::textarea('note_uso','', ['max-length' => config('strings.prodotto.specifiche'), 'placeholder' => 'Inserisci testo qui...']) }}
         @if ($errors->first('note_uso'))
@@ -105,6 +107,6 @@
             </ul>
         @endif
     </div>
-    {{ Form::submit ('Conferma', ['class' => 'button btn-form']) }}
+    {{ Form::submit ('Inserisci', ['class' => 'button btn-form']) }}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{Form::close()}}

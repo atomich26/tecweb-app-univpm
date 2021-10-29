@@ -38,7 +38,7 @@ trait ProdottiActions
         $prodotto = new Prodotto();
         $this->fillProdotto($request, $prodotto);
 
-        return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 'successful', __('message.prodotto.insert'));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.prodotto.insert'));
     }
 
     public function viewModifyProdotto($prodottoID){
@@ -64,7 +64,7 @@ trait ProdottiActions
 
         $this->fillProdotto($request, $prodotto);
 
-        return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 'successful', __('message.prodotto.update', ['item' => $prodotto->ID]));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', ['sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 'successful', __('message.prodotto.update', ['item' => $prodotto->ID]));
     }
 
     public function deleteProdotto($prodottoID){ 

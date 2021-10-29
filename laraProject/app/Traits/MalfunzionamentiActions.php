@@ -42,7 +42,10 @@ trait MalfunzionamentiActions
         $malfunzionamento->descrizione = $request->descrizione;
         $malfunzionamento->save();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.insert'));
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', 
+            ['prodottoID' => $prodottoID, 'sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 
+            'successful', 
+            __('message.malfunzionamento.insert'));
     }
 
     public function viewModifyMalfunzionamento($prodottoID, $malfunzionamentoID){
@@ -67,7 +70,10 @@ trait MalfunzionamentiActions
         $malfunzionamento->descrizione = $request->descrizione;
         $malfunzionamento->save();
 
-        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'successful', __('message.malfunzionamento.update', ['item' => $malfunzionamentoID]));
+        return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table',
+            ['prodottoID' => $prodottoID, 'sort_by' => 'updated_at', 'sort_dir'=> 'desc', 'rows' => 10], 
+            'successful', __('message.malfunzionamento.update', 
+            ['item' => $malfunzionamentoID]));
     }
 
     public function deleteMalfunzionamento($prodottoID, $malfunzionamentoID){
