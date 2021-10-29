@@ -12,7 +12,6 @@ class ProdottiTableSeeder extends Seeder
     public function run()
     {
         DB::table('prodotti')->insert([
-            'ID'=> 1,
             'nome'=> 'Lavatrice Serie 6 ProSmart™, 8 kg, 1400 giri/min',
             'modello'=> 'WUU24T29IT',
             'categoriaID'=> 1,
@@ -49,7 +48,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=> 2,
             'nome'=> 'Lavatrice Serie 8 a Vapore SteamCure™, 10 kg, 1400 giri/min ',
             'modello'=> 'WAW286H8IT',
             'categoriaID'=> 1,
@@ -87,7 +85,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>3,
             'nome'=> 'Lavatrice HomeProfessional i-Dos™, 10kg, 1600 giri/min',
             'modello'=> 'WAX32EH0II',
             'categoriaID'=> 1,
@@ -121,7 +118,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>4,
             'nome'=> 'Asciugatrice Serie 6 a pompa di calore 9 kg',
             'modello'=> 'WTW85T09IT',
             'categoriaID'=> 1,
@@ -157,7 +153,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>5,
             'nome'=> 'Asciugatrice Serie 8 a pompa di calore 8 kg',
             'modello'=> 'WTW87568II',
             'categoriaID'=> 1,
@@ -193,7 +188,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>6,
             'nome'=> 'Lavastoviglie QuadWash ad incastro scomparsa totale',
             'modello'=> 'WTW96475CZ',
             'categoriaID'=> 2,
@@ -227,7 +221,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>7,
             'nome'=> 'Lavastoviglie Serie 5 Optimal Wash&Dry',
             'modello'=> 'WES77587DA',
             'categoriaID'=> 2,
@@ -261,7 +254,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>8,
             'nome'=> 'Serie 6 Frigo-congelatorelibero posizionamento Zirconiu',
             'modello'=> 'WRQ34210MW',
             'categoriaID'=> 3,
@@ -292,7 +284,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>9,
             'nome'=> 'Serie 4 Frigorifero da libero posizionamento Inox',
             'modello'=> 'WEV14856BS',
             'categoriaID'=> 3,
@@ -322,7 +313,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>10,
             'nome'=> 'Piano cottura elettrico TouchSelect Borderless',
             'modello'=> 'WNF62498JD',
             'categoriaID'=> 4,
@@ -346,7 +336,6 @@ class ProdottiTableSeeder extends Seeder
         ]);
 
         DB::table('prodotti')->insert([
-            'ID'=>12,
             'nome'=> 'Forno VaporHybrid ad incastro',
             'modello'=> 'WHD20877SN',
             'categoriaID'=> 4,

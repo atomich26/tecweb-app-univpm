@@ -49,7 +49,7 @@ trait MalfunzionamentiActions
         $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
         
         if($malfunzionamento == null)
-            return response()->actionResponse(Auth::user()->role . ".prodotti.table", 'error', __('message.malfunzionamento.not-exists'));
+            return response()->actionResponse(Auth::user()->role . ".prodotti.table", null, 'error', __('message.malfunzionamento.not-exist'));
         
         return view ('admin.malfunzionamento-form', [
             'title' => "Modifica malfunzionamento $malfunzionamento->ID",
@@ -62,7 +62,7 @@ trait MalfunzionamentiActions
         $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
 
         if($malfunzionamento == null)
-            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table',['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table',['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exist'));
         
         $malfunzionamento->descrizione = $request->descrizione;
         $malfunzionamento->save();
@@ -74,7 +74,7 @@ trait MalfunzionamentiActions
         $malfunzionamento = Malfunzionamento::where('prodottoID', $prodottoID)->where('ID', $malfunzionamentoID)->first();
 
         if($malfunzionamento == null)
-            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exists'));
+            return response()->actionResponse(Auth::user()->role . '.malfunzionamenti.table', ['prodottoID' => $prodottoID], 'error', __('message.malfunzionamento.not-exist'));
 
         $malfunzionamento->delete();
         
