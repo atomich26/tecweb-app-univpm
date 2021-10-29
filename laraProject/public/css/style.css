@@ -91,6 +91,11 @@ a.link-col, a.link-col:visited, a.link-col:hover, a.link-col:focus{
     border-bottom-left-radius: 0;
 }
 
+.table .input-group input, .table .input-group select {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
 .button i svg{
     width: 20px;
     height: 20px;
@@ -745,6 +750,15 @@ div.product-text h3{
     padding: .75rem;
     vertical-align: middle;
     height: 60px;
+}
+
+.table tbody td{
+    word-break: normal;
+}
+
+.table tbody .break-long-text{
+    max-width: 850px;
+    word-break: break-all;
 }
 
 .table-title{

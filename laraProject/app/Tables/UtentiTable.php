@@ -47,13 +47,13 @@ class UtentiTable extends AdminTable{
         $this->column('username')->title('Nome utente')->sortable()->searchable();
         $this->column('data_nascita')->title('Data di nascita')->dateTimeFormat('d/m/Y')->sortable();
         $this->column('email')->title('email')->html(function(User $utente){
-            return link_to('mailto:' . $utente->email, $utente->email, ['class' => 'link-col']);
+            return link_to('mailto:' . $utente->email, $this->formatContent($utente->email, 50), ['class' => 'link-col', 'title' => $utente->email]);
         });
         $this->column('role')->title('Ruolo')->searchable();
         $this->column('centroID')->title('Centro assistenza')->value(function(User $utente){
              $centro = $utente->belongsTo(CentroAssistenza::class, 'centroID', 'ID')->first();
             if(!is_null($centro))
-                return  $centro->ragione_sociale;
+                return  $this->formatContent($centro->ragione_sociale, 50);
             else
                 return "Nessun centro";
         });

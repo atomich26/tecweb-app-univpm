@@ -13,7 +13,7 @@ abstract class AdminTable extends Table{
 
     abstract protected function build();
 
-    protected function parseHtmlContent($text, $limit){
+    protected function formatContent($text, $limit){
         if(is_null($text) || strlen($text) == 0)
             return;
         

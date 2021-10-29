@@ -29,11 +29,11 @@ class FaqTable extends AdminTable{
         })->rowsSelection();
 
         $this->column('ID')->title('ID')->sortable();
-        $this->column('domanda')->title('Domanda')->searchable()->value(function(Faq $faq){
-           return $this->parseHtmlContent($faq->domanda, 190);
+        $this->column('domanda')->title('Domanda')->classes(['break-long-text'])->searchable()->value(function(Faq $faq){
+           return $this->formatContent($faq->domanda, 190);
         });
-        $this->column('risposta')->title('Risposta')->searchable()->value(function(Faq $faq){
-            return $this->parseHtmlContent($faq->risposta, 190);
+        $this->column('risposta')->title('Risposta')->classes(['break-long-text'])->searchable()->value(function(Faq $faq){
+            return $this->formatContent($faq->risposta, 190);
         });
         $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();
     }

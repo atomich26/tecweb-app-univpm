@@ -42,7 +42,9 @@ class MalfunzionamentiTable extends AdminTable{
         });
 
         $this->column('ID')->title('ID')->sortable();
-        $this->column('descrizione')->title('Descrizione')->searchable()->sortable();
+        $this->column('descrizione')->title('Descrizione')->classes(['break-long-text'])->value(function(Malfunzionamento $malfunzionamento){
+            return $this->formatContent($malfunzionamento->descrizione, 150);
+        })->searchable()->sortable();
         $this->column()->title('Soluzioni')->value(function(Malfunzionamento $malfunzionamento){
             $soluzioniCount = count($malfunzionamento->hasMany(Soluzione::class,'malfunzionamentoID', 'ID')->get());
             if($soluzioniCount < 1 )

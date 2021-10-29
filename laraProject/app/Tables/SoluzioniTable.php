@@ -45,7 +45,9 @@ class SoluzioniTable extends AdminTable{
         });
 
         $this->column('ID')->title('ID')->sortable();
-        $this->column('descrizione')->title('Descrizione')->searchable()->sortable();
+        $this->column('descrizione')->title('Descrizione')->value(function(Soluzione $soluzione) {
+            return $this->formatContent($soluzione->descrizione, 250);
+        })->searchable()->sortable();
         $this->column('created_at')->title('Data creazione')->dateTimeFormat('d/m/Y H:i')->sortable();
         $this->column('updated_at')->title('Ultima modifica')->dateTimeFormat('d/m/Y H:i')->sortable();
     }

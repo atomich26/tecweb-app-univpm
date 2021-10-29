@@ -50,16 +50,17 @@ class ProdottiTable extends AdminTable{
             return view('helpers.product-image', ['image' => $prodotto->file_img, 'class' => 'thumb-table'])->render();
         });
         $this->column('nome')->title('Nome')->html(function(Prodotto $prodotto){
-            return link_to_route('catalogo.view', $prodotto->nome, ['prodotto' => $prodotto->ID], ['class' => 'link-col']);
+            return link_to_route('catalogo.view', $this->formatContent($prodotto->nome, 60), ['prodotto' => $prodotto->ID], ['class' => 'link-col', 'title' => $prodotto->nome]);
         })->sortable()->searchable();
         $this->column('categoriaID')->title('Categoria')->sortable()
             ->value(function(Prodotto $prodotto){
-                return $prodotto->belongsTo(Categoria::class, 'categoriaID', 'ID')->first()->nome;
+                $categoria = $prodotto->belongsTo(Categoria::class, 'categoriaID', 'ID')->first();
+                return $this->formatContent($categoria->nome, 30);
         });
         $this->column('modello')->title('Modello')->searchable();
         $this->column('descrizione')->title('Descrizione')->searchable()
             ->value(function(Prodotto $prodotto){
-                return $this->parseHtmlContent($prodotto->descrizione, 150);
+                return $this->formatContent($prodotto->descrizione, 150);
             });
 
         if(Auth::user()->checkRole('admin')){

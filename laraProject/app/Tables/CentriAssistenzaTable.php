@@ -35,10 +35,10 @@ class CentriAssistenzaTable extends AdminTable{
             return link_to('tel:' . $centro->telefono, $title = $centro->telefono, $attributes = ['class' => 'link-col']);
         });
         $this->column('email')->title('E-mail')->searchable()->html(function(CentroAssistenza $centro){
-            return link_to('mailto:' . $centro->email, $title = $centro->email, $attributes = ['class' => 'link-col']);
+            return link_to('mailto:' . $centro->email, $this->formatContent($centro->email, 60), ['class' => 'link-col', 'title' => $centro->email]);
         });
         $this->column('sito_web')->title('Sito web')->html(function(CentroAssistenza $centro){
-            return link_to($centro->sito_web, $centro->sito_web,['class' => 'link-col']);
+            return link_to($centro->sito_web, $this->formatContent($centro->sito_web, 60),['class' => 'link-col', 'title' => $centro->sito_web]);
         });
         $this->column('via')->title('Via');
         $this->column('città')->title('Città')->searchable()->sortable();
