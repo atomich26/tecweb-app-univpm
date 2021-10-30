@@ -149,7 +149,7 @@ class AdminController extends Controller
         //Controlla se è presente l'immagine
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $request->username . '.' . $file->getClientOriginalExtension();
+            $imageName = $request->username . '-' . date('Y_m_d_H_i_s') . '.' . $file->getClientOriginalExtension();
         }
         else{
             $imageName = NULL;

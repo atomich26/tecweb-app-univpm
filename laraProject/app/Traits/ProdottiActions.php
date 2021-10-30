@@ -126,7 +126,7 @@ trait ProdottiActions
 
         if($request->hasFile('file_img')){
             $file = $request->file('file_img');
-            $imageName = $request->modello . '.' . $file->getClientOriginalExtension();
+            $imageName = $request->modello . '-' . date('Y_m_d_H_i_s') . '.' . $file->getClientOriginalExtension();
         }
         else{
             $imageName = NULL;
