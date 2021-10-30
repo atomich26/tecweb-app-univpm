@@ -135,11 +135,13 @@ trait ProdottiActions
         if($imageName != NULL){
             if($prodotto->file_img != NULL && rtrim($prodotto->file_img) !='')
                 Storage::delete('/public/images/products/' . $prodotto->file_img);
-                
+            
+            $prodotto->file_img = $imageName;
             $file->storeAs('/public/images/products/', $imageName);
         }
-        else if($prodotto->file_img == NULL)
+        else if($prodotto->file_img == NULL){
             $prodotto->file_img = $imageName;
+        }
 
         $prodotto->save();
     }

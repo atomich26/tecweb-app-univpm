@@ -158,7 +158,8 @@ class AdminController extends Controller
         if($imageName != NULL){
             if($utente->file_img != NULL && rtrim($utente->file_img) !='')
                 Storage::delete('/public/images/profiles/' . $utente->file_img);
-                
+            
+            $utente->file_img = $imageName;
             $file->storeAs('/public/images/profiles/', $imageName);
         }
         else if($utente->file_img == NULL)
