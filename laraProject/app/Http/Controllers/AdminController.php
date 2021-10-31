@@ -64,7 +64,7 @@ class AdminController extends Controller
     public function updateUtente(UserRequest $request, $utenteID){
         $utente = User::find($utenteID);
 
-        if($utente == null)
+        if($utente == NULL)
             return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utente.not-exist'));
 
         $this->fillUtente($request, $utente);
@@ -75,7 +75,7 @@ class AdminController extends Controller
     public function deleteUtente($utenteID){
         $utente = User::find($utenteID);
         
-        if($utente === null)
+        if($utente == NULL)
             return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'error', __('message.utente.not-exist'));
         else if($utente->checkRole('admin')){
             return response()->actionResponse(Auth::user()->role . '.utenti.table', null,  'error', "Non è consentito eliminare un amministratore!");
@@ -87,7 +87,7 @@ class AdminController extends Controller
     }
 
     public function bulkDeleteUtenti(Request $request){        
-        if($request->items == null || strlen($request->items) < 1)
+        if($request->items == NULL || strlen($request->items) < 1)
             return response()->actionResponse(Auth::user()->role . ".utenti.table", null, 'error', 'Impossibile gli utenti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
@@ -190,7 +190,7 @@ class AdminController extends Controller
     public function viewModifyFAQ($faqID){
         $faq = Faq::find($faqID);
         
-        if($faq === null)
+        if($faq == NULL)
             return response()->actionResponse('admin.faq.new', null, 'error', __('message.faq.not-exist'));
         
         return view('admin.faq-form', ['title' => 'Modifica FAQ ' . $faq->ID, 'action' => 'modify', 'faq'=> $faq]);
@@ -199,7 +199,7 @@ class AdminController extends Controller
     public function updateFAQ(FAQRequest $request, $faqID){
         $faq = FAQ::find($faqID);
 
-        if($faq === null)
+        if($faq == NULL)
             return response()->actionResponse('admin.faq.new', null, 'error', __('message.faq.not-exist'));
 
         $faq->fill($request->validated());
@@ -211,7 +211,7 @@ class AdminController extends Controller
     public function deleteFAQ($faqID){
         $faq = FAQ::find($faqID);
 
-        if($faq === null)
+        if($faq == NULL)
             return response()->actionResponse('admin.faq.table', null,  'error', __('message.faq.not-exist'));
 
         $faq->delete();
@@ -220,7 +220,7 @@ class AdminController extends Controller
     }
 
     public function bulkDeleteFaq(Request $request){
-        if($request->items == null || strlen($request->items) < 1)
+        if($request->items == NULL || strlen($request->items) < 1)
             return response()->actionResponse("admin.faq.table", null,'error', 'Impossibile eliminare le faq selezionate. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
@@ -251,7 +251,7 @@ class AdminController extends Controller
     public function viewModifyCentro($centroID){
         $centro = CentroAssistenza::find($centroID);
 
-        if($centro === null)
+        if($centro == NULL)
             return response()->actionResponse('admin.centro.new', null, 'successful', __('message.centro-assistenza.not-exist'));
 
         return view('admin.centro-assistenza-form', ['title' => 'Modifica ' . $centro->ragione_sociale, 'action' => 'modify', 'centro' => $centro]);
@@ -260,7 +260,7 @@ class AdminController extends Controller
     public function updateCentro(CentroRequest $request, $centroID){
         $centro = CentroAssistenza::find($centroID);
 
-        if($centro === null)
+        if($centro == NULL)
             return response()->actionResponse('admin.insert-centro', null, 'successful', __('message.centro-assistenza.not-exists'));
 
         $centro->fill($request->validated());
@@ -272,7 +272,7 @@ class AdminController extends Controller
     public function deleteCentro($centroID){
         $centro = CentroAssistenza::find($centroID);
         
-        if($centro === null)
+        if($centro == NULL)
             return response()->actionResponse('admin.centri.table', null, 'error', __('message.centro-assistenza.not-exist'));
 
         $centro->delete($centroID);
@@ -281,7 +281,7 @@ class AdminController extends Controller
     }
 
     public function bulkDeleteCentri(Request $request){
-        if($request->items == null || strlen($request->items) < 1)
+        if($request->items == NULL || strlen($request->items) < 1)
             return response()->actionResponse("admin.centri.table", null, 'error', 'Impossibile eliminare i centri assistenza selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));

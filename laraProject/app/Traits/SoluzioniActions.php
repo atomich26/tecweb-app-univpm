@@ -21,7 +21,7 @@ trait SoluzioniActions
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID);
         
         if(!$malfunzionamento->exists())
-            abort(404);
+            return abort(404);
 
         $table = new SoluzioniTable($malfunzionamentoID);
 
@@ -31,8 +31,8 @@ trait SoluzioniActions
     public function viewInsertSoluzione($prodottoID, $malfunzionamentoID){   
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
 
-        if($malfunzionamento == null)
-           abort(404);
+        if($malfunzionamento == NULL)
+           return abort(404);
         
         return view ('admin.soluzione-form', [
             'title' => 'Inserisci una nuova soluzione', 
@@ -45,8 +45,8 @@ trait SoluzioniActions
     public function storeSoluzione(SoluzioneRequest $request, $prodottoID, $malfunzionamentoID){
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
 
-        if($malfunzionamento == null)
-           abort(404);
+        if($malfunzionamento == NULL)
+           return abort(404);
         
         $soluzione = new Soluzione();
         $soluzione->descrizione = $request->descrizione;
@@ -64,12 +64,12 @@ trait SoluzioniActions
     public function viewModifySoluzione($prodottoID, $malfunzionamentoID, $soluzioneID){
         $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
         
-        if($malfunzionamento != null)
+        if($malfunzionamento != NULL)
             $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID)->first();
         else
             return abort(404);
 
-        if($soluzione == null)
+        if($soluzione == NULL)
            return abort(404);
 
         return view('admin.soluzione-form', [
@@ -105,12 +105,12 @@ trait SoluzioniActions
     public function deleteSoluzione($prodottoID, $malfunzionamentoID, $soluzioneID){
        $malfunzionamento = Malfunzionamento::where('ID', $malfunzionamentoID)->where('prodottoID', $prodottoID)->first();
         
-        if($malfunzionamento != null)
+        if($malfunzionamento != NULL)
             $soluzione = Soluzione::where('malfunzionamentoID', $malfunzionamento->ID)->where('ID', $soluzioneID)->first();
         else
             return abort(404);
 
-        if($soluzione == null)
+        if($soluzione == NULL)
            return abort(404);
 
         $soluzione->delete();
@@ -123,7 +123,7 @@ trait SoluzioniActions
     }
 
     public function bulkDeleteSoluzioni(Request $request){
-        if($request->items == null || strlen($request->items) < 1)
+        if($request->items == NULL || strlen($request->items) < 1)
             return response()->actionResponse(Auth::user()->role . ".malfunzionamenti.table", ['prodottoID' => $request->prodottoID], 'error', 'Impossibile eliminare i malfunzionamenti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));

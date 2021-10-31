@@ -82,8 +82,8 @@
     <div class="input-group single">
         {{ Form::label('file_img','Foto profilo') }}
         <div class="preview-img-container">
-            <img id="item-image" src="" alt="item-image" style="border-radius:50%">
-            <button class="button delete-preview" type="button" id="delete-preview" style="display:none">{!! config('laravel-table.icon.destroy') !!} Rimuovi immagine</button>
+            <img id="item-image" src="" alt="item-image" style="border-radius:50%; object-fit: cover;">
+            <button class="button delete-preview" type="button" id="delete-preview" style="display:none;">{!! config('laravel-table.icon.destroy') !!} Rimuovi immagine</button>
         </div>
         {{ Form::file('file_img', ["accept" => 'image/*', 'id' => 'load-image']) }}
         @if ($errors->first('file_img'))

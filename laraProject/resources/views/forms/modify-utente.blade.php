@@ -87,7 +87,7 @@
             @php
                 $hasImage = !($utente->file_img == null || rtrim($utente->file_img) == ''); 
             @endphp
-            <img id="item-image" src="{{ $hasImage ? asset('/storage/images/profiles/' . $utente->file_img) : '' }}" style="border-radius:50%" alt="item-image">
+            <img id="item-image" src="{{ $hasImage ? asset('/storage/images/profiles/' . $utente->file_img) : '' }}" style="border-radius:50%; object-fit: cover;" alt="item-image">
             <button class="button delete-preview" type="button" id="delete-preview" style="display:none"
                 @if($hasImage)
                     data-url="{{ route(Auth::user()->role . '.utente.delete-img', ['utenteID' => $utente->ID])}}"

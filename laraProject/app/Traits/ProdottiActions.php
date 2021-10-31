@@ -44,7 +44,7 @@ trait ProdottiActions
     public function viewModifyProdotto($prodottoID){
         $prodotto = Prodotto::find($prodottoID);
         
-        if($prodotto == null)
+        if($prodotto == NULL)
             return response()->actionResponse(Auth::user()->role. '.prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $staffUtenti = User::where('role','staff')->pluck('username','ID');
@@ -59,7 +59,7 @@ trait ProdottiActions
     public function updateProdotto(ProdottoRequest $request, $prodottoID){
         $prodotto = Prodotto::find($prodottoID);
 
-        if($prodotto == null)
+        if($prodotto == NULL)
             return response()->actionResponse(Auth::user()->role . '.prodotto.new', null, 'error', __('message.prodotto.not-exist'));
 
         $this->fillProdotto($request, $prodotto);
@@ -70,13 +70,13 @@ trait ProdottiActions
     public function deleteProdotto($prodottoID){ 
         $prodotto = Prodotto::find($prodottoID);
         
-        if($prodotto == null)
+        if($prodotto == NULL)
             return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 
             'error', __('message.prodotto.not-exist', ['item' => $prodottoID]));
         
         $prodotto->delete($prodottoID);
 
-        return response()->actionResponse('admin.prodotti.table', null, 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
+        return response()->actionResponse(Auth::user()->role . '.prodotti.table', null, 'successful', __('message.prodotto.delete', ['item' => $prodotto->ID ]));
     }
     
     public function assignProdottiToUtente(Request $request){
@@ -96,7 +96,7 @@ trait ProdottiActions
     }
    
     public function bulkDeleteProdotti(Request $request){
-        if($request->items == null || strlen($request->items) < 1)
+        if($request->items == NULL || strlen($request->items) < 1)
             return response()->actionResponse("admin.prodotti.table", null, 'error', 'Impossibile eliminare i prodotti selezionati. Controlla i parametri e riprova.');
 
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
