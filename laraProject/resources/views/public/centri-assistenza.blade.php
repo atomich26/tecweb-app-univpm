@@ -18,10 +18,12 @@
             <h2 class="widget-title">{{ $sentence }}</h2>
         </div>
             <div class="flex-v-center">
-                {!! Form::label('città', 'Filtra per città: ') !!}
-                {{ Form::select('città', $città, $selected, ['placeholder' => 'Seleziona...', 'id' => 'place-select', 'data-url' => route('centri-assistenza')]) }}
-                @if($selected != null)
-                    <a href="{{ route('centri-assistenza') }}" class="cancel-search button"><i class="bi bi-x-circle"></i> Annulla ricerca</a>
+                @if(count($città) > 1)
+                    {!! Form::label('città', 'Filtra per città: ') !!}
+                    {{ Form::select('città', $città, $selected, ['placeholder' => 'Seleziona...', 'id' => 'place-select', 'data-url' => route('centri-assistenza')]) }}
+                    @if($selected != null)
+                        <a href="{{ route('centri-assistenza') }}" class="cancel-search button"><i class="bi bi-x-circle"></i> Annulla ricerca</a>
+                    @endif
                 @endif
             </div>
     </div>

@@ -55,9 +55,13 @@
                         <h4 class="malfunzionamento"> {{$malfunzionamento->descrizione}}</h4>
                         @if(isset($malfunzionamento->soluzioni))
                             <ul style="padding: 10px!important">
-                                @foreach ($malfunzionamento->soluzioni as $soluzione)
-                                    <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
-                                @endforeach
+                                @if(count($malfunzionamento->soluzioni) < 1)
+                                    <li><p>Non sono state registrate soluzioni per questo malfunzionamento.</p></li>
+                                @else 
+                                    @foreach ($malfunzionamento->soluzioni as $soluzione)
+                                        <li class="soluzione"><p>{{$soluzione->descrizione}}</p></li>
+                                    @endforeach
+                                @endif
                             </ul>
                         @endif
                     </li>
