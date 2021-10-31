@@ -62,7 +62,7 @@ Route::prefix('staff')->group(function () {
         //Rotte CRUD per i prodotti
         Route::get('modifica-prodotto/{prodottoID}', 'StaffController@viewModifyProdotto')->name('staff.prodotto.modify');
         Route::put('modifica-prodotto/{prodottoID}', 'StaffController@updateProdotto')->name('staff.prodotto.update');
-        Route::get('elimina-immagine-prodotto', 'StaffController@eliminaImmagineProdotto')->name('staff.prodotto.delete-img');
+        Route::get('elimina-immagine-prodotto/{prodottoID}', 'StaffController@eliminaImmagineProdotto')->name('staff.prodotto.delete-img');
     
         //Rotte CRUD per i malfunzionamenti
         Route::get('prod/{prodottoID}/gestione-malfunzionamenti', 'StaffController@viewMalfunzionamentiTable')->name('staff.malfunzionamenti.table');
@@ -96,7 +96,7 @@ Route::prefix('admin')->group(function(){
     Route::put('modifica-prodotto/{prodottoID}', 'AdminController@updateProdotto')->name('admin.prodotto.update');
     Route::delete('elimina-prodotto/{prodottoID}', 'AdminController@deleteProdotto')->name('admin.prodotto.delete');
     Route::delete('elimina-prodotti', 'AdminController@bulkDeleteProdotti')->name('admin.prodotti.bulk-delete');
-    Route::get('elimina-immagine-prodotto', 'AdminController@eliminaImmagineProdotto')->name('admin.prodotto.delete-img');
+    Route::get('elimina-immagine-prodotto/{prodottoID}', 'AdminController@eliminaImmagineProdotto')->name('admin.prodotto.delete-img');
     
     //Rotte CRUD per le FAQ
     Route::get('gestione-faq', 'AdminController@viewFaqTable')->name('admin.faq.table');
@@ -116,7 +116,7 @@ Route::prefix('admin')->group(function(){
     Route::post('assegna-utenti', 'AdminController@assignUtentiToCentro')->name('admin.utenti.assign');
     Route::delete('elimina-utente/{utenteID}', 'AdminController@deleteUtente')->name('admin.utente.delete'); 
     Route::delete('elimina-utenti', 'AdminController@bulkDeleteUtenti')->name('admin.utenti.bulk-delete');
-    Route::get('elimina-immagine-utente', 'AdminController@eliminaImmagineUtente')->name('admin.utente.delete-img');
+    Route::get('elimina-immagine-utente/{utenteID}', 'AdminController@eliminaImmagineUtente')->name('admin.utente.delete-img');
 
     //Rotte CRUD per i centri assistenza
     Route::get('gestione-centri-assistenza', 'AdminController@viewCentriAssistenzaTable')->name('admin.centri.table');

@@ -93,7 +93,7 @@ class AdminController extends Controller
         $items = explode(',', $request->items, config('laravel-table.value.rowsNumber'));
         User::destroy($items);
         
-        return response()->actionResponse(Auth::user()->role . 'utenti.table', null, 'successful', 'message.utente.bulk-delete');
+        return response()->actionResponse(Auth::user()->role . '.utenti.table', null, 'successful', __('message.utente.bulk-delete'));
     }
 
     public function assignUtentiToCentro(Request $request){

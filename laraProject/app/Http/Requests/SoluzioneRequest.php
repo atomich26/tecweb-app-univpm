@@ -25,7 +25,7 @@ class SoluzioneRequest extends FormRequest
     public function rules()
     {
         return [
-            'descrizione'=>'required|max:'.Config::get('strings.soluzione.descrizione')
+            'descrizione'=>'required|string|min:20|max:'. Config::get('strings.soluzione.descrizione')
         ];
     }
 }

@@ -25,12 +25,12 @@ class ProdottoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'=>'required|max:'. Config::get('strings.prodotto.nome'),
-            'modello'=>'required|unique:prodotti,modello,'. $this->route('prodottoID') . '|max:' . Config::get('strings.prodotto.modello'),
-            'descrizione'=>'required|max:' . Config::get('strings.prodotto.descrizione'),
-            'specifiche'=>'required|max:' . Config::get('strings.prodotto.specifiche'),
-            'guida_installazione'=>'nullable|max:' . Config::get('strings.prodotto.guida_installazione'),
-            'note_uso'=>'nullable|max:' . Config::get('strings.prodotto.note_uso'),
+            'nome'=>'required|string|min:5|unique:prodotti,nome,' . $this->route('prodottoID') . '|max:'. Config::get('strings.prodotto.nome'),
+            'modello'=>'required|alpha_num|unique:prodotti,modello,'. $this->route('prodottoID') . '|max:' . Config::get('strings.prodotto.modello'),
+            'descrizione'=>'required|string|min:20|max:' . Config::get('strings.prodotto.descrizione'),
+            'specifiche'=>'required|string|min:20|max:' . Config::get('strings.prodotto.specifiche'),
+            'guida_installazione'=>'nullable|string|min:20|max:' . Config::get('strings.prodotto.guida_installazione'),
+            'note_uso'=>'nullable|string|min:20|max:' . Config::get('strings.prodotto.note_uso'),
             'file_img'=>'mimes:jpeg,png,jpg|max:2048|nullable',
         ];
     }

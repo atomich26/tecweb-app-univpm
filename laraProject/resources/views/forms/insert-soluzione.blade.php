@@ -7,7 +7,7 @@
         {{ Form::label('descrizione', 'Descrizione soluzione*') }}
         {{ Form::textarea('descrizione','', ['max-length' => config('strings.soluzione.descrizione'), 'placeholder' => 'Inserisci il testo qui...', 'required']) }}
         @if($errors->first('descrizione'))
-        <ul>
+        <ul class="input-errors-list">
             @foreach ($errors->get('descrizione') as $message)
                 <li class="errors">{{ $message }}</li>
             @endforeach

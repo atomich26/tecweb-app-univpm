@@ -25,8 +25,8 @@ class userRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required|unique:utenti,username,'.$this->route('utenteID').'|max:' . Config::get('strings.utente.username'),
-            'password'=>'required|confirmed|max:30|min:7',
+            'username'=>'required|alpha_dash|min:5|unique:utenti,username,'.$this->route('utenteID').'|max:' . Config::get('strings.utente.username'),
+            'password'=>'required|string|confirmed|max:30|min:7',
             'nome'=>'required|string|max:' . Config::get('strings.utente.nome'),
             'cognome'=>'required|string|max:' . Config::get('strings.utente.cognome'),
             'file_img'=>'mimes:jpeg,png,jpg|max:4092|nullable',

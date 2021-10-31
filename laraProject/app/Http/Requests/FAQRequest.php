@@ -26,8 +26,8 @@ class FAQRequest extends FormRequest
     {
         return [
 
-            'domanda'=>'required|max:'. Config::get('strings.faq.domanda'),
-            'risposta'=>'required|max:' . Config::get('strings.faq.risposta'),
+            'domanda'=>'required|string|min:20|max:'. Config::get('strings.faq.domanda'),
+            'risposta'=>'required|string|min:20|max:' . Config::get('strings.faq.risposta'),
         ];
     }
 }
