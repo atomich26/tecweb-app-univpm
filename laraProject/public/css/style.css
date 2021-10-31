@@ -1174,6 +1174,7 @@ form .bi-info-circle:hover{
 .product-card .product-name{
     position: absolute;
     bottom: 0;
+    width: 100%;
     height: 100px;
     max-height: 100px;
     padding: 20px;
