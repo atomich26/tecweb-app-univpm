@@ -252,7 +252,7 @@ class AdminController extends Controller
         $centro = CentroAssistenza::find($centroID);
 
         if($centro == NULL)
-            return response()->actionResponse('admin.centro.new', null, 'successful', __('message.centro-assistenza.not-exist'));
+            return response()->actionResponse('admin.centro.new', null, 'error', __('message.centro-assistenza.not-exist'));
 
         return view('admin.centro-assistenza-form', ['title' => 'Modifica ' . $centro->ragione_sociale, 'action' => 'modify', 'centro' => $centro]);
     }
@@ -261,7 +261,7 @@ class AdminController extends Controller
         $centro = CentroAssistenza::find($centroID);
 
         if($centro == NULL)
-            return response()->actionResponse('admin.insert-centro', null, 'successful', __('message.centro-assistenza.not-exists'));
+            return response()->actionResponse('admin.insert-centro', null, 'error', __('message.centro-assistenza.not-exists'));
 
         $centro->fill($request->validated());
         $centro->save();
