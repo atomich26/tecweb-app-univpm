@@ -6,12 +6,12 @@ $('document').ready(() => {
     windowLoadResponseMessage();
 });
 
-// <---- Funzioni per il counter delle textarea ----->
-
+//Mostra un messaggio con le informazioni sulla ricerca
 function showSearchTip() {
     msgProvider.send({ status: 'info', text: "Puoi cercare i prodotti per descrizione inserendo la parola chiave completa o parte di essa seguita dal carattere wildcard \'*\'.", duration: 10 });
 }
 
+// Assegna all'utente scelto i prodotti selezionati
 function assignProdottiUtente() {
     sendRequestAssegnItems((rowsSelected, optionSelected, response) => {
         rowsSelected.find('td:nth-child(8)').text(optionSelected);
@@ -20,6 +20,7 @@ function assignProdottiUtente() {
     });
 }
 
+// Assegna al centro assistenza scelto i tecnici selezionati
 function assignUtentiCentro() {
     sendRequestAssegnItems((rowsSelected, optionSelected, response) => {
         rowsSelected.find('td:nth-child(10)').text(optionSelected);
@@ -27,6 +28,7 @@ function assignUtentiCentro() {
     });
 }
 
+// Esegue una richiesta AJAX al server per l'assegnazione di elementi
 function sendRequestAssegnItems(callback) {
     let checkedItems = [];
     let optionSelected = $('#assign-select option:selected').text();
@@ -63,6 +65,7 @@ function sendRequestAssegnItems(callback) {
     });
 }
 
+//crea un messaggio(se esiste), dopo il caricamento della pagina 
 function windowLoadResponseMessage() {
     var metaMessage = $('meta[name="response-message"]');
 
@@ -70,6 +73,7 @@ function windowLoadResponseMessage() {
         msgProvider.send({ status: metaMessage.attr('data-alert'), text: metaMessage.attr('content') });
 }
 
+//convalida la ricerca 
 function validateSearch() {
     $('#search-form').submit((event) => {
         let keyword = $.trim($(event.target).find('input[type="text"]').val());
