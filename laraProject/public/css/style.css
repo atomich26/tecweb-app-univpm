@@ -1377,8 +1377,9 @@ select#place-select{
 }
 
 .container-form form .input-errors-list{
-    background-color: var(--color-primary);
     padding: 5px 10px;
+    border-radius: 2px;
+    background-color: var(--color-primary);
 }
 
 .container-form form .input-errors-list li{

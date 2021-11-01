@@ -140,6 +140,6 @@
                 {{ Form::select ('centroID', $centri, $utente->centroID, ['placeholder' => 'Nessun centro', 'style' => 'width: 40%'])}}
             </div>
         </div>
-    {{ Form::submit('Aggiorna', ['class' => 'button btn-form']) }}
+    {{ Form::submit('Aggiorna profilo utente', ['class' => 'button btn-form']) }}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{ Form::close() }}

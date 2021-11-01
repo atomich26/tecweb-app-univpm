@@ -105,6 +105,6 @@
         @endif
     </div>
 
-    {{ Form::submit('Aggiorna', ['class' => 'button btn-form']) }}
+    {{ Form::submit('Aggiorna centro assistenza', ['class' => 'button btn-form']) }}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{Form::close()}}

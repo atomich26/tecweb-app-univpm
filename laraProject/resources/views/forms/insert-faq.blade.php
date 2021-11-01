@@ -22,6 +22,6 @@
             </ul>
         @endif
     </div>
-    {{ Form::submit ('Salva', ['class' => 'button btn-form']) }}
+    {{ Form::submit ('Inserisci faq', ['class' => 'button btn-form']) }}
     {{ Form::reset ('Annulla modifiche', ['class' => 'button btn-form'])}}
 {{Form::close()}}

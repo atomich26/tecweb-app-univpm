@@ -131,7 +131,7 @@
                 {{ Form::select ('centroID', $centri, null, ['placeholder' => 'Nessun centro', 'style' => 'width: 40%'])}}
             </div>
         </div>
-    {{ Form::submit('Inserisci', ['class' => 'button btn-form']) }}
+    {{ Form::submit('Inserisci utente', ['class' => 'button btn-form']) }}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 
 {{  Form::close()}}

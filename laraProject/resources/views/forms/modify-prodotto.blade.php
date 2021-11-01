@@ -119,7 +119,7 @@
             </ul>
         @endif
     </div>
-    {{ Form::submit ('Aggiorna', ['class' => 'button btn-form']) }}
+    {{ Form::submit ('Aggiorna prodotto', ['class' => 'button btn-form']) }}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form']) }}
 {{Form::close()}}
 

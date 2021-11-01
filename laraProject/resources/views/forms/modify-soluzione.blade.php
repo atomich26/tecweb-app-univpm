@@ -17,7 +17,7 @@
         </ul>
         @endif
     </div>
-    {{ Form::submit('Inserisci', ['class' => 'button btn-form'])}}
+    {{ Form::submit('Aggiorna soluzione', ['class' => 'button btn-form'])}}
     {{ Form::reset('Annulla modifiche', ['class' => 'button btn-form'])}}
     
 {{ Form::close()}}
