@@ -29,7 +29,7 @@ class userRequest extends FormRequest
             'password'=>'required|string|confirmed|max:30|min:7',
             'nome'=>'required|string|max:' . Config::get('strings.utente.nome'),
             'cognome'=>'required|string|max:' . Config::get('strings.utente.cognome'),
-            'file_img'=>'mimes:jpeg,png,jpg|max:4092|nullable',
+            'file_img'=>'mimes:jpeg,png,jpg|max:2048|nullable',
             'data_nascita'=>'required|date|before:today',
             'email'=>'required|unique:utenti,email,'.$this->route('utenteID').'|email|max:' . Config::get('strings.global.default'),
             'telefono'=>'required|unique:utenti,telefono,'.$this->route('utenteID').'|digits:' . Config::get('strings.global.telefono'),

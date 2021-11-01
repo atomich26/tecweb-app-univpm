@@ -58,7 +58,7 @@
     <div class="input-group">
         <div class="input-inline">
             {{ Form::label ('password', 'Password*') }}
-            {{ Form::password ('password', ['max-length' => 30,'required']) }}
+            {{ Form::password ('password', ['max-length' => 30, 'required']) }}
             @if ($errors->first('password'))
                 <ul class="input-errors-list">
                     @foreach ($errors->get('password') as $message)
@@ -70,7 +70,7 @@
 
         <div class="input-inline">
             {{ Form::label ('password_confirmation', 'Conferma password*') }}
-            {{ Form::password ('password_confirmation', ['max-length' => 30,'required']) }}
+            {{ Form::password ('password_confirmation', ['max-length' => 30, 'required']) }}
             @if($errors->first('password'))
                 <ul class="input-errors-list">
                     @foreach ($errors->get('password') as $message)
