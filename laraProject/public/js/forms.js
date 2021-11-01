@@ -3,11 +3,12 @@ export { initInputLoadImg, initRadioRole, showTextareaTip };
 var inputImage = $("input[type='file']#load-image");
 var imageItem = $('#item-image');
 var deletePreviewBtn = $('#delete-preview');
+var fieldCurrentImg = $('input[name="current_img"]')
 
 let currentExists = () => { 
-    let currentImg = deletePreviewBtn.attr('data-url');
+    let currentImgName = fieldCurrentImg.val();
 
-    return typeof currentImg !== 'undefined' && currentImg.trim() !== "";
+    return typeof currentImgName !== 'undefined' && currentImgName.trim() !== "";
 };
 
 let changeStatus = (obj) => {
@@ -26,7 +27,10 @@ function initInputLoadImg() {
         loadCurrent();
     
     inputImage.on('input', function () {
-        loadPreview(); 
+        if (!inputImage.val())
+            deleteImage();
+        else
+            loadPreview(); 
     });
 
     deletePreviewBtn.click(() => {
@@ -45,6 +49,7 @@ function deleteCurrent() {
         deletePreviewBtn.hide();
         imageItem.hide();
         inputImage.show(); 
+        fieldCurrentImg.val("");
     });
 }
 

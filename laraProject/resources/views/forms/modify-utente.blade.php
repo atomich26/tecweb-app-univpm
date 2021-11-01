@@ -81,6 +81,8 @@
         </div>
     </div>
 
+    {{ Form::hidden ('current_img', $utente->file_img) }}
+
     <div class="input-group single" style="width: 50%">
         {{ Form::label('file_img','Foto profilo') }}
         <div class="preview-img-container">

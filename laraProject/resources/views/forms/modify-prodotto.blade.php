@@ -27,6 +27,8 @@
         </div>
     </div>
 
+    {{ Form::hidden ('current_img', $prodotto->file_img) }}
+
     <div class="input-group single" style="width: 50%">
         {{ Form::label('file_img','Immagine Prodotto') }}
         <div class="preview-img-container">
