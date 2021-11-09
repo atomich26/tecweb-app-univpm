@@ -39,8 +39,6 @@ class UserObserver
     {
         if($user->file_img != null && !empty($user->file_img))
             Storage::delete('/public/images/profiles/' . $user->file_img);
-        
-        error_log('testtt-deleted-by-observer');
     }
 
     /**
