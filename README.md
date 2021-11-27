@@ -1,5 +1,5 @@
 # Tecweb21
-Repository del progetto per il corso di Tecnologie Web 2021 Univpm.
+Repository del progetto per il corso di Tecnologie Web 2021 Univpm. 
 
 ## Credenziali utenti
 > Per tutti gli utenti la password è : ijADPwLb
@@ -10,5 +10,5 @@ Repository del progetto per il corso di Tecnologie Web 2021 Univpm.
 - Username: francesco_tecn
 
 ## Disclaimer
-Il progetto è stato realizzato a scopo didattico. Realizzato interamente da Bevilacqua Michele e Diego Giacchi.
+Il progetto è stato realizzato a scopo didattico pertanto è possibile trovare errori nel codice e nella stesura della documentazione. Realizzato interamente da Bevilacqua Michele e Diego Giacchi.
 
